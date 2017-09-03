@@ -162,6 +162,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
+	case WM_KEYDOWN:
+		switch (wParam)
+		{
+		case VK_ESCAPE:
+			PostQuitMessage(0);
+			break;
+		}
+		break;
+	case WM_MOUSEMOVE:
+		g_ptMouse.x = static_cast<float>(LOWORD(lParam));
+		g_ptMouse.y = static_cast<float>(HIWORD(lParam));
+		break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
