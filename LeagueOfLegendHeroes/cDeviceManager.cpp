@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "cDeviceManager.h"
 
+cDeviceManager::~cDeviceManager()
+{
+}
+
 cDeviceManager::cDeviceManager() : m_pD3D(NULL), m_pD3DDevice(NULL)
 {
 	m_pD3D = Direct3DCreate9(D3D_SDK_VERSION);
@@ -25,17 +29,16 @@ cDeviceManager::cDeviceManager() : m_pD3D(NULL), m_pD3DDevice(NULL)
 	stD3DPP.EnableAutoDepthStencil = TRUE;
 	stD3DPP.AutoDepthStencilFormat = D3DFMT_D16;
 
-}
-
-cDeviceManager::~cDeviceManager()
-{
+	m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_hWnd, nVertexProcessing, &stD3DPP, &m_pD3DDevice);
 }
 
 LPDIRECT3DDEVICE9 cDeviceManager::GetDevice()
 {
-	return LPDIRECT3DDEVICE9();
+	return m_pD3DDevice;
 }
 
 void cDeviceManager::Destroy()
 {
+	SAFE_RELEASE(m_pD3D);
+	SAFE_RELEASE(m_pD3DDevice);
 }

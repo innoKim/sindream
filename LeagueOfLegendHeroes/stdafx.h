@@ -28,8 +28,8 @@
 
 using namespace std;
 
-extern HWND		g_hWnd;
-extern POINT	g_pMouse;
+extern HWND		g_hWnd;		//HWND 전역변수
+extern POINT	g_ptMouse;	//마우스 포인터 위치 전역변수
 
 // define문 목록
 #define SAFE_ADD_REF(p) if(p) { (p)->AddRef(); }
@@ -47,6 +47,44 @@ public:\
 protected: varType varName;\
 public: inline varType Get##funName(void) const { return varName; }\
 public: inline void Set##funName(varType var){ varName = var; }
+
+#define SYNTHESIZE_PASS_BY_REF(varType, varName, funName)\
+protected: varType varName;\
+public: inline varType& Get##funName(void) { return varName; }\
+public: inline void Set##funName(const varType& var){ varName = var; }
+
+#define SYNTHESIZE_ADD_REF(varType, varName, funName)    \
+protected: varType varName; \
+public: virtual varType Get##funName(void) const { return varName; } \
+public: virtual void Set##funName(varType var){\
+	if (varName != var) {\
+	SAFE_RELEASE(varName);\
+	SAFE_ADD_REF(var);\
+	varName = var;\
+	}\
+}
+
+// 전역으로 사용할 struct 선언
+// 1. Position 정점의 좌표 x,y,z(float)			: D3DFVF_XYZ
+// 2. RHW (float)                               : D3DFVF_XYZRHW (D3DFVF_XYZ 또는 D3DFVF_NORMAL과 같이 사용불가)
+// 3. Blending Weight Data 결합 가중치 (float)	: D3DFVF_XYZB1 ~ D3DFVF_XYZB5
+// 4. Vertex Normal 정점의 법선 벡터 x,y,z(float)	: D3DFVF_NORMAL
+// 5. Vertex Point Size 정점의 점 크기 (float)	: D3DFVF_PSIZE
+// 6. Diffuse Color (DWORD)						: D3DFVF_DIFFUSE
+// 7. Specular Color (DWORD)                    : D3DFVF_SPECULAR
+// 8. Texture Coordinate Set 1 (float)          : D3DFVF_TEX0 - D3DFVF_TEX8
+
+struct ST_PC_VERTEX
+{
+	D3DXVECTOR3 p;
+	D3DCOLOR	c;
+
+	ST_PC_VERTEX() : p(0, 0, 0), c(D3DCOLOR_XRGB(0, 0, 0)) {}
+	ST_PC_VERTEX(D3DXVECTOR3 _p, D3DCOLOR _c) : p(_p), c(_c) {}
+
+	enum { FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE };
+};
+
 
 // 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
