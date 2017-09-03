@@ -31,3 +31,5 @@
 	~class_name(void);\
 public:\
 	static class_name* GetInstance() { static class_name instance; return &instance; }
+
+#include "cDeviceManager.h"
