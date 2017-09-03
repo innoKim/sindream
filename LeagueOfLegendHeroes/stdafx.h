@@ -28,8 +28,8 @@
 
 using namespace std;
 
-extern HWND		g_hWnd;
-extern POINT	g_pMouse;
+extern HWND		g_hWnd;		//HWND 전역변수
+extern POINT	g_ptMouse;	//마우스 포인터 위치 전역변수
 
 // define문 목록
 #define SAFE_ADD_REF(p) if(p) { (p)->AddRef(); }
