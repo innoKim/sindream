@@ -3,7 +3,6 @@
 
 cMainGame::cMainGame()
 {
-	g_pKeyManager->Setup();
 }
 
 cMainGame::~cMainGame()
