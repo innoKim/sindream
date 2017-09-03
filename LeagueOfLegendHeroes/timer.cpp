@@ -38,3 +38,46 @@ void timer::Setup()
 void timer::Release()
 {
 }
+
+void timer::tick(float lockFPS)
+{
+	if (m_bIsHardware)
+	{
+		QueryPerformanceCounter((LARGE_INTEGER*)&m_nCurTime);
+	}
+	else
+	{
+		m_nCurTime = timeGetTime();
+	}
+
+	m_fTimeElapsed = (m_nCurTime - m_nLastTime)*m_fTimeScale;
+
+	if (lockFPS > 0.0f)
+	{
+		while (m_fTimeElapsed < (1.0f / lockFPS))
+		{
+			if (m_bIsHardware)
+			{
+				QueryPerformanceCounter((LARGE_INTEGER*)&m_nCurTime);
+			}
+			else
+			{
+				m_nCurTime = timeGetTime();
+			}
+			m_fTimeElapsed = (m_nCurTime - m_nLastTime)*m_fTimeScale;
+		}
+	}
+
+	m_nLastTime = m_nCurTime;
+	m_dFPSFrameCount++;
+	m_fFPSTimeElapsed += m_fTimeElapsed;
+	m_fWorldTime += m_fTimeElapsed;
+
+	if (m_fFPSTimeElapsed > 1.0f)
+	{
+		m_dFrameRate = m_dFPSFrameCount;
+		m_dFPSFrameCount = 0;
+		m_fFPSTimeElapsed = 0.0f;
+	}
+}
+
