@@ -64,5 +64,27 @@ public: virtual void Set##funName(varType var){\
 	}\
 }
 
+// 전역으로 사용할 struct 선언
+// 1. Position 정점의 좌표 x,y,z(float)			: D3DFVF_XYZ
+// 2. RHW (float)                               : D3DFVF_XYZRHW (D3DFVF_XYZ 또는 D3DFVF_NORMAL과 같이 사용불가)
+// 3. Blending Weight Data 결합 가중치 (float)	: D3DFVF_XYZB1 ~ D3DFVF_XYZB5
+// 4. Vertex Normal 정점의 법선 벡터 x,y,z(float)	: D3DFVF_NORMAL
+// 5. Vertex Point Size 정점의 점 크기 (float)	: D3DFVF_PSIZE
+// 6. Diffuse Color (DWORD)						: D3DFVF_DIFFUSE
+// 7. Specular Color (DWORD)                    : D3DFVF_SPECULAR
+// 8. Texture Coordinate Set 1 (float)          : D3DFVF_TEX0 - D3DFVF_TEX8
+
+struct ST_PC_VERTEX
+{
+	D3DXVECTOR3 p;
+	D3DCOLOR	c;
+
+	ST_PC_VERTEX() : p(0, 0, 0), c(D3DCOLOR_XRGB(0, 0, 0)) {}
+	ST_PC_VERTEX(D3DXVECTOR3 _p, D3DCOLOR _c) : p(_p), c(_c) {}
+
+	enum { FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE };
+};
+
+
 // 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
