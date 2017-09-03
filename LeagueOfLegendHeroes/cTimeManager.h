@@ -1,5 +1,7 @@
 #pragma once
+
 #include "timer.h"
+#define g_pTimeManager cTimeManager::GetInstance()
 
 class cTimeManager
 {
