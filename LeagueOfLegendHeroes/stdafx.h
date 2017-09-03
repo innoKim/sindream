@@ -43,5 +43,10 @@ protected: varType varName;\
 public: inline varType Get##funName(void) const { return varName; }\
 public: inline void Set##funName(varType var){ varName = var; }
 
+#define SYNTHESIZE_PASS_BY_REF(varType, varName, funName)\
+protected: varType varName;\
+public: inline varType& Get##funName(void) { return varName; }\
+public: inline void Set##funName(const varType& var){ varName = var; }
+
 // 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
