@@ -81,9 +81,3 @@ void timer::tick(float lockFPS)
 	}
 }
 
-unsigned long timer::GetFrameRate(char * str) const
-{
-	if (str != NULL) sprintf(str, "FPS : %d", m_dFrameRate);
-	return m_dFrameRate;
-}
-
