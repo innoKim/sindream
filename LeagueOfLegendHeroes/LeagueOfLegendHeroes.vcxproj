@@ -149,19 +149,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDeviceManager.h" />
-    <ClInclude Include="cKeyManager.h" />
-    <ClInclude Include="cMainGame.h" />
     <ClInclude Include="LeagueOfLegendHeroes.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="cTimeManager.h" />
-    <ClInclude Include="cTimer.h" />
+    <ClInclude Include="timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cDeviceManager.cpp" />
-    <ClCompile Include="cKeyManager.cpp" />
-    <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="LeagueOfLegendHeroes.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -169,8 +164,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="cTimeManager.cpp" />
-    <ClCompile Include="cTimer.cpp" />
+    <ClCompile Include="timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LeagueOfLegendHeroes.rc" />
