@@ -11,7 +11,7 @@ private:
 	__int64			m_nPeriodFrequency;
 
 	unsigned long	m_dFrameRate;
-	unsigned long	m_dFPSFrame;
+	unsigned long	m_dFPSFrameCount;
 
 	float			m_fFPSTimeElapsed;
 	float			m_fWorldTime;

@@ -26,6 +26,11 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
+using namespace std;
+
+extern HWND		g_hWnd;
+extern POINT	g_pMouse;
+
 // define문 목록
 #define SAFE_ADD_REF(p) if(p) { (p)->AddRef(); }
 #define SAFE_RELEASE(p) if(p) { (p)->Release(); p = NULL; }
