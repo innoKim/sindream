@@ -2,7 +2,7 @@
 #include "timer.h"
 #include <mmsystem.h>
 
-#pragma commetn(lib, "winmm.lib")
+#pragma comment(lib, "winmm.lib")
 
 timer::timer()
 {
