@@ -26,6 +26,11 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
+using namespace std;
+
+extern HWND		g_hWnd;
+extern POINT	g_pMouse;
+
 #define SINGLETON(class_name)	private:\
 	class_name(void);\
 	~class_name(void);\
