@@ -30,10 +30,13 @@
     <ClInclude Include="LeagueOfLegendHeroes.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="timer.h">
+    <ClInclude Include="cDeviceManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cDeviceManager.h">
+    <ClInclude Include="cTimer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cTimeManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,10 +47,13 @@
     <ClCompile Include="LeagueOfLegendHeroes.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="timer.cpp">
+    <ClCompile Include="cDeviceManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="cDeviceManager.cpp">
+    <ClCompile Include="cTimer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cTimeManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
