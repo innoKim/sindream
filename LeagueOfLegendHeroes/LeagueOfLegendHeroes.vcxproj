@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cMainGame.h" />
     <ClInclude Include="LeagueOfLegendHeroes.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -157,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="LeagueOfLegendHeroes.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
