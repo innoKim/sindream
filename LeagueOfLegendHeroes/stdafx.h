@@ -131,3 +131,4 @@ struct ST_PNT_VERTEX
 #include "cDeviceManager.h"
 #include "cKeyManager.h"
 #include "cTextureManager.h"
+#include "cTimeManager.h"
