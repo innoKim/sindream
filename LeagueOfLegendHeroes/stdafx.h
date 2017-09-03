@@ -26,10 +26,17 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
+// define문 목록
+#define SAFE_ADD_REF(p) if(p) { (p)->AddRef(); }
+#define SAFE_RELEASE(p) if(p) { (p)->Release(); p = NULL; }
+#define SAFE_DELETE(p) if(p) { delete (p); (p) = NULL; }
+#define SAFE_DELETE_ARRAY(p) if(p) { delete [] (p); (p) = NULL; }
+
 #define SINGLETON(class_name)	private:\
 	class_name(void);\
 	~class_name(void);\
 public:\
 	static class_name* GetInstance() { static class_name instance; return &instance; }
 
+// 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
