@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdAfx.h"
 #include "cKeyManager.h"
 
 HRESULT cKeyManager::Setup(void)
