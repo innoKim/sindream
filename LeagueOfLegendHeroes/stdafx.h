@@ -125,5 +125,11 @@ struct ST_PNT_VERTEX
 	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 };
 };
 
+struct ST_POS_SAMPLE
+{
+	D3DXVECTOR3		p;
+	int				n;
+};
+
 // 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
