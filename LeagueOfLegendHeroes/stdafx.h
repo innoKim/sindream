@@ -21,3 +21,9 @@
 
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
+
+#define SINGLETON(class_name)	private:\
+	class_name(void);\
+	~class_name(void);\
+public:\
+	static class_name* GetInstance() { static class_name instance; return &instance; }
