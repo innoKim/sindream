@@ -137,5 +137,12 @@ struct ST_ROT_SAMPLE
 	int				n;
 };
 
+struct ST_SPHERE
+{
+	D3DXVECTOR3		p;
+	float			r;
+	bool			isPicked;
+};
+
 // 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
