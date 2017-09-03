@@ -51,13 +51,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_pMainGame->Setup();
 
     // 기본 메시지 루프입니다.
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
+		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT) break;
+			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+		}
+		else
+		{
+			g_pTimeManager->Update(60.0f);
+			g_pMainGame->Update();
+			g_pMainGame->Render();
+		}
     }
 
 	SAFE_DELETE(g_pMainGame);
