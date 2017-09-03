@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "LeagueOfLegendHeroes.h"
+#include "cMainGame.h"
 
 #define MAX_LOADSTRING 100
 
@@ -11,8 +12,9 @@ HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
-HWND	g_hWnd;
-POINT	g_ptMouse = { 0, 0 };
+HWND		g_hWnd;
+POINT		g_ptMouse = { 0, 0 };
+cMainGame*	g_pMainGame;
 
 // 이 코드 모듈에 들어 있는 함수의 정방향 선언입니다.
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -45,6 +47,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
+	g_pMainGame = new cMainGame;
+	g_pMainGame->Setup();
+
     // 기본 메시지 루프입니다.
     while (GetMessage(&msg, nullptr, 0, 0))
     {
@@ -54,6 +59,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
+
+	if (g_pMainGame) delete g_pMainGame;
 
     return (int) msg.wParam;
 }
