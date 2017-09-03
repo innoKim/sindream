@@ -60,7 +60,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
-	if (g_pMainGame) delete g_pMainGame;
+	SAFE_DELETE(g_pMainGame);
 
     return (int) msg.wParam;
 }
