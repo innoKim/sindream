@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="매니저">
-      <UniqueIdentifier>{97652e49-8dc7-4772-a947-33afca4a21e8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -36,28 +33,12 @@
     <ClInclude Include="cDeviceManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-<<<<<<< .mine
     <ClInclude Include="cTimer.h">
-=======
-    <ClInclude Include="cMainGame.h">
->>>>>>> .theirs
       <Filter>헤더 파일</Filter>
     </ClInclude>
-<<<<<<< .mine
     <ClInclude Include="cTimeManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-
-
-
-=======
-    <ClInclude Include="cDeviceManager.h">
-      <Filter>매니저</Filter>
-    </ClInclude>
-    <ClInclude Include="cKeyManager.h">
-      <Filter>매니저</Filter>
-    </ClInclude>
->>>>>>> .theirs
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -69,28 +50,12 @@
     <ClCompile Include="cDeviceManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-<<<<<<< .mine
     <ClCompile Include="cTimer.cpp">
-=======
-    <ClCompile Include="cMainGame.cpp">
->>>>>>> .theirs
       <Filter>소스 파일</Filter>
     </ClCompile>
-<<<<<<< .mine
     <ClCompile Include="cTimeManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-
-
-
-=======
-    <ClCompile Include="cDeviceManager.cpp">
-      <Filter>매니저</Filter>
-    </ClCompile>
-    <ClCompile Include="cKeyManager.cpp">
-      <Filter>매니저</Filter>
-    </ClCompile>
->>>>>>> .theirs
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LeagueOfLegendHeroes.rc">
