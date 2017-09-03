@@ -2,8 +2,11 @@
 
 class cDeviceManager
 {
+	SINGLETON(cDeviceManager);
+
+private:
+	
 public:
-	cDeviceManager();
-	~cDeviceManager();
+	
 };
 
