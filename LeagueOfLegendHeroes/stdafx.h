@@ -96,6 +96,17 @@ struct ST_PT_VERTEX
 	enum { FVF = D3DFVF_XYZ | D3DFVF_TEX1 };
 };
 
+struct ST_PN_VERTEX
+{
+	D3DXVECTOR3 p;
+	D3DXVECTOR3	n;
+
+	ST_PN_VERTEX() : p(0, 0, 0), n(0, 0, 0) {}
+	ST_PN_VERTEX(D3DXVECTOR3 _p, D3DXVECTOR3 _n = D3DXVECTOR3(0, 0, 0)) : p(_p), n(_n) {}
+
+	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL };
+};
+
 
 // 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
