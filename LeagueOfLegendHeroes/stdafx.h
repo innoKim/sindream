@@ -38,5 +38,10 @@
 public:\
 	static class_name* GetInstance() { static class_name instance; return &instance; }
 
+#define SYNTHESIZE(varType, varName, funName)\
+protected: varType varName;\
+public: inline varType Get##funName(void) const { return varName; }\
+public: inline void Set##funName(varType var){ varName = var; }
+
 // 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
