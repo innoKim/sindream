@@ -21,6 +21,8 @@ public:
 	void Release();
 	void tick(float lockFPS = 0.0f);
 
+	unsigned long GetFrameRate(char * str) const;
+
 	inline float	GetElapsedTime(void) const { return m_fTimeElapsed; }
 	inline float	GetWorldTime(void) const { return m_fWorldTime; }
 	
