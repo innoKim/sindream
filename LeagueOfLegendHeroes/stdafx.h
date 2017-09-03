@@ -131,5 +131,19 @@ struct ST_POS_SAMPLE
 	int				n;
 };
 
+struct ST_ROT_SAMPLE
+{
+	D3DXQUATERNION	q;
+	int				n;
+};
+
+struct ST_SPHERE
+{
+	D3DXVECTOR3		p;
+	float			r;
+	bool			isPicked;
+};
+
 // 매니저 클래스 인클루드 목록
 #include "cDeviceManager.h"
+#include "cKeyManager.h"
