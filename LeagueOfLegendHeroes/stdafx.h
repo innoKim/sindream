@@ -22,11 +22,13 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "cUtils.h"
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
 using namespace std;
+using namespace MY_UTIL;
 
 extern HWND		g_hWnd;		//HWND 전역변수
 extern POINT	g_ptMouse;	//마우스 포인터 위치 전역변수
