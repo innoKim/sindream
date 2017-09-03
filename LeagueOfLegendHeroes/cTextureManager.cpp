@@ -82,7 +82,7 @@ LPDIRECT3DTEXTURE9 cTextureManager::GetTextureEx(const char* szFullPath, OUT D3D
 	}
 	else if (m_mapImageInfo.find(szFullPath) == m_mapImageInfo.end())
 	{
-		assert(true && "이전에 로드된적 있음~!");
+		//assert(true && "이전에 로드된적 있음~!");
 	}
 
 	if (pImageInfo)
