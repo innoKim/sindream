@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cKeyManager.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="LeagueOfLegendHeroes.h" />
     <ClInclude Include="resource.h" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cKeyManager.cpp" />
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="LeagueOfLegendHeroes.cpp" />
     <ClCompile Include="stdafx.cpp">
