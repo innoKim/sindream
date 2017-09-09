@@ -1,8 +1,18 @@
 #pragma once
 class cShader
 {
+private:
+	LPD3DXMESH		m_pMesh;
+	LPD3DXEFFECT	m_pEffect;
+
 public:
 	cShader();
 	~cShader();
+
+	void Setup(char* szFxFileName, char* szMeshFileName);
+	void Render();
+
+private:
+	LPD3DXEFFECT LoadEffect(char* szFileName);
 };
 
