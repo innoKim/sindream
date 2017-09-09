@@ -23,6 +23,26 @@ void cShader::Setup(char * szFxFileName, char * szMeshFileName)
 
 	m_vCameraPos = D3DXVECTOR4(0.0f, 0.0f, -200.0f, 1.0f);
 	m_vLightPos = D3DXVECTOR4(500.0f, 500.0f, -500.0f, 1.0f);
+
+	D3DXVECTOR3 vEye(0.0f, 0.0f, -200.0f);
+
+	RECT rc;
+	GetClientRect(g_hWnd, &rc);
+
+	D3DXMATRIX matView;
+	D3DXMatrixLookAtLH(&matView,
+		&vEye,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 1, 0));
+	g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
+
+	D3DXMATRIX matProj;
+	D3DXMatrixPerspectiveFovLH(&matProj,
+		D3DX_PI / 4.0f,
+		rc.right / (float)rc.bottom,
+		1.0f,
+		1000.0f);
+	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
 void cShader::Render()
