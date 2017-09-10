@@ -1,0 +1,1064 @@
+newmtl grnd_terrain_d2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_d.dds
+
+newmtl lambert175152
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_e.dds
+
+newmtl LM_Grnd_Terrain_B_Shader
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_b.dds
+
+newmtl lm_Grnd_Terrain_A_Shader
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_a.dds
+
+newmtl hing_temp_lm_Grnd_Terrain_F_Shader2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_f.dds
+
+newmtl hing_temp_lm_Grnd_Terrain_H_Shader2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_h.dds
+
+newmtl lambert177183
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_i.dds
+
+newmtl lm_Grnd_Terrain_L_Shader2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_l.dds
+
+newmtl LM_lambert27034
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_n.dds
+
+newmtl hing_temp_lm_Grnd_Terrain_M_Shader1
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_m.dds
+
+newmtl hing_temp_lm_Grnd_Terrain_K_Shader2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_k.dds
+
+newmtl hing_temp_lm_Grnd_Terrain_O_Shader1
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_o.dds
+
+newmtl splitfilewip_2256_grnd_terrain_s2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_s.dds
+
+newmtl splitfilewip_2256_hing_temp_LM_Grnd_Terrain_R_Shader2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_r.dds
+
+newmtl lm_Grnd_Terrain_T_Shader2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_t.dds
+
+newmtl lambert177189
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_q.dds
+
+newmtl grnd_terrain_y2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_y.dds
+
+newmtl grnd_terrain_w
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_w.dds
+
+newmtl ground_V2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_v.dds
+
+newmtl grnd_terrain_x
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_x.dds
+
+newmtl lambert176398
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_u.dds
+
+newmtl lm_Grnd_Terrain_W_Shader3
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_w.dds
+
+newmtl bk_distant_horizon_a4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd bk_distant_horizon_a.dds
+
+newmtl bk_distant_horizon_a8
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd bk_distant_horizon_a.dds
+
+newmtl periph_north_m2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_m.dds
+
+newmtl periph_north_k
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_k.dds
+
+newmtl periph_north_j11
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_j1.dds
+
+newmtl lambert177290
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_a.dds
+
+newmtl periph_north_l11
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_l.dds
+
+newmtl _chunk_base_north_walls_g_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_walls_g_alpha_3dcuv_atlas_color.dds
+
+newmtl periph_north_l9
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_l.dds
+
+newmtl _chunk_base_north_walls_b_Alpha_3dcUV_Atlas_color10
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_walls_b_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_north_island_l_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_l_alpha_3dcuv_atlas_color.dds
+
+newmtl lm_Grnd_Terrain_C_Shader3
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_c.dds
+
+newmtl lambert3
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_i_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_base_north_walls_b_Alpha_3dcUV_Atlas_color5
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_walls_b_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177337
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_g_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_base_north_walls_f_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_walls_f_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177330
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_h_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_base_north_walls_f_Alpha_3dcUV_Atlas_color2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_walls_f_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_north_island_d_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_d_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_north_island_d_Alpha_3dcUV_Atlas_color2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_d_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert176391
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_j.dds
+
+newmtl _chunk_base_north_walls_d_Alpha_3dcUV_Atlas_color2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_walls_d_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177340
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd jungle_north_island_fb.dds
+
+newmtl jungle_west_island_a1
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd jungle_west_island_a.dds
+
+newmtl periph_west_e1
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_west_e.dds
+
+newmtl _chunk_jungle_north_island_e_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_e_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177293
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_g.dds
+
+newmtl _chunk_jungle_north_island_c_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_c_alpha_3dcuv_atlas_color.dds
+
+newmtl jungle_north_island_fa3
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd jungle_north_island_fa.dds
+
+newmtl lambert177338
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_b_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177346
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_c_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_east_island_i_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_i_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_west_island_d_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_d_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_west_island_b_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_b_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_north_island_a_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_a_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_east_island_f_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_f_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_east_island_g_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_g_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_east_island_h_Alpha_3dcUV_Atlas_color6
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_h_alpha_3dcuv_atlas_color.dds
+
+newmtl periph_west_d26
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_west_d3.dds
+
+newmtl _chunk_jungle_east_island_h_Alpha_3dcUV_Atlas_color4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_h_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_east_island_h_Alpha_3dcUV_Atlas_color2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_h_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_west_island_e_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_e_alpha_3dcuv_atlas_color.dds
+
+newmtl periph_west_d24
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_west_d3.dds
+
+newmtl _chunk_jungle_east_island_h_Alpha_3dcUV_Atlas_color8
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_h_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_east_island_e_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_e_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_west_island_g_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_g_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_east_island_d_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_d_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_west_island_h_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_h_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177148
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_base_south_west_a.dds
+
+newmtl _chunk_jungle_west_island_f_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_f_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_east_island_b_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_b_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_south_island_a_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_a_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177350
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_i_alpha_3dcuv_atlas_color.dds
+
+newmtl periph_west_a4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_west_a4.dds
+
+newmtl _chunk_jungle_east_island_c_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_east_island_c_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177187
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd grnd_terrain_p.dds
+
+newmtl lambert2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_b_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177342
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd south_island_f_dragonpita.dds
+
+newmtl _chunk_jungle_west_island_i_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_west_island_i_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd south_island_f_dragonpitb.dds
+
+newmtl jungle_east_island_a5
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd jungle_east_island_a.dds
+
+newmtl _chunk_base_south_walls_b_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_south_walls_b_alpha_3dcuv_atlas_color.dds
+
+newmtl periph_southeast_c6
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_southeast_c3.dds
+
+newmtl periph_southeast_d2SG2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_southeast_d2.dds
+
+newmtl _chunk_jungle_south_island_c_Alpha_3dcUV_Atlas_color2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_c_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177344
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_e_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert5
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_d_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177348
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_c_alpha_3dcuv_atlas_color.dds
+
+newmtl periph_southeast_a4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_southeast_a1.dds
+
+newmtl periph_southeast_c4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_southeast_c3.dds
+
+newmtl periph_south_walls_f8
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_south_walls_f.dds
+
+newmtl lambert177295
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_h_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_base_south_walls_c_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_south_walls_c_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177341
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_i_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177299
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_g_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177349
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_l_alpha_3dcuv_atlas_color.dds
+
+newmtl lambert177345
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_j_alpha_3dcuv_atlas_color.dds
+
+newmtl periph_southeast_eb2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_southeast_eb.dds
+
+newmtl lambert177347
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_south_island_k_alpha_3dcuv_atlas_color.dds
+
+newmtl south_platform_periph_coll2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd south_platform_periph_coll.dds
+
+newmtl periph_southeast_a8
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_southeast_a1.dds
+
+newmtl lambert177284
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_southeast_a1.dds
+
+newmtl pally_platform
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd pally_platform.dds
+
+newmtl pally_base_side_walls_bot3
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd pally_base_side_walls_bot1.dds
+
+newmtl base_south_foliage
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd base_south_foliage.dds
+
+newmtl periph_north_base_b4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_base_b.dds
+
+newmtl periph_north_d13
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_d.dds
+
+newmtl lambert177343
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_j_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_jungle_north_island_k_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_jungle_north_island_k_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_base_north_walls_b_Alpha_3dcUV_Atlas_color11
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_walls_b_alpha_3dcuv_atlas_color.dds
+
+newmtl periph_west_c4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_west_c4.dds
+
+newmtl periph_south_e9
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_south_e1.dds
+
+newmtl periph_south_e11
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_south_e1.dds
+
+newmtl periph_north_g35
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_g.dds
+
+newmtl periph_north_g
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_north_g.dds
+
+newmtl periph_south_f6
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_south_f1.dds
+
+newmtl periph_south_f1
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_south_f1.dds
+
+newmtl periph_south_g_combined2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_south_g_combined2.dds
+
+newmtl periph_southeast_a6
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_southeast_a1.dds
+
+newmtl base_north_arches_periph2
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd base_north_arches_periph.dds
+
+newmtl base_north_arches_periph4
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd base_north_arches_periph.dds
+
+newmtl _chunk_base_north_shop_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_shop_alpha_3dcuv_atlas_color.dds
+
+newmtl _chunk_base_north_platform_Alpha_3dcUV_Atlas_color
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd _chunk_base_north_platform_alpha_3dcuv_atlas_color.dds
+
+newmtl paly_south_base_edge_wall_right_a5
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd paly_south_base_edge_wall_right_a1.dds
+
+newmtl grass_stair_card_01_lambert174131
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd mage_spawn_pad_b.dds
+
+newmtl periph_east_g
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_east_g.dds
+
+newmtl periph_east_d15
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_east_d2.dds
+
+newmtl periph_east_c20
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_east_c.dds
+
+newmtl periph_east_c1
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_east_c1.dds
+
+newmtl periph_east_a1
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_east_a1.dds
+
+newmtl periph_east_b1
+Ka 0.200000 0.200000 0.200000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 8.000000
+map_Kd periph_east_b1.dds
+

@@ -1,0 +1,2139 @@
+[MaterialBegin]
+Name= defaultShader
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 0
+Color24= 255 0 0
+[MaterialEnd]
+
+[MaterialBegin]
+Name= grass_nu_01
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_brush.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= SRU_Gromp_mini_mat1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_gromp_mini_tx_cm.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= Frame2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_es_banner_frame_1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= SRU_banner_02
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_es_banner_uol.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_southeast_c6
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_southeast_c3.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_southeast_c4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_southeast_c3.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_l11
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_l.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= MAT_OrderInhib8
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= unq_struc_base_pali_inhibitor_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177352
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_snail_cm_tx.psd
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177289
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_es_banner_frame_wall_2.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= SRU_banner_01_sru_test_banner_flag_uol12
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_es_banner_c9.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lm_Grnd_Terrain_C_Shader3
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_c.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_walls_f_Alpha_3dcUV_Atlas_color2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_walls_f_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177341
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_i_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_b_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177347
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_k_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_d_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_d_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177353
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_lizard_tx_cm.psd
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177337
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_g_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177342
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= south_island_f_dragonpita.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_north_island_l_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_l_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_g
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_g.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177290
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= hing_turret_temp_Mage_TurC
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= mage_turret_d.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177349
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_l_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_southeast_d2SG2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_southeast_d2.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert3
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_i_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177346
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_c_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= hing_temp_sru_mage_inhibitor_shader1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= unq_struc_base_mage_inhibitor_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= paly_south_base_edge_wall_right_a5
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= paly_south_base_edge_wall_right_a1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_e_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_e_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177354
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_antlermouse_tx_cm.psd
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177343
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_j_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_southeast_a4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_southeast_a1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177284
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_southeast_a1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_platform_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_platform_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_southeast_a6
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_southeast_a1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= pally_platform
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= pally_platform.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= pally_base_side_walls_bot3
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= pally_base_side_walls_bot1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177286
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_banner_frame_wall_02.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= SRU_banner_01_sru_test_banner_flag_uol8
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_es_banner_uol.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_west_island_g_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_g_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert174010
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= Wall_Of_Grass
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_west_island_d_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_d_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= jungle_east_island_a5
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= jungle_east_island_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177281
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_storekeepernorth_tx_cm.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_k
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_k.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_d13
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_d.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_i_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_i_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_south_walls_b_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_south_walls_b_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_south_g_combined2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_south_g_combined2.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177345
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_j_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert176391
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_j.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= BlueBuff_Bird_Mat1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= npc_blue_bird_tx_cm.tga
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= SRUAP_OrderTurret1_Mat
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sruap_turret_order1_tx_cm.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177338
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_b_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_west_island_h_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_h_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_south_walls_c_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_south_walls_c_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177340
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= jungle_north_island_fb.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177348
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_c_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= base_north_arches_periph2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= base_north_arches_periph.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= base_north_arches_periph4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= base_north_arches_periph.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_west_d24
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_west_d3.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_west_a4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_west_a4.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert5
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_d_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_north_island_d_Alpha_3dcUV_Atlas_color2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_d_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_f_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_f_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_east_a1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_east_a1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_west_island_e_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_e_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_north_island_e_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_e_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= south_platform_periph_coll2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= south_platform_periph_coll.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_h_Alpha_3dcUV_Atlas_color2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_h_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177355
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_porowl_cm.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_south_f1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_south_f1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_south_f6
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_south_f1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_walls_d_Alpha_3dcUV_Atlas_color2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_walls_d_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_walls_b_Alpha_3dcUV_Atlas_color5
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_walls_b_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_walls_b_Alpha_3dcUV_Atlas_color10
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_walls_b_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_south_island_c_Alpha_3dcUV_Atlas_color2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_c_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177344
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_e_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_east_c20
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_east_c.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_southeast_eb2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_southeast_eb.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_south_walls_f8
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_south_walls_f.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177295
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_h_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177350
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_i_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= jungle_west_island_a1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= jungle_west_island_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_h_Alpha_3dcUV_Atlas_color4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_h_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_h_Alpha_3dcUV_Atlas_color6
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_h_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_h_Alpha_3dcUV_Atlas_color8
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_h_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= grass_stair_card_01_lambert174131
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= mage_spawn_pad_b.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177187
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_p.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= grnd_terrain_y2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_y.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= grnd_terrain_x
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_x.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= hing_temp_lm_Grnd_Terrain_M_Shader1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_m.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lm_Grnd_Terrain_L_Shader2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_l.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert175152
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_e.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= hing_temp_lm_Grnd_Terrain_O_Shader1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_o.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lm_Grnd_Terrain_A_Shader
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177189
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_q.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= LM_lambert27034
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_n.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= grnd_terrain_d2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_d.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= hing_temp_lm_Grnd_Terrain_K_Shader2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_k.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177183
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_i.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert176398
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_u.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= LM_Grnd_Terrain_B_Shader
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_b.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= splitfilewip_2256_grnd_terrain_s2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_s.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= splitfilewip_2256_hing_temp_LM_Grnd_Terrain_R_Shader2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_r.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lm_Grnd_Terrain_W_Shader3
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_w.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= grnd_terrain_w
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_w.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= hing_temp_lm_Grnd_Terrain_H_Shader2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_h.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= ground_V2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_v.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lm_Grnd_Terrain_T_Shader2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_t.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= hing_temp_lm_Grnd_Terrain_F_Shader2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_f.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_g35
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_g.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= south_island_f_dragonpitb.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_east_c1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_east_c1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_walls_f_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_walls_f_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_j11
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_j1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= Frame3
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_es_banner_frame_1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= SRU_banner_03
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_es_banner_c9.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_north_island_d_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_d_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= MAT_Dragon6
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 0
+Color24= 255 0 0
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_walls_b_Alpha_3dcUV_Atlas_color11
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_walls_b_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= SRUAP_OrderNexus_Mat
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sruap_ordernexus_tx_cm.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= grass_nu_03
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sru_brush.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177299
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_g_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_west_island_f_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_f_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_east_d15
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_east_d2.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177148
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_base_south_west_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_south_e11
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_south_e1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_north_island_k_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_k_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_west_island_i_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_i_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_north_island_a_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_a_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= jungle_north_island_fa3
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= jungle_north_island_fa.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= SRUAP_OrderTurret5
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sruap_orderturret5.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_south_island_a_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_south_island_a_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_g_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_g_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= Beast_Mat20
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 0
+Color24= 255 0 0
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_west_c4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_west_c4.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= bk_distant_horizon_a8
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= bk_distant_horizon_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_l9
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_l.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_west_e1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_west_e.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_shop_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_shop_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_b_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_b_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_east_b1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_east_b1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_south_e9
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_south_e1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177330
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_h_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= bk_distant_horizon_a4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= bk_distant_horizon_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= GreyBox1
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grey.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_m2
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_m.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= lambert177293
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= grnd_terrain_g.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_west_d26
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_west_d3.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_west_island_b_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_west_island_b_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_southeast_a8
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_southeast_a1.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_north_island_c_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_north_island_c_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= hing_temp_sru_mage_inhibitor_shader
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= unq_struc_base_mage_inhibitor_a.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_jungle_east_island_c_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_jungle_east_island_c_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_north_base_b4
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_north_base_b.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= periph_east_g
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= periph_east_g.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= MAT_CHAOS_NEXUS
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= sruap_chaosnexus_tx_cm.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= _chunk_base_north_walls_g_Alpha_3dcUV_Atlas_color
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= _chunk_base_north_walls_g_alpha_3dcuv_atlas_color.dds
+Color24= 204 204 204
+[MaterialEnd]
+
+[MaterialBegin]
+Name= base_south_foliage
+Flags= texture_gouraud_
+EmissiveColor= 0 0 0
+UVScroll = 0 0
+DisableBackfaceCulling = 0
+ShaderName = Prop
+SimpleShader = 1
+Opacity= 255
+Texture= base_south_foliage.dds
+Color24= 204 204 204
+[MaterialEnd]
+
