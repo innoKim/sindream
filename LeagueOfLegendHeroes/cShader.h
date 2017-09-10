@@ -6,7 +6,7 @@ class cShader
 private:
 	LPD3DXMESH			m_pMesh;
 	LPD3DXEFFECT		m_pEffect;
-	D3DXVECTOR4			m_vCameraPos;
+	D3DXVECTOR3*		m_pvCameraPos;
 	D3DXVECTOR4			m_vLightPos;
 	LPDIRECT3DTEXTURE9	m_pDMTexture;
 	LPDIRECT3DTEXTURE9	m_pSMTexture;
@@ -16,7 +16,7 @@ public:
 	cShader();
 	~cShader();
 
-	void Setup(char* szFxFileName, char* szMeshFileName, char* szDMTextureFileName = NULL, char* szSMTextureFileName = NULL);
+	void Setup(D3DXVECTOR3* pvEye, char* szFxFileName, char* szMeshFileName, char* szDMTextureFileName = NULL, char* szSMTextureFileName = NULL);
 	void Render();
 
 private:

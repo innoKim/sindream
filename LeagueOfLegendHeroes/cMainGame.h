@@ -1,11 +1,13 @@
 #pragma once
 
 class cShader;
+class cCamera;
 
 class cMainGame
 {
 private:
-	cShader* m_pShader;
+	cCamera*	m_pCamera;
+	cShader*	m_pShader;
 
 public:
 	cMainGame();
@@ -14,4 +16,5 @@ public:
 	void Setup();
 	void Update();
 	void Render();
+	void MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

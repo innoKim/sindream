@@ -1,15 +1,18 @@
 #include "stdafx.h"
 #include "cMainGame.h"
 #include "cShader.h"
+#include "cCamera.h"
 
 cMainGame::cMainGame()
 	: m_pShader(NULL)
+	, m_pCamera(NULL)
 {
 }
 
 cMainGame::~cMainGame()
 {
 	SAFE_DELETE(m_pShader);
+	SAFE_DELETE(m_pCamera);
 
 	g_pKeyManager->Destroy();
 	g_pTimeManager->Destroy();
@@ -19,12 +22,16 @@ cMainGame::~cMainGame()
 
 void cMainGame::Setup()
 {
+	m_pCamera = new cCamera;
+	m_pCamera->Setup(NULL);
+
 	m_pShader = new cShader;
-	m_pShader->Setup("specularMapping.fx", "sphere.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga");
+	m_pShader->Setup(m_pCamera->GetEye(), "specularMapping.fx", "sphere.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga");
 }
 
 void cMainGame::Update()
 {
+	if (m_pCamera) m_pCamera->Update();
 }
 
 void cMainGame::Render()
@@ -38,4 +45,12 @@ void cMainGame::Render()
 	/////  ·»´õ ³¡
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
+}
+
+void cMainGame::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	if (m_pCamera)
+	{
+		m_pCamera->MsgProc(hWnd, message, wParam, lParam);
+	}
 }

@@ -145,7 +145,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)
+	if (g_pMainGame)
+	{
+		g_pMainGame->MsgProc(hWnd, message, wParam, lParam);
+	}
+	
+	switch (message)
     {
     case WM_COMMAND:
         {

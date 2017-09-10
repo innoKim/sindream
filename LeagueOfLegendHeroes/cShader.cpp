@@ -7,6 +7,7 @@ cShader::cShader()
 	, m_pMesh(NULL)
 	, m_pDMTexture(NULL)
 	, m_pSMTexture(NULL)
+	, m_pvCameraPos(NULL)
 	, m_vLightColor(D3DXVECTOR4(0.7f, 0.7f, 1.0f, 1.0f))
 {
 }
@@ -14,13 +15,15 @@ cShader::cShader()
 
 cShader::~cShader()
 {
+	m_pvCameraPos = NULL;
+
 	SAFE_RELEASE(m_pEffect);
 	SAFE_RELEASE(m_pMesh);
 	SAFE_RELEASE(m_pDMTexture);
 	SAFE_RELEASE(m_pSMTexture);
 }
 
-void cShader::Setup(char * szFxFileName, char * szMeshFileName, char* szDMTextureFileName, char* szSMTextureFileName)
+void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileName, char* szDMTextureFileName, char* szSMTextureFileName)
 {
 	m_pEffect = LoadEffect(szFxFileName);
 
@@ -36,47 +39,29 @@ void cShader::Setup(char * szFxFileName, char * szMeshFileName, char* szDMTextur
 		m_pSMTexture = g_pTextureManager->GetTexture(szSMTextureFileName);
 	}
 
-	m_vCameraPos = D3DXVECTOR4(0.0f, 0.0f, -200.0f, 1.0f);
+	m_pvCameraPos = pvEye;
 	m_vLightPos = D3DXVECTOR4(500.0f, 500.0f, -500.0f, 1.0f);
-
-	D3DXVECTOR3 vEye(0.0f, 0.0f, -200.0f);
-
-	RECT rc;
-	GetClientRect(g_hWnd, &rc);
-
-	D3DXMATRIX matView;
-	D3DXMatrixLookAtLH(&matView,
-		&vEye,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 1, 0));
-	g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
-
-	D3DXMATRIX matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj,
-		D3DX_PI / 4.0f,
-		rc.right / (float)rc.bottom,
-		1.0f,
-		1000.0f);
-	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
 void cShader::Render()
 {
-	D3DXMATRIXA16 matWorld, matView, matProjection;
+	D3DXMATRIXA16 matS, matWorld, matView, matProjection;
 
-	D3DXMatrixIdentity(&matWorld);
+	D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
+	
+	matWorld = matS;
 
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
 
-	D3DXVECTOR3 vCameraPos;
+	D3DXVECTOR4 vCameraPos = D3DXVECTOR4(m_pvCameraPos->x, m_pvCameraPos->y, m_pvCameraPos->z, 1.0f);
 
 	// 쉐이더 전역변수들을 설정
 	m_pEffect->SetMatrix("matWorld", &matWorld);
 	m_pEffect->SetMatrix("matView", &matView);
 	m_pEffect->SetMatrix("matProjection", &matProjection);
 	m_pEffect->SetVector("vLightPos", &m_vLightPos);
-	m_pEffect->SetVector("vCameraPos", &m_vCameraPos);
+	m_pEffect->SetVector("vCameraPos", &vCameraPos);
 
 	if (m_pDMTexture)
 	{
