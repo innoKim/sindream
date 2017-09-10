@@ -1,13 +1,16 @@
 #pragma once
+#include "cGroup.h"
 
 class cOBJLoader
 {
 private:
-	ST_PC_VERTEX			stVertex;
-	vector<ST_PC_VERTEX>	vecVertex;
+	map<string, cMtlTex*> m_mapMtl;
+
 public:
 	cOBJLoader();
 	~cOBJLoader();
 
-	vector<ST_PC_VERTEX> Load(char* FileName);
+	void Load(IN char* Folder, char* FilePath, OUT vector<cGroup*> &vecGroup);
+protected:
+	void LoadMtl(char* Folder, char* FilePath);
 };

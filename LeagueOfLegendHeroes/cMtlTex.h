@@ -1,13 +1,16 @@
 #pragma once
 
-class cMtlTex
+class cMtlTex : public cObject
 {
-private:
+protected:
 	SYNTHESIZE_PASS_BY_REF(D3DMATERIAL9, m_stMtl, Mtl);
 	SYNTHESIZE(LPDIRECT3DTEXTURE9, m_pTexture, Texture);
 
 public:
 	cMtlTex();
 	~cMtlTex();
+
+	LPDIRECT3DTEXTURE9* GetpTexture() { return &m_pTexture; }
+
 };
 

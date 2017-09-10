@@ -155,9 +155,11 @@
     <ClInclude Include="cAllocateHierachy.h" />
     <ClInclude Include="cCamera.h" />
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cGroup.h" />
     <ClInclude Include="cKeyManager.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMtlTex.h" />
+    <ClInclude Include="cObject.h" />
     <ClInclude Include="cOBJLoader.h" />
     <ClInclude Include="cShader.h" />
     <ClInclude Include="cSkinnedMesh.h" />
@@ -176,9 +178,11 @@
     <ClCompile Include="cAllocateHierachy.cpp" />
     <ClCompile Include="cCamera.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cGroup.cpp" />
     <ClCompile Include="cKeyManager.cpp" />
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
+    <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cOBJLoader.cpp" />
     <ClCompile Include="cShader.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
