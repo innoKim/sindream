@@ -31,7 +31,7 @@ struct VS_INPUT
 struct VS_OUTPUT 
 {
    float4 Position : POSITION0;
-   float2 Diffuse : TEXCOORD1;
+   float3 Diffuse : TEXCOORD1;
    float3 ViewDir : TEXCOORD2;
    float3 Reflection : TEXCOORD3;
 };
@@ -69,7 +69,7 @@ VS_OUTPUT Lighting_Pass_0_Vertex_Shader_vs_main( VS_INPUT Input )
    worldNormal = normalize(worldNormal);
    
    Output.Diffuse = dot(-lightDir, worldNormal);
-   Output.Reflection = reflect(cameraDir, worldNormal);
+   Output.Reflection = reflect(lightDir, worldNormal);
    
    return( Output );
    
@@ -92,14 +92,14 @@ float4 Lighting_Pass_0_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
    float3 reflection = normalize(Input.mReflection);
    float3 viewDir = normalize(Input.mViewDir);
    
-   float specular = 0;
+   float3 specular = 0;
    if (diffuse.x > 0)
    {
       specular = saturate(dot(reflection, -viewDir));
       specular = pow(specular, 20.0f);
    }
    
-   float3 ambient = float3(0.1f, 0.1f, 0.1f);
+   float3 ambient = float3(0.1f, 0.1f, 0.1f); 
    
    return float4( ambient + specular + diffuse, 1 );
    
