@@ -20,7 +20,7 @@ cMainGame::~cMainGame()
 void cMainGame::Setup()
 {
 	m_pShader = new cShader;
-	m_pShader->Setup("lighting.fx", "sphere.x");
+	m_pShader->Setup("specularMapping.fx", "sphere.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga");
 }
 
 void cMainGame::Update()
