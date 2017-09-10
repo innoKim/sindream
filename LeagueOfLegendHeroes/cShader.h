@@ -16,7 +16,7 @@ public:
 	cShader();
 	~cShader();
 
-	void Setup(char* szFxFileName, char* szMeshFileName, char* szDMTextureFileName, char* szSMTextureFileName);
+	void Setup(char* szFxFileName, char* szMeshFileName, char* szDMTextureFileName = NULL, char* szSMTextureFileName = NULL);
 	void Render();
 
 private:

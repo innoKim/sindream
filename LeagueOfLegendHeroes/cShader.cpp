@@ -26,8 +26,15 @@ void cShader::Setup(char * szFxFileName, char * szMeshFileName, char* szDMTextur
 
 	D3DXLoadMeshFromX(szMeshFileName, D3DXMESH_MANAGED, g_pD3DDevice, NULL, NULL, NULL, NULL, &m_pMesh);
 
-	m_pDMTexture = g_pTextureManager->GetTexture(szDMTextureFileName);
-	m_pSMTexture = g_pTextureManager->GetTexture(szSMTextureFileName);
+	if (szDMTextureFileName)
+	{
+		m_pDMTexture = g_pTextureManager->GetTexture(szDMTextureFileName);
+	}
+
+	if (szSMTextureFileName)
+	{
+		m_pSMTexture = g_pTextureManager->GetTexture(szSMTextureFileName);
+	}
 
 	m_vCameraPos = D3DXVECTOR4(0.0f, 0.0f, -200.0f, 1.0f);
 	m_vLightPos = D3DXVECTOR4(500.0f, 500.0f, -500.0f, 1.0f);
@@ -70,9 +77,17 @@ void cShader::Render()
 	m_pEffect->SetMatrix("matProjection", &matProjection);
 	m_pEffect->SetVector("vLightPos", &m_vLightPos);
 	m_pEffect->SetVector("vCameraPos", &m_vCameraPos);
-	m_pEffect->SetVector("vLightColor", &m_vLightColor);
-	m_pEffect->SetTexture("DiffuseMap_Tex", m_pDMTexture);
-	m_pEffect->SetTexture("SpecularMap_Tex", m_pSMTexture);
+
+	if (m_pDMTexture)
+	{
+		m_pEffect->SetTexture("DiffuseMap_Tex", m_pDMTexture);
+		m_pEffect->SetVector("vLightColor", &m_vLightColor);
+	}
+
+	if (m_pSMTexture)
+	{
+		m_pEffect->SetTexture("SpecularMap_Tex", m_pSMTexture);
+	}
 	
 
 	UINT numPasses = 0;
