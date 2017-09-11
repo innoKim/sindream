@@ -31,8 +31,8 @@ cMainGame::~cMainGame()
 
 void cMainGame::Setup()
 {
-	cOBJLoader objLoader;
-	objLoader.Load("map/", "room.obj", m_vecGroup);
+	//cOBJLoader objLoader;
+	//objLoader.Load("map/", "room.obj", m_vecGroup);
 
 	m_pCamera = new cCamera;
 	//m_pCamera->Setup(NULL);
@@ -43,7 +43,7 @@ void cMainGame::Setup()
 	// ³¡
 
 	m_pShader = new cShader;
-	m_pShader->Setup(m_pCamera->GetEye(), "shader/specularMapping.fx", "shader/sphere.x", "shader/Fieldstone_DM.tga", "shader/Fieldstone_SM.tga");
+	m_pShader->Setup(m_pCamera->GetEye(), "ToonShader.fx", "teapot.x");
 }
 
 void cMainGame::Update()
@@ -88,22 +88,22 @@ void cMainGame::Render()
 
 	if (m_pShader) m_pShader->Render();
 
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
-	D3DXMatrixIdentity(&m_matW);
+	//D3DXMatrixIdentity(&m_matW);
 
-	D3DXMatrixScaling(&m_matS, 0.01f, 0.01f, 0.01f);
+	//D3DXMatrixScaling(&m_matS, 0.01f, 0.01f, 0.01f);
 
-	D3DXMatrixRotationX(&m_matR, -D3DX_PI / 2);
+	//D3DXMatrixRotationX(&m_matR, -D3DX_PI / 2);
 
-	m_matW = m_matS * m_matR;
+	//m_matW = m_matS * m_matR;
 
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matW);
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matW);
 
-	for each (auto p in m_vecGroup)
-	{
-		p->Render();
-	}
+	//for each (auto p in m_vecGroup)
+	//{
+	//	p->Render();
+	//}
 	
 	/////  ·»´õ ³¡
 	g_pD3DDevice->EndScene();

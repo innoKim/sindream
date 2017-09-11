@@ -11,6 +11,7 @@ private:
 	LPDIRECT3DTEXTURE9	m_pDMTexture;
 	LPDIRECT3DTEXTURE9	m_pSMTexture;
 	D3DXVECTOR4			m_vLightColor;
+	string				m_sFolder;
 
 public:
 	cShader();

@@ -9,6 +9,7 @@ cShader::cShader()
 	, m_pSMTexture(NULL)
 	, m_pvCameraPos(NULL)
 	, m_vLightColor(D3DXVECTOR4(0.7f, 0.7f, 1.0f, 1.0f))
+	, m_sFolder("shader/")
 {
 }
 
@@ -25,9 +26,21 @@ cShader::~cShader()
 
 void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileName, char* szDMTextureFileName, char* szSMTextureFileName)
 {
-	m_pEffect = LoadEffect(szFxFileName);
+	string sFileName = szFxFileName;
 
-	D3DXLoadMeshFromX(szMeshFileName, D3DXMESH_MANAGED, g_pD3DDevice, NULL, NULL, NULL, NULL, &m_pMesh);
+	string sFullPath = m_sFolder + sFileName;
+
+	char* szFullPath = (char*)sFullPath.c_str();
+
+	m_pEffect = LoadEffect(szFullPath);
+
+	sFileName = szMeshFileName;
+
+	sFullPath = m_sFolder + sFileName;
+
+	szFullPath = (char*)sFullPath.c_str();
+
+	D3DXLoadMeshFromX(szFullPath, D3DXMESH_MANAGED, g_pD3DDevice, NULL, NULL, NULL, NULL, &m_pMesh);
 
 	if (szDMTextureFileName)
 	{
@@ -45,23 +58,28 @@ void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileNa
 
 void cShader::Render()
 {
-	D3DXMATRIXA16 matS, matWorld, matView, matProjection;
+	D3DXMATRIXA16 matS, matWorld, matView, matProjection, matWolrdViewProjection, matInvWorld;
 
 	D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
-	
+
 	matWorld = matS;
+
+	D3DXMatrixInverse(&matInvWorld, 0, &matWorld);
 
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
 
+	matWolrdViewProjection = matWorld * matView * matProjection;
+
 	D3DXVECTOR4 vCameraPos = D3DXVECTOR4(m_pvCameraPos->x, m_pvCameraPos->y, m_pvCameraPos->z, 1.0f);
+	D3DXVECTOR4 vSurfaceColor = D3DXVECTOR4(0, 1, 0, 1);
 
 	// 쉐이더 전역변수들을 설정
-	m_pEffect->SetMatrix("matWorld", &matWorld);
-	m_pEffect->SetMatrix("matView", &matView);
-	m_pEffect->SetMatrix("matProjection", &matProjection);
-	m_pEffect->SetVector("vLightPos", &m_vLightPos);
-	m_pEffect->SetVector("vCameraPos", &vCameraPos);
+	m_pEffect->SetMatrix("matWorldViewProjection", &matWolrdViewProjection);
+	m_pEffect->SetMatrix("matWorldInverse", &matInvWorld);
+	//m_pEffect->SetVector("LightPos", &m_vLightPos);
+	//m_pEffect->SetVector("vCameraPos", &vCameraPos);
+	//m_pEffect->SetVector("SurfaceColor", &vSurfaceColor);
 
 	if (m_pDMTexture)
 	{
@@ -73,7 +91,7 @@ void cShader::Render()
 	{
 		m_pEffect->SetTexture("SpecularMap_Tex", m_pSMTexture);
 	}
-	
+
 
 	UINT numPasses = 0;
 	m_pEffect->Begin(&numPasses, NULL);
