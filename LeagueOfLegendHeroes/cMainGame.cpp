@@ -43,7 +43,7 @@ void cMainGame::Setup()
 	// ³¡
 
 	m_pShader = new cShader;
-	m_pShader->Setup(m_pCamera->GetEye(), "specularMapping.fx", "sphere.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga");
+	m_pShader->Setup(m_pCamera->GetEye(), "shader/specularMapping.fx", "shader/sphere.x", "shader/Fieldstone_DM.tga", "shader/Fieldstone_SM.tga");
 }
 
 void cMainGame::Update()

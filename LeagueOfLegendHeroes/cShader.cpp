@@ -19,8 +19,8 @@ cShader::~cShader()
 
 	SAFE_RELEASE(m_pEffect);
 	SAFE_RELEASE(m_pMesh);
-	SAFE_RELEASE(m_pDMTexture);
-	SAFE_RELEASE(m_pSMTexture);
+	//SAFE_RELEASE(m_pDMTexture);
+	//SAFE_RELEASE(m_pSMTexture);
 }
 
 void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileName, char* szDMTextureFileName, char* szSMTextureFileName)

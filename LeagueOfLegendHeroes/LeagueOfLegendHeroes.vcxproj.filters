@@ -155,7 +155,8 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="lighting.fx" />
-    <FxCompile Include="specularMapping.fx" />
+    <FxCompile Include="shader\specularMapping.fx" />
+    <FxCompile Include="shader\ToonShader.fx" />
+    <FxCompile Include="shader\lighting.fx" />
   </ItemGroup>
 </Project>
