@@ -158,5 +158,6 @@
     <FxCompile Include="shader\specularMapping.fx" />
     <FxCompile Include="shader\ToonShader.fx" />
     <FxCompile Include="shader\lighting.fx" />
+    <FxCompile Include="shader\ToonShaderSona.fx" />
   </ItemGroup>
 </Project>

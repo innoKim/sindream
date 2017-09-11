@@ -35,15 +35,15 @@ void cMainGame::Setup()
 	//objLoader.Load("map/", "room.obj", m_vecGroup);
 
 	m_pCamera = new cCamera;
-	//m_pCamera->Setup(NULL);
+	m_pCamera->Setup(NULL);
 	// 카메라 테스트용
 	
-	m_pCamera->Setup(&m_vPos);
+	//m_pCamera->Setup(&m_vPos);
 
 	// 끝
 
 	m_pShader = new cShader;
-	m_pShader->Setup(m_pCamera->GetEye(), "ToonShader.fx", "teapot.x");
+	m_pShader->Setup(m_pCamera->GetEye(), "ToonShaderSona.fx", "sona.x", "sona.dds");
 }
 
 void cMainGame::Update()

@@ -44,12 +44,24 @@ void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileNa
 
 	if (szDMTextureFileName)
 	{
-		m_pDMTexture = g_pTextureManager->GetTexture(szDMTextureFileName);
+		sFileName = szDMTextureFileName;
+
+		sFullPath = m_sFolder + sFileName;
+
+		szFullPath = (char*)sFullPath.c_str();
+
+		m_pDMTexture = g_pTextureManager->GetTexture(szFullPath);
 	}
 
 	if (szSMTextureFileName)
 	{
-		m_pSMTexture = g_pTextureManager->GetTexture(szSMTextureFileName);
+		sFileName = szDMTextureFileName;
+
+		sFullPath = m_sFolder + sFileName;
+
+		szFullPath = (char*)sFullPath.c_str();
+
+		m_pSMTexture = g_pTextureManager->GetTexture(szFullPath);
 	}
 
 	m_pvCameraPos = pvEye;
@@ -58,11 +70,12 @@ void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileNa
 
 void cShader::Render()
 {
-	D3DXMATRIXA16 matS, matWorld, matView, matProjection, matWolrdViewProjection, matInvWorld;
+	D3DXMATRIXA16 matS, matR, matWorld, matView, matProjection, matWolrdViewProjection, matInvWorld;
 
 	D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
+	D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0f);
 
-	matWorld = matS;
+	matWorld = matS * matR;
 
 	D3DXMatrixInverse(&matInvWorld, 0, &matWorld);
 
@@ -77,14 +90,13 @@ void cShader::Render()
 	// 쉐이더 전역변수들을 설정
 	m_pEffect->SetMatrix("matWorldViewProjection", &matWolrdViewProjection);
 	m_pEffect->SetMatrix("matWorldInverse", &matInvWorld);
-	//m_pEffect->SetVector("LightPos", &m_vLightPos);
+	m_pEffect->SetVector("LightPos", &m_vLightPos);
 	//m_pEffect->SetVector("vCameraPos", &vCameraPos);
 	//m_pEffect->SetVector("SurfaceColor", &vSurfaceColor);
 
 	if (m_pDMTexture)
 	{
 		m_pEffect->SetTexture("DiffuseMap_Tex", m_pDMTexture);
-		m_pEffect->SetVector("vLightColor", &m_vLightColor);
 	}
 
 	if (m_pSMTexture)
