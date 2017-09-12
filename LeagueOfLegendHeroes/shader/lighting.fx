@@ -115,8 +115,8 @@ technique Lighting
 {
    pass Pass_0
    {
-      VertexShader = compile vs_2_0 Lighting_Pass_0_Vertex_Shader_vs_main();
-      PixelShader = compile ps_2_0 Lighting_Pass_0_Pixel_Shader_ps_main();
+      VertexShader = compile vs_3_0 Lighting_Pass_0_Vertex_Shader_vs_main();
+      PixelShader = compile ps_3_0 Lighting_Pass_0_Pixel_Shader_ps_main();
    }
 
 }

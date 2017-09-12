@@ -20,7 +20,7 @@
 //--------------------------------------------------------------//
 // Pass 0
 //--------------------------------------------------------------//
-string Default_DirectX_Effect_Pass_0_Model : ModelData = "..\\..\\..\\Documents\\Visual Studio 2017\\Projects\\LOLH Test2\\Dx3D\\Sona.x";
+string Default_DirectX_Effect_Pass_0_Model : ModelData = "..\\Documents\\Visual Studio 2017\\Projects\\LOLH Test\\LeagueOfLegendHeroes\\shader\\Sona.x";
 
 float4x4 matWorldViewProjection : WorldViewProjection;
 float4x4 matWorldInverse : WorldInverse;
@@ -72,7 +72,7 @@ VS_OUTPUT Default_DirectX_Effect_Pass_0_Vertex_Shader_vs_main( VS_INPUT Input )
 float3 SurfaceColor;
 texture DiffuseMap_Tex
 <
-   string ResourceName = "..\\..\\..\\Documents\\Visual Studio 2017\\Projects\\LOLH Test2\\Dx3D\\sona.dds";
+   string ResourceName = "..\\Documents\\Visual Studio 2017\\Projects\\LOLH Test\\LeagueOfLegendHeroes\\shader\\sona.dds";
 >;
 sampler2D DiffuseSampler = sampler_state
 {
@@ -106,8 +106,8 @@ technique Default_DirectX_Effect
 {
    pass Pass_0
    {
-      VertexShader = compile vs_2_0 Default_DirectX_Effect_Pass_0_Vertex_Shader_vs_main();
-      PixelShader = compile ps_2_0 Default_DirectX_Effect_Pass_0_Pixel_Shader_ps_main();
+      VertexShader = compile vs_3_0 Default_DirectX_Effect_Pass_0_Vertex_Shader_vs_main();
+      PixelShader = compile ps_3_0 Default_DirectX_Effect_Pass_0_Pixel_Shader_ps_main();
    }
 
 }
