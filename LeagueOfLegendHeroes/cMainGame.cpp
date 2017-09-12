@@ -42,7 +42,7 @@ void cMainGame::Setup()
 
 	// ³¡
 	m_pShader = new cShader;
-	m_pShader->Setup(m_pCamera->GetEye(), "EnvironmentMapping.fx", "TeapotWithTangent.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga", "Fieldstone_NM.tga", "Snow_ENV.dds");
+	m_pShader->Setup(m_pCamera->GetEye(), "UVAnimation.fx", "Torus.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga");
 }
 
 void cMainGame::Update()

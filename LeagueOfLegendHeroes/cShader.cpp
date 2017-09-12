@@ -89,7 +89,6 @@ void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileNa
 		D3DXCreateCubeTextureFromFile(g_pD3DDevice, szFullPath, &m_pEnvTexture);
 	}
 
-
 	m_pvCameraPos = pvEye;
 	m_vLightPos = D3DXVECTOR4(-500.0f, 500.0f, -500.0f, 1.0f);
 }
@@ -121,13 +120,21 @@ void cShader::Render()
 	D3DXVECTOR4 vSurfaceColor = D3DXVECTOR4(0.7f, 0.7f, 1.0f, 1.0f);
 
 	// 쉐이더 전역변수들을 설정
-	m_pEffect->SetMatrix("gWorldViewProjectionMatrix", &matWolrdViewProjection);
-	//m_pEffect->SetMatrix("matViewProjection", &matViewProjection);
-	m_pEffect->SetMatrix("gWorldMatrix", &matWorld);
+	m_pEffect->SetFloat("fWaveHeight", 3.0f);
+	m_pEffect->SetFloat("fSpeed", 2.0f);
+	m_pEffect->SetFloat("fWaveFrequency", 10.0f);
+	m_pEffect->SetFloat("fUVSpeed", 0.25f);
+
+	ULONGLONG tick = GetTickCount64();
+	m_pEffect->SetFloat("fTime", tick / 1000.0f);
+
+	m_pEffect->SetMatrix("matView", &matView);
+	m_pEffect->SetMatrix("matProjection", &matProjection);
+	m_pEffect->SetMatrix("matWorld", &matWorld);
 	//m_pEffect->SetMatrix("matWorldInverse", &matWorldInverse);
-	m_pEffect->SetVector("gWorldLightPosition", &m_vLightPos);
-	m_pEffect->SetVector("gWorldCameraPosition", &vCameraPos);
-	m_pEffect->SetVector("gLightColor", &vSurfaceColor);
+	m_pEffect->SetVector("vLightPos", &m_vLightPos);
+	m_pEffect->SetVector("vCameraPos", &vCameraPos);
+	m_pEffect->SetVector("vLightColor", &vSurfaceColor);
 
 	if (m_pDMTexture)
 	{
