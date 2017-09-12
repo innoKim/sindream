@@ -15,6 +15,8 @@ private:
 
 	D3DXMATRIX		m_matW, m_matS, m_matR, m_matT;
 
+	vector<ST_PC_VERTEX> m_vecSur;
+
 	// 테스트용
 	D3DXVECTOR3		m_vPos;
 	D3DXVECTOR3		m_vDir;

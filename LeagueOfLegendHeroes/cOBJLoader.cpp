@@ -2,6 +2,10 @@
 #include "cOBJLoader.h"
 
 cOBJLoader::cOBJLoader()
+			: minX(500.f)
+			, maxX(500.f)
+			, minZ(500.f)
+			, maxZ(500.f)
 {
 }
 
@@ -90,6 +94,46 @@ void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecG
 	}
 
 	fclose(fp);
+}
+
+vector<ST_PC_VERTEX> cOBJLoader::LoadSur(char * Filepath)
+{
+	FILE* fp = 0;
+	fopen_s(&fp, Filepath, "r");
+	
+	while (!feof(fp))
+	{
+		char szBuf[1024] = { '\0', };
+		fgets(szBuf, 1024, fp);
+
+		if (szBuf[0] <= 33) continue;
+
+		else if (szBuf[0] == 'O') continue;
+
+		else if (szBuf[0] == 'T') continue;
+
+		else if (szBuf[0] == 't') continue;
+
+		else
+		{
+			float x, y, z;
+			sscanf_s(szBuf, "%f %f %f %*f %*f", &x, &y, &z);
+
+			if (fabs(x) > maxX) maxX = fabs(x);
+			if (fabs(x) < minX) minX = fabs(x);
+			if (fabs(z) > maxZ) maxZ = fabs(z);
+			if (fabs(z) < minZ) minZ = fabs(z);
+
+			D3DXVECTOR3 p = D3DXVECTOR3(x, -y + 1, z);
+			D3DXCOLOR	c = D3DCOLOR_XRGB(255, 255, 255);
+
+			m_vecSur.push_back(ST_PC_VERTEX(p, c));
+		}
+	}
+
+	fclose(fp);
+
+	return m_vecSur;
 }
 
 void cOBJLoader::LoadMtl(char* Folder, char * FilePath)

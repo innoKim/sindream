@@ -31,18 +31,21 @@ cMainGame::~cMainGame()
 
 void cMainGame::Setup()
 {
-	//cOBJLoader objLoader;
-	//objLoader.Load("map/", "room.obj", m_vecGroup);
+	cOBJLoader objLoader;
+	objLoader.Load("map/", "room.obj", m_vecGroup);
+
+	cOBJLoader surLoader;
+	m_vecSur = surLoader.LoadSur("Lol/room_surface.obj");
 
 	m_pCamera = new cCamera;
-	m_pCamera->Setup(NULL);		//카메라 distance 200으로 수정해둠
+	//m_pCamera->Setup(NULL);		//카메라 distance 200으로 수정해둠
 	// 카메라 테스트용
 	
-	//m_pCamera->Setup(&m_vPos);
+	m_pCamera->Setup(&m_vPos);
 
 	// 끝
-	m_pShader = new cShader;
-	m_pShader->Setup(m_pCamera->GetEye(), "UVAnimation.fx", "Torus.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga");
+	//m_pShader = new cShader;
+	//m_pShader->Setup(m_pCamera->GetEye(), "UVAnimation.fx", "Torus.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga");
 }
 
 void cMainGame::Update()
@@ -87,22 +90,35 @@ void cMainGame::Render()
 
 	if (m_pShader) m_pShader->Render();
 
-	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
-	//D3DXMatrixIdentity(&m_matW);
+	D3DXMatrixIdentity(&m_matW);
 
-	//D3DXMatrixScaling(&m_matS, 0.01f, 0.01f, 0.01f);
+	D3DXMatrixScaling(&m_matS, 0.01f, 0.01f, 0.01f);
 
-	//D3DXMatrixRotationX(&m_matR, -D3DX_PI / 2);
+	D3DXMatrixRotationX(&m_matR, -D3DX_PI / 2);
 
-	//m_matW = m_matS * m_matR;
+	m_matW = m_matS * m_matR;
 
-	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matW);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matW);
 
-	//for each (auto p in m_vecGroup)
-	//{
-	//	p->Render();
-	//}
+	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+
+	for each (auto p in m_vecGroup)
+	{
+		p->Render();
+	}
+
+	D3DXMatrixRotationX(&m_matR, -D3DX_PI / 2);
+
+	m_matW *= m_matR;
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matW);
+
+	g_pD3DDevice->SetTexture(0, NULL);
+	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
+	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecSur.size() / 3, &m_vecSur[0], sizeof(ST_PC_VERTEX));
 	
 	/////  렌더 끝
 	g_pD3DDevice->EndScene();
