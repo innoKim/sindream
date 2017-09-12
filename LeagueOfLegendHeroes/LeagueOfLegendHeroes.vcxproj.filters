@@ -154,10 +154,4 @@
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="shader\specularMapping.fx" />
-    <FxCompile Include="shader\ToonShader.fx" />
-    <FxCompile Include="shader\lighting.fx" />
-    <FxCompile Include="shader\ToonShaderSona.fx" />
-  </ItemGroup>
 </Project>

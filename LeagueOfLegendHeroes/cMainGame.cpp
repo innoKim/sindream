@@ -35,15 +35,14 @@ void cMainGame::Setup()
 	//objLoader.Load("map/", "room.obj", m_vecGroup);
 
 	m_pCamera = new cCamera;
-	m_pCamera->Setup(NULL);
+	m_pCamera->Setup(NULL);		//카메라 distance 200으로 수정해둠
 	// 카메라 테스트용
 	
 	//m_pCamera->Setup(&m_vPos);
 
 	// 끝
-
 	m_pShader = new cShader;
-	m_pShader->Setup(m_pCamera->GetEye(), "ToonShaderSona.fx", "sona.x", "sona.dds");
+	m_pShader->Setup(m_pCamera->GetEye(), "EnvironmentMapping.fx", "TeapotWithTangent.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga", "Fieldstone_NM.tga", "Snow_ENV.dds");
 }
 
 void cMainGame::Update()

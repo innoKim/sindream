@@ -6,7 +6,7 @@ cCamera::cCamera(void)
 	, m_fAngleX(0.0f)
 	, m_fAngleY(0.0f)
 	, m_isLButtonDown(false)
-	, m_fDistance(5)
+	, m_fDistance(200)
 	, m_vEye(0, 0, -m_fDistance)
 {
 }

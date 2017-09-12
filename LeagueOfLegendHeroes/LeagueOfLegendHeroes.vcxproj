@@ -110,7 +110,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <FxCompile>
-      <ShaderModel>2.0</ShaderModel>
+      <ShaderModel>3.0</ShaderModel>
       <ShaderType>Effect</ShaderType>
     </FxCompile>
   </ItemDefinitionGroup>
@@ -206,12 +206,6 @@
   <ItemGroup>
     <Image Include="LeagueOfLegendHeroes.ico" />
     <Image Include="small.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="shader\lighting.fx" />
-    <FxCompile Include="shader\specularMapping.fx" />
-    <FxCompile Include="shader\ToonShader.fx" />
-    <FxCompile Include="shader\ToonShaderSona.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

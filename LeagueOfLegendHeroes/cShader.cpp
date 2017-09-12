@@ -7,9 +7,12 @@ cShader::cShader()
 	, m_pMesh(NULL)
 	, m_pDMTexture(NULL)
 	, m_pSMTexture(NULL)
+	, m_pNMTexture(NULL)
+	, m_pEnvTexture(NULL)
 	, m_pvCameraPos(NULL)
 	, m_vLightColor(D3DXVECTOR4(0.7f, 0.7f, 1.0f, 1.0f))
 	, m_sFolder("shader/")
+	, m_fRotationY(0.0f)
 {
 }
 
@@ -24,7 +27,7 @@ cShader::~cShader()
 	//SAFE_RELEASE(m_pSMTexture);
 }
 
-void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileName, char* szDMTextureFileName, char* szSMTextureFileName)
+void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileName, char* szDMTextureFileName, char* szSMTextureFileName, char* szNMTextureFileName, char* szEnvTextureFileName)
 {
 	string sFileName = szFxFileName;
 
@@ -55,7 +58,7 @@ void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileNa
 
 	if (szSMTextureFileName)
 	{
-		sFileName = szDMTextureFileName;
+		sFileName = szSMTextureFileName;
 
 		sFullPath = m_sFolder + sFileName;
 
@@ -64,35 +67,67 @@ void cShader::Setup(D3DXVECTOR3* pvEye, char * szFxFileName, char * szMeshFileNa
 		m_pSMTexture = g_pTextureManager->GetTexture(szFullPath);
 	}
 
+	if (szNMTextureFileName)
+	{
+		sFileName = szNMTextureFileName;
+
+		sFullPath = m_sFolder + sFileName;
+
+		szFullPath = (char*)sFullPath.c_str();
+
+		m_pNMTexture = g_pTextureManager->GetTexture(szFullPath);
+	}
+
+	if (szEnvTextureFileName)
+	{
+		sFileName = szEnvTextureFileName;
+
+		sFullPath = m_sFolder + sFileName;
+
+		szFullPath = (char*)sFullPath.c_str();
+
+		D3DXCreateCubeTextureFromFile(g_pD3DDevice, szFullPath, &m_pEnvTexture);
+	}
+
+
 	m_pvCameraPos = pvEye;
-	m_vLightPos = D3DXVECTOR4(500.0f, 500.0f, -500.0f, 1.0f);
+	m_vLightPos = D3DXVECTOR4(-500.0f, 500.0f, -500.0f, 1.0f);
 }
 
 void cShader::Render()
 {
-	D3DXMATRIXA16 matS, matR, matWorld, matView, matProjection, matWolrdViewProjection, matInvWorld;
+	D3DXMATRIXA16 matS, matR, matWorld, matView, matProjection, matViewProjection, matWolrdViewProjection, matWorldInverse;
 
-	D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
-	D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0f);
+	// 프레임마다 0.4도씩 회전을 시킨다.
+	//m_fRotationY += 0.4f * D3DX_PI / 180.0f;
+	//if (m_fRotationY > 2 * D3DX_PI)
+	//{
+	//	m_fRotationY -= 2 * D3DX_PI;
+	//}
 
-	matWorld = matS * matR;
+	//D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0f);
 
-	D3DXMatrixInverse(&matInvWorld, 0, &matWorld);
+	D3DXMatrixIdentity(&matWorld);
+
+	//D3DXMatrixInverse(&matWorldInverse, 0, &matWorld);
 
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
 
+	matViewProjection = matView * matProjection;
 	matWolrdViewProjection = matWorld * matView * matProjection;
 
 	D3DXVECTOR4 vCameraPos = D3DXVECTOR4(m_pvCameraPos->x, m_pvCameraPos->y, m_pvCameraPos->z, 1.0f);
-	D3DXVECTOR4 vSurfaceColor = D3DXVECTOR4(0, 1, 0, 1);
+	D3DXVECTOR4 vSurfaceColor = D3DXVECTOR4(0.7f, 0.7f, 1.0f, 1.0f);
 
 	// 쉐이더 전역변수들을 설정
-	m_pEffect->SetMatrix("matWorldViewProjection", &matWolrdViewProjection);
-	m_pEffect->SetMatrix("matWorldInverse", &matInvWorld);
-	m_pEffect->SetVector("LightPos", &m_vLightPos);
-	//m_pEffect->SetVector("vCameraPos", &vCameraPos);
-	//m_pEffect->SetVector("SurfaceColor", &vSurfaceColor);
+	m_pEffect->SetMatrix("gWorldViewProjectionMatrix", &matWolrdViewProjection);
+	//m_pEffect->SetMatrix("matViewProjection", &matViewProjection);
+	m_pEffect->SetMatrix("gWorldMatrix", &matWorld);
+	//m_pEffect->SetMatrix("matWorldInverse", &matWorldInverse);
+	m_pEffect->SetVector("gWorldLightPosition", &m_vLightPos);
+	m_pEffect->SetVector("gWorldCameraPosition", &vCameraPos);
+	m_pEffect->SetVector("gLightColor", &vSurfaceColor);
 
 	if (m_pDMTexture)
 	{
@@ -102,6 +137,16 @@ void cShader::Render()
 	if (m_pSMTexture)
 	{
 		m_pEffect->SetTexture("SpecularMap_Tex", m_pSMTexture);
+	}
+
+	if (m_pNMTexture)
+	{
+		m_pEffect->SetTexture("NormalMap_Tex", m_pNMTexture);
+	}
+
+	if (m_pEnvTexture)
+	{
+		m_pEffect->SetTexture("EnvironmentMap_Tex", m_pEnvTexture);
 	}
 
 
