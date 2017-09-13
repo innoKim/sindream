@@ -2,11 +2,12 @@
 #include "cTestScene.h"
 #include "cShader.h"
 
-cTestScene::cTestScene() : m_pShader(NULL)
-, m_vPos(D3DXVECTOR3(0, 0, 0))
-, m_fAngle(0.f)
-, m_vDir(D3DXVECTOR3(0, 0, 1))
-, m_fSpeed(0.1f)
+cTestScene::cTestScene()
+	: m_pShader(NULL)
+	, m_vPos(D3DXVECTOR3(0, 0, 0))
+	, m_fAngle(0.f)
+	, m_vDir(D3DXVECTOR3(0, 0, 1))
+	, m_fSpeed(0.3f)
 {
 }
 
@@ -15,7 +16,7 @@ cTestScene::~cTestScene()
 {
 	SAFE_DELETE(m_pShader);
 	
-	for each (auto p in m_vecGroup)
+	for each (auto p in m_vecMap)
 	{
 		SAFE_DELETE(p);
 	}
@@ -23,12 +24,11 @@ cTestScene::~cTestScene()
 
 void cTestScene::Setup()
 {
-	cOBJLoader objLoader;
-	objLoader.Load("map/", "room.obj", m_vecGroup);
+	//cOBJLoader objLoader;
+	//objLoader.Load("map/", "room.obj", m_vecMap);
 
 	cOBJLoader surLoader;
-	m_vecSur = surLoader.LoadSur("Lol/room_surface.obj");
-
+	surLoader.LoadSur("Lol/room_surface.obj", m_vecSur, m_vecGrid);
 
 	//카메라 설정 이렇게 할 수 있습니다.
 	g_pCamera->SetTarget(&m_vPos);
@@ -81,6 +81,16 @@ void cTestScene::Render()
 
 	D3DXMatrixScaling(&m_matS, 0.01f, 0.01f, 0.01f);
 
+	m_matW *= m_matS;
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matW);
+
+	g_pD3DDevice->SetTexture(0, NULL);
+	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
+	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecSur.size() / 3, &m_vecSur[0], sizeof(ST_PC_VERTEX));
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, m_vecGrid.size() / 2, &m_vecGrid[0], sizeof(ST_PC_VERTEX));
+
 	D3DXMatrixRotationX(&m_matR, -D3DX_PI / 2);
 
 	m_matW = m_matS * m_matR;
@@ -89,19 +99,8 @@ void cTestScene::Render()
 
 	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
-	for each (auto p in m_vecGroup)
+	for each (auto p in m_vecMap)
 	{
 		p->Render();
 	}
-
-	D3DXMatrixRotationX(&m_matR, -D3DX_PI / 2);
-
-	m_matW *= m_matR;
-
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matW);
-
-	g_pD3DDevice->SetTexture(0, NULL);
-	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
-	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecSur.size() / 3, &m_vecSur[0], sizeof(ST_PC_VERTEX));
 }
