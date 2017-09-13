@@ -168,6 +168,7 @@
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cUtils.h" />
     <ClInclude Include="iMap.h" />
+    <ClInclude Include="iScene.h" />
     <ClInclude Include="LeagueOfLegendHeroes.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cUtils.cpp" />
     <ClCompile Include="iMap.cpp" />
+    <ClCompile Include="iScene.cpp" />
     <ClCompile Include="LeagueOfLegendHeroes.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
