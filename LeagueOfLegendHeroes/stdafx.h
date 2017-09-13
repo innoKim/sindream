@@ -32,6 +32,7 @@ using namespace MY_UTIL;
 
 extern HWND		g_hWnd;		//HWND 전역변수
 extern POINT	g_ptMouse;	//마우스 포인터 위치 전역변수
+extern int		g_nMouseWheel; //마우스 휠 상태
 
 // define문 목록
 #define SAFE_ADD_REF(p) if(p) { (p)->AddRef(); }
@@ -133,3 +134,4 @@ struct ST_PNT_VERTEX
 #include "cKeyManager.h"
 #include "cTextureManager.h"
 #include "cTimeManager.h"
+#include "cCamera.h"

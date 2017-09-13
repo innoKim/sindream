@@ -13,7 +13,10 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
 HWND		g_hWnd;
+
 POINT		g_ptMouse = { 0, 0 };
+int			g_nMouseWheel = 0;
+
 cMainGame*	g_pMainGame;
 
 // 이 코드 모듈에 들어 있는 함수의 정방향 선언입니다.
@@ -73,6 +76,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	SAFE_DELETE(g_pMainGame);
 
     return (int) msg.wParam;
+
 }
 
 
@@ -144,12 +148,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	if (g_pMainGame)
-	{
-		g_pMainGame->MsgProc(hWnd, message, wParam, lParam);
-	}
-	
+{	
 	switch (message)
     {
     case WM_COMMAND:
@@ -169,6 +168,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+
+	case WM_MOUSEWHEEL:
+		if ((SHORT)HIWORD(wParam) > 0)
+		{
+			g_nMouseWheel++;
+		}
+		else
+		{
+			g_nMouseWheel--;
+		}
+		break;
+
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
