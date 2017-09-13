@@ -9,11 +9,11 @@ class cTestScene : public iScene
 {
 	cShader*		m_pShader;
 
-	vector<cGroup*>	m_vecGroup;
+	vector<cGroup*>			m_vecMap;
+	vector<ST_PC_VERTEX>	m_vecSur;
+	vector<ST_PC_VERTEX>	m_vecGrid;
 
 	D3DXMATRIX		m_matW, m_matS, m_matR, m_matT;
-
-	vector<ST_PC_VERTEX> m_vecSur;
 
 	// 테스트용
 	D3DXVECTOR3		m_vPos;

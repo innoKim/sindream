@@ -96,7 +96,7 @@ void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecG
 	fclose(fp);
 }
 
-vector<ST_PC_VERTEX> cOBJLoader::LoadSur(char * Filepath)
+void cOBJLoader::LoadSur(IN char * Filepath, OUT vector<ST_PC_VERTEX> &vecSur, vector<ST_PC_VERTEX> &vecGrid)
 {
 	FILE* fp = 0;
 	fopen_s(&fp, Filepath, "r");
@@ -119,21 +119,30 @@ vector<ST_PC_VERTEX> cOBJLoader::LoadSur(char * Filepath)
 			float x, y, z;
 			sscanf_s(szBuf, "%f %f %f %*f %*f", &x, &y, &z);
 
-			if (fabs(x) > maxX) maxX = fabs(x);
-			if (fabs(x) < minX) minX = fabs(x);
-			if (fabs(z) > maxZ) maxZ = fabs(z);
-			if (fabs(z) < minZ) minZ = fabs(z);
-
-			D3DXVECTOR3 p = D3DXVECTOR3(x, -y + 1, z);
+			D3DXVECTOR3 p = D3DXVECTOR3(x, y, -z);
 			D3DXCOLOR	c = D3DCOLOR_XRGB(255, 255, 255);
+			vecSur.push_back(ST_PC_VERTEX(p, c));
 
-			m_vecSur.push_back(ST_PC_VERTEX(p, c));
+			if (x > maxX) maxX = x;		 // 14618.4004
+			if (x < minX) minX = x;		 // 98.8951035  14521
+			if (-z > maxZ) maxZ = -z;	 // 14692.2109
+			if (-z < minZ) minZ = -z;	 // 132.755798  14561
+
 		}
 	}
 
-	fclose(fp);
+	for (int i = 0; i <= 5; i++)
+	{
+		D3DXCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 
-	return m_vecSur;
+		vecGrid.push_back(ST_PC_VERTEX(D3DXVECTOR3(0, 0, i * 2940), c));
+		vecGrid.push_back(ST_PC_VERTEX(D3DXVECTOR3(14700, 0, i * 2940), c));
+
+		vecGrid.push_back(ST_PC_VERTEX(D3DXVECTOR3(i * 2940, 0, 0), c));
+		vecGrid.push_back(ST_PC_VERTEX(D3DXVECTOR3(i * 2940, 0, 14700), c));
+	}
+
+	fclose(fp);
 }
 
 void cOBJLoader::LoadMtl(char* Folder, char * FilePath)

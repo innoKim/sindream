@@ -6,8 +6,6 @@ class cOBJLoader
 private:
 	map<string, cMtlTex*>	m_mapMtl;
 
-	vector<ST_PC_VERTEX>	m_vecSur;
-
 	float minX, maxX, minZ, maxZ;
 
 public:
@@ -15,7 +13,7 @@ public:
 	~cOBJLoader();
 
 	void Load(IN char* Folder, char* FilePath, OUT vector<cGroup*> &vecGroup);
-	vector<ST_PC_VERTEX> LoadSur(char* Filepath);
+	void LoadSur(IN char* Filepath, OUT vector<ST_PC_VERTEX> &vecSur, vector<ST_PC_VERTEX> &vecGrid);
 protected:
 	void LoadMtl(char* Folder, char* FilePath);
 };
