@@ -1,7 +1,11 @@
 #include "stdafx.h"
 #include "cPhysicsScene.h"
+
 #include "cUnit.h"
+
 #include "cPlayer.h"
+#include "cEnemy.h"
+
 #include "cPlane.h"
 
 void cPhysicsScene::SetLight()
@@ -37,19 +41,27 @@ cPhysicsScene::~cPhysicsScene()
 void cPhysicsScene::Setup()
 {
 	m_pPlayer = new cPlayer;
-
 	vector<ST_UNITLOADINFO> temp;
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" ,NULL,NULL });
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x",NULL,NULL });
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",AlistarSpell1CallBack,m_pPlayer });
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",AlistarSpell2CallBack,m_pPlayer });
-
 	m_pPlayer->Setup(temp);
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 
 	m_pPlane = new cPlane;
 	m_pPlane->Setup(20);
 
+	for (int i = 0; i < 3; i++)
+	{
+		cUnit* enemy = new cEnemy;
+		vector<ST_UNITLOADINFO> temp;
+		temp.push_back({ STATE_IDLE, "unit/PoroIdle.x" ,NULL,NULL });
+		enemy->Setup(temp);
+		enemy->SetPosition(D3DXVECTOR3(i, 0, 0));
+		m_vecEnemy.push_back(enemy);
+	}
+	
 	SetLight();
 }
 

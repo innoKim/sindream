@@ -2,6 +2,14 @@
 #include "cUnit.h"
 #include "cSkinnedMesh.h"
 
+void cUnit::Destroy()
+{
+	for each(auto p in m_mapStates)
+	{
+		SAFE_DELETE(p.second);
+	}
+}
+
 cUnit::cUnit() :
 	m_vPos(0, 0, 0),
 	m_vDir(0, 0, -1)
@@ -10,10 +18,6 @@ cUnit::cUnit() :
 
 cUnit::~cUnit()
 {
-	for each(auto p in m_mapStates)
-	{
-		SAFE_DELETE(p.second);
-	}
 }
 
 void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)

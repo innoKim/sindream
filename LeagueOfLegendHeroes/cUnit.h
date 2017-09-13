@@ -29,9 +29,10 @@ protected:
 	eSTATE   m_eStateNum;
 	cSkinnedMesh* m_pCurState;
 
-	D3DXVECTOR3	m_vPos;
-	D3DXVECTOR3	m_vDir;
+	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3,m_vPos,Position)
+	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vDir, Direction)
 
+	void Destroy();
 public:
 	cUnit();
 	~cUnit();

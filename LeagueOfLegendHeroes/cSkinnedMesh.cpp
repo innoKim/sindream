@@ -52,7 +52,7 @@ void cSkinnedMesh::Update()
 void cSkinnedMesh::Render(D3DXVECTOR3 * Pos, D3DXVECTOR3 * Dir)
 {
 	D3DXMATRIX matS, matT, matR, worldMat;
-	D3DXMatrixScaling(&matS, 0.01, 0.01, 0.01);
+	D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
 	D3DXMatrixTranslation(&matT, Pos->x, Pos->y, Pos->z);
 
 	D3DXMatrixLookAtLH(&matR, &D3DXVECTOR3(0, 0, 0), &(-(*Dir)), &D3DXVECTOR3(0, 1, 0));

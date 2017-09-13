@@ -7,6 +7,7 @@ cPlayer::cPlayer()
 
 cPlayer::~cPlayer()
 {
+	Destroy();
 }
 
 void cPlayer::Update()

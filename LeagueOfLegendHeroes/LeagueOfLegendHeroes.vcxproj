@@ -155,6 +155,7 @@
     <ClInclude Include="cAllocateHierachy.h" />
     <ClInclude Include="cCamera.h" />
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cEnemy.h" />
     <ClInclude Include="cGroup.h" />
     <ClInclude Include="cKeyManager.h" />
     <ClInclude Include="cMainGame.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="cAllocateHierachy.cpp" />
     <ClCompile Include="cCamera.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cEnemy.cpp" />
     <ClCompile Include="cGroup.cpp" />
     <ClCompile Include="cKeyManager.cpp" />
     <ClCompile Include="cMainGame.cpp" />
