@@ -98,3 +98,27 @@ void cCamera::KeyControl()
 		g_nMouseWheel++;
 	}
 }
+
+D3DXVECTOR3 cCamera::GetDir()
+{
+	D3DXVECTOR3 dir;
+	if (m_pvTarget)
+	{
+		dir = (*m_pvTarget) - m_vCameraPos;
+	}
+	else
+	{
+		dir = -m_vCameraPos;
+	}
+	D3DXVec3Normalize(&dir, &dir);
+	
+	return dir;
+}
+
+D3DXVECTOR3 cCamera::GetDirParrallelToPlane()
+{
+	D3DXVECTOR3 dir = GetDir();
+	dir = D3DXVECTOR3(dir.x, 0, dir.z);
+	D3DXVec3Normalize(&dir, &dir);
+	return dir;
+}

@@ -43,4 +43,6 @@ public:
 	void SetState(eSTATE state);
 
 	bool IsReady() { return ((m_eStateNum == STATE_RUN || m_eStateNum == STATE_IDLE) ? true : false); }
+
+	D3DXVECTOR3* GetPosPtr() { return &m_vPos; }
 };

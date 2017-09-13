@@ -8,8 +8,9 @@
 
 class cCamera
 {
+private:
 	SINGLETON(cCamera);
-
+	
 private:
 	D3DXVECTOR3 m_vCameraPos;
 
@@ -29,7 +30,6 @@ private:
 	bool m_RButtonClicked;
 
 public:
-	
 	void Setup();
 	void Destroy();
 	void Update();
@@ -43,5 +43,7 @@ public:
 	void SetLookAtLH(D3DXMATRIX mat) { m_mLookAtLH = mat; }
 
 	D3DXMATRIX GetPos() { return m_vCameraPos; }
+	D3DXVECTOR3 GetDir();
+	D3DXVECTOR3 GetDirParrallelToPlane();
 };
 

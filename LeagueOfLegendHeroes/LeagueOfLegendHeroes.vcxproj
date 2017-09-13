@@ -30,7 +30,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -162,6 +162,7 @@
     <ClInclude Include="cObject.h" />
     <ClInclude Include="cOBJLoader.h" />
     <ClInclude Include="cPhysicsScene.h" />
+    <ClInclude Include="cPlane.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cShader.h" />
     <ClInclude Include="cSkinnedMesh.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cOBJLoader.cpp" />
     <ClCompile Include="cPhysicsScene.cpp" />
+    <ClCompile Include="cPlane.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cShader.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
