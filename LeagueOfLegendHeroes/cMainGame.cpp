@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "cMainGame.h"
 #include "cTestScene.h"
-
+#include "cPhysicsScene.h"
 cMainGame::cMainGame() :
 	m_pScene(NULL)
 {
@@ -11,18 +11,17 @@ cMainGame::~cMainGame()
 {
 	SAFE_DELETE(m_pScene);
 
+	g_pCamera->Destroy();
 	g_pKeyManager->Destroy();
 	g_pTimeManager->Destroy();
 	g_pTextureManager->Destroy();
 	g_pDeviceManager->Destroy();
-	g_pCamera->Destroy();
 }
 
 void cMainGame::Setup()
 {
-	g_pCamera->Setup();
-		
-	m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
+	//m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
+	m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
 	m_pScene->Setup();
 }
 

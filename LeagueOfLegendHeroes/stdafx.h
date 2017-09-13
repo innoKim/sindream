@@ -135,3 +135,6 @@ struct ST_PNT_VERTEX
 #include "cTextureManager.h"
 #include "cTimeManager.h"
 #include "cCamera.h"
+
+//타입 정의
+typedef void(*CALLBACKFUNC)(void*);

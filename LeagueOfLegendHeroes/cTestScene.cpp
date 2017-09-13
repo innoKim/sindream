@@ -29,7 +29,10 @@ void cTestScene::Setup()
 	cOBJLoader surLoader;
 	m_vecSur = surLoader.LoadSur("Lol/room_surface.obj");
 
+
+	//카메라 설정 이렇게 할 수 있습니다.
 	g_pCamera->SetTarget(&m_vPos);
+	g_pCamera->Zoom(100.0f);
 
 	// 끝
 	//m_pShader = new cShader;

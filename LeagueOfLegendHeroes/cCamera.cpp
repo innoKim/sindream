@@ -3,7 +3,7 @@
 
 cCamera::cCamera() :m_pvTarget(NULL), m_fDistanceFromTarget(0.0f), m_vCameraPos(0, 0, 0), m_vRotation(0, 0, 0), m_vRelativePos(0, 0, 0)
 {
-
+	Setup();
 }
 
 cCamera::~cCamera()
