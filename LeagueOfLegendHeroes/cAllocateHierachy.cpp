@@ -46,7 +46,7 @@ STDMETHODIMP cAllocateHierachy::CreateMeshContainer(
 	{
 		cMtlTex* mtlTex = new cMtlTex;
 		std::string sFile(pMaterials[i].pTextureFilename);
-		string sPath = string("./Zealot/") + string(pMaterials[i].pTextureFilename);
+		string sPath = string("./unit/") + string(pMaterials[i].pTextureFilename);
 		mtlTex->SetTexture(g_pTextureManager->GetTexture(sPath));
 		mtlTex->SetMtl(pMaterials[i].MatD3D);
 		container->vecTM.push_back(mtlTex);
