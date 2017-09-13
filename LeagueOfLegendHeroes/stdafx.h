@@ -22,12 +22,13 @@
 #include <vector>
 #include <map>
 #include <string>
-#include "cUtils.h"
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
 using namespace std;
+
+#include "cUtils.h"
 using namespace MY_UTIL;
 
 extern HWND		g_hWnd;		//HWND 전역변수
@@ -129,6 +130,7 @@ struct ST_PNT_VERTEX
 };
 
 // 매니저 클래스 인클루드 목록
+
 #include "cObject.h"
 #include "cDeviceManager.h"
 #include "cKeyManager.h"

@@ -22,4 +22,65 @@ namespace MY_UTIL
 		return angle;
 	}
 
+	RayInfo Ray(D3DXVECTOR3 start, D3DXVECTOR3 end)
+	{
+		D3DXVECTOR3 dir = end - start;
+		D3DXVec3Normalize(&dir, &dir);
+		return RayInfo(start, dir);
+	}
+
+	RayInfo RayToScreenPoint(int screenPosX, int screenPosY)
+	{
+		float fx = 0.0f, fy = 0.0f;
+
+		D3DVIEWPORT9 vp;
+		g_pD3DDevice->GetViewport(&vp);
+
+		D3DXMATRIX proj;
+		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &proj);
+
+		fx = ((2.0f*screenPosX) / vp.Width - 1) / proj._11;
+		fy = ((-2.0f*screenPosY) / vp.Height + 1) / proj._22;
+
+		D3DXMATRIX view;
+		g_pD3DDevice->GetTransform(D3DTS_VIEW, &view);
+		D3DXMatrixInverse(&view, 0, &view);
+
+		D3DXVECTOR3 cameraPos(0, 0, 0);
+		D3DXVec3TransformCoord(&cameraPos, &cameraPos, &view);
+
+		D3DXVECTOR3 rayInVeiwSpace(fx, fy, 1.0f);
+		D3DXVec3TransformNormal(&rayInVeiwSpace, &rayInVeiwSpace, &view);
+		D3DXVec3Normalize(&rayInVeiwSpace, &rayInVeiwSpace);
+
+		return RayInfo(cameraPos, rayInVeiwSpace);
+	}
+
+	bool RayCast(IN RayInfo& ray, OUT HitInfo& hit, IN vector<D3DXVECTOR3>& target)
+	{
+		if (target.size() % 3 != 0 || target.size() < 3) return false;
+
+		float dist = 9999.0f;
+		hit.dist = dist;
+		bool result = false;
+
+		for (int i = 0; i < target.size(); i += 3)
+		{
+			if (D3DXIntersectTri(&target[i], &target[i + 1], &target[i + 2], &ray.pos, &ray.dir, 0, 0, &dist))
+			{
+				if (hit.dist > dist)
+				{
+					hit.dist = dist;
+					hit.hitpos = ray.pos + hit.dist*ray.dir;
+				}
+				result = true;
+			}
+		}
+		return result;
+	}
+
+	DWORD FtoDw(float f)
+	{
+		return *((DWORD*)&f);
+	}
 }
