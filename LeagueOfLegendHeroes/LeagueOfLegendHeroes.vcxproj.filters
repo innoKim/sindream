@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="매니저">
+      <UniqueIdentifier>{0042c12d-6fb6-4ea1-abbb-3a09ea446c7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -33,19 +36,7 @@
     <ClInclude Include="timer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cDeviceManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cMainGame.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cTimeManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cTextureManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cKeyManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cUtils.h">
@@ -60,13 +51,7 @@
     <ClInclude Include="cAllocateHierachy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cSkinnedMeshManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="iMap.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cCamera.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cOBJLoader.h">
@@ -102,17 +87,35 @@
     <ClInclude Include="cPhysics.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cDebugManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cCollision.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cShaderManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cMap.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cDebugManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="cDeviceManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="cKeyManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="cShaderManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMeshManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="cTextureManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="cTimeManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="cCamera.h">
+      <Filter>매니저</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,19 +128,7 @@
     <ClCompile Include="timer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="cDeviceManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cMainGame.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cTimeManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cTextureManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cKeyManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cUtils.cpp">
@@ -152,13 +143,7 @@
     <ClCompile Include="cAllocateHierachy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="cSkinnedMeshManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="iMap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cCamera.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cOBJLoader.cpp">
@@ -194,17 +179,35 @@
     <ClCompile Include="cPhysics.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="cDebugManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cCollision.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cShaderManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cMap.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cDebugManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cDeviceManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cKeyManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cShaderManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMeshManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cTextureManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cTimeManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cCamera.cpp">
+      <Filter>매니저</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
