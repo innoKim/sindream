@@ -27,59 +27,49 @@ float4x4 matLightView;
 float4x4 matLightProjection : Projection;
 float4x4 matViewProjection : ViewProjection;
 
-float4 vLightPos
-<
-   string UIName = "vLightPos";
-   string UIWidget = "Direction";
-   bool UIVisible =  false;
-   float4 UIMin = float4( -10.00, -10.00, -10.00, -10.00 );
-   float4 UIMax = float4( 10.00, 10.00, 10.00, 10.00 );
-   bool Normalize =  false;
-> = float4( 500.00, 500.00, -500.00, 1.00 );
+float4 vLightPos;
+float4 vCameraPos;
 
 struct VS_INPUT 
 {
    float4 Position : POSITION0;
-   float3 Normal : NORMAL;
+   float3 Normal :   NORMAL;
+   float2 UV :       TEXCOORD0;
 };
 
 struct VS_OUTPUT 
 {
-   float4 Position : POSITION0;
-   float4 ClipPosition : TEXCOORD1;
-   float Diffuse : TEXCOORD2;
+   float4 Position :         POSITION0;
+   float2 UV :                TEXCOORD0;
+   float3 ViewDirection : TEXCOORD1;
+   float3 LightDirection : TEXCOORD2;
+   float3 Normal :          TEXCOORD3;
+   float4 ClipPosition :    TEXCOORD4;
 };
 
 VS_OUTPUT ShadowMapping_ApplyShadow_Vertex_Shader_vs_main( VS_INPUT Input )
 {
    VS_OUTPUT Output;
 
-   float4x4 lightViewMatrix = matLightView;
-   
-   float3 dirZ = -normalize(vLightPos.xyz);
-   float3 up = float3(0, 1, 0);
-   
-   float3 dirX = cross(up, dirZ);
-   float3 dirY = cross(dirZ, dirX);
-   
-   lightViewMatrix = float4x4(
-      float4(dirX, -dot(vLightPos.xyz, dirX)),
-      float4(dirY, -dot(vLightPos.xyz, dirY)),
-      float4(dirZ, -dot(vLightPos.xyz, dirZ)),
-      float4(0, 0, 0, 1));
-   lightViewMatrix = transpose(lightViewMatrix);
-
    float4 worldPosition = mul(Input.Position, matWorld);
    Output.Position = mul(worldPosition, matViewProjection);
    
-   Output.ClipPosition = mul(worldPosition, lightViewMatrix);
-   Output.ClipPosition = mul(Output.ClipPosition, matLightProjection);
+   Output.UV = Input.UV;
    
-   float3 lightDir = normalize(worldPosition.xyz - vLightPos.xyz);
-   float3 worldNormal = normalize(mul(Input.Normal, (float3x3)matWorld));
+   float3 fvObjectPosition = mul( Input.Position, matWorld );
    
-   Output.Diffuse = dot(-lightDir, worldNormal);
+   Output.ViewDirection    = vCameraPos - fvObjectPosition;
+   Output.LightDirection   = vLightPos - fvObjectPosition;
    
+   Output.ViewDirection    = mul(Output.ViewDirection, (float3x3)matViewProjection);
+   Output.LightDirection   = mul(Output.LightDirection, (float3x3)matViewProjection);
+   
+   Output.Normal = mul(Input.Normal, (float3x3)matWorld);
+   Output.Normal = mul(Output.Normal, (float3x3)matViewProjection );
+
+   Output.ClipPosition     = mul(worldPosition, matLightView);
+   Output.ClipPosition     = mul(Output.ClipPosition, matLightProjection);
+      
    return( Output );
    
 }
@@ -87,46 +77,70 @@ VS_OUTPUT ShadowMapping_ApplyShadow_Vertex_Shader_vs_main( VS_INPUT Input )
 
 
 
-texture ShadowMap_Tex
-<
-   string ResourceName = "..\\Downloads\\RavioliGameTools_v2.9\\Ezreal\\";
->;
+float4 fvAmbient = float4( 0.37, 0.37, 0.37, 1.00 );
+float4 fvSpecular = float4( 0.49, 0.49, 0.49, 1.00 );
+float4 fvDiffuse = float4( 0.89, 0.89, 0.89, 1.00 );
+float fSpecularPower = float( 25.00 );
+texture ShadowMap_Tex;
 sampler2D ShadowSampler = sampler_state
 {
    Texture = (ShadowMap_Tex);
 };
-float4 vObjectColor
-<
-   string UIName = "vObjectColor";
-   string UIWidget = "Color";
-   bool UIVisible =  true;
-> = float4( 0.00, 1.00, 1.00, 1.00 );
+texture DiffuseMap_Tex;
+sampler2D DiffuseSampler = sampler_state
+{
+   Texture = (DiffuseMap_Tex);
+};
+bool bTexture = true;
 
 struct PS_INPUT
 {
-   float4 ClipPosition : TEXCOORD1;
-   float Diffuse : TEXCOORD2;
+   float2 UV :              TEXCOORD0;
+   float3 ViewDirection :   TEXCOORD1;
+   float3 LightDirection :  TEXCOORD2;
+   float3 Normal :          TEXCOORD3;
+   float4 ClipPosition :    TEXCOORD4;
 };
 
 float4 ShadowMapping_ApplyShadow_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
 {
-   float3 rgb = saturate(Input.Diffuse) * vObjectColor;
-   
-   float currentDepth = Input.ClipPosition.z / Input.ClipPosition.w;
+   float depth = Input.ClipPosition.z / Input.ClipPosition.w;
    
    float2 uv = Input.ClipPosition.xy / Input.ClipPosition.w;
+   
    uv.y = -uv.y;
+   
    uv = uv * 0.5 + 0.5;
+
+   float shadowMapDepth = tex2D(ShadowSampler, uv).r;
    
-   float shadowDepth = tex2D(ShadowSampler, uv).r;
+   float colorWeight = 1.0f;
    
-   if (currentDepth > shadowDepth + 0.0000125f)
+   if (depth > shadowMapDepth + 0.0000125f)
    {
-      rgb *= 0.5f;
-   }   
+      colorWeight = 0.5f;
+   }
    
-   return( float4( rgb, 1.0f ) );
+   float3 fvLightDirection = normalize( Input.LightDirection );
+   float3 fvNormal         = normalize( Input.Normal );
+   float  fNDotL           = dot( fvNormal, fvLightDirection ); 
    
+   float3 fvReflection = normalize(reflect(-fvLightDirection, fvNormal));
+   float3 fvViewDirection = normalize(Input.ViewDirection);
+   float fRDotV = fNDotL > 0 ? max(0.0f, dot(fvReflection, fvViewDirection)) : 0.0f;
+   
+   float4 fvBaseColor = float4(1.0f, 1.0f, 1.0f, 1.0f);
+
+   if (bTexture)
+   {
+      fvBaseColor = tex2D( DiffuseSampler, Input.UV );
+   }
+
+   float4 fvTotalAmbient   = fvAmbient * fvBaseColor; 
+   float4 fvTotalDiffuse   = fvDiffuse * fNDotL * fvBaseColor; 
+   float4 fvTotalSpecular  = fvSpecular * pow( fRDotV, fSpecularPower ) * 0.5f;
+   
+   return( saturate( fvTotalAmbient + fvTotalDiffuse + fvTotalSpecular ) * colorWeight );
 }
 
 
