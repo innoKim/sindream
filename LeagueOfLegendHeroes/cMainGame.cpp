@@ -16,6 +16,7 @@ cMainGame::~cMainGame()
 	g_pTimeManager->Destroy();
 	g_pTextureManager->Destroy();
 	g_pDeviceManager->Destroy();
+	g_pDebug->Destroy();
 }
 
 void cMainGame::Setup()
@@ -38,6 +39,10 @@ void cMainGame::Render()
 	///// 여기서부터 렌더 시작
 
 	m_pScene->Render();
+	
+	char str[256];
+	sprintf(str, "%f FPS", g_pTimeManager->GetFrameRate());
+	g_pDebug->Print(str);
 	
 	/////  렌더 끝
 	g_pD3DDevice->EndScene();

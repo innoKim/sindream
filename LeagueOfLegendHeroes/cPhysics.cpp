@@ -26,10 +26,12 @@ bool cPhysics::ColisionWith(vector<cPhysics*> vecVersusObject)
 {
 	for (int i = 0; i < vecVersusObject.size(); i++)
 	{
-		if (m_fRestDuration > 0 || vecVersusObject[i]->GetRestDuration()>0) return;
+		if (m_fRestDuration > 0 || vecVersusObject[i]->GetRestDuration()>0) return true;
 
 		SphereVsSphere(this, vecVersusObject[i]);
 	}	
+
+	return true;
 }
 
 void cPhysics::SphereVsSphere(cPhysics * Object1, cPhysics * Object2)
