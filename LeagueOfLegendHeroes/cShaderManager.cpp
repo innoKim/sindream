@@ -56,7 +56,7 @@ void cShaderManager::BeginRender()
 	//±¤¿ø-ºä Çà·ÄÀ» ¸¸µç´Ù
 	D3DXVECTOR3 vEyePt(m_pvTarget->x + m_vLightPos.x, m_pvTarget->y + m_vLightPos.y, m_pvTarget->z + m_vLightPos.z);
 
-	D3DXVECTOR3 vLookatPt(0, 0, 0);
+	D3DXVECTOR3 vLookatPt = *m_pvTarget;
 
 	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
 
