@@ -33,15 +33,7 @@ float4x4 matWorld : World;
 float4x4 matLightView;
 float4x4 matLightProjection : Projection;
 
-float4 vLightPos
-<
-   string UIName = "vLightPos";
-   string UIWidget = "Direction";
-   bool UIVisible =  false;
-   float4 UIMin = float4( -10.00, -10.00, -10.00, -10.00 );
-   float4 UIMax = float4( 10.00, 10.00, 10.00, 10.00 );
-   bool Normalize =  false;
-> = float4( 500.00, 500.00, -500.00, 1.00 );
+float4 vLightPos;
 
 struct VS_INPUT
 {
@@ -57,24 +49,9 @@ struct VS_OUTPUT
 VS_OUTPUT ShadowMapping_CreateShadow_Vertex_Shader_vs_main(VS_INPUT Input)
 {
    VS_OUTPUT Output;
-   
-   float4x4 lightViewMatrix = matLightView;
-   
-   float3 dirZ = -normalize(vLightPos.xyz);
-   float3 up = float3(0, 1, 0);
-   
-   float3 dirX = cross(up, dirZ);
-   float3 dirY = cross(dirZ, dirX);
-   
-   lightViewMatrix = float4x4(
-      float4(dirX, -dot(vLightPos.xyz, dirX)),
-      float4(dirY, -dot(vLightPos.xyz, dirY)),
-      float4(dirZ, -dot(vLightPos.xyz, dirZ)),
-      float4(0, 0, 0, 1));
-   lightViewMatrix = transpose(lightViewMatrix);
-   
+      
    Output.Position = mul(Input.Position, matWorld);
-   Output.Position = mul(Output.Position, lightViewMatrix);
+   Output.Position = mul(Output.Position, matLightView);
    Output.Position = mul(Output.Position, matLightProjection);
    
    Output.ClipPosition = Output.Position;
