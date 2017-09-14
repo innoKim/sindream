@@ -54,9 +54,6 @@
     <ClInclude Include="iMap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cCamera.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cOBJLoader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -117,6 +114,9 @@
     <ClInclude Include="cTimeManager.h">
       <Filter>매니저</Filter>
     </ClInclude>
+    <ClInclude Include="cCamera.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -144,9 +144,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="iMap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cCamera.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cOBJLoader.cpp">
@@ -207,6 +204,9 @@
       <Filter>매니저</Filter>
     </ClCompile>
     <ClCompile Include="cTimeManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cCamera.cpp">
       <Filter>매니저</Filter>
     </ClCompile>
   </ItemGroup>
