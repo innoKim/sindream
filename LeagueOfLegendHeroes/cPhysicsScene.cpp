@@ -47,6 +47,7 @@ void cPhysicsScene::Setup()
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",AlistarSpell1CallBack,m_pPlayer });
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",AlistarSpell2CallBack,m_pPlayer });
 	m_pPlayer->Setup(temp);
+	m_pPlayer->SetPosition(D3DXVECTOR3(0, 300, 0));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
@@ -59,7 +60,7 @@ void cPhysicsScene::Setup()
 		vector<ST_UNITLOADINFO> temp;
 		temp.push_back({ STATE_IDLE, "unit/PoroIdle.x" ,NULL,NULL });
 		enemy->Setup(temp);
-		enemy->SetPosition(D3DXVECTOR3(i * 100, 0, 0));
+		enemy->SetPosition(D3DXVECTOR3(i * 100, 300 , 0));
 		m_vecEnemy.push_back(enemy);
 	}
 	

@@ -45,8 +45,6 @@ void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2)
 
 			obj1.SetVelocity(fv1*dirPlus);
 			obj2.SetVelocity(fv2*dirMinus);
-
-			return;
 		}
 		else //2가 앞쪽일때
 		{
@@ -61,8 +59,6 @@ void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2)
 
 			obj1.SetVelocity(fv1*dirMinus);
 			obj2.SetVelocity(fv2*dirPlus);
-
-			return;
 		}
 	}
 	else //다른 방향
@@ -81,8 +77,6 @@ void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2)
 
 			obj1.SetVelocity(fv1*dirPlus);
 			obj2.SetVelocity(fv2*dirMinus);
-
-			return;
 		}
 		else
 		{
@@ -97,9 +91,14 @@ void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2)
 
 			obj1.SetVelocity(fv1*dirMinus);
 			obj2.SetVelocity(fv2*dirPlus);
-			return;
 		}
 	}
+
+	obj1.SetRestDuration(0.0f);
+	obj2.SetRestDuration(0.0f);
+
+	obj1.SetIsActivate(true);
+	obj2.SetIsActivate(true);
 }
 
 void cCollision::ObjVSObstacle(cPhysics& obj)
@@ -109,11 +108,23 @@ void cCollision::ObjVSObstacle(cPhysics& obj)
 	
 	if (D3DXVec3Dot(&n, &obj.GetVelocity()) < 0) // 위에서 아래로 떨어지면 튕긴다.
 	{
-		D3DXVECTOR3 temp = n*D3DXVec3Dot(&n, &obj.GetVelocity());
+		D3DXVECTOR3 temp;
+		if (fabs(D3DXVec3Dot(&n, &obj.GetVelocity())) < 0.01f)
+		{
+			temp = n;
+		}
+		else
+		{
+			temp = n*D3DXVec3Dot(&n, &obj.GetVelocity());
+		}
 
-		obj.SetVelocity(obj.GetElastic()*(obj.GetVelocity() + 2 * temp));
+		D3DXVECTOR3 result = obj.GetElastic()*(obj.GetVelocity() - 2 * temp);
+
+		obj.SetVelocity(result);
 	}
 	
+
+	if(D3DXVec3Length(&obj.GetVelocity())<0.1f) obj.SetIsActivate(false);
 	//아님 말구
 }
 

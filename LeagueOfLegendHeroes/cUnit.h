@@ -1,6 +1,7 @@
 #pragma once
 
 class cSkinnedMesh;
+class cPhysics;
 
 enum eSTATE
 {
@@ -29,9 +30,9 @@ protected:
 	eSTATE   m_eStateNum;
 	cSkinnedMesh* m_pCurState;
 
-	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vNext, NextPosition)
 	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vPos, Position)
 	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vDir, Direction)
+	SYNTHESIZE(cPhysics*, m_pPhysics, Physics)
 
 	void Destroy();
 public:

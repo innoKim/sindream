@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "cPhysics.h"
 
-cPhysics::cPhysics()
+cPhysics::cPhysics() :
+	m_bIsActivate(true)
 {
 }
 
@@ -15,38 +16,33 @@ void cPhysics::Setup()
 
 void cPhysics::Update()
 {
+	m_fRestDuration += g_pTimeManager->GetElapsedTime();
+
+	ColisionWith(vector<cPhysics*>());
+
+	if (!m_bIsActivate) return;
+
+	m_vAcceleration.y += PHYSICS_GRAVITY;
 	m_vVelocity		+= m_vAcceleration;
 	(*m_pvPos)		+= m_vVelocity;
-
-	m_fRestDuration += g_pTimeManager->GetElapsedTime();
 }
 
 bool cPhysics::ColisionWith(vector<cPhysics*> vecVersusObject)
 {
-	for (int i = 0; i < vecVersusObject.size(); i++)
+	if ((*m_pvPos).y<m_fRadius) g_pCollisionCalculator->ObjVSObstacle(*this);
+
+	if (m_fRestDuration < g_pTimeManager->GetElapsedTime()) return false;
+
+	if (!vecVersusObject.empty())
 	{
-		if (m_fRestDuration > 0 || vecVersusObject[i]->GetRestDuration()>0) return true;
+		for (int i = 0; i < vecVersusObject.size(); i++)
+		{
+			if (vecVersusObject[i]->GetRestDuration() < g_pTimeManager->GetElapsedTime()) continue;
 
-		SphereVsSphere(this, vecVersusObject[i]);
-	}	
-
-	return true;
+			if (D3DXVec3Length(&((*vecVersusObject[i]->GetPositionPtr()) - (*m_pvPos))) > (vecVersusObject[i]->GetRadius()+m_fRadius)) continue;
+		
+			g_pCollisionCalculator->ObjVSObj(*this, *vecVersusObject[i]);
+		}
+	}
 }
 
-void cPhysics::SphereVsSphere(cPhysics * Object1, cPhysics * Object2)
-{
-	D3DXVECTOR3 distanceVector = (*Object1->GetPositionPtr()) - (*Object2->GetPositionPtr());
-	float dist = D3DXVec3LengthSq(&distanceVector);
-
-	if (((Object1->GetRadius() + Object1->GetRadius()) / 2)*((Object1->GetRadius() + Object1->GetRadius()) / 2) > dist) return;
-	
-
-
-	Object1->SetRestDuration(0.0f);
-	Object2->SetRestDuration(0.0f);
-}
-
-void cPhysics::SphereVsGround()
-{
-	
-}

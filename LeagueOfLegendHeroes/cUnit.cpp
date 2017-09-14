@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cUnit.h"
 #include "cSkinnedMesh.h"
+#include "cPhysics.h"
 
 void cUnit::Destroy()
 {
@@ -8,11 +9,14 @@ void cUnit::Destroy()
 	{
 		SAFE_DELETE(p.second);
 	}
+
+	SAFE_DELETE(m_pPhysics);
 }
 
 cUnit::cUnit() :
 	m_vPos(0, 0, 0),
-	m_vDir(0, 0, -1)
+	m_vDir(0, 0, -1),
+	m_pPhysics(NULL)
 {
 }
 
@@ -30,11 +34,20 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
 		newState->SetCallBack(statesVector[i].callbackFunc, statesVector[i].callbackObj);
 	}
 	SetState(STATE_IDLE);
+
+	m_pPhysics = new cPhysics;
+	m_pPhysics->SetElastic(0.7f);
+	m_pPhysics->SetMass(1.0f);
+	m_pPhysics->SetAcceleration(D3DXVECTOR3(0,0,0));
+	m_pPhysics->SetVelocity(D3DXVECTOR3(0, 0, 0));
+	m_pPhysics->SetPositionPtr(&m_vPos);
+	m_pPhysics->Setup();
 }
 
 void cUnit::Update()
 {
 	m_pCurState->Update();
+	m_pPhysics->Update();
 }
 
 void cUnit::Render()
