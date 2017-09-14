@@ -1,7 +1,7 @@
 #pragma once
 #include "cGroup.h"
 
-#define RATIO	0.1f
+#define RATIO	0.5f
 
 class cOBJLoader
 {

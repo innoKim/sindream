@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "cMap.h"
 
-
 cMap::cMap()
 {
 }
@@ -62,10 +61,7 @@ void cMap::Render()
 
 	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
-	for each (auto p in m_vecMap)
-	{
-		p->Render();
-	}
+	g_pShaderManager->SetMap(&m_vecMap, (D3DXMATRIXA16)m_matW);
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 }

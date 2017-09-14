@@ -11,7 +11,7 @@ private:
 	vector<ST_PC_VERTEX>	m_vecSur;
 	vector<ST_PC_VERTEX>	m_vecGrid;
 
-	D3DXMATRIX		m_matW, m_matS, m_matR, m_matT;
+	D3DXMATRIX				m_matW, m_matS, m_matR, m_matT;
 
 	RayInfo					m_stRay;
 
