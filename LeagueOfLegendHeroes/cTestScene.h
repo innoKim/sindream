@@ -3,12 +3,9 @@
 #include "iScene.h"
 #include "cOBJLoader.h"
 
-class cShader;
 
 class cTestScene : public iScene
 {
-	cShader*		m_pShader;
-
 	vector<cGroup*>			m_vecMap;
 	vector<ST_PC_VERTEX>	m_vecSur;
 	vector<ST_PC_VERTEX>	m_vecGrid;

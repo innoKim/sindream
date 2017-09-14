@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "cTestScene.h"
-#include "cShader.h"
 
 cTestScene::cTestScene()
-	: m_pShader(NULL)
-	, m_vPos(D3DXVECTOR3(0, 0, 0))
+	: m_vPos(D3DXVECTOR3(0, 0, 0))
 	, m_fAngle(0.f)
 	, m_vDir(D3DXVECTOR3(0, 0, 1))
 	, m_fSpeed(0.3f)
@@ -14,8 +12,6 @@ cTestScene::cTestScene()
 
 cTestScene::~cTestScene()
 {
-	SAFE_DELETE(m_pShader);
-	
 	for each (auto p in m_vecMap)
 	{
 		SAFE_DELETE(p);
@@ -33,10 +29,6 @@ void cTestScene::Setup()
 	//카메라 설정 이렇게 할 수 있습니다.
 	g_pCamera->SetTarget(&m_vPos);
 	g_pCamera->Zoom(100.0f);
-
-	// 끝
-	//m_pShader = new cShader;
-	//m_pShader->Setup(m_pCamera->GetEye(), "UVAnimation.fx", "Torus.x", "Fieldstone_DM.tga", "Fieldstone_SM.tga");
 }
 
 void cTestScene::Update()
@@ -73,8 +65,6 @@ void cTestScene::Update()
 
 void cTestScene::Render()
 {
-	if (m_pShader) m_pShader->Render();
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 	D3DXMatrixIdentity(&m_matW);

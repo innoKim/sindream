@@ -4,7 +4,7 @@
 
 #define CAMERA_MIN_DISTANCE 2
 #define CAMERA_MOVE_ANGLE_SPD 0.005
-#define CAMERA_ZOOM_SPD 1.0f
+#define CAMERA_ZOOM_SPD 10.0f
 
 class cCamera
 {
@@ -42,7 +42,7 @@ public:
 	D3DXMATRIX GetLookAtLH() { return m_mLookAtLH; }
 	void SetLookAtLH(D3DXMATRIX mat) { m_mLookAtLH = mat; }
 
-	D3DXMATRIX GetPos() { return m_vCameraPos; }
+	D3DXVECTOR3 GetPos() { return m_vCameraPos; }
 	D3DXVECTOR3 GetDir();
 	D3DXVECTOR3 GetDirParrallelToPlane();
 };

@@ -2,7 +2,7 @@
 #include "cUnit.h"
 
 #define PLAYER_ROTSPD 0.05f
-#define PLAYER_SPD 0.03f
+#define PLAYER_SPD 3.0f
 
 struct ST_MoveInfo
 {

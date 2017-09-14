@@ -49,18 +49,10 @@ void cPlane::Setup(int size)
 
 
 	ZeroMemory(&m_material, sizeof(D3DMATERIAL9));
-	m_material.Ambient = m_material.Diffuse, m_material.Specular = D3DXCOLOR(0.25f, 0.25f, 0.25f, 0.25f);
-}
+	m_material.Ambient = m_material.Diffuse, m_material.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 
-void cPlane::Render()
-{
-	D3DXMATRIX matWorld;
+	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	g_pD3DDevice->SetMaterial(&m_material);
-	g_pD3DDevice->SetTexture(0, NULL);
-	m_pMesh->DrawSubset(0);
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pShaderManager->SetPlane(m_pMesh, matWorld);
 }

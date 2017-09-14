@@ -44,6 +44,8 @@ void cMainGame::Render()
 	g_pShaderManager->BeginRender();
 
 	m_pScene->Render();
+
+	g_pShaderManager->Render();
 	
 	char str[256];
 	sprintf(str, "%f FPS", g_pTimeManager->GetFrameRate());

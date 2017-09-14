@@ -11,6 +11,5 @@ public:
 	virtual ~cPlane();
 	
 	void Setup(int size);
-	void Render();
 };
 

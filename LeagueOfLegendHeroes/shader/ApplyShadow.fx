@@ -112,6 +112,8 @@ float4 ShadowMapping_ApplyShadow_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
    
    uv = uv * 0.5 + 0.5;
 
+   uv = saturate(uv);
+
    float shadowMapDepth = tex2D(ShadowSampler, uv).r;
    
    float colorWeight = 1.0f;

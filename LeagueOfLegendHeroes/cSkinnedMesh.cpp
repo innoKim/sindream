@@ -52,7 +52,7 @@ void cSkinnedMesh::Update()
 void cSkinnedMesh::Render(D3DXVECTOR3 * Pos, D3DXVECTOR3 * Dir)
 {
 	D3DXMATRIX matS, matT, matR, worldMat;
-	D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
+	D3DXMatrixScaling(&matS, 0.5f, 0.5f, 0.5f);
 	D3DXMatrixTranslation(&matT, Pos->x, Pos->y, Pos->z);
 
 	D3DXMatrixLookAtLH(&matR, &D3DXVECTOR3(0, 0, 0), &(-(*Dir)), &D3DXVECTOR3(0, 1, 0));
@@ -176,7 +176,7 @@ void cSkinnedMesh::CircularRender(D3DXFRAME * target, D3DXMATRIX worldMatrix)
 			g_pD3DDevice->SetTransform(D3DTS_WORLD, &worldMatrix);
 			g_pD3DDevice->SetTexture(0, container->vecTM[i]->GetTexture());
 			g_pD3DDevice->SetMaterial(&container->vecTM[i]->GetMtl());
-			container->workMesh->DrawSubset(i);
+			g_pShaderManager->RenderShadow(container->workMesh, container->vecTM[i]->GetTexture(), worldMatrix);
 		}
 	}
 

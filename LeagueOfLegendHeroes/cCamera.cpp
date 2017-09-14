@@ -12,7 +12,7 @@ cCamera::~cCamera()
 
 void cCamera::Setup()
 {
-	m_fDistanceFromTarget = 5.0f;
+	m_fDistanceFromTarget = 200.0f;
 	m_vRotation.x = 0.5f;
 	D3DXMatrixIdentity(&m_mLookAtLH);
 	D3DXMatrixIdentity(&m_mPerspectiveFovLH);
@@ -51,7 +51,7 @@ void cCamera::Update()
 	//화면 크기가 바뀌어도 카메라가 업데이트시 계속 투영매트릭스 적용
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
-	D3DXMatrixPerspectiveFovLH(&m_mPerspectiveFovLH, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1, 1000);
+	D3DXMatrixPerspectiveFovLH(&m_mPerspectiveFovLH, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1, 10000);
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &m_mPerspectiveFovLH);
 }
 
