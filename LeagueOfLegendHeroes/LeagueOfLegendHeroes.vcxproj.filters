@@ -108,6 +108,9 @@
     <ClInclude Include="cDebugManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="cCollision.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -192,6 +195,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cDebugManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cCollision.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
