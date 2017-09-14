@@ -2,6 +2,8 @@
 
 #define g_pCollisionCalculator cCollision::GetInstance()
 
+#define EPSILON_VELOCITY 1.0f
+
 class cPhysics;
 
 class cCollision

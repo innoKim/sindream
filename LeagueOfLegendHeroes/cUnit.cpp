@@ -41,6 +41,7 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
 	m_pPhysics->SetAcceleration(D3DXVECTOR3(0,0,0));
 	m_pPhysics->SetVelocity(D3DXVECTOR3(0, 0, 0));
 	m_pPhysics->SetPositionPtr(&m_vPos);
+	m_pPhysics->SetRadius(15.0f);
 	m_pPhysics->Setup();
 }
 
@@ -59,4 +60,9 @@ void cUnit::SetState(eSTATE state)
 {
 	m_pCurState = m_mapStates[state];
 	m_eStateNum = state;
+}
+
+void cUnit::SetPhysicsTargets(vector<cPhysics*>* vector)
+{
+	m_pPhysics->SetTargetsPtr(vector);
 }

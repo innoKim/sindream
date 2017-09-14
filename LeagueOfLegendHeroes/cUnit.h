@@ -49,4 +49,6 @@ public:
 
 	D3DXVECTOR3* GetPosPtr() { return &m_vPos; }
 	void SetPosY(float posY) { m_vPos.y = posY; }
+
+	void SetPhysicsTargets(vector<cPhysics*>* vector);
 };

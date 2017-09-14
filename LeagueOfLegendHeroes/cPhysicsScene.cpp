@@ -5,6 +5,7 @@
 
 #include "cPlayer.h"
 #include "cEnemy.h"
+#include "cPhysics.h"
 
 #include "cPlane.h"
 
@@ -47,7 +48,7 @@ void cPhysicsScene::Setup()
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",AlistarSpell1CallBack,m_pPlayer });
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",AlistarSpell2CallBack,m_pPlayer });
 	m_pPlayer->Setup(temp);
-	m_pPlayer->SetPosition(D3DXVECTOR3(0, 300, 0));
+	m_pPlayer->SetPosition(D3DXVECTOR3(-100, 0, 0));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
@@ -60,10 +61,27 @@ void cPhysicsScene::Setup()
 		vector<ST_UNITLOADINFO> temp;
 		temp.push_back({ STATE_IDLE, "unit/PoroIdle.x" ,NULL,NULL });
 		enemy->Setup(temp);
-		enemy->SetPosition(D3DXVECTOR3(i * 100, 300 , 0));
+		enemy->SetPosition(D3DXVECTOR3(i * 100, 0 , i*10));
 		m_vecEnemy.push_back(enemy);
 	}
+
+
+	//물리관련
 	
+
+	m_vecPhysics.push_back(m_pPlayer->GetPhysics());
+	for (int i = 0; i < 3; i++)
+	{
+		m_vecPhysics.push_back(m_vecEnemy[i]->GetPhysics());
+	}
+
+	m_pPlayer->SetPhysicsTargets(&m_vecPhysics);
+	for (int i = 0; i < 3; i++)
+	{
+		m_vecEnemy[i]->SetPhysicsTargets(&m_vecPhysics);
+	}
+	///요기까지 물리
+
 	SetLight();
 }
 
@@ -74,6 +92,11 @@ void cPhysicsScene::Update()
 	for each(auto p in m_vecEnemy)
 	{
 		p->Update();
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
+	{
+		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(5, 2, 0));
 	}
 }
 

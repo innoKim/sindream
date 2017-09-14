@@ -17,7 +17,8 @@ private:
 
 	SYNTHESIZE(D3DXVECTOR3*,	m_pvPos,			PositionPtr);
 	SYNTHESIZE(float,			m_fRestDuration,	RestDuration);		//마지막 충돌로부터의 시간;
-
+	SYNTHESIZE(vector<cPhysics*>*, m_pvecTargets,	TargetsPtr);		//충돌을할 타겟 오브젝트들
+	
 public:
 	cPhysics();
 	virtual ~cPhysics();
@@ -25,5 +26,7 @@ public:
 	void Setup();
 	void Update();
 	bool ColisionWith(vector<cPhysics*> vecVersusObject);
+
+	float GetVelocityScalar() { return D3DXVec3Length(&m_vVelocity); }
 };
 
