@@ -24,6 +24,8 @@ void cMainGame::Setup()
 	//m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
 	m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
 	m_pScene->Setup();
+
+	g_pShaderManager->SetupShadow();
 }
 
 void cMainGame::Update()
@@ -37,6 +39,8 @@ void cMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 	///// 여기서부터 렌더 시작
+
+	g_pShaderManager->BeginRender();
 
 	m_pScene->Render();
 	

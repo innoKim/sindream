@@ -66,9 +66,6 @@
     <ClInclude Include="iMap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cShader.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cCamera.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -109,6 +106,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cCollision.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cShaderManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -155,9 +155,6 @@
     <ClCompile Include="iMap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="cShader.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cCamera.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -198,6 +195,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cCollision.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cShaderManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

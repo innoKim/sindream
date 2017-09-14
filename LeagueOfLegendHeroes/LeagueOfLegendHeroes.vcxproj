@@ -168,7 +168,7 @@
     <ClInclude Include="cPhysicsScene.h" />
     <ClInclude Include="cPlane.h" />
     <ClInclude Include="cPlayer.h" />
-    <ClInclude Include="cShader.h" />
+    <ClInclude Include="cShaderManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkinnedMeshManager.h" />
     <ClInclude Include="cTestScene.h" />
@@ -201,7 +201,7 @@
     <ClCompile Include="cPhysicsScene.cpp" />
     <ClCompile Include="cPlane.cpp" />
     <ClCompile Include="cPlayer.cpp" />
-    <ClCompile Include="cShader.cpp" />
+    <ClCompile Include="cShaderManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkinnedMeshManager.cpp" />
     <ClCompile Include="cTestScene.cpp" />
