@@ -49,7 +49,7 @@ void cTestScene::Update()
 void cTestScene::Render()
 {
 	m_pMap->Render();
-	//m_pPlayer->Render();
+	m_pPlayer->Render();
 }
 
 void cTestScene::SetLight()

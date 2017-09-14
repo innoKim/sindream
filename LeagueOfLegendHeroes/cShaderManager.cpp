@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "cShaderManager.h"
-
+#include "cGroup.h"
 
 cShaderManager::cShaderManager()
 	: m_pApplyShadow(NULL)
@@ -12,12 +12,26 @@ cShaderManager::cShaderManager()
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
+	, m_pvecMap(NULL)
 {
 }
 
 
 cShaderManager::~cShaderManager()
 {
+}
+
+void cShaderManager::SetupShadow()
+{
+	m_pCreateShadow = LoadEffect("shader/CreateShadow.fx");
+
+	m_pApplyShadow = LoadEffect("shader/ApplyShadow.fx");
+
+	const int shadowMapSize = 8192;
+
+	g_pD3DDevice->CreateTexture(shadowMapSize, shadowMapSize, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R32F, D3DPOOL_DEFAULT, &m_pShadowRenderTarget, NULL);
+
+	g_pD3DDevice->CreateDepthStencilSurface(shadowMapSize, shadowMapSize, D3DFMT_D24X8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_pShadowDepthStencil, NULL);
 }
 
 void cShaderManager::BeginRender()
@@ -60,19 +74,6 @@ void cShaderManager::BeginRender()
 	m_pCreateShadow->SetVector("vLightPos", &D3DXVECTOR4(vEyePt, 1));
 
 	m_pApplyShadow->SetBool("bTexture", true);
-}
-
-void cShaderManager::SetupShadow()
-{
-	m_pCreateShadow = LoadEffect("shader/CreateShadow.fx");
-
-	m_pApplyShadow = LoadEffect("shader/ApplyShadow.fx");
-
-	const int shadowMapSize = 8192;
-
-	g_pD3DDevice->CreateTexture(shadowMapSize, shadowMapSize, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R32F, D3DPOOL_DEFAULT, &m_pShadowRenderTarget, NULL);
-
-	g_pD3DDevice->CreateDepthStencilSurface(shadowMapSize, shadowMapSize, D3DFMT_D24X8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_pShadowDepthStencil, NULL);
 }
 
 void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture, D3DXMATRIXA16 matWorld)
@@ -151,17 +152,31 @@ void cShaderManager::Render()
 			m_pMeshGround->DrawSubset(0);
 		}
 
+		if (m_pvecMap)
+		{
+			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldGround);
+
+			for (int k = 0; k < m_pvecMap->size(); k++)
+			{
+				if ((*m_pvecMap)[k]->GetMtlTex())
+				{
+					m_pApplyShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
+				}
+				m_pApplyShadow->CommitChanges();
+
+				g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
+				g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, (*m_pvecMap)[k]->GetVertex().size() / 3, &(*m_pvecMap)[k]->GetVertex()[0], sizeof(ST_PT_VERTEX));
+			}
+		}
+
 		m_pApplyShadow->EndPass();
 	}
-
-	m_pvTarget;
 
 	m_pApplyShadow->End();
 
 	m_vecMesh.clear();
 	m_vecTexture.clear();
 	m_vecMatWorld.clear();
-
 }
 
 void cShaderManager::Destroy()
@@ -179,6 +194,11 @@ void cShaderManager::SetPlane(LPD3DXMESH pMesh, D3DXMATRIXA16 matWorld)
 	m_matWorldGround = matWorld;
 }
 
+void cShaderManager::SetMap(vector<cGroup*>* pvecMap, D3DXMATRIXA16 matWorldGround)
+{
+	m_pvecMap = pvecMap; 
+	m_matWorldGround = matWorldGround;
+}
 LPD3DXEFFECT cShaderManager::LoadEffect(char * szFileName)
 {
 	LPD3DXEFFECT pEffect = NULL;
