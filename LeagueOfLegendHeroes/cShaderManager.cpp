@@ -11,6 +11,7 @@ cShaderManager::cShaderManager()
 	, m_sFolder("shader/")
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
+	, m_pMeshGround(NULL)
 {
 }
 
@@ -140,12 +141,15 @@ void cShaderManager::Render()
 			m_vecMesh[j]->DrawSubset(0);
 		}
 
-		m_pApplyShadow->SetMatrix("matWorld", &m_matWorldGround);
-		m_pApplyShadow->SetBool("bTexture", false);
+		if (m_pMeshGround)
+		{
+			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldGround);
+			m_pApplyShadow->SetBool("bTexture", false);
 
-		m_pApplyShadow->CommitChanges();
-		
-		m_pMeshGround->DrawSubset(0);
+			m_pApplyShadow->CommitChanges();
+
+			m_pMeshGround->DrawSubset(0);
+		}
 
 		m_pApplyShadow->EndPass();
 	}

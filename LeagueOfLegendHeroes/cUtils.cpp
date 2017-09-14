@@ -79,6 +79,31 @@ namespace MY_UTIL
 		return result;
 	}
 
+	bool RayCastPC(IN RayInfo& ray, OUT HitInfo& hit, IN vector<ST_PC_VERTEX>* target)
+	{
+		if (target->size() % 3 != 0 || target->size() < 3) return false;
+
+		float dist = 9999.0f;
+		hit.dist = dist;
+		bool result = false;
+
+		for (int i = 0; i < target->size(); i += 3)
+		{
+			if (D3DXIntersectTri(&(*target)[i].p, &(*target)[i + 1].p, &(*target)[i + 2].p, &ray.pos, &ray.dir, 0, 0, &dist))
+			{
+
+				hit.dist = dist;
+				hit.hitpos = ray.pos + hit.dist*ray.dir;
+				if (hit.dist > dist)
+				{
+					
+				}
+				result = true;
+			}
+		}
+		return result;
+	}
+
 	DWORD FtoDw(float f)
 	{
 		return *((DWORD*)&f);

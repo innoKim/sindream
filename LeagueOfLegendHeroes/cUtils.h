@@ -21,6 +21,8 @@ struct HitInfo
 	HitInfo(D3DXVECTOR3 hitPosition, float distance) { hitpos = hitPosition, dist = distance; }
 };
 
+struct ST_PC_VERTEX;
+
 namespace MY_UTIL
 {
 	// 거리 구한다
@@ -35,6 +37,8 @@ namespace MY_UTIL
 	RayInfo RayToScreenPoint(int screenPosX, int screenPosY);
 
 	bool RayCast(IN RayInfo& ray, OUT HitInfo& hit, IN vector<D3DXVECTOR3>& target);
+
+	bool RayCastPC(IN RayInfo& ray, OUT HitInfo& hit, IN vector<ST_PC_VERTEX>* target);
 
 	DWORD FtoDw(float f);
 }

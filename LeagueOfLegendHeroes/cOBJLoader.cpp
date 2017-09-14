@@ -62,7 +62,7 @@ void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecG
 			if (szBuf[1] == ' ')
 			{
 				sscanf_s(szBuf, "%*s %f %f %f", &x, &y, &z, 1024);
-				vecP.push_back(D3DXVECTOR3(x, y, z));
+				vecP.push_back(D3DXVECTOR3(x * RATIO, y * RATIO, z * RATIO));
 			}
 			else if (szBuf[1] == 't')
 			{
@@ -119,7 +119,7 @@ void cOBJLoader::LoadSur(IN char * Filepath, OUT vector<ST_PC_VERTEX> &vecSur, v
 			float x, y, z;
 			sscanf_s(szBuf, "%f %f %f %*f %*f", &x, &y, &z);
 
-			D3DXVECTOR3 p = D3DXVECTOR3(x, y, -z);
+			D3DXVECTOR3 p = D3DXVECTOR3(x * RATIO, y * RATIO, -z * RATIO);
 			D3DXCOLOR	c = D3DCOLOR_XRGB(255, 255, 255);
 			vecSur.push_back(ST_PC_VERTEX(p, c));
 

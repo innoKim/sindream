@@ -1,22 +1,16 @@
 #pragma once
 
-#include "iScene.h"
-#include "cOBJLoader.h"
+#define RAY 9999.f
 
+#include "iScene.h"
+#include "cMap.h"
+#include "cPlayer.h"
 
 class cTestScene : public iScene
 {
-	vector<cGroup*>			m_vecMap;
-	vector<ST_PC_VERTEX>	m_vecSur;
-	vector<ST_PC_VERTEX>	m_vecGrid;
-
-	D3DXMATRIX		m_matW, m_matS, m_matR, m_matT;
-
-	// 테스트용
-	D3DXVECTOR3		m_vPos;
-	D3DXVECTOR3		m_vDir;
-	float			m_fAngle;
-	float			m_fSpeed;
+private:
+	cUnit*					m_pPlayer;
+	cMap*					m_pMap;
 
 public:
 	cTestScene();
@@ -25,5 +19,10 @@ public:
 	virtual void Setup() override;
 	virtual void Update() override;
 	virtual void Render() override;
+
+	static void AlistarSpell1CallBack(void* CallBackObj);
+	static void AlistarSpell2CallBack(void* CallBackObj);
+
+	void SetLight();
 };
 

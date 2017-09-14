@@ -29,7 +29,8 @@ protected:
 	eSTATE   m_eStateNum;
 	cSkinnedMesh* m_pCurState;
 
-	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3,m_vPos,Position)
+	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vNext, NextPosition)
+	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vPos, Position)
 	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vDir, Direction)
 
 	void Destroy();
@@ -46,4 +47,5 @@ public:
 	bool IsReady() { return ((m_eStateNum == STATE_RUN || m_eStateNum == STATE_IDLE) ? true : false); }
 
 	D3DXVECTOR3* GetPosPtr() { return &m_vPos; }
+	void SetPosY(float posY) { m_vPos.y = posY; }
 };

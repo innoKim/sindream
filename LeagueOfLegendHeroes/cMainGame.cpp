@@ -22,11 +22,11 @@ cMainGame::~cMainGame()
 
 void cMainGame::Setup()
 {
-	//m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
-	m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
+	m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
+	//m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
 	m_pScene->Setup();
 
-	g_pShaderManager->SetupShadow();
+	//g_pShaderManager->SetupShadow();
 }
 
 void cMainGame::Update()
@@ -41,11 +41,11 @@ void cMainGame::Render()
 	g_pD3DDevice->BeginScene();
 	///// 여기서부터 렌더 시작
 
-	g_pShaderManager->BeginRender();
+	//g_pShaderManager->BeginRender();
 
 	m_pScene->Render();
 
-	g_pShaderManager->Render();
+	//g_pShaderManager->Render();
 	
 	char str[256];
 	sprintf(str, "%f FPS", g_pTimeManager->GetFrameRate());
