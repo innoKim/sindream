@@ -7,7 +7,7 @@ cShaderManager::cShaderManager()
 	, m_pCreateShadow(NULL)
 	, m_pShadowRenderTarget(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(D3DXVECTOR4(-500.0f, 500.0f, -500.0f, 1.0f))
+	, m_vLightPos(D3DXVECTOR4(-1000.0f, 1000.0f, -1000.0f, 1.0f))
 	, m_sFolder("shader/")
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
@@ -92,6 +92,23 @@ void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture,
 		m_pCreateShadow->BeginPass(i);
 
 		pMesh->DrawSubset(0);
+
+		if (m_pvecMap)
+		{
+			m_pCreateShadow->SetMatrix("matWorld", &m_matWorldGround);
+
+			for (int k = 0; k < m_pvecMap->size(); k++)
+			{
+				if ((*m_pvecMap)[k]->GetMtlTex())
+				{
+					m_pCreateShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
+				}
+				m_pCreateShadow->CommitChanges();
+
+				g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
+				g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, (*m_pvecMap)[k]->GetVertex().size() / 3, &(*m_pvecMap)[k]->GetVertex()[0], sizeof(ST_PT_VERTEX));
+			}
+		}
 
 		m_pCreateShadow->EndPass();
 	}
