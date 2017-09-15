@@ -34,8 +34,9 @@ void cPhysics::Update()
 	
 	m_vVelocity *= 0.98f;
 
-	m_vVelocity		+= m_vAcceleration;
-	(*m_pvPos)		+= m_vVelocity;
+	m_vVelocity	+= m_vAcceleration;
+	
+	(*m_pvPos) += m_vVelocity;
 }
 
 bool cPhysics::ColisionWith(vector<cPhysics*> vecVersusObject)
@@ -62,7 +63,7 @@ bool cPhysics::ColisionWith(vector<cPhysics*> vecVersusObject)
 
 			if (distance > (vecVersusObject[i]->GetRadius()+m_fRadius)) continue;
 		
-			g_pCollisionCalculator->ObjVSObj(*this, *vecVersusObject[i]);
+			g_pCollisionCalculator->ObjVSObj(*this, *vecVersusObject[i],false);
 		}
 	}
 }
