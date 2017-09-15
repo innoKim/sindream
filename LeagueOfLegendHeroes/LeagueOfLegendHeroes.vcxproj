@@ -171,6 +171,8 @@
     <ClInclude Include="cPhysicsScene.h" />
     <ClInclude Include="cPlane.h" />
     <ClInclude Include="cPlayer.h" />
+    <ClInclude Include="cRigidbody.h" />
+    <ClInclude Include="cRigidbodyCollision.h" />
     <ClInclude Include="cShaderManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkinnedMeshManager.h" />
@@ -207,6 +209,8 @@
     <ClCompile Include="cPhysicsScene.cpp" />
     <ClCompile Include="cPlane.cpp" />
     <ClCompile Include="cPlayer.cpp" />
+    <ClCompile Include="cRigidbody.cpp" />
+    <ClCompile Include="cRigidbodyCollision.cpp" />
     <ClCompile Include="cShaderManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkinnedMeshManager.cpp" />

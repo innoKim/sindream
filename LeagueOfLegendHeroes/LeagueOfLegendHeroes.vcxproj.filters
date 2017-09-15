@@ -123,6 +123,12 @@
     <ClInclude Include="cPhysicsManager.h">
       <Filter>매니저</Filter>
     </ClInclude>
+    <ClInclude Include="cRigidbody.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cRigidbodyCollision.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -220,6 +226,12 @@
     </ClCompile>
     <ClCompile Include="cGroup.cpp">
       <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cRigidbody.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cRigidbodyCollision.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
