@@ -2,15 +2,19 @@
 #include "cMainGame.h"
 #include "cTestScene.h"
 #include "cPhysicsScene.h"
+#include "cGridPlane.h"
+
 cMainGame::cMainGame() :
-	m_pScene(NULL)
+	m_pScene(NULL),
+	m_pGrid(NULL)
 {
 }
 
 cMainGame::~cMainGame()
 {
 	SAFE_DELETE(m_pScene);
-	
+	SAFE_DELETE(m_pGrid);
+
 	g_pCamera->Destroy();
 	g_pKeyManager->Destroy();
 	g_pTimeManager->Destroy();
@@ -25,6 +29,10 @@ void cMainGame::Setup()
 	m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
 	//m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
 	m_pScene->Setup();
+
+	m_pGrid = new cGridPlane;
+	m_pGrid->Setup(100,50);
+
 
 	g_pShaderManager->SetupShadow();
 }
@@ -47,6 +55,9 @@ void cMainGame::Render()
 
 	g_pShaderManager->Render();
 	
+	m_pGrid->Render();
+
+
 	char str[256];
 	sprintf(str, "%.2f FPS", g_pTimeManager->GetFrameRate());
 	g_pDebug->Print(str);
