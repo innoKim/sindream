@@ -7,7 +7,7 @@ cShaderManager::cShaderManager()
 	, m_pCreateShadow(NULL)
 	, m_pShadowRenderTarget(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(300, 300, 300,1.0f)
+	, m_vLightPos(-300, 300, -300, 1.0f)
 	, m_sFolder("shader/")
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
@@ -63,7 +63,7 @@ void cShaderManager::BeginRender()
 	D3DXMatrixLookAtLH(&m_matLightView, &vEyePt, &vLookatPt, &vUpVec);
 
 	//광원-투영 행렬을 만든다
-	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 10000);
+	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 5000);
 
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -93,22 +93,18 @@ void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture,
 
 		pMesh->DrawSubset(0);
 
-		if (m_pvecMap)
-		{
-			m_pCreateShadow->SetMatrix("matWorld", &m_matWorldGround);
+		//if (m_pvecMap)
+		//{
+		//	m_pCreateShadow->SetMatrix("matWorld", &m_matWorldGround);
 
-			for (int k = 0; k < m_pvecMap->size(); k++)
-			{
-				if ((*m_pvecMap)[k]->GetMtlTex())
-				{
-					m_pCreateShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
-				}
-				m_pCreateShadow->CommitChanges();
+		//	for (int k = 0; k < m_pvecMap->size(); k++)
+		//	{
+		//		m_pCreateShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
+		//		m_pCreateShadow->CommitChanges();
 
-				g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
-				g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, (*m_pvecMap)[k]->GetVertex().size() / 3, &(*m_pvecMap)[k]->GetVertex()[0], sizeof(ST_PT_VERTEX));
-			}
-		}
+		//		(*m_pvecMap)[k]->GetMesh()->DrawSubset(0);
+		//	}
+		//}
 
 		m_pCreateShadow->EndPass();
 	}
@@ -175,14 +171,10 @@ void cShaderManager::Render()
 
 			for (int k = 0; k < m_pvecMap->size(); k++)
 			{
-				if ((*m_pvecMap)[k]->GetMtlTex())
-				{
-					m_pApplyShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
-				}
+				m_pApplyShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
 				m_pApplyShadow->CommitChanges();
 
-				g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
-				g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, (*m_pvecMap)[k]->GetVertex().size() / 3, &(*m_pvecMap)[k]->GetVertex()[0], sizeof(ST_PT_VERTEX));
+				(*m_pvecMap)[k]->GetMesh()->DrawSubset(0);
 			}
 		}
 

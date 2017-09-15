@@ -47,12 +47,46 @@ void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecG
 		{
 			if (!vecVertex.empty())
 			{
+				LPD3DXMESH pMesh;
+				D3DXCreateMeshFVF(vecVertex.size() / 3, vecVertex.size(), D3DXMESH_MANAGED, ST_PT_VERTEX::FVF, g_pD3DDevice, &pMesh);
+
+				ST_PT_VERTEX* vb = NULL;
+				pMesh->LockVertexBuffer(0, (LPVOID*)&vb);
+
+				for (int i = 0; i < vecVertex.size(); i++)
+				{
+					vb[i] = vecVertex[i];
+				}
+
+				pMesh->UnlockVertexBuffer();
+
+				WORD* ib = NULL;
+				pMesh->LockIndexBuffer(0, (LPVOID*)&ib);
+
+				for (int i = 0; i < vecVertex.size(); i++)
+				{
+					ib[i] = i;
+				}
+
+				pMesh->UnlockIndexBuffer();
+
+				vector<DWORD> adjagencyInfo(pMesh->GetNumFaces() * 3);
+				pMesh->GenerateAdjacency(0.0f, &adjagencyInfo[0]);
+
+				pMesh->OptimizeInplace(D3DXMESHOPT_COMPACT | D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_VERTEXCACHE,
+					&adjagencyInfo[0], NULL, 0, 0);
+
 				cGroup* pGroup = new cGroup;
-				pGroup->SetVertex(vecVertex);
+				//pGroup->SetVertex(vecVertex);
 				vecGroup.push_back(pGroup);
 				vecVertex.clear();
-
+				pGroup->SetMesh(pMesh);
 				pGroup->SetMtlTex(m_mapMtl[szMtl]);
+				D3DXMATRIXA16 matW;
+				D3DXMatrixRotationX(&matW, -D3DX_PI / 2.0f);
+				pGroup->SetWorld(matW);
+
+				SAFE_RELEASE(pMesh);
 			}
 		}
 

@@ -27,7 +27,5 @@ public:
 	void LoadSur(char* FileFullPath);
 
 	float GetGroundHeight(D3DXVECTOR3 pos);
-
-	void Render();
 };
 

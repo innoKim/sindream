@@ -4,12 +4,12 @@
 class cGroup
 {
 private:
-	SYNTHESIZE_PASS_BY_REF(vector<ST_PT_VERTEX>, m_vecVertex, Vertex);
+	SYNTHESIZE(D3DXMATRIXA16, matWorld, World);
+	SYNTHESIZE_ADD_REF(LPD3DXMESH, m_pMesh, Mesh);
+	//SYNTHESIZE_PASS_BY_REF(vector<ST_PT_VERTEX>, m_vecVertex, Vertex);
 	SYNTHESIZE_ADD_REF(cMtlTex*, m_pMtlTex, MtlTex);
 
 public:
 	cGroup();
 	~cGroup();
-
-	void Render();
 };

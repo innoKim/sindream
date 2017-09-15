@@ -37,7 +37,7 @@ void cTestScene::Setup()
 	
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
-	SetLight();
+	//SetLight();
 }
 
 void cTestScene::Update()
@@ -48,7 +48,6 @@ void cTestScene::Update()
 
 void cTestScene::Render()
 {
-	m_pMap->Render();
 	m_pPlayer->Render();
 }
 
