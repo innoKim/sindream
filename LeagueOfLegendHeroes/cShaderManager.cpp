@@ -7,7 +7,7 @@ cShaderManager::cShaderManager()
 	, m_pCreateShadow(NULL)
 	, m_pShadowRenderTarget(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(-300, 300, -300, 1.0f)
+	, m_vLightPos(-500, 500, -500, 1.0f)
 	, m_sFolder("shader/")
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
@@ -32,6 +32,10 @@ void cShaderManager::SetupShadow()
 	g_pD3DDevice->CreateTexture(shadowMapSize, shadowMapSize, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R32F, D3DPOOL_DEFAULT, &m_pShadowRenderTarget, NULL);
 
 	g_pD3DDevice->CreateDepthStencilSurface(shadowMapSize, shadowMapSize, D3DFMT_D24X8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_pShadowDepthStencil, NULL);
+
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0);
 }
 
 void cShaderManager::BeginRender()
@@ -63,7 +67,7 @@ void cShaderManager::BeginRender()
 	D3DXMatrixLookAtLH(&m_matLightView, &vEyePt, &vLookatPt, &vUpVec);
 
 	//광원-투영 행렬을 만든다
-	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 5000);
+	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 10000);
 
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -73,6 +77,7 @@ void cShaderManager::BeginRender()
 	m_pCreateShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 	m_pCreateShadow->SetVector("vLightPos", &D3DXVECTOR4(vEyePt, 1));
 
+	m_pApplyShadow->SetFloat("fLightWeight", 1.0f);
 	m_pApplyShadow->SetBool("bTexture", true);
 }
 
@@ -121,7 +126,7 @@ void cShaderManager::Render()
 	SAFE_RELEASE(m_pHWBackBuffer);
 	SAFE_RELEASE(m_pHWDepthStencilBuffer);
 
-	D3DXMATRIXA16 matView, matProjection; 
+	D3DXMATRIXA16 matView, matProjection;
 
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
@@ -171,6 +176,7 @@ void cShaderManager::Render()
 
 			for (int k = 0; k < m_pvecMap->size(); k++)
 			{
+				m_pApplyShadow->SetFloat("fLightWeight", 2.0f);
 				m_pApplyShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
 				m_pApplyShadow->CommitChanges();
 
