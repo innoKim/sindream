@@ -126,7 +126,7 @@ void cCollision::Destroy()
 //	}	
 //}
 
-void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2)
+void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2, bool byObstacle)
 {
 	D3DXVECTOR3 n = FindNormalToCollisionPlane(obj1, obj2);
 
@@ -143,8 +143,11 @@ void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2)
 	obj1.SetVelocity(vV1);
 	obj2.SetVelocity(vV2);
 
-	obj1.SetRestDuration(0.0f);
-	obj2.SetRestDuration(0.0f);
+	if (!byObstacle)
+	{
+		obj1.SetRestDuration(0.0f);
+		obj2.SetRestDuration(0.0f);
+	}
 
 	//가까우면 부담스러우니까 떨어트려
 	(*obj1.GetPositionPtr() += n*obj1.GetRadius()*0.1f);
@@ -156,8 +159,9 @@ void cCollision::ObjVSObstacle(cPhysics& obj)
 	cPhysics obstacle;
 	D3DXVECTOR3 obsPos = *obj.GetPositionPtr();
 	obstacle.SetPositionPtr(&D3DXVECTOR3(obsPos.x,0,obsPos.z));
-	
-	ObjVSObj(obj, obstacle);
+	obstacle.SetElastic(0.0f);
+
+	ObjVSObj(obj, obstacle,true);
 
 	if (obj.GetVelocityScalar() < EPSILON_VELOCITY)
 	{
