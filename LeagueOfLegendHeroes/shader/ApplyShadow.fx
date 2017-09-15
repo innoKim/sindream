@@ -81,6 +81,7 @@ float4 fvAmbient = float4( 0.37, 0.37, 0.37, 1.00 );
 float4 fvSpecular = float4( 0.49, 0.49, 0.49, 1.00 );
 float4 fvDiffuse = float4( 0.89, 0.89, 0.89, 1.00 );
 float fSpecularPower = float( 25.00 );
+float fLightWeight = 1.0f;
 texture ShadowMap_Tex;
 sampler2D ShadowSampler = sampler_state
 {
@@ -116,9 +117,9 @@ float4 ShadowMapping_ApplyShadow_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
 
    float shadowMapDepth = tex2D(ShadowSampler, uv).r;
    
-   float colorWeight = 1.0f;
+   float colorWeight = 1.0f * fLightWeight;
    
-   if (depth > shadowMapDepth + 0.0000125f)
+   if (depth > shadowMapDepth + 0.000001f)
    {
       colorWeight = 0.5f;
    }
@@ -140,7 +141,7 @@ float4 ShadowMapping_ApplyShadow_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
 
    float4 fvTotalAmbient   = fvAmbient * fvBaseColor; 
    float4 fvTotalDiffuse   = fvDiffuse * fNDotL * fvBaseColor; 
-   float4 fvTotalSpecular  = fvSpecular * pow( fRDotV, fSpecularPower ) * 0.5f;
+   float4 fvTotalSpecular  = fvSpecular * pow( fRDotV, fSpecularPower ) * 0.3f;
    
    return( saturate( fvTotalAmbient + fvTotalDiffuse + fvTotalSpecular ) * colorWeight );
 }
