@@ -3,6 +3,8 @@
 #define g_pCollisionCalculator cCollision::GetInstance()
 
 #define EPSILON_VELOCITY 1.0f
+#define PHYSICS_COR 0.1f //반발계수
+#define OBSTACLE_MASS 10000.0f
 
 class cPhysics;
 

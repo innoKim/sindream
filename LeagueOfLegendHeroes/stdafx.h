@@ -21,6 +21,8 @@
 #include <d3dx9.h>
 #include <vector>
 #include <map>
+#include <set>
+
 #include <string>
 
 #pragma comment(lib, "d3d9.lib")
@@ -135,11 +137,13 @@ struct ST_PNT_VERTEX
 #include "cDeviceManager.h"
 #include "cKeyManager.h"
 #include "cTextureManager.h"
-#include "cCollision.h"
 #include "cTimeManager.h"
 #include "cCamera.h"
 #include "cDebugManager.h"
 #include "cShaderManager.h"
+
+#include "cPhysicsManager.h"
+#include "cCollision.h"
 
 //타입 정의
 typedef void(*CALLBACKFUNC)(void*);

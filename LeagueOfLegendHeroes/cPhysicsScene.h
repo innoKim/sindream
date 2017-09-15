@@ -12,8 +12,7 @@ private:
 	D3DLIGHT9	m_light;
 
 	vector<cUnit*> m_vecEnemy;
-	vector<cPhysics*> m_vecPhysics;
-
+	
 	void SetLight();
 public:
 	cPhysicsScene();

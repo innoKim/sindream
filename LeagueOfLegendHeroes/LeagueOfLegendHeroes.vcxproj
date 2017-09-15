@@ -167,6 +167,7 @@
     <ClInclude Include="cObject.h" />
     <ClInclude Include="cOBJLoader.h" />
     <ClInclude Include="cPhysics.h" />
+    <ClInclude Include="cPhysicsManager.h" />
     <ClInclude Include="cPhysicsScene.h" />
     <ClInclude Include="cPlane.h" />
     <ClInclude Include="cPlayer.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cOBJLoader.cpp" />
     <ClCompile Include="cPhysics.cpp" />
+    <ClCompile Include="cPhysicsManager.cpp" />
     <ClCompile Include="cPhysicsScene.cpp" />
     <ClCompile Include="cPlane.cpp" />
     <ClCompile Include="cPlayer.cpp" />

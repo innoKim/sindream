@@ -48,13 +48,12 @@ void cPhysicsScene::Setup()
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",AlistarSpell1CallBack,m_pPlayer });
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",AlistarSpell2CallBack,m_pPlayer });
 	m_pPlayer->Setup(temp);
-	m_pPlayer->SetPosition(D3DXVECTOR3(-100, 100, 0));
+	m_pPlayer->SetPosition(D3DXVECTOR3(-100, 0, 0));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
-	//m_pPlane = new cPlane;
-
-	//m_pPlane->Setup(5000);
+	m_pPlane = new cPlane;
+	m_pPlane->Setup(5000);
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -68,17 +67,7 @@ void cPhysicsScene::Setup()
 
 
 	//물리관련
-	m_vecPhysics.push_back(m_pPlayer->GetPhysics());
-	for (int i = 0; i < 3; i++)
-	{
-		m_vecPhysics.push_back(m_vecEnemy[i]->GetPhysics());
-	}
-
-	m_pPlayer->SetPhysicsTargets(&m_vecPhysics);
-	for (int i = 0; i < 3; i++)
-	{
-		m_vecEnemy[i]->SetPhysicsTargets(&m_vecPhysics);
-	}
+	m_pPlayer->GetPhysics()->SetIsActivate(false);
 	///요기까지 물리
 
 	SetLight();

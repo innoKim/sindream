@@ -22,6 +22,8 @@ cMainGame::~cMainGame()
 	g_pDeviceManager->Destroy();
 	g_pDebug->Destroy();
 	g_pCollisionCalculator->Destroy();
+	g_pPhysicsManager->Destroy();
+	g_pShaderManager->Destroy();
 }
 
 void cMainGame::Setup()
@@ -32,7 +34,6 @@ void cMainGame::Setup()
 
 	m_pGrid = new cGridPlane;
 	m_pGrid->Setup(100,50);
-
 
 	g_pShaderManager->SetupShadow();
 }

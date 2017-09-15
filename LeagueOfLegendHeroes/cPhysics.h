@@ -6,6 +6,7 @@ class cPhysics
 {
 private:
 	bool m_bStatic; //충돌의 대상이 되지만 움직이지 않는 고정된놈 (무한의 질량) ex) 바닥, 벽
+	
 	SYNTHESIZE(bool, m_bIsActivate, IsActivate);
 
 	SYNTHESIZE_PASS_BY_REF(float, m_fRadius, Radius); // 지름
@@ -17,15 +18,13 @@ private:
 
 	SYNTHESIZE(D3DXVECTOR3*,	m_pvPos,			PositionPtr);
 	SYNTHESIZE(float,			m_fRestDuration,	RestDuration);		//마지막 충돌로부터의 시간;
-	SYNTHESIZE(vector<cPhysics*>*, m_pvecTargets,	TargetsPtr);		//충돌을할 타겟 오브젝트들
-	
 public:
 	cPhysics();
 	virtual ~cPhysics();
 
 	void Setup();
 	void Update();
-	bool ColisionWith(vector<cPhysics*> vecVersusObject);
+	bool ColisionWith(set<cPhysics*> setVersusObject);
 
 	float GetVelocityScalar() { return D3DXVec3Length(&m_vVelocity); }
 };
