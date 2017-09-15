@@ -52,8 +52,9 @@ void cPhysicsScene::Setup()
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
-	m_pPlane = new cPlane;
-	m_pPlane->Setup(5000);
+	//m_pPlane = new cPlane;
+
+	//m_pPlane->Setup(5000);
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -94,7 +95,7 @@ void cPhysicsScene::Update()
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
 	{
-		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(5, 2, 0));
+		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(5, 30, 0));
 	}
 }
 

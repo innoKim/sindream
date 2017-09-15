@@ -117,6 +117,9 @@
     <ClInclude Include="cCamera.h">
       <Filter>매니저</Filter>
     </ClInclude>
+    <ClInclude Include="cGridPlane.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="cCamera.cpp">
       <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cGridPlane.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
