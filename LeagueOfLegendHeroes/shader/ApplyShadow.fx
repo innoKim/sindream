@@ -119,7 +119,7 @@ float4 ShadowMapping_ApplyShadow_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
    
    float colorWeight = 1.0f * fLightWeight;
    
-   if (depth > shadowMapDepth + 0.0000125f)
+   if (depth > shadowMapDepth + 0.000001f)
    {
       colorWeight = 0.5f;
    }
@@ -141,7 +141,7 @@ float4 ShadowMapping_ApplyShadow_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
 
    float4 fvTotalAmbient   = fvAmbient * fvBaseColor; 
    float4 fvTotalDiffuse   = fvDiffuse * fNDotL * fvBaseColor; 
-   float4 fvTotalSpecular  = fvSpecular * pow( fRDotV, fSpecularPower ) * 0.5f;
+   float4 fvTotalSpecular  = fvSpecular * pow( fRDotV, fSpecularPower ) * 0.3f;
    
    return( saturate( fvTotalAmbient + fvTotalDiffuse + fvTotalSpecular ) * colorWeight );
 }

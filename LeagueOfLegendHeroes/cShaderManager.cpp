@@ -7,7 +7,7 @@ cShaderManager::cShaderManager()
 	, m_pCreateShadow(NULL)
 	, m_pShadowRenderTarget(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(-500, 500, -500, 1.0f)
+	, m_vLightPos(-100, 500, -100, 1.0f)
 	, m_sFolder("shader/")
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
@@ -67,7 +67,7 @@ void cShaderManager::BeginRender()
 	D3DXMatrixLookAtLH(&m_matLightView, &vEyePt, &vLookatPt, &vUpVec);
 
 	//광원-투영 행렬을 만든다
-	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 10000);
+	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3000);
 
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);

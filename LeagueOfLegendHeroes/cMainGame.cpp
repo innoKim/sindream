@@ -30,8 +30,8 @@ void cMainGame::Setup()
 	//m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
 	m_pScene->Setup();
 
-	m_pGrid = new cGridPlane;
-	m_pGrid->Setup(100,50);
+	//m_pGrid = new cGridPlane;
+	//m_pGrid->Setup(100,50);
 
 
 	g_pShaderManager->SetupShadow();
@@ -55,7 +55,7 @@ void cMainGame::Render()
 
 	g_pShaderManager->Render();
 	
-	m_pGrid->Render();
+	if (m_pGrid) m_pGrid->Render();
 
 
 	char str[256];
