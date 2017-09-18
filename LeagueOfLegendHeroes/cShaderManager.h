@@ -11,11 +11,11 @@ private:
 	SINGLETON(cShaderManager);
 
 private:
-	LPD3DXEFFECT				m_pApplyShadow;
-	LPD3DXEFFECT				m_pCreateShadow;
-	D3DXVECTOR4					m_vLightPos;
-	LPDIRECT3DTEXTURE9			m_pShadowRenderTarget;
-	LPDIRECT3DSURFACE9			m_pShadowDepthStencil;
+	LPD3DXEFFECT				m_pApplyShadow;				//2패스때 사용할 쉐이더
+	LPD3DXEFFECT				m_pCreateShadow;			//1패스때 사용할 쉐이더
+	D3DXVECTOR4					m_vLightPos;				//캐릭터를 기준으로 한 광원의 상대적 위치
+	LPDIRECT3DTEXTURE9			m_pShadowRenderTarget;		//1패스때 쉐도우맵 그리는데 사용할 렌더타겟
+	LPDIRECT3DSURFACE9			m_pShadowDepthStencil;		//
 	D3DXVECTOR4					m_vLightColor;
 	string						m_sFolder;
 	LPDIRECT3DSURFACE9			m_pHWBackBuffer;

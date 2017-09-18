@@ -1,21 +1,19 @@
 #include "StdAfx.h"
 #include "cCamera.h"
 
-cCamera::cCamera() :m_pvTarget(NULL), m_fDistanceFromTarget(0.0f), m_vCameraPos(0, 0, 0), m_vRotation(0, 0, 0), m_vRelativePos(0, 0, 0)
+cCamera::cCamera() 
+	: m_pvTarget(NULL)
+	, m_fDistanceFromTarget(200.0f)
+	, m_vCameraPos(0, 0, 0)
+	, m_vRotation(0.5f, 0, 0)
+	, m_vRelativePos(0, 0, 0)
 {
-	Setup();
+	D3DXMatrixIdentity(&m_mLookAtLH);
+	D3DXMatrixIdentity(&m_mPerspectiveFovLH);
 }
 
 cCamera::~cCamera()
 {
-}
-
-void cCamera::Setup()
-{
-	m_fDistanceFromTarget = 200.0f;
-	m_vRotation.x = 0.5f;
-	D3DXMatrixIdentity(&m_mLookAtLH);
-	D3DXMatrixIdentity(&m_mPerspectiveFovLH);
 }
 
 void cCamera::Destroy()

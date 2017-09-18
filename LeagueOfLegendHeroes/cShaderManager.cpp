@@ -98,19 +98,6 @@ void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture,
 
 		pMesh->DrawSubset(0);
 
-		//if (m_pvecMap)
-		//{
-		//	m_pCreateShadow->SetMatrix("matWorld", &m_matWorldGround);
-
-		//	for (int k = 0; k < m_pvecMap->size(); k++)
-		//	{
-		//		m_pCreateShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
-		//		m_pCreateShadow->CommitChanges();
-
-		//		(*m_pvecMap)[k]->GetMesh()->DrawSubset(0);
-		//	}
-		//}
-
 		m_pCreateShadow->EndPass();
 	}
 
