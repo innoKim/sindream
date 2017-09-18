@@ -31,5 +31,7 @@ public:
 
 	set<cPhysics*>* GetSet() { return &m_setPhysicsObj; }
 	set<cRigidbody*>* GetRigidbodySet() { return &m_setRigidbody; }
+
+	set<cPhysics*> GetTargets(D3DXVECTOR3 posision, float radius);
 };
 

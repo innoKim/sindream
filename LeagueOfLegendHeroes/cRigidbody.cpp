@@ -4,6 +4,7 @@
 
 cRigidbody::cRigidbody():
 	m_pvPos(NULL),
+	m_pvDir(NULL),
 	m_fRadius(0.0f),
 	m_vElasticFactor(0.5f),
 	m_bIsActivate(true),

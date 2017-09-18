@@ -4,9 +4,7 @@
 
 cSkinnedMesh::cSkinnedMesh():
 	m_pRoot(NULL),
-	m_pAnimController(NULL),
-	m_pfnCallBack(NULL),
-	m_pCallBackObj(NULL)
+	m_pAnimController(NULL)
 {
 }
 
@@ -24,10 +22,17 @@ void cSkinnedMesh::Setup(const char * filePath)
 	SetupBoneMatrixPtrs(m_pRoot);
 }
 
-void cSkinnedMesh::SetCallBack(CALLBACKFUNC CallBackFunction, void * Obj)
+void cSkinnedMesh::SetCallBack(CALLBACKFUNC CallBackFunction, void * Obj, float time)
 {
-	m_pfnCallBack = CallBackFunction;
-	m_pCallBackObj = Obj;
+	if (!CallBackFunction) return;
+
+	ST_CallbackInfo newCallback;
+
+	newCallback.fTime = time;
+	newCallback.pCallBackObj = Obj;
+	newCallback.pfnCallBack = CallBackFunction;
+
+	m_vecCallbackInfo.push_back(newCallback);	
 }
 
 void cSkinnedMesh::Update()
@@ -42,10 +47,27 @@ void cSkinnedMesh::Update()
 
 	m_pAnimController->GetTrackAnimationSet(0, &m_pAnimSet);
 
-	if (m_pAnimController->GetTime()>m_pAnimSet->GetPeriod() && m_pfnCallBack)
+	for each (auto cb in m_vecCallbackInfo)
 	{
-		m_pfnCallBack(m_pCallBackObj);
-		m_pAnimController->ResetTime();
+		int a = 0;
+
+		if (!cb.pfnCallBack) continue;
+
+		if (cb.fTime < FLT_EPSILON)
+		{
+			if (m_pAnimController->GetTime()>m_pAnimSet->GetPeriod())
+			{
+				cb.pfnCallBack(cb.pCallBackObj);
+				m_pAnimController->ResetTime();
+			}
+		}
+		else
+		{
+			if (m_pAnimController->GetTime()>cb.fTime&&m_pAnimController->GetTime()<cb.fTime+g_pTimeManager->GetElapsedTime())
+			{
+				cb.pfnCallBack(cb.pCallBackObj);
+			}
+		}
 	}
 }
 

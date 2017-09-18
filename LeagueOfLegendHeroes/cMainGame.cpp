@@ -33,8 +33,8 @@ void cMainGame::Setup()
 
 	m_pScene->Setup();
 
-	//m_pGrid = new cGridPlane;
-	//m_pGrid->Setup(100,50);
+	m_pGrid = new cGridPlane;
+	m_pGrid->Setup(100,50);
 
 	g_pShaderManager->SetupShadow();
 }

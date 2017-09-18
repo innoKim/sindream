@@ -2,6 +2,7 @@
 #include "cPhysicsManager.h"
 #include "cRigidbodyCollision.h"
 #include "cRigidbody.h"
+#include "cPhysics.h"
 
 cPhysicsManager::cPhysicsManager()
 {
@@ -130,6 +131,20 @@ void cPhysicsManager::RigidbodyUpdate()
 	{
 		p->Update(g_pTimeManager->GetElapsedTime());
 	}
+}
+
+set<cPhysics*> cPhysicsManager::GetTargets(D3DXVECTOR3 position, float radius)
+{
+	set<cPhysics*> setTarget;
+
+	for each (auto p in m_setPhysicsObj)
+	{
+		if (D3DXVec3Length(&(*p->GetPositionPtr() - position)) < radius)
+		{
+			setTarget.insert(p);
+		}
+	}
+	return setTarget;
 }
 
 void cPhysicsManager::ClearOverlapped(cRigidbody * obj1, cRigidbody * obj2, cRigidbodyCollision * collision)

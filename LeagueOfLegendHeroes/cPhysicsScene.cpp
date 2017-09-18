@@ -44,10 +44,10 @@ void cPhysicsScene::Setup()
 {
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
-	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" ,NULL,NULL });
-	temp.push_back({ STATE_RUN, "unit/AlistarRun.x",NULL,NULL });
-	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",AlistarSpell1CallBack,m_pPlayer });
-	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",AlistarSpell2CallBack,m_pPlayer });
+	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x"});
+	temp.push_back({ STATE_RUN, "unit/AlistarRun.x"});
+	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell1CallBack2,m_pPlayer)});
+	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",{0.0f,AlistarSpell2CallBack,m_pPlayer}});
 	m_pPlayer->Setup(temp);
 	m_pPlayer->SetPosition(D3DXVECTOR3(-100, 0, 0));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
@@ -86,7 +86,7 @@ void cPhysicsScene::Update()
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
 	{
-		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(200, 1000, 0));
+		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(100, 500, 0));
 	}
 
 	g_pPhysicsManager->RigidbodyUpdate();
@@ -105,9 +105,25 @@ void cPhysicsScene::Render()
 void cPhysicsScene::AlistarSpell1CallBack(void *CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
-
+	
 	Alistar->SetState(STATE_IDLE);
 }
+
+
+void cPhysicsScene::AlistarSpell1CallBack2(void *CallBackObj)
+{
+	cUnit* Alistar = (cUnit*)CallBackObj;
+
+	set<cPhysics*> targets = g_pPhysicsManager->GetTargets(Alistar->GetPosition(), 100);
+
+	for each (auto target in targets)
+	{
+		target->SetAcceleration(D3DXVECTOR3(0, 0, 0));
+		target->SetVelocity(target->GetVelocity() + D3DXVECTOR3(rand() % 100-50, 700, rand() % 100-50));
+		target->SetAngularVelocity(D3DXVECTOR3(rand()%20-10, rand() % 20 - 10, rand() % 20 - 10));
+	}
+}
+
 
 void cPhysicsScene::AlistarSpell2CallBack(void * CallBackObj)
 {

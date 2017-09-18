@@ -33,7 +33,8 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
 		cSkinnedMesh* newState = new cSkinnedMesh;
 		newState->Setup(statesVector[i].fileName);
 		m_mapStates[statesVector[i].state] = newState;
-		newState->SetCallBack(statesVector[i].callbackFunc, statesVector[i].callbackObj);
+		newState->SetCallBack(statesVector[i].cbInfo1.pfnCallBack, statesVector[i].cbInfo1.pCallBackObj, statesVector[i].cbInfo1.fTime);
+		newState->SetCallBack(statesVector[i].cbInfo2.pfnCallBack, statesVector[i].cbInfo2.pCallBackObj, statesVector[i].cbInfo2.fTime);
 	}
 	SetState(STATE_IDLE);
 
@@ -44,6 +45,7 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
 	
 	m_pPhysics = new cPhysics;
 	m_pPhysics->SetPositionPtr(&m_vPos);
+	m_pPhysics->SetDirectionPtr(&m_vDir);
 	m_pPhysics->SetRadius(15.0f);
 	m_pPhysics->Setup();
 }

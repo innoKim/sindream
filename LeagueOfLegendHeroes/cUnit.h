@@ -1,8 +1,9 @@
 #pragma once
 
-class cSkinnedMesh;
 class cPhysics;
 class cRigidbody;
+
+#include "cSkinnedMesh.h"
 
 enum eSTATE
 {
@@ -19,8 +20,8 @@ struct ST_UNITLOADINFO
 {
 	eSTATE			state;
 	const char*		fileName;
-	CALLBACKFUNC	callbackFunc;
-	void*			callbackObj;
+	ST_CallbackInfo cbInfo1;
+	ST_CallbackInfo cbInfo2;
 };
 
 
