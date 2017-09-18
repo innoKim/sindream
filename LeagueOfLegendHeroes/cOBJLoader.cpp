@@ -93,8 +93,15 @@ void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecG
 	fclose(fp);
 }
 
-void cOBJLoader::LoadSur(IN char * Filepath, OUT vector<ST_PC_VERTEX> &vecSur, vector<ST_PC_VERTEX> &vecGrid)
+void cOBJLoader::LoadSur(IN char * Filepath, OUT vector<ST_PC_VERTEX> &vecSur, vector<stGrid> & vecGrid)
 {
+	CreateGrid();
+
+	for (int i = 0; i < 25; i++)
+	{
+		vecGrid.push_back(m_stGrid[i]);
+	}
+
 	FILE* fp = 0;
 	fopen_s(&fp, Filepath, "r");
 	
@@ -124,22 +131,69 @@ void cOBJLoader::LoadSur(IN char * Filepath, OUT vector<ST_PC_VERTEX> &vecSur, v
 			if (x < minX) minX = x;		 // 98.8951035  14521
 			if (-z > maxZ) maxZ = -z;	 // 14692.2109
 			if (-z < minZ) minZ = -z;	 // 132.755798  14561
-
 		}
 	}
 
-	for (int i = 0; i <= 5; i++)
+	for (int i = 0; i < 25; i++)
 	{
-		D3DXCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-
-		vecGrid.push_back(ST_PC_VERTEX(D3DXVECTOR3(0, 0, i * 2940), c));
-		vecGrid.push_back(ST_PC_VERTEX(D3DXVECTOR3(14700, 0, i * 2940), c));
-
-		vecGrid.push_back(ST_PC_VERTEX(D3DXVECTOR3(i * 2940, 0, 0), c));
-		vecGrid.push_back(ST_PC_VERTEX(D3DXVECTOR3(i * 2940, 0, 14700), c));
+		Collision(vecGrid[i], vecSur);
 	}
 
+	int a = 0;
+
 	fclose(fp);
+}
+
+void cOBJLoader::CreateGrid()
+{
+	for (int j = 0; j < 5; j++)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			m_stGrid[j * 5 + i].vecLT = D3DXVECTOR3((0.f + i * 3000.f) * RATIO,		 0.f,	(3000.f + j * 3000) * RATIO);
+			m_stGrid[j * 5 + i].vecRT = D3DXVECTOR3((3000.f + i * 3000.f) * RATIO,	 0.f,	(3000.f + j * 3000) * RATIO);
+			m_stGrid[j * 5 + i].vecLB = D3DXVECTOR3((0.f + i * 3000.f) * RATIO,		 0.f,	(0.f + j * 3000) * RATIO);
+			m_stGrid[j * 5 + i].vecRB = D3DXVECTOR3((3000.f + i * 3000.f) * RATIO,	 0.f,	(0.f + j * 3000) * RATIO);
+		}
+	}
+}
+
+void cOBJLoader::Collision(stGrid Grid, vector<ST_PC_VERTEX> vecSur)
+{
+	float fLeft = Grid.vecLT.x;
+	float fTop = Grid.vecLT.z;
+	float fRight = Grid.vecRB.x;
+	float fBottom = Grid.vecRB.z;
+
+	RECT rc = { fLeft, fTop, fRight, fBottom };
+
+	for (int i = 0; i < vecSur.size(); i+=3)
+	{
+		POINT pt0 = { vecSur[i].p.x, vecSur[i].p.z };
+		POINT pt1 = { vecSur[i+1].p.x, vecSur[i+1].p.z };
+		POINT pt2 = { vecSur[i+2].p.x, vecSur[i+2].p.z };
+
+		if (PtInRect(&rc, pt0))
+		{
+			Grid.vecVertex.push_back(vecSur[i].p);
+			Grid.vecVertex.push_back(vecSur[i+1].p);
+			Grid.vecVertex.push_back(vecSur[i+2].p);
+		}
+
+		if (PtInRect(&rc, pt1))
+		{
+			Grid.vecVertex.push_back(vecSur[i - 1].p);
+			Grid.vecVertex.push_back(vecSur[i].p);
+			Grid.vecVertex.push_back(vecSur[i + 1].p);
+		}
+			
+		if (PtInRect(&rc, pt2))
+		{
+			Grid.vecVertex.push_back(vecSur[i - 2].p);
+			Grid.vecVertex.push_back(vecSur[i - 1].p);
+			Grid.vecVertex.push_back(vecSur[i].p);
+		}
+	}
 }
 
 void cOBJLoader::LoadMtl(IN char* Folder, IN char * FilePath, OUT map<string, cMtlTex*>& mapMtlTex)

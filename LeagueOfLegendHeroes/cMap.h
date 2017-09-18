@@ -10,7 +10,7 @@ private:
 	LPD3DXMESH						m_pMesh;
 	vector<cGroup*>					m_vecMap;
 	vector<ST_PC_VERTEX>			m_vecSur;
-	vector<ST_PC_VERTEX>			m_vecGrid;
+	vector<stGrid>					m_vecGrid;
 	map<string, cMtlTex*>			m_mapMtlTex;
 	map<string, cMtlTex*>::iterator	m_iterMtlTex;
 	vector<cMtlTex*>				m_vecMtlTex;
