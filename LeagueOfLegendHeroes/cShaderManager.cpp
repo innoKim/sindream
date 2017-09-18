@@ -1,18 +1,18 @@
 #include "stdafx.h"
 #include "cShaderManager.h"
 #include "cGroup.h"
+#include "cMtlTex.h"
 
 cShaderManager::cShaderManager()
 	: m_pApplyShadow(NULL)
 	, m_pCreateShadow(NULL)
 	, m_pShadowRenderTarget(NULL)
+	, m_pShadowDepthStencil(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
 	, m_vLightPos(-100, 500, -100, 1.0f)
-	, m_sFolder("shader/")
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
-	, m_pvecMap(NULL)
 {
 }
 
@@ -21,18 +21,30 @@ cShaderManager::~cShaderManager()
 {
 }
 
+void cShaderManager::Destroy()
+{
+	SAFE_RELEASE(m_pShadowRenderTarget);
+	SAFE_RELEASE(m_pApplyShadow);
+	SAFE_RELEASE(m_pCreateShadow);
+	SAFE_RELEASE(m_pShadowDepthStencil);
+}
+
 void cShaderManager::SetupShadow()
 {
 	m_pCreateShadow = LoadEffect("shader/CreateShadow.fx");
 
 	m_pApplyShadow = LoadEffect("shader/ApplyShadow.fx");
 
+	//쉐도우 맵 가로, 세로 사이즈
 	const int shadowMapSize = 8192;
 
+	//렌더타겟 변수에 쉐도우 맵 생성
 	g_pD3DDevice->CreateTexture(shadowMapSize, shadowMapSize, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R32F, D3DPOOL_DEFAULT, &m_pShadowRenderTarget, NULL);
 
+	//쉐도우 맵에서 사용될 깊이 버퍼 생성
 	g_pD3DDevice->CreateDepthStencilSurface(shadowMapSize, shadowMapSize, D3DFMT_D24X8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_pShadowDepthStencil, NULL);
 
+	//알파테스트 설정, 알파값이 0인 경우 그리지 않는다
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0);
@@ -83,12 +95,14 @@ void cShaderManager::BeginRender()
 
 void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture, D3DXMATRIXA16 matWorld)
 {
+	//2패스 렌더링을 위해 벡터에 메쉬와 텍스처, 월드 매트릭스들을 저장
 	m_vecMesh.push_back(pMesh);
 	m_vecTexture.push_back(pTexture);
 	m_vecMatWorld.push_back(matWorld);
 
 	m_pCreateShadow->SetMatrix("matWorld", &matWorld);
 
+	//현재 렌더 타겟은 쉐도우 맵, 쉐도우 맵에 광원 위치에서 본 오브젝트의 모양을 그린다
 	UINT numPasses = 0;
 	m_pCreateShadow->Begin(&numPasses, NULL);
 
@@ -97,19 +111,6 @@ void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture,
 		m_pCreateShadow->BeginPass(i);
 
 		pMesh->DrawSubset(0);
-
-		//if (m_pvecMap)
-		//{
-		//	m_pCreateShadow->SetMatrix("matWorld", &m_matWorldGround);
-
-		//	for (int k = 0; k < m_pvecMap->size(); k++)
-		//	{
-		//		m_pCreateShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
-		//		m_pCreateShadow->CommitChanges();
-
-		//		(*m_pvecMap)[k]->GetMesh()->DrawSubset(0);
-		//	}
-		//}
 
 		m_pCreateShadow->EndPass();
 	}
@@ -120,9 +121,11 @@ void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture,
 void cShaderManager::Render()
 {
 	//2. 그림자 입히기
+	//렌더 타겟을 원래의 하드웨어 백버퍼와 깊이 버퍼로 교체
 	g_pD3DDevice->SetRenderTarget(0, m_pHWBackBuffer);
 	g_pD3DDevice->SetDepthStencilSurface(m_pHWDepthStencilBuffer);
 
+	//더 이상 사용하지 않는 임시 변수 메모리 해제
 	SAFE_RELEASE(m_pHWBackBuffer);
 	SAFE_RELEASE(m_pHWDepthStencilBuffer);
 
@@ -131,8 +134,10 @@ void cShaderManager::Render()
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
 
+	//뷰-투영 매트릭스
 	m_matViewProjection = matView * matProjection;
 
+	//2패스 렌더링에 필요한 각종 변수 설정
 	m_pApplyShadow->SetMatrix("matLightView", &m_matLightView);
 	m_pApplyShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 	m_pApplyShadow->SetMatrix("matViewProjection", &m_matViewProjection);
@@ -140,6 +145,7 @@ void cShaderManager::Render()
 	m_pApplyShadow->SetVector("vLightPos", &D3DXVECTOR4(m_pvTarget->x + m_vLightPos.x, m_pvTarget->y + m_vLightPos.y, m_pvTarget->z + m_vLightPos.z, 1));
 	m_pApplyShadow->SetVector("vCameraPos", &D3DXVECTOR4(g_pCamera->GetPos(), 1.0f));
 
+	//그림자 그리는데 필요한 쉐도우 맵 렌더타겟 설정
 	m_pApplyShadow->SetTexture("ShadowMap_Tex", m_pShadowRenderTarget);
 
 	UINT numPasses = 0;
@@ -149,38 +155,28 @@ void cShaderManager::Render()
 	{
 		m_pApplyShadow->BeginPass(i);
 		
+		//1패스때 저장한 메쉬들 각각의 월드 매트릭스와 텍스처를 통하여 그림자가 입혀진 상태로 렌더링
 		for (int j = 0; j < m_vecMesh.size(); j++)
 		{
 			m_pApplyShadow->SetMatrix("matWorld", &m_vecMatWorld[j]);
-			m_pApplyShadow->CommitChanges();
-
 			m_pApplyShadow->SetTexture("DiffuseMap_Tex", m_vecTexture[j]);
 			m_pApplyShadow->CommitChanges();
 
 			m_vecMesh[j]->DrawSubset(0);
 		}
 
+		//각 오브젝트들의 그림자가 입혀진 바닥 맵 렌더링
 		if (m_pMeshGround)
 		{
 			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldGround);
-			m_pApplyShadow->SetBool("bTexture", false);
 
-			m_pApplyShadow->CommitChanges();
-
-			m_pMeshGround->DrawSubset(0);
-		}
-
-		if (m_pvecMap)
-		{
-			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldGround);
-
-			for (int k = 0; k < m_pvecMap->size(); k++)
+			for (int k = 0; k < m_vecMtlTex.size(); k++)
 			{
 				m_pApplyShadow->SetFloat("fLightWeight", 2.0f);
-				m_pApplyShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
+				m_pApplyShadow->SetTexture("DiffuseMap_Tex", m_vecMtlTex[k]->GetTexture());
 				m_pApplyShadow->CommitChanges();
 
-				(*m_pvecMap)[k]->GetMesh()->DrawSubset(0);
+				m_pMeshGround->DrawSubset(k);
 			}
 		}
 
@@ -194,14 +190,6 @@ void cShaderManager::Render()
 	m_vecMatWorld.clear();
 }
 
-void cShaderManager::Destroy()
-{
-	SAFE_RELEASE(m_pShadowRenderTarget);
-	SAFE_RELEASE(m_pApplyShadow);
-	SAFE_RELEASE(m_pCreateShadow);
-	SAFE_RELEASE(m_pShadowDepthStencil);
-}
-
 void cShaderManager::SetPlane(LPD3DXMESH pMesh, D3DXMATRIXA16 matWorld)
 {
 	m_pMeshGround = pMesh;
@@ -209,11 +197,13 @@ void cShaderManager::SetPlane(LPD3DXMESH pMesh, D3DXMATRIXA16 matWorld)
 	m_matWorldGround = matWorld;
 }
 
-void cShaderManager::SetMap(vector<cGroup*>* pvecMap, D3DXMATRIXA16 matWorldGround)
+void cShaderManager::SetMap(LPD3DXMESH pMesh, vector<cMtlTex*> vecMtlTex, D3DXMATRIXA16 matWorldGround)
 {
-	m_pvecMap = pvecMap; 
+	m_pMeshGround = pMesh;
 	m_matWorldGround = matWorldGround;
+	m_vecMtlTex = vecMtlTex;
 }
+
 LPD3DXEFFECT cShaderManager::LoadEffect(char * szFileName)
 {
 	LPD3DXEFFECT pEffect = NULL;

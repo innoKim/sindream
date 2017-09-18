@@ -18,7 +18,7 @@ void cDebugManager::Setup()
 	ZeroMemory(&DXFont_DESC, sizeof(D3DXFONT_DESC));
 
 	DXFont_DESC.Height = 15;
-	DXFont_DESC.Width = 15;
+	DXFont_DESC.Width = 7;
 	DXFont_DESC.Weight = FW_NORMAL;
 	DXFont_DESC.MipLevels = D3DX_DEFAULT;
 	DXFont_DESC.Italic = false;
