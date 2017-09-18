@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cUnit.h"
 #include "cSkinnedMesh.h"
+//#include "cRigidbody.h"
 #include "cPhysics.h"
 
 void cUnit::Destroy()
@@ -9,12 +10,14 @@ void cUnit::Destroy()
 	{
 		SAFE_DELETE(p.second);
 	}
+	//SAFE_DELETE(m_pRigidbody);
 	SAFE_DELETE(m_pPhysics);
 }
 
 cUnit::cUnit() :
 	m_vPos(0, 0, 0),
 	m_vDir(0, 0, -1),
+	//m_pRigidbody(NULL)
 	m_pPhysics(NULL)
 {
 }
@@ -34,6 +37,11 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
 	}
 	SetState(STATE_IDLE);
 
+	/*m_pRigidbody = new cRigidbody;
+	m_pRigidbody->SetPositionPtr(&m_vPos);
+	m_pRigidbody->SetDirectionPtr(&m_vDir);
+	m_pRigidbody->SetRadius(15.0f);*/
+	
 	m_pPhysics = new cPhysics;
 	m_pPhysics->SetPositionPtr(&m_vPos);
 	m_pPhysics->SetRadius(15.0f);
@@ -43,7 +51,7 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
 void cUnit::Update()
 {
 	m_pCurState->Update();
-	m_pPhysics->Update();
+	m_pPhysics->Update(g_pTimeManager->GetElapsedTime());
 }
 
 void cUnit::Render()

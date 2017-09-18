@@ -6,6 +6,7 @@
 #include "cPlayer.h"
 #include "cEnemy.h"
 #include "cPhysics.h"
+#include "cRigidbody.h"
 
 #include "cPlane.h"
 
@@ -68,6 +69,7 @@ void cPhysicsScene::Setup()
 
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
+	//m_pPlayer->GetRigidbody()->SetIsActivate(false);
 	///요기까지 물리
 
 	SetLight();
@@ -84,8 +86,10 @@ void cPhysicsScene::Update()
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
 	{
-		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(5, 30, 0));
+		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(200, 1000, 0));
 	}
+
+	g_pPhysicsManager->RigidbodyUpdate();
 }
 
 void cPhysicsScene::Render()

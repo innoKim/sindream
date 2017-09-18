@@ -23,13 +23,12 @@ void cPhysics::Setup()
 {
 }
 
-void cPhysics::Update()
+void cPhysics::Update(float deltaTime)
 {
-	m_fRestDuration += g_pTimeManager->GetElapsedTime();
+	m_fRestDuration += deltaTime;
 
 	ColisionWith(*g_pPhysicsManager->GetSet());
-
-
+	
 	if (!m_bIsActivate) return;
 	if ((*m_pvPos).y>10.0f) m_vAcceleration.y += PHYSICS_GRAVITY;
 
@@ -39,8 +38,8 @@ void cPhysics::Update()
 	}
 
 	m_vVelocity *= 0.98f;
-	m_vVelocity	+= m_vAcceleration;
-	(*m_pvPos) += m_vVelocity;
+	m_vVelocity	+= m_vAcceleration*deltaTime;
+	(*m_pvPos) += m_vVelocity*deltaTime;
 }
 
 bool cPhysics::ColisionWith(set<cPhysics*> setVersusObject)

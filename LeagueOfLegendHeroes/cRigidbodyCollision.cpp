@@ -9,20 +9,22 @@ cRigidbodyCollision::cRigidbodyCollision()
 
 cRigidbodyCollision::cRigidbodyCollision(cRigidbody * object1, cRigidbody * object2)
 {
+	m_pObj1 = object1;
+	m_pObj2 = object2;
 }
 
 cRigidbodyCollision::~cRigidbodyCollision()
 {
 }
 
-eCollisionState cRigidbodyCollision::CollisionOccurred()
+eCollisionState cRigidbodyCollision::FindCollisionState()
 {
 	eCollisionState result = COLLISION_NONE;
 
-	//두 구체 사이의 틈 거리 (중점의 거리가 아닌 표면들 사이의 최소거리)
-	float dist = fabs(D3DXVec3Length(&((*m_pObj1->GetPositionPtr()) - (*m_pObj1->GetPositionPtr()))) - m_pObj1->GetRadius() - m_pObj1->GetRadius());
+	//두 구체 사이의 거리
+	float dist = D3DXVec3Length(&((*m_pObj1->GetPositionPtr()) - (*m_pObj2->GetPositionPtr())));
 	
-	if (dist < EPSILON_COLLISION)
+	if (dist - m_pObj1->GetRadius() - m_pObj2->GetRadius()< EPSILON_COLLISION)
 	{
 		result = COLLISION_CONTACT;
 	}
@@ -95,6 +97,9 @@ bool cRigidbodyCollision::CalculateReaction()
 	//최종적인 힘
 	m_pObj1->GetForce().force += f;
 	m_pObj2->GetForce().force -= f;
+
+	if (m_pObj1->GetIsActivate())	*m_pObj1->GetPositionPtr() = *m_pObj1->GetPositionPtr() + n / 2;
+	if (m_pObj2->GetIsActivate())	*m_pObj2->GetPositionPtr() = *m_pObj2->GetPositionPtr() - n / 2;
 
 	return true;
 }

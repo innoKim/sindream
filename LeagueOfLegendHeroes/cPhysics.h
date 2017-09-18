@@ -1,6 +1,6 @@
 #pragma once
 
-#define PHYSICS_GRAVITY -0.01f
+#define PHYSICS_GRAVITY -10.0f
 
 class cPhysics
 {
@@ -23,7 +23,7 @@ public:
 	virtual ~cPhysics();
 
 	void Setup();
-	void Update();
+	void Update(float deltaTime);
 	bool ColisionWith(set<cPhysics*> setVersusObject);
 
 	float GetVelocityScalar() { return D3DXVec3Length(&m_vVelocity); }
