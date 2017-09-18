@@ -3,6 +3,7 @@
 #define g_pShaderManager cShaderManager::GetInstance()
 
 class cGroup;
+class cMtlTex;
 
 class cShaderManager
 {
@@ -28,7 +29,7 @@ private:
 	D3DXMATRIXA16				m_matLightProjection;
 	D3DXMATRIXA16				m_matViewProjection;
 	D3DXVECTOR3*				m_pvTarget;
-	vector<cGroup*>*			m_pvecMap;
+	vector<cMtlTex*>			m_vecMtlTex;
 
 public:
 	void BeginRender();
@@ -37,7 +38,7 @@ public:
 	void Render();
 	void Destroy();
 	void SetPlane(LPD3DXMESH pMesh, D3DXMATRIXA16 matWorld);
-	void SetMap(vector<cGroup*>* pvecMap, D3DXMATRIXA16 matWorldGround);
+	void SetMap(LPD3DXMESH pMesh, vector<cMtlTex*> vecMtlTex, D3DXMATRIXA16 matWorldGround);
 	void SetTarget(D3DXVECTOR3* pvTarget) { m_pvTarget = pvTarget; }
 
 private:

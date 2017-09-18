@@ -13,7 +13,7 @@ cOBJLoader::~cOBJLoader()
 {
 }
 
-void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecGroup)
+void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecGroup, OUT map<string, cMtlTex*>& mapMtlTex)
 {
 	vector<D3DXVECTOR3>		vecP;
 	vector<D3DXVECTOR2>		vecT;
@@ -40,53 +40,21 @@ void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecG
 		{
 			char szPath[1024] = { '\0', };
 			sscanf_s(szBuf, "%*s %s", szPath, 1024);
-			LoadMtl(Folder, szPath);
+			LoadMtl(Folder, szPath, mapMtlTex);
 		}
 
 		else if (szBuf[0] == 'g')
 		{
 			if (!vecVertex.empty())
 			{
-				LPD3DXMESH pMesh;
-				D3DXCreateMeshFVF(vecVertex.size() / 3, vecVertex.size(), D3DXMESH_MANAGED, ST_PT_VERTEX::FVF, g_pD3DDevice, &pMesh);
-
-				ST_PT_VERTEX* vb = NULL;
-				pMesh->LockVertexBuffer(0, (LPVOID*)&vb);
-
-				for (int i = 0; i < vecVertex.size(); i++)
-				{
-					vb[i] = vecVertex[i];
-				}
-
-				pMesh->UnlockVertexBuffer();
-
-				WORD* ib = NULL;
-				pMesh->LockIndexBuffer(0, (LPVOID*)&ib);
-
-				for (int i = 0; i < vecVertex.size(); i++)
-				{
-					ib[i] = i;
-				}
-
-				pMesh->UnlockIndexBuffer();
-
-				vector<DWORD> adjagencyInfo(pMesh->GetNumFaces() * 3);
-				pMesh->GenerateAdjacency(0.0f, &adjagencyInfo[0]);
-
-				pMesh->OptimizeInplace(D3DXMESHOPT_COMPACT | D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_VERTEXCACHE,
-					&adjagencyInfo[0], NULL, 0, 0);
-
 				cGroup* pGroup = new cGroup;
-				//pGroup->SetVertex(vecVertex);
+				pGroup->SetVertex(vecVertex);
 				vecGroup.push_back(pGroup);
 				vecVertex.clear();
-				pGroup->SetMesh(pMesh);
-				pGroup->SetMtlTex(m_mapMtl[szMtl]);
+				pGroup->SetMtlTex(mapMtlTex[szMtl]);
 				D3DXMATRIXA16 matW;
 				D3DXMatrixRotationX(&matW, -D3DX_PI / 2.0f);
 				pGroup->SetWorld(matW);
-
-				SAFE_RELEASE(pMesh);
 			}
 		}
 
@@ -120,11 +88,6 @@ void cOBJLoader::Load(IN char* Folder, char* FilePath, OUT vector<cGroup*>& vecG
 				vecVertex.push_back(ST_PT_VERTEX(p, t));
 			}
 		}
-	}
-
-	for each(auto p in m_mapMtl)
-	{
-		SAFE_RELEASE(p.second);
 	}
 
 	fclose(fp);
@@ -179,7 +142,7 @@ void cOBJLoader::LoadSur(IN char * Filepath, OUT vector<ST_PC_VERTEX> &vecSur, v
 	fclose(fp);
 }
 
-void cOBJLoader::LoadMtl(char* Folder, char * FilePath)
+void cOBJLoader::LoadMtl(IN char* Folder, IN char * FilePath, OUT map<string, cMtlTex*>& mapMtlTex)
 {
 	string szFolder = Folder;
 	string szFile = FilePath;
@@ -202,12 +165,12 @@ void cOBJLoader::LoadMtl(char* Folder, char * FilePath)
 		{
 			sscanf_s(szBuf, "%*s %s", szMtlName, 1024);
 
-			m_mapMtl[szMtlName] = new cMtlTex;
+			mapMtlTex[szMtlName] = new cMtlTex;
 		}
 
 		else if (szBuf[0] == 'K')
 		{
-			D3DMATERIAL9& stMtl = m_mapMtl[szMtlName]->GetMtl();
+			D3DMATERIAL9& stMtl = mapMtlTex[szMtlName]->GetMtl();
 
 			float r, g, b;
 
@@ -235,7 +198,7 @@ void cOBJLoader::LoadMtl(char* Folder, char * FilePath)
 			string szFileName(szTexPath);
 			string szFullPath = Folder + szFileName;
 			LPDIRECT3DTEXTURE9 pTex = g_pTextureManager->GetTexture(szFullPath.c_str());
-			m_mapMtl[szMtlName]->SetTexture(pTex);
+			mapMtlTex[szMtlName]->SetTexture(pTex);
 		}
 	}
 

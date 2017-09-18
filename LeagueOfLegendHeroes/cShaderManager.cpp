@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cShaderManager.h"
 #include "cGroup.h"
+#include "cMtlTex.h"
 
 cShaderManager::cShaderManager()
 	: m_pApplyShadow(NULL)
@@ -12,7 +13,6 @@ cShaderManager::cShaderManager()
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
-	, m_pvecMap(NULL)
 {
 }
 
@@ -163,24 +163,14 @@ void cShaderManager::Render()
 		if (m_pMeshGround)
 		{
 			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldGround);
-			m_pApplyShadow->SetBool("bTexture", false);
 
-			m_pApplyShadow->CommitChanges();
-
-			m_pMeshGround->DrawSubset(0);
-		}
-
-		if (m_pvecMap)
-		{
-			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldGround);
-
-			for (int k = 0; k < m_pvecMap->size(); k++)
+			for (int k = 0; k < m_vecMtlTex.size(); k++)
 			{
 				m_pApplyShadow->SetFloat("fLightWeight", 2.0f);
-				m_pApplyShadow->SetTexture("DiffuseMap_Tex", (*m_pvecMap)[k]->GetMtlTex()->GetTexture());
+				m_pApplyShadow->SetTexture("DiffuseMap_Tex", m_vecMtlTex[k]->GetTexture());
 				m_pApplyShadow->CommitChanges();
 
-				(*m_pvecMap)[k]->GetMesh()->DrawSubset(0);
+				m_pMeshGround->DrawSubset(k);
 			}
 		}
 
@@ -209,11 +199,13 @@ void cShaderManager::SetPlane(LPD3DXMESH pMesh, D3DXMATRIXA16 matWorld)
 	m_matWorldGround = matWorld;
 }
 
-void cShaderManager::SetMap(vector<cGroup*>* pvecMap, D3DXMATRIXA16 matWorldGround)
+void cShaderManager::SetMap(LPD3DXMESH pMesh, vector<cMtlTex*> vecMtlTex, D3DXMATRIXA16 matWorldGround)
 {
-	m_pvecMap = pvecMap; 
+	m_pMeshGround = pMesh;
 	m_matWorldGround = matWorldGround;
+	m_vecMtlTex = vecMtlTex;
 }
+
 LPD3DXEFFECT cShaderManager::LoadEffect(char * szFileName)
 {
 	LPD3DXEFFECT pEffect = NULL;

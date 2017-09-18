@@ -224,13 +224,13 @@
     <ClCompile Include="cPhysicsManager.cpp">
       <Filter>매니저</Filter>
     </ClCompile>
-    <ClCompile Include="cGroup.cpp">
-      <Filter>헤더 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cRigidbody.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cRigidbodyCollision.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cGroup.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

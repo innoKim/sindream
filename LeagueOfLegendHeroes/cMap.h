@@ -7,17 +7,21 @@
 class cMap
 {
 private:
-	vector<cGroup*>			m_vecMap;
-	vector<ST_PC_VERTEX>	m_vecSur;
-	vector<ST_PC_VERTEX>	m_vecGrid;
+	LPD3DXMESH						m_pMesh;
+	vector<cGroup*>					m_vecMap;
+	vector<ST_PC_VERTEX>			m_vecSur;
+	vector<ST_PC_VERTEX>			m_vecGrid;
+	map<string, cMtlTex*>			m_mapMtlTex;
+	map<string, cMtlTex*>::iterator	m_iterMtlTex;
+	vector<cMtlTex*>				m_vecMtlTex;
 
-	D3DXMATRIX				m_matW, m_matS, m_matR, m_matT;
+	D3DXMATRIX						m_matW, m_matS, m_matR, m_matT;
 
-	RayInfo					m_stRay;
+	RayInfo							m_stRay;
 
-	HitInfo					m_stHit;
+	HitInfo							m_stHit;
 
-	float					m_fRayDist;
+	float							m_fRayDist;
 
 public:
 	cMap();
