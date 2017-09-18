@@ -9,7 +9,9 @@ cPhysics::cPhysics() :
 	m_vVelocity(0, 0, 0),
 	m_vElasticFactor(0.5f),
 	m_fRadius(0.0f),
-	m_fMass(1.0f)
+	m_fMass(1.0f),
+	m_pvDir(NULL),
+	m_vAngularVelocity(0, 0, 0)
 {
 	g_pPhysicsManager->AddToSet(this);
 }
@@ -23,24 +25,38 @@ void cPhysics::Setup()
 {
 }
 
-void cPhysics::Update()
+void cPhysics::Update(float deltaTime)
 {
-	m_fRestDuration += g_pTimeManager->GetElapsedTime();
+	m_fRestDuration += deltaTime;
 
 	ColisionWith(*g_pPhysicsManager->GetSet());
-
-
-	if (!m_bIsActivate) return;
-	if ((*m_pvPos).y>10.0f) m_vAcceleration.y += PHYSICS_GRAVITY;
-
-	else if ((*m_pvPos).y < 5.0f)
+	
+	if (!m_bIsActivate)
+	{
+		m_vVelocity = D3DXVECTOR3(0, 0, 0);
+		m_vAcceleration = D3DXVECTOR3(0, 0, 0);
+		return;
+	}
+	D3DXVECTOR3 Acc = m_vAcceleration;
+	
+	if ((*m_pvPos).y>1.0f) Acc.y += PHYSICS_GRAVITY;
+	
+	else if ((*m_pvPos).y < 1.0f)
 	{
 		m_vVelocity *= 0.9f;
+		m_vAngularVelocity *= 0.5f;
 	}
 
-	m_vVelocity *= 0.98f;
-	m_vVelocity	+= m_vAcceleration;
-	(*m_pvPos) += m_vVelocity;
+	m_vVelocity *= 0.99f;
+	
+	m_vVelocity	+= Acc*deltaTime;
+	(*m_pvPos) += m_vVelocity*deltaTime;
+
+	D3DXMATRIXA16 rotx, roty, rotz;
+	D3DXMatrixRotationX(&rotx, m_vAngularVelocity.x*deltaTime);
+	D3DXMatrixRotationY(&roty, m_vAngularVelocity.y*deltaTime);
+	D3DXMatrixRotationZ(&rotz, m_vAngularVelocity.z*deltaTime);
+	D3DXVec3TransformNormal(m_pvDir, m_pvDir, &(rotx*roty*rotz));
 }
 
 bool cPhysics::ColisionWith(set<cPhysics*> setVersusObject)

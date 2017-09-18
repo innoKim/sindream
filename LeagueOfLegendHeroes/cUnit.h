@@ -1,7 +1,9 @@
 #pragma once
 
-class cSkinnedMesh;
 class cPhysics;
+class cRigidbody;
+
+#include "cSkinnedMesh.h"
 
 enum eSTATE
 {
@@ -18,8 +20,8 @@ struct ST_UNITLOADINFO
 {
 	eSTATE			state;
 	const char*		fileName;
-	CALLBACKFUNC	callbackFunc;
-	void*			callbackObj;
+	ST_CallbackInfo cbInfo1;
+	ST_CallbackInfo cbInfo2;
 };
 
 
@@ -33,6 +35,7 @@ protected:
 	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vPos, Position)
 	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vDir, Direction)
 	SYNTHESIZE(cPhysics*, m_pPhysics, Physics)
+//	SYNTHESIZE(cRigidbody*, m_pRigidbody, Rigidbody)
 
 	void Destroy();
 public:

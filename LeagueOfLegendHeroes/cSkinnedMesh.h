@@ -2,6 +2,16 @@
 
 #include "cAllocateHierachy.h"
 
+struct ST_CallbackInfo
+{
+	float						fTime;
+	CALLBACKFUNC				pfnCallBack;
+	void*						pCallBackObj;
+
+	ST_CallbackInfo() :fTime(0.0f), pfnCallBack(NULL), pCallBackObj(NULL) {};
+	ST_CallbackInfo(float time, CALLBACKFUNC cbfn = NULL, void* cbobj = NULL) { fTime = time, pfnCallBack = cbfn, pCallBackObj = cbobj; }
+};
+
 class cSkinnedMesh
 {
 private:
@@ -12,15 +22,14 @@ private:
 	LPD3DXANIMATIONCONTROLLER	m_pAnimController;
 	LPD3DXANIMATIONSET			m_pAnimSet;
 
-	CALLBACKFUNC				m_pfnCallBack;
-	void*						m_pCallBackObj;
-
+	vector<ST_CallbackInfo>	m_vecCallbackInfo;
+	
 public:
 	cSkinnedMesh();
 	~cSkinnedMesh();
 
 	void Setup(const char* filePath);
-	void SetCallBack(CALLBACKFUNC CallBackFunction, void* Obj);
+	void SetCallBack(CALLBACKFUNC CallBackFunction, void* Obj, float time);
 
 	void Update();
 	void Render(D3DXVECTOR3* Pos, D3DXVECTOR3* Dir);

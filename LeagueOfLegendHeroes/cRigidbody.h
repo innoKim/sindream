@@ -4,6 +4,8 @@ struct ST_FORCE
 {
 	D3DXVECTOR3 force = D3DXVECTOR3(0, 0, 0);
 	D3DXVECTOR3 pos = D3DXVECTOR3(0, 0, 0);
+
+	void Reset() { force = D3DXVECTOR3(0, 0, 0); pos = D3DXVECTOR3(0, 0, 0); }
 };
 
 class cRigidbody
@@ -33,6 +35,10 @@ public:
 	cRigidbody();
 	virtual ~cRigidbody();
 	
-	void Update();
+	void Update(float deltaTime);
+
+	//이번루프에 충돌이 됬느냐 검사 //충돌됬으면 충돌 안시킬꺼임
+	bool IsCollidedAtThisLoop() { return (m_fRestDuration>g_pTimeManager->GetElapsedTime()) ? false : true; }
+	void ResetRestDuration() { m_fRestDuration = 0.0f; }
 };
 

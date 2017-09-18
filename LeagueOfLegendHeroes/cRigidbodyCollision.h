@@ -23,7 +23,7 @@ public:
 	cRigidbodyCollision(cRigidbody* object1, cRigidbody* object2);
 	virtual ~cRigidbodyCollision();
 
-	eCollisionState CollisionOccurred();
+	eCollisionState FindCollisionState();
 	bool CalculateReaction();
 };
 

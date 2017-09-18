@@ -23,6 +23,7 @@ public:
 	virtual void Render() override;
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
+	static void AlistarSpell1CallBack2(void * CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
 };
 

@@ -24,10 +24,10 @@ void cTestScene::Setup()
 
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
-	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" ,NULL,NULL });
-	temp.push_back({ STATE_RUN, "unit/AlistarRun.x",NULL,NULL });
-	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",AlistarSpell1CallBack,m_pPlayer });
-	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",AlistarSpell2CallBack,m_pPlayer });
+	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
+	temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
+	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer)});
+	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",{ 0.0f,AlistarSpell2CallBack,m_pPlayer } });
 	m_pPlayer->Setup(temp);
 
 	m_pPlayer->SetPosition(D3DXVECTOR3(0.f, 0.f, 0.f));
