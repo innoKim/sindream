@@ -31,7 +31,7 @@ private:
 	vector<cMtlTex*>			m_vecMtlTex;				//맵에 적용될 텍스처
 	LPDIRECT3DCUBETEXTURE9		m_pCubeTexture;				//스카이박스로 사용될 큐브 텍스처
 	LPD3DXEFFECT				m_pSkybox;					//스카이박스를 그리기 위한 쉐이더
-	vector<D3DXVECTOR3>			m_vecCubeVertex;			//스카이박스 큐브 버텍스
+	LPD3DXMESH					m_pCube;
 
 public:
 	void BeginRender();		//그림자를 그리기 위하여 렌더할 때마다 초기화를 위해 호출되는 begin함수
