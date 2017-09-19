@@ -29,6 +29,9 @@ private:
 	LPD3DXMESH					m_pMeshGround;				//맵으로 사용될 메쉬
 	D3DXMATRIXA16				m_matWorldGround;			//맵에 적용될 월드 매트릭스
 	vector<cMtlTex*>			m_vecMtlTex;				//맵에 적용될 텍스처
+	LPDIRECT3DCUBETEXTURE9		m_pCubeTexture;				//스카이박스로 사용될 큐브 텍스처
+	LPD3DXEFFECT				m_pSkybox;					//스카이박스를 그리기 위한 쉐이더
+	vector<D3DXVECTOR3>			m_vecCubeVertex;			//스카이박스 큐브 버텍스
 
 public:
 	void BeginRender();		//그림자를 그리기 위하여 렌더할 때마다 초기화를 위해 호출되는 begin함수
@@ -38,7 +41,7 @@ public:
 	void Destroy();
 	void SetPlane(LPD3DXMESH pMesh, D3DXMATRIXA16 matWorld);	//텍스처 없이 단일 메쉬로 이루어진 맵 셋업
 	void SetMap(LPD3DXMESH pMesh, vector<cMtlTex*> vecMtlTex, D3DXMATRIXA16 matWorldGround);	//단일 메쉬이되 여러 개의 텍스처로 이루어진 맵 셋업
-	void SetTarget(D3DXVECTOR3* pvTarget) { m_pvTarget = pvTarget; }
+	void SetTarget(D3DXVECTOR3* pvTarget) { m_pvTarget = pvTarget; }	//타겟 설정
 
 private:
 	LPD3DXEFFECT LoadEffect(char* szFileName);

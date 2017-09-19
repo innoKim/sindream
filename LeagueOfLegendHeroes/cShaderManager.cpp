@@ -13,6 +13,8 @@ cShaderManager::cShaderManager()
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
+	, m_pCubeTexture(NULL)
+	, m_pSkybox(NULL)
 {
 }
 
@@ -27,6 +29,8 @@ void cShaderManager::Destroy()
 	SAFE_RELEASE(m_pApplyShadow);
 	SAFE_RELEASE(m_pCreateShadow);
 	SAFE_RELEASE(m_pShadowDepthStencil);
+	SAFE_RELEASE(m_pCubeTexture);
+	SAFE_RELEASE(m_pSkybox);
 }
 
 void cShaderManager::SetupShadow()
@@ -34,6 +38,22 @@ void cShaderManager::SetupShadow()
 	m_pCreateShadow = LoadEffect("shader/CreateShadow.fx");
 
 	m_pApplyShadow = LoadEffect("shader/ApplyShadow.fx");
+
+	m_pSkybox = LoadEffect("shader/Skybox.fx");
+
+	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/Snow_ENV.dds", &m_pCubeTexture);
+
+	m_vecCubeVertex.resize(8);
+
+	m_vecCubeVertex[0] = D3DXVECTOR3(-10000, -10000, -10000);
+	m_vecCubeVertex[1] = D3DXVECTOR3(-10000, -10000,  10000);
+	m_vecCubeVertex[2] = D3DXVECTOR3( 10000, -10000,  10000);
+	m_vecCubeVertex[3] = D3DXVECTOR3( 10000, -10000, -10000);
+	m_vecCubeVertex[4] = D3DXVECTOR3(-10000,  10000, -10000);
+	m_vecCubeVertex[5] = D3DXVECTOR3(-10000,  10000,  10000);
+	m_vecCubeVertex[6] = D3DXVECTOR3( 10000,  10000,  10000);
+	m_vecCubeVertex[7] = D3DXVECTOR3( 10000,  10000, -10000);
+
 
 	//쉐도우 맵 가로, 세로 사이즈
 	const int shadowMapSize = 8192;
@@ -91,6 +111,8 @@ void cShaderManager::BeginRender()
 
 	m_pApplyShadow->SetFloat("fLightWeight", 1.0f);
 	m_pApplyShadow->SetBool("bTexture", true);
+
+	//m_pSkybox->SetMatrix("")
 }
 
 void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture, D3DXMATRIXA16 matWorld)

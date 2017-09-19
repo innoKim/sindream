@@ -21,7 +21,6 @@ void cTestScene::Setup()
 	
 	m_pMap->LoadSur("LoL/room_surface.obj");
 
-
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
