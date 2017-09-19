@@ -43,7 +43,7 @@ void cShaderManager::SetupShadow()
 
 	m_pSkybox = LoadEffect("shader/Skybox.fx");
 
-	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/iceCube.dds", &m_pCubeTexture);
+	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/cubeTexture1.dds", &m_pCubeTexture);
 
 	D3DXCreateBox(g_pD3DDevice, 20000, 20000, 20000, &m_pCube, NULL);
 
