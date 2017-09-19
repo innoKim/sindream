@@ -17,7 +17,7 @@ cTestScene::~cTestScene()
 void cTestScene::Setup()
 {
 	m_pMap = new cMap;
-	//m_pMap->LoadMap("map/", "room.obj");
+	m_pMap->LoadMap("map/", "room.obj");
 	
 	m_pMap->LoadSur("LoL/room_surface.obj");
 
