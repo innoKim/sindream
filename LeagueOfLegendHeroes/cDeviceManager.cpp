@@ -29,8 +29,8 @@ cDeviceManager::cDeviceManager() : m_pD3D(NULL), m_pD3DDevice(NULL)
 	stD3DPP.EnableAutoDepthStencil = TRUE;
 	stD3DPP.AutoDepthStencilFormat = D3DFMT_D24X8;
 	stD3DPP.hDeviceWindow = g_hWnd;
-	stD3DPP.BackBufferWidth = 1920;
-	stD3DPP.BackBufferWidth = 1080;
+	stD3DPP.BackBufferWidth = 1280;
+	stD3DPP.BackBufferWidth = 720;
 
 	m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_hWnd, nVertexProcessing, &stD3DPP, &m_pD3DDevice);
 }
