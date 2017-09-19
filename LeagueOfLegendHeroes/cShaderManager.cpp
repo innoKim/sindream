@@ -43,30 +43,9 @@ void cShaderManager::SetupShadow()
 
 	m_pSkybox = LoadEffect("shader/Skybox.fx");
 
-	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/Snow_ENV.dds", &m_pCubeTexture);
+	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/iceCube.dds", &m_pCubeTexture);
 
-	//D3DXLoadMeshFromX("shader/cube.x", D3DXMESH_MANAGED, g_pD3DDevice, NULL, NULL, NULL, NULL, &m_pCube);
-
-	D3DXCreateBox(g_pD3DDevice, 10000, 10000, 10000, &m_pCube, NULL);
-
-	//ST_PT_VERTEX* pStVertex = new ST_PT_VERTEX[8];
-	//DWORD* pNIndex = new DWORD[36];
-
-	//m_pCube->LockVertexBuffer(NULL, (LPVOID*)&pStVertex);
-	//m_pCube->LockIndexBuffer(NULL, (LPVOID*)&pNIndex);
-
-	//pStVertex[0] = D3DXVECTOR3(-10000, -10000, -10000);
-	//pStVertex[1] = D3DXVECTOR3(-10000, -10000, 10000);
-	//pStVertex[2] = D3DXVECTOR3(10000, -10000, 10000);
-	//pStVertex[3] = D3DXVECTOR3(10000, -10000, -10000);
-	//pStVertex[4] = D3DXVECTOR3(-10000, 10000, -10000);
-	//pStVertex[5] = D3DXVECTOR3(-10000, 10000, 10000);
-	//pStVertex[6] = D3DXVECTOR3(10000, 10000, 10000);
-	//pStVertex[7] = D3DXVECTOR3(10000, 10000, -10000);
-
-
-	//m_pCube->UnlockVertexBuffer();
-	//m_pCube->UnlockIndexBuffer();
+	D3DXCreateBox(g_pD3DDevice, 20000, 20000, 20000, &m_pCube, NULL);
 
 	//쉐도우 맵 가로, 세로 사이즈
 	const int shadowMapSize = 8192;
