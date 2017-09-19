@@ -16,10 +16,10 @@ cTestScene::~cTestScene()
 
 void cTestScene::Setup()
 {
-	m_pMap = new cMap;
-	m_pMap->LoadMap("map/", "room.obj");
+	//m_pMap = new cMap;
+	//m_pMap->LoadMap("map/", "room.obj");
 	
-	m_pMap->LoadSur("LoL/room_surface.obj");
+	//m_pMap->LoadSur("LoL/room_surface.obj");
 
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
@@ -43,7 +43,7 @@ void cTestScene::Setup()
 void cTestScene::Update()
 {
 	m_pPlayer->Update();
-	m_pPlayer->SetPosY(m_pMap->GetGroundHeight(m_pPlayer->GetPosition()));
+	if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetGroundHeight(m_pPlayer->GetPosition()));
 }
 
 void cTestScene::Render()

@@ -45,7 +45,9 @@ void cShaderManager::SetupShadow()
 
 	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/Snow_ENV.dds", &m_pCubeTexture);
 
-	D3DXCreateBox(g_pD3DDevice, 1000, 1000, 1000, &m_pCube, NULL);
+	//D3DXLoadMeshFromX("shader/cube.x", D3DXMESH_MANAGED, g_pD3DDevice, NULL, NULL, NULL, NULL, &m_pCube);
+
+	D3DXCreateBox(g_pD3DDevice, 10000, 10000, 10000, &m_pCube, NULL);
 
 	//ST_PT_VERTEX* pStVertex = new ST_PT_VERTEX[8];
 	//DWORD* pNIndex = new DWORD[36];
@@ -65,11 +67,6 @@ void cShaderManager::SetupShadow()
 
 	//m_pCube->UnlockVertexBuffer();
 	//m_pCube->UnlockIndexBuffer();
-
-	vector<DWORD> vecAdj(m_pCube->GetNumFaces() * 3);
-	m_pCube->GenerateAdjacency(0.0f, &vecAdj[0]);
-
-	m_pCube->OptimizeInplace(D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE, &vecAdj[0], NULL, NULL, NULL);
 
 	//쉐도우 맵 가로, 세로 사이즈
 	const int shadowMapSize = 8192;
@@ -128,41 +125,10 @@ void cShaderManager::BeginRender()
 	m_pApplyShadow->SetFloat("fLightWeight", 1.0f);
 	m_pApplyShadow->SetBool("bTexture", true);
 
-	//스카이박스를 위한 뷰-투영 매트릭스 만들기
-	D3DXMATRIXA16 matView, matProjection, matViewProjection;
+	D3DXMATRIXA16 matView, matProjection;
 
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
-
-	//뷰-투영 매트릭스
-	matViewProjection = matView * matProjection;
-
-	m_pSkybox->SetMatrix("matViewProjection", &matViewProjection);
-	m_pSkybox->SetVector("vCameraPos", &D3DXVECTOR4(g_pCamera->GetPos(), 1.0f));
-	m_pSkybox->SetTexture("EnvironmentMap_Tex", m_pCubeTexture);
-
-	//g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE); //컬링은 양면
-	//g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, FALSE);   //Z버퍼 끄기
-	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, FALSE);   //조명 끄기
-
-	//현재 렌더 타겟은 쉐도우 맵, 쉐도우 맵에 광원 위치에서 본 오브젝트의 모양을 그린다
-	UINT numPasses = 0;
-	m_pSkybox->Begin(&numPasses, NULL);
-
-	for (int i = 0; i < numPasses; i++)
-	{
-		m_pSkybox->BeginPass(i);
-
-		m_pCube->DrawSubset(0);
-
-		m_pSkybox->EndPass();
-	}
-
-	m_pSkybox->End();
-
-	//g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, TRUE);   //Z버퍼 켜기
-	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, TRUE);   //조명 켜기
-	//g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW); //컬링 반시계방향
 }
 
 void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture, D3DXMATRIXA16 matWorld)
@@ -209,6 +175,25 @@ void cShaderManager::Render()
 	//뷰-투영 매트릭스
 	m_matViewProjection = matView * matProjection;
 
+	D3DXVECTOR4 vCameraPos = D3DXVECTOR4(g_pCamera->GetPos(), 1.0f);
+	m_pSkybox->SetMatrix("matViewProjection", &m_matViewProjection);
+	m_pSkybox->SetVector("vCameraPos", &vCameraPos);
+	m_pSkybox->SetTexture("EnvironmentMap_Tex", m_pCubeTexture);
+
+	UINT numPasses = 0;
+	m_pSkybox->Begin(&numPasses, NULL);
+
+	for (int i = 0; i < numPasses; i++)
+	{
+		m_pSkybox->BeginPass(i);
+
+		m_pCube->DrawSubset(0);
+
+		m_pSkybox->EndPass();
+	}
+
+	m_pSkybox->End();
+
 	//2패스 렌더링에 필요한 각종 변수 설정
 	m_pApplyShadow->SetMatrix("matLightView", &m_matLightView);
 	m_pApplyShadow->SetMatrix("matLightProjection", &m_matLightProjection);
@@ -220,7 +205,7 @@ void cShaderManager::Render()
 	//그림자 그리는데 필요한 쉐도우 맵 렌더타겟 설정
 	m_pApplyShadow->SetTexture("ShadowMap_Tex", m_pShadowRenderTarget);
 
-	UINT numPasses = 0;
+	numPasses = 0;
 	m_pApplyShadow->Begin(&numPasses, NULL);
 
 	for (int i = 0; i < numPasses; i++)
