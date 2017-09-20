@@ -54,7 +54,7 @@ void cShaderManager::SetupShadow()
 	g_pD3DDevice->CreateTexture(shadowMapSize, shadowMapSize, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R32F, D3DPOOL_DEFAULT, &m_pShadowRenderTarget, NULL);
 
 	//쉐도우 맵에서 사용될 깊이 버퍼 생성
-	g_pD3DDevice->CreateDepthStencilSurface(shadowMapSize, shadowMapSize, D3DFMT_D24X8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_pShadowDepthStencil, NULL);
+	g_pD3DDevice->CreateDepthStencilSurface(shadowMapSize, shadowMapSize, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_pShadowDepthStencil, NULL);
 
 	//알파테스트 설정, 알파값이 0인 경우 그리지 않는다
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
