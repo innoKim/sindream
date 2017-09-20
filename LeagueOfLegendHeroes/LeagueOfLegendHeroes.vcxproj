@@ -166,6 +166,9 @@
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cObject.h" />
     <ClInclude Include="cOBJLoader.h" />
+    <ClInclude Include="cParticle.h" />
+    <ClInclude Include="cParticleGroup.h" />
+    <ClInclude Include="cParticleScene.h" />
     <ClInclude Include="cPhysics.h" />
     <ClInclude Include="cPhysicsManager.h" />
     <ClInclude Include="cPhysicsScene.h" />
@@ -204,6 +207,9 @@
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cOBJLoader.cpp" />
+    <ClCompile Include="cParticle.cpp" />
+    <ClCompile Include="cParticleGroup.cpp" />
+    <ClCompile Include="cParticleScene.cpp" />
     <ClCompile Include="cPhysics.cpp" />
     <ClCompile Include="cPhysicsManager.cpp" />
     <ClCompile Include="cPhysicsScene.cpp" />
