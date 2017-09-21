@@ -3,7 +3,7 @@
 
 
 cParticle::cParticle():
-	m_pvPosition(NULL),
+	m_vPosition(0,0,0),
 	m_fLifeTime(0.0f),
 	m_fCurTime(0.0f),
 	m_vAcceleration(0,0,0),
@@ -19,11 +19,11 @@ cParticle::~cParticle()
 {
 }
 
-void cParticle::Setup(D3DXVECTOR3* PositionPtr, D3DXVECTOR3 Velocity, D3DXVECTOR3 Acceleration, float LifeTime, D3DXCOLOR StartColor, D3DXCOLOR EndColor, float DragVelocity)
+void cParticle::Setup(D3DXVECTOR3 Position, D3DXVECTOR3 Velocity, D3DXVECTOR3 Acceleration, float LifeTime, D3DXCOLOR StartColor, D3DXCOLOR EndColor, float DragVelocity)
 {
-	m_pvPosition		= PositionPtr;
-	m_vAcceleration		= Velocity;
-	m_vVelocity			= Acceleration;
+	m_vPosition			= Position;
+	m_vVelocity			= Velocity;
+	m_vAcceleration		= Acceleration;
 	m_fLifeTime			= LifeTime;
 	m_dStartColor		= StartColor;
 	m_dEndColor			= EndColor;
@@ -38,11 +38,12 @@ void cParticle::Update()
 	
 	if (m_fDragVelocity > FLT_EPSILON)
 	{
-		if (VelocityScalar<m_fDragVelocity)	m_vVelocity += m_vAcceleration;
-		else m_vVelocity += m_vVelocity*(VelocityScalar - m_fDragVelocity)*0.1f;
+		if (VelocityScalar < m_fDragVelocity)	m_vVelocity += m_vAcceleration;
+		else m_vVelocity *= 0.9f;
 	}
-	
-	(*m_pvPosition) += m_vVelocity;
+
+	m_vVelocity += m_vAcceleration;
+	m_vPosition += m_vVelocity;
 }
 
 D3DXCOLOR cParticle::GetCurColor()

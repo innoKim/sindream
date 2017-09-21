@@ -28,16 +28,18 @@ cPhysicsScene::cPhysicsScene():
 	m_pPlayer(NULL),
 	m_pPlane(NULL)
 {
-	for each(auto p in m_vecEnemy)
-	{
-		SAFE_DELETE(p);
-	}
+	
 }
 
 cPhysicsScene::~cPhysicsScene()
 {
 	SAFE_DELETE(m_pPlayer);
 	SAFE_DELETE(m_pPlane);
+
+	for each(auto p in m_vecEnemy)
+	{
+		SAFE_DELETE(p);
+	}
 }
 
 void cPhysicsScene::Setup()

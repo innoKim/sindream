@@ -3,6 +3,7 @@
 #include "cTestScene.h"
 #include "cPhysicsScene.h"
 #include "cGridPlane.h"
+#include "cParticleScene.h"
 
 cMainGame::cMainGame() :
 	m_pScene(NULL),
@@ -28,8 +29,9 @@ cMainGame::~cMainGame()
 
 void cMainGame::Setup()
 {
-	m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
+//	m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
 //	m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
+	m_pScene = new cParticleScene;
 
 	m_pScene->Setup();
 
@@ -53,12 +55,12 @@ void cMainGame::Render()
 
 	g_pShaderManager->BeginRender();
 
-	m_pScene->Render();
+	//m_pScene->Render();
 
 	g_pShaderManager->Render();
 	
 	if (m_pGrid) m_pGrid->Render();
-
+	m_pScene->Render();
 
 	char str[256];
 	sprintf(str, "%.2f FPS", g_pTimeManager->GetFrameRate());
