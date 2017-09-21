@@ -4,13 +4,15 @@
 
 #include "iScene.h"
 #include "cMap.h"
-#include "cPlayer.h"
+
+class cUnit;
 
 class cTestScene : public iScene
 {
 private:
 	cUnit*					m_pPlayer;
 	cMap*					m_pMap;
+	vector<cUnit*>			m_vecBuilding;
 
 public:
 	cTestScene();

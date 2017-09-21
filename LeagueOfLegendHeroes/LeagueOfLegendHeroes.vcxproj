@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cAllocateHierachy.h" />
+    <ClInclude Include="cBuilding.h" />
     <ClInclude Include="cCamera.h" />
     <ClInclude Include="cCollision.h" />
     <ClInclude Include="cDebugManager.h" />
@@ -195,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cAllocateHierachy.cpp" />
+    <ClCompile Include="cBuilding.cpp" />
     <ClCompile Include="cCamera.cpp" />
     <ClCompile Include="cCollision.cpp" />
     <ClCompile Include="cDebugManager.cpp" />

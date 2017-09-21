@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "cMap.h"
+#include "cBuilding.h"
 
 cMap::cMap()
 	: m_pMesh(NULL)
@@ -107,6 +108,10 @@ void cMap::LoadSur(char * FileFullPath)
 {
 	cOBJLoader surLoader;
 	surLoader.LoadSur(FileFullPath, m_vecSur, m_vecGrid);
+}
+
+void cMap::SetBuilding()
+{
 }
 
 float cMap::GetGroundHeight(D3DXVECTOR3 pos)
