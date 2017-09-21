@@ -64,7 +64,7 @@ void cPhysicsScene::Setup()
 		vector<ST_UNITLOADINFO> temp;
 		temp.push_back({ STATE_IDLE, "unit/PoroIdle.x" ,NULL,NULL });
 		enemy->Setup(temp);
-		enemy->SetPosition(D3DXVECTOR3(i * 100, 100 , i*10));
+		enemy->SetPosition(D3DXVECTOR3(i * 100, 100 , i * 10));
 		m_vecEnemy.push_back(enemy);
 	}
 

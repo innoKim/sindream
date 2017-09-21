@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "cTestScene.h"
+#include "cPlayer.h"
+#include "cBuilding.h"
 
 cTestScene::cTestScene()
 	: m_pPlayer(NULL)
@@ -37,6 +39,13 @@ void cTestScene::Setup()
 	
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
+	cUnit* pOrderNexus = new cBuilding;
+	vector<ST_UNITLOADINFO> tempBuilding;
+	tempBuilding.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x" ,NULL,NULL });
+	pOrderNexus->Setup(tempBuilding);
+	pOrderNexus->SetPosition(D3DXVECTOR3(750, 50, 750));
+	m_vecBuilding.push_back(pOrderNexus);
+
 	//SetLight();
 }
 
@@ -49,6 +58,11 @@ void cTestScene::Update()
 void cTestScene::Render()
 {
 	m_pPlayer->Render();
+
+	for (int i = 0; i < m_vecBuilding.size(); i++)
+	{
+		m_vecBuilding[i]->Render();
+	}
 }
 
 void cTestScene::SetLight()
