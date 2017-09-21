@@ -184,6 +184,11 @@
     <ClInclude Include="cTestScene.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
+    <ClInclude Include="cUIButton.h" />
+    <ClInclude Include="cUIImage.h" />
+    <ClInclude Include="cUIObject.h" />
+    <ClInclude Include="cUIScroll.h" />
+    <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
     <ClInclude Include="cUtils.h" />
     <ClInclude Include="iMap.h" />
@@ -227,6 +232,11 @@
     <ClCompile Include="cTestScene.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
+    <ClCompile Include="cUIButton.cpp" />
+    <ClCompile Include="cUIImage.cpp" />
+    <ClCompile Include="cUIObject.cpp" />
+    <ClCompile Include="cUIScroll.cpp" />
+    <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
     <ClCompile Include="cUtils.cpp" />
     <ClCompile Include="iMap.cpp" />

@@ -47,8 +47,7 @@ void cParticleScene::Setup()
 		m_vecParticleGroup[i]->SetStartColorVariation(D3DXCOLOR(0, 0, 0, 0.3f));
 		
 		m_vecParticleGroup[i]->SetEndColor(D3DXCOLOR(0.3f, 0.3f, 0.3f, 0.0f));
-
-
+		
 		m_vecParticleGroup[i]->SetDragVelocity(0.05f);
 
 		m_vecParticleGroup[i]->Setup();
