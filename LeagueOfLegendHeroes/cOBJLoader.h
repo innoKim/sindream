@@ -2,6 +2,7 @@
 #include "cGroup.h"
 
 #define RATIO	0.5f
+#define GRID	10
 
 struct stGrid
 {
@@ -16,9 +17,9 @@ struct stGrid
 class cOBJLoader
 {
 private:
-	float minX, maxX, minZ, maxZ;
-	
-	stGrid	m_stGrid[25];
+	float minY, maxY;
+
+	stGrid	m_stGrid[GRID*GRID];
 
 public:
 	cOBJLoader();
@@ -29,7 +30,7 @@ public:
 
 	void CreateGrid();
 
-	void Collision(stGrid Grid, vector<ST_PC_VERTEX> vecSur);
+	void DivideVertex(stGrid &Grid, vector<ST_PC_VERTEX> vecSur);
 protected:
 	void LoadMtl(IN char* Folder, IN char* FilePath, OUT map<string, cMtlTex*>& mapMtlTex);
 };
