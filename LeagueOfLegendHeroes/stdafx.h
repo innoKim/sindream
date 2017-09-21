@@ -138,6 +138,7 @@ struct ST_PNT_VERTEX
 #include "cKeyManager.h"
 #include "cRandomManager.h"
 #include "cTextureManager.h"
+#include "cFontManager.h"
 #include "cTimeManager.h"
 #include "cCamera.h"
 #include "cDebugManager.h"

@@ -16,7 +16,7 @@ protected:
 
 public:
 	cUIObject();
-	~cUIObject();
+	virtual ~cUIObject();
 
 	virtual void Update();
 	virtual void Render(LPD3DXSPRITE SpritePtr);

@@ -159,6 +159,9 @@
     <ClInclude Include="cUIScroll.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="cFontManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -292,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="cUIScroll.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cFontManager.cpp">
+      <Filter>매니저</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

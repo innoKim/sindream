@@ -2,8 +2,15 @@
 #include "cUIObject.h"
 class cUIImage : public cUIObject
 {
+protected:
+	string m_sTexture;
+
 public:
 	cUIImage();
 	virtual ~cUIImage();
+
+	virtual void SetTexture(string sFullPath);
+
+	virtual void Render(LPD3DXSPRITE SpritePtr) override;
 };
 

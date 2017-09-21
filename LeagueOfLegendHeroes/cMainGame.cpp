@@ -17,14 +17,15 @@ cMainGame::~cMainGame()
 	SAFE_DELETE(m_pGrid);
 
 	g_pCamera->Destroy();
+	g_pCollisionCalculator->Destroy();
+	g_pPhysicsManager->Destroy();	
+	g_pTextureManager->Destroy();
+	g_pFontManager->Destroy();
+	g_pDebug->Destroy();
 	g_pKeyManager->Destroy();
 	g_pTimeManager->Destroy();
-	g_pTextureManager->Destroy();
-	g_pDeviceManager->Destroy();
-	g_pDebug->Destroy();
-	g_pCollisionCalculator->Destroy();
-	g_pPhysicsManager->Destroy();
 	g_pShaderManager->Destroy();
+	g_pDeviceManager->Destroy();
 }
 
 void cMainGame::Setup()
