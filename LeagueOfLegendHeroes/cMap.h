@@ -31,7 +31,6 @@ public:
 
 	void LoadMap(IN char* Folder, IN char* File);
 	void LoadSur(char* FileFullPath);
-	void SetBuilding();
 
 	float GetGroundHeight(D3DXVECTOR3 pos);
 };

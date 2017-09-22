@@ -14,6 +14,11 @@ cTestScene::~cTestScene()
 {
 	SAFE_DELETE(m_pMap);
 	SAFE_DELETE(m_pPlayer);
+
+	for each (auto p in m_vecBuilding)
+	{
+		SAFE_DELETE(p);
+	}
 }
 
 void cTestScene::Setup()
@@ -40,11 +45,60 @@ void cTestScene::Setup()
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
 	cUnit* pOrderNexus = new cBuilding;
-	vector<ST_UNITLOADINFO> tempBuilding;
-	tempBuilding.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x" ,NULL,NULL });
-	pOrderNexus->Setup(tempBuilding);
-	pOrderNexus->SetPosition(D3DXVECTOR3(750, 50, 750));
+	vector<ST_UNITLOADINFO> tempOrderNexus;
+	tempOrderNexus.push_back({ STATE_IDLE, "unit/OrderNexus.x" ,NULL,NULL });
+	pOrderNexus->Setup(tempOrderNexus);
+	pOrderNexus->SetPosition(D3DXVECTOR3(780, 50, 830));
 	m_vecBuilding.push_back(pOrderNexus);
+
+	int nIndex = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		cUnit* pOrderInhibitor = new cBuilding;
+		vector<ST_UNITLOADINFO> tempOrderInhibitor;
+		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x" ,NULL,NULL });
+		pOrderInhibitor->Setup(tempOrderInhibitor);
+		pOrderInhibitor->SetPosition(D3DXVECTOR3(nIndex++ * 1000 + 2000, 50, 2000));
+		m_vecBuilding.push_back(pOrderInhibitor);
+	}
+
+	//요기부터 할 차례
+	for (int i = 0; i < 11; i++)
+	{
+		cUnit* pOrderTurret = new cBuilding;
+		vector<ST_UNITLOADINFO> tempOrderTurret;
+		tempOrderTurret.push_back({ STATE_IDLE, "unit/OrderInhibitor.x" ,NULL,NULL });
+		pOrderTurret->Setup(tempOrderTurret);
+		pOrderTurret->SetPosition(D3DXVECTOR3(nIndex++ * 1000 + 2000, 50, 2000));
+		m_vecBuilding.push_back(pOrderTurret);
+	}
+
+	cUnit* pChaosNexus = new cBuilding;
+	vector<ST_UNITLOADINFO> tempChaosNexus;
+	tempChaosNexus.push_back({ STATE_IDLE, "unit/ChaosNexus.x" ,NULL,NULL });
+	pChaosNexus->Setup(tempChaosNexus);
+	pChaosNexus->SetPosition(D3DXVECTOR3(nIndex++, 50, 830));
+	m_vecBuilding.push_back(pChaosNexus);
+
+	for (int i = 0; i < 3; i++)
+	{
+		cUnit* pOrderInhibitor = new cBuilding;
+		vector<ST_UNITLOADINFO> tempOrderInhibitor;
+		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x" ,NULL,NULL });
+		pOrderInhibitor->Setup(tempOrderInhibitor);
+		pOrderInhibitor->SetPosition(D3DXVECTOR3(nIndex++ * 1000 + 2000, 50, 2000));
+		m_vecBuilding.push_back(pOrderInhibitor);
+	}
+
+	for (int i = 0; i < 11; i++)
+	{
+		cUnit* pOrderInhibitor = new cBuilding;
+		vector<ST_UNITLOADINFO> tempOrderInhibitor;
+		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x" ,NULL,NULL });
+		pOrderInhibitor->Setup(tempOrderInhibitor);
+		pOrderInhibitor->SetPosition(D3DXVECTOR3(nIndex++ * 1000 + 2000, 50, 2000));
+		m_vecBuilding.push_back(pOrderInhibitor);
+	}
 
 	//SetLight();
 }
