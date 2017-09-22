@@ -41,4 +41,6 @@ namespace MY_UTIL
 	bool RayCastPC(IN RayInfo& ray, OUT HitInfo& hit, IN vector<ST_PC_VERTEX>* target);
 
 	DWORD FtoDw(float f);
+
+	D3DXVECTOR3 WorldToScreenPosition(D3DXVECTOR3 worldPosition);
 }

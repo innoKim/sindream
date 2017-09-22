@@ -108,4 +108,35 @@ namespace MY_UTIL
 	{
 		return *((DWORD*)&f);
 	}
+	D3DXVECTOR3 WorldToScreenPosition(D3DXVECTOR3 worldPosition)
+	{
+		D3DXVECTOR3 result = worldPosition;
+		
+		D3DXMATRIX view;
+		g_pD3DDevice->GetTransform(D3DTS_VIEW, &view);
+
+		D3DXMATRIX projection;
+		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &projection);
+
+		D3DVIEWPORT9 vp;
+		g_pD3DDevice->GetViewport(&vp);
+
+		D3DXMATRIX viewport;
+		D3DXMatrixIdentity(&viewport);
+		
+		float a = vp.Width;
+		viewport._11 = a / 2.0f;
+		a = vp.Height;
+		viewport._22 = -a / 2.0f;
+		viewport._33 = vp.MaxZ - vp.MinZ;
+		viewport._41 = vp.X + vp.Width / 2.0f;
+		viewport._42 = vp.Y + vp.Height / 2.0f;
+		viewport._43 = vp.MinZ;
+
+		D3DXVec3TransformCoord(&result, &result, &view);
+		D3DXVec3TransformCoord(&result, &result, &projection);
+		D3DXVec3TransformCoord(&result, &result, &viewport);
+
+		return result;
+	}
 }

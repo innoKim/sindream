@@ -71,7 +71,6 @@ void cPhysicsScene::Setup()
 
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
-	//m_pPlayer->GetRigidbody()->SetIsActivate(false);
 	///요기까지 물리
 
 	SetLight();
@@ -111,7 +110,6 @@ void cPhysicsScene::AlistarSpell1CallBack(void *CallBackObj)
 	Alistar->SetState(STATE_IDLE);
 }
 
-
 void cPhysicsScene::AlistarSpell1CallBack2(void *CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
@@ -125,7 +123,6 @@ void cPhysicsScene::AlistarSpell1CallBack2(void *CallBackObj)
 		target->SetAngularVelocity(D3DXVECTOR3(rand()%20-10, rand() % 20 - 10, rand() % 20 - 10));
 	}
 }
-
 
 void cPhysicsScene::AlistarSpell2CallBack(void * CallBackObj)
 {

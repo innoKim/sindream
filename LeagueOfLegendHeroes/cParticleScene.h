@@ -2,13 +2,23 @@
 #include "iScene.h"
 
 class cParticleGroup;
+class cUIObject;
+class cUnit;
+class cPlayer;
 
-class cParticleScene :
-	public iScene
+class cParticleScene : public iScene
 {
 private:
+	
 	D3DXVECTOR3 target;
-	vector<cParticleGroup*> m_vecParticleGroup;
+	cUnit* m_pPlayer;
+
+	cParticleGroup* m_pParticleGroup;
+
+	//for UI
+	LPD3DXSPRITE m_pSprite;
+	vector<cUIObject*>		m_vecUIObject;
+
 
 public:
 	cParticleScene();
@@ -18,5 +28,10 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	void Pop();
+
+	void RenderInfo();
+
+	static void AlistarSpell1CallBack(void* CallBackObj);
+	static void AlistarSpell2CallBack(void* CallBackObj);
 };
 

@@ -7,9 +7,8 @@ struct ST_CallbackInfo
 	float						fTime;
 	CALLBACKFUNC				pfnCallBack;
 	void*						pCallBackObj;
-
-	ST_CallbackInfo() :fTime(0.0f), pfnCallBack(NULL), pCallBackObj(NULL) {};
-	ST_CallbackInfo(float time, CALLBACKFUNC cbfn = NULL, void* cbobj = NULL) { fTime = time, pfnCallBack = cbfn, pCallBackObj = cbobj; }
+	
+	ST_CallbackInfo(float time = 0.0f, CALLBACKFUNC cbfn = NULL, void* cbobj = NULL) { fTime = time, pfnCallBack = cbfn, pCallBackObj = cbobj; }
 };
 
 class cSkinnedMesh

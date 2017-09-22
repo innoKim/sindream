@@ -18,6 +18,7 @@ protected:
 	
 	SYNTHESIZE(CALLBACKFUNC, m_pfnCallback, Callback);
 	SYNTHESIZE(void*, m_pCallbackObj, CallbackObject);
+	SYNTHESIZE(void*, m_pCallbackObj2, CallbackObject2);
 
 
 public:
