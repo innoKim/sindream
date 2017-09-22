@@ -6,6 +6,7 @@
 cTestScene::cTestScene()
 	: m_pPlayer(NULL)
 	, m_pMap(NULL)
+	, m_bEditOn(false)
 {
 }
 
@@ -28,90 +29,107 @@ void cTestScene::Setup()
 	
 	m_pMap->LoadSur("LoL/room_surface.obj");
 
-	m_pPlayer = new cPlayer;
-	vector<ST_UNITLOADINFO> temp;
-	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
-	temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
-	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer)});
-	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",{ 0.0f,AlistarSpell2CallBack,m_pPlayer } });
-	m_pPlayer->Setup(temp);
+	//m_pPlayer = new cPlayer;
+	//vector<ST_UNITLOADINFO> temp;
+	//temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
+	//temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
+	//temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer)});
+	//temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",{ 0.0f,AlistarSpell2CallBack,m_pPlayer } });
+	//m_pPlayer->Setup(temp);
 
-	m_pPlayer->SetPosition(D3DXVECTOR3(0.f, 0.f, 0.f));
+	//m_pPlayer->SetPosition(D3DXVECTOR3(0.f, 0.f, 0.f));
 
 	//카메라 설정 이렇게 할 수 있습니다.
-	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+	//g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pCamera->Zoom(5.f);
 	
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
-
-	cUnit* pOrderNexus = new cBuilding;
-	vector<ST_UNITLOADINFO> tempOrderNexus;
-	tempOrderNexus.push_back({ STATE_IDLE, "unit/OrderNexus.x" ,NULL,NULL });
-	pOrderNexus->Setup(tempOrderNexus);
-	pOrderNexus->SetPosition(D3DXVECTOR3(780, 50, 830));
-	m_vecBuilding.push_back(pOrderNexus);
-
-	int nIndex = 0;
-	for (int i = 0; i < 3; i++)
-	{
-		cUnit* pOrderInhibitor = new cBuilding;
-		vector<ST_UNITLOADINFO> tempOrderInhibitor;
-		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x" ,NULL,NULL });
-		pOrderInhibitor->Setup(tempOrderInhibitor);
-		pOrderInhibitor->SetPosition(D3DXVECTOR3(nIndex++ * 1000 + 2000, 50, 2000));
-		m_vecBuilding.push_back(pOrderInhibitor);
-	}
-
-	//요기부터 할 차례
-	for (int i = 0; i < 11; i++)
-	{
-		cUnit* pOrderTurret = new cBuilding;
-		vector<ST_UNITLOADINFO> tempOrderTurret;
-		tempOrderTurret.push_back({ STATE_IDLE, "unit/OrderInhibitor.x" ,NULL,NULL });
-		pOrderTurret->Setup(tempOrderTurret);
-		pOrderTurret->SetPosition(D3DXVECTOR3(nIndex++ * 1000 + 2000, 50, 2000));
-		m_vecBuilding.push_back(pOrderTurret);
-	}
-
-	cUnit* pChaosNexus = new cBuilding;
-	vector<ST_UNITLOADINFO> tempChaosNexus;
-	tempChaosNexus.push_back({ STATE_IDLE, "unit/ChaosNexus.x" ,NULL,NULL });
-	pChaosNexus->Setup(tempChaosNexus);
-	pChaosNexus->SetPosition(D3DXVECTOR3(nIndex++, 50, 830));
-	m_vecBuilding.push_back(pChaosNexus);
-
-	for (int i = 0; i < 3; i++)
-	{
-		cUnit* pOrderInhibitor = new cBuilding;
-		vector<ST_UNITLOADINFO> tempOrderInhibitor;
-		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x" ,NULL,NULL });
-		pOrderInhibitor->Setup(tempOrderInhibitor);
-		pOrderInhibitor->SetPosition(D3DXVECTOR3(nIndex++ * 1000 + 2000, 50, 2000));
-		m_vecBuilding.push_back(pOrderInhibitor);
-	}
-
-	for (int i = 0; i < 11; i++)
-	{
-		cUnit* pOrderInhibitor = new cBuilding;
-		vector<ST_UNITLOADINFO> tempOrderInhibitor;
-		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x" ,NULL,NULL });
-		pOrderInhibitor->Setup(tempOrderInhibitor);
-		pOrderInhibitor->SetPosition(D3DXVECTOR3(nIndex++ * 1000 + 2000, 50, 2000));
-		m_vecBuilding.push_back(pOrderInhibitor);
-	}
-
-	//SetLight();
 }
 
 void cTestScene::Update()
 {
-	m_pPlayer->Update();
-	if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetGroundHeight(m_pPlayer->GetPosition()));
+	if (m_pPlayer)
+	{
+		m_pPlayer->Update();
+		if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetGroundHeight(m_pPlayer->GetPosition()));
+	}
+
+	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('1'))
+	{
+		m_bEditOn = true;
+		cUnit* pOrderNexus = new cBuilding;
+		vector<ST_UNITLOADINFO> tempOrderNexus;
+		tempOrderNexus.push_back({ STATE_IDLE, "unit/OrderNexus.x", NULL, NULL });
+		pOrderNexus->Setup(tempOrderNexus);
+		pOrderNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
+		g_pCamera->SetTarget(pOrderNexus->GetPosPtr());
+		m_vecBuilding.push_back(pOrderNexus);
+	}
+
+	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('2'))
+	{
+		m_bEditOn = true;
+		cUnit* pOrderInhibitor = new cBuilding;
+		vector<ST_UNITLOADINFO> tempOrderInhibitor;
+		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x", NULL, NULL });
+		pOrderInhibitor->Setup(tempOrderInhibitor);
+		pOrderInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
+		g_pCamera->SetTarget(pOrderInhibitor->GetPosPtr());
+		m_vecBuilding.push_back(pOrderInhibitor);
+	}
+
+	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('3'))
+	{
+		m_bEditOn = true;
+		cUnit* pOrderTurret = new cBuilding;
+		vector<ST_UNITLOADINFO> tempOrderTurret;
+		tempOrderTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
+		pOrderTurret->Setup(tempOrderTurret);
+		pOrderTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
+		g_pCamera->SetTarget(pOrderTurret->GetPosPtr());
+		m_vecBuilding.push_back(pOrderTurret);
+	}
+
+	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('4'))
+	{
+		m_bEditOn = true;
+		cUnit* pChaosNexus = new cBuilding;
+		vector<ST_UNITLOADINFO> tempChaosNexus;
+		tempChaosNexus.push_back({ STATE_IDLE, "unit/ChaosNexus.x", NULL, NULL });
+		pChaosNexus->Setup(tempChaosNexus);
+		pChaosNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
+		g_pCamera->SetTarget(pChaosNexus->GetPosPtr());
+		m_vecBuilding.push_back(pChaosNexus);
+	}
+
+	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('5'))
+	{
+		m_bEditOn = true;
+		cUnit* pChaosInhibitor = new cBuilding;
+		vector<ST_UNITLOADINFO> tempChaosInhibitor;
+		tempChaosInhibitor.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x", NULL, NULL });
+		pChaosInhibitor->Setup(tempChaosInhibitor);
+		pChaosInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
+		g_pCamera->SetTarget(pChaosInhibitor->GetPosPtr());
+		m_vecBuilding.push_back(pChaosInhibitor);
+	}
+
+	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('6'))
+	{
+		m_bEditOn = true;
+		cUnit* pChaosTurret = new cBuilding;
+		vector<ST_UNITLOADINFO> tempChaosTurret;
+		tempChaosTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
+		pChaosTurret->Setup(tempChaosTurret);
+		pChaosTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
+		g_pCamera->SetTarget(pChaosTurret->GetPosPtr());
+		m_vecBuilding.push_back(pChaosTurret);
+	}
 }
 
 void cTestScene::Render()
 {
-	m_pPlayer->Render();
+	if (m_pPlayer) m_pPlayer->Render();
 
 	for (int i = 0; i < m_vecBuilding.size(); i++)
 	{

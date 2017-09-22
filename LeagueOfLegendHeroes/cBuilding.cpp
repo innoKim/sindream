@@ -11,3 +11,11 @@ cBuilding::~cBuilding()
 {
 	Destroy();
 }
+
+void cBuilding::Update()
+{
+}
+
+void cBuilding::KeyControl()
+{
+}

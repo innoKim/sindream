@@ -9,7 +9,7 @@ cShaderManager::cShaderManager()
 	, m_pShadowRenderTarget(NULL)
 	, m_pShadowDepthStencil(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(-100, 2500, -100, 1.0f)
+	, m_vLightPos(-100, 3000, -100, 1.0f)
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
@@ -82,9 +82,17 @@ void cShaderManager::BeginRender()
 	g_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
 
 	//광원-뷰 행렬을 만든다
-	D3DXVECTOR3 vEyePt(m_pvTarget->x + m_vLightPos.x, m_pvTarget->y + m_vLightPos.y, m_pvTarget->z + m_vLightPos.z);
-
-	D3DXVECTOR3 vLookatPt = *m_pvTarget;
+	D3DXVECTOR3 vEyePt, vLookatPt;
+	if (m_pvTarget)
+	{
+		vEyePt = D3DXVECTOR3(m_pvTarget->x + m_vLightPos.x, m_pvTarget->y + m_vLightPos.y, m_pvTarget->z + m_vLightPos.z);
+		vLookatPt = *m_pvTarget;
+	}
+	else
+	{
+		vEyePt = D3DXVECTOR3(m_vLightPos.x, m_vLightPos.y, m_vLightPos.z);
+		vLookatPt = D3DXVECTOR3(0, 0, 0);
+	}
 
 	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
 
@@ -178,7 +186,16 @@ void cShaderManager::Render()
 	m_pApplyShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 	m_pApplyShadow->SetMatrix("matViewProjection", &m_matViewProjection);
 
-	m_pApplyShadow->SetVector("vLightPos", &D3DXVECTOR4(m_pvTarget->x + m_vLightPos.x, m_pvTarget->y + m_vLightPos.y, m_pvTarget->z + m_vLightPos.z, 1));
+	D3DXVECTOR4 vLightPos;
+	if (m_pvTarget)
+	{
+		vLightPos = D3DXVECTOR4(m_pvTarget->x + m_vLightPos.x, m_pvTarget->y + m_vLightPos.y, m_pvTarget->z + m_vLightPos.z, 1);
+	}
+	else
+	{
+		vLightPos = m_vLightPos;
+	}
+	m_pApplyShadow->SetVector("vLightPos", &vLightPos);
 	m_pApplyShadow->SetVector("vCameraPos", &D3DXVECTOR4(g_pCamera->GetPos(), 1.0f));
 
 	//그림자 그리는데 필요한 쉐도우 맵 렌더타겟 설정

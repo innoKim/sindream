@@ -13,6 +13,7 @@ private:
 	cUnit*					m_pPlayer;
 	cMap*					m_pMap;
 	vector<cUnit*>			m_vecBuilding;
+	bool					m_bEditOn;
 
 public:
 	cTestScene();
