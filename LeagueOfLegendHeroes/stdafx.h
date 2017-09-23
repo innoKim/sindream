@@ -151,12 +151,14 @@ struct ST_SQUARE
 {
 	D3DXVECTOR2 a; //left-bottom min x y
 	D3DXVECTOR2 b;
-	D3DXVECTOR3 c;
+	D3DXVECTOR2 c;
 	D3DXVECTOR2 d; //right-top max x y
 
-	ST_SQUARE(
-		D3DXVECTOR2 leftBottom = D3DXVECTOR2(0, 0),
-		D3DXVECTOR2 rightTop = D3DXVECTOR2(0, 0)) : a(D3DXVECTOR2(leftBottom.x, leftBottom.y)), b(D3DXVECTOR2(rightTop.x, leftBottom.y)) , c(D3DXVECTOR2(leftBottom.x, rightTop.y)) , d(D3DXVECTOR2(rightTop.x, rightTop.y)) {}
+	ST_SQUARE(float left = 0.0f, float bottom = 0.0f, float right = 0.0f, float Top = 0.0f)
+		: a(left, bottom), b(right, bottom) , c(left, Top) , d(right, Top) {}
+
+	float width() { return (d - a).x; }
+	float height() { return (d - a).y; }
 };
 
 // 매니저 클래스 인클루드 목록

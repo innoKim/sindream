@@ -8,10 +8,13 @@
 #include "cPlayer.h"
 #include "cUIButton.h"
 
+#include "cMap.h"
+
 cParticleScene::cParticleScene():
 	target(0,0,0),
 	m_pSprite(NULL),
-	m_pPlayer(NULL)
+	m_pPlayer(NULL),
+	m_pMap(NULL)
 {
 }
 
@@ -27,6 +30,8 @@ cParticleScene::~cParticleScene()
 	SAFE_DELETE(m_pPlayer);
 
 	SAFE_RELEASE(m_pSprite);
+
+	SAFE_DELETE(m_pMap);
 }
 
 void cParticleScene::Setup()
@@ -97,6 +102,11 @@ void cParticleScene::Setup()
 
 		button->SetPosition(1100, (i+1) * 48);
 	}
+
+
+	//////////////////////
+	m_pMap = new cMap;
+	m_pMap->LoadSur("LoL/room_surface.obj");
 }
 
 void cParticleScene::Update()

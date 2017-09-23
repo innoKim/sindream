@@ -31,7 +31,7 @@ void cTestScene::Setup()
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer) });
 	m_pPlayer->Setup(temp);
 
-	m_pPlayer->SetPosition(D3DXVECTOR3(0.f, 0.f, 0.f));
+	m_pPlayer->SetPosition(D3DXVECTOR3(1000.0f, 0, 1000.0f));
 
 	//카메라 설정 이렇게 할 수 있습니다.
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
@@ -79,6 +79,18 @@ void cTestScene::SetLight()
 	g_pD3DDevice->LightEnable(0, true);
 
 	g_pD3DDevice->SetRenderState(D3DRS_SPECULARENABLE, true);
+}
+
+D3DXVECTOR3 cTestScene::playerPos()
+{
+	if (m_pPlayer)
+	{
+		m_pPlayer->GetPosition();
+	}
+	else
+	{
+		return D3DXVECTOR3(0, 0, 0);
+	}
 }
 
 void cTestScene::AlistarSpell1CallBack(void *CallBackObj)

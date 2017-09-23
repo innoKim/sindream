@@ -5,6 +5,7 @@ class cParticleGroup;
 class cUIObject;
 class cUnit;
 class cPlayer;
+class cMap;
 
 class cParticleScene : public iScene
 {
@@ -19,7 +20,7 @@ private:
 	LPD3DXSPRITE m_pSprite;
 	vector<cUIObject*>		m_vecUIObject;
 
-
+	cMap* m_pMap;
 public:
 	cParticleScene();
 	~cParticleScene();

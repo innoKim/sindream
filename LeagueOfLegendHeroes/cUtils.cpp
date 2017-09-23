@@ -141,7 +141,7 @@ namespace MY_UTIL
 	}
 
 	//테스트 결과 성공
-	bool PtInTri(ST_TRIANGLE triangle, D3DXVECTOR2 point)
+	bool PtInTri(ST_TRIANGLE& triangle, D3DXVECTOR2& point)
 	{
 		D3DXVECTOR3 ab = triangle.b - triangle.a;
 		D3DXVECTOR3 ac = triangle.c - triangle.a;
@@ -170,12 +170,28 @@ namespace MY_UTIL
 		return true;
 	}
 
-	bool PtInSquare(ST_SQUARE square, D3DXVECTOR2 point)
+	bool PtInSquare(ST_SQUARE& square, D3DXVECTOR2& point)
 	{
 		if (square.a.x > point.x) return false;
 		if (square.d.x < point.x) return false;
 		if (square.a.y > point.y) return false;
 		if (square.d.y < point.y) return false;
 		return true;
+	}
+
+	bool TriVsSq(ST_TRIANGLE& tri,ST_SQUARE& sq)
+	{
+		//사각형 내부에 삼각형의 점 하나가 들어가있거나.
+		if(PtInSquare(sq, tri.a))return true;
+		if(PtInSquare(sq, tri.b))return true;
+		if(PtInSquare(sq, tri.c))return true;
+		
+		//삼각형 내부에 사각형의 점 하나가 들어가있거나.
+		if(PtInTri(tri, sq.a))return true;
+		if(PtInTri(tri, sq.b))return true;
+		if(PtInTri(tri, sq.c))return true;
+		if(PtInTri(tri, sq.d))return true;
+
+		return false;
 	}
 }

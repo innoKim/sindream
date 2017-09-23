@@ -12,19 +12,12 @@ private:
 	LPD3DXMESH						m_pMesh;
 	vector<cGroup*>					m_vecMap;
 	vector<ST_PC_VERTEX>			m_vecSur;
-	vector<stGrid>					m_vecGrid;
 	map<string, cMtlTex*>			m_mapMtlTex;
 	map<string, cMtlTex*>::iterator	m_iterMtlTex;
 	vector<cMtlTex*>				m_vecMtlTex;
-
 	D3DXMATRIX						m_matW, m_matS, m_matR, m_matT;
-
-	RayInfo							m_stRay;
-
-	HitInfo							m_stHit;
-
-	float							m_fRayDist;
-
+	
+	vector<vector<ST_HEIGHTNODE>>	m_gridHeightNode; // 잘 나눠져서 들어왔네요
 public:
 	cMap();
 	~cMap();

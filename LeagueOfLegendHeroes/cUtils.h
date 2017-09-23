@@ -46,5 +46,7 @@ namespace MY_UTIL
 
 	D3DXVECTOR3 WorldToScreenPosition(D3DXVECTOR3 worldPosition);
 	
-	bool PtInTri(ST_TRIANGLE triangle, D3DXVECTOR2 point);
+	bool PtInTri(ST_TRIANGLE& triangle, D3DXVECTOR2& point);
+	bool PtInSquare(ST_SQUARE & square, D3DXVECTOR2 & point);
+	bool TriVsSq(ST_TRIANGLE& tri, ST_SQUARE& sq);
 }
