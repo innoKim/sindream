@@ -54,12 +54,19 @@ void cUIObject::SetPosition(float x, float y)
 
 void cUIObject::GetRect(RECT * RectPtr)
 {
-	if (!RectPtr) return;
+	RECT rc;
+	GetClientRect(g_hWnd, &rc);
 
-	RectPtr->left = m_matWorld._41;
-	RectPtr->top = m_matWorld._42;
-	RectPtr->right = m_matWorld._41 + m_fWidth;
-	RectPtr->bottom = m_matWorld._42 + m_fHeight;
+	float widthRatio, heightRatio;
+	widthRatio = (float)rc.right / (float)WIN_WIDTH;
+	heightRatio = (float)rc.bottom / (float)WIN_HEIGHT;
+
+	if (!RectPtr) return;
+	
+	RectPtr->left = m_matWorld._41*widthRatio;
+	RectPtr->top = m_matWorld._42*heightRatio;
+	RectPtr->right = (m_matWorld._41 + m_fWidth)*widthRatio;
+	RectPtr->bottom = (m_matWorld._42 + m_fHeight)*heightRatio;
 }
 
 void cUIObject::AddChild(cUIObject * ChildPtr)

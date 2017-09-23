@@ -8,6 +8,9 @@
 #include "targetver.h"
 
 #define WIN32_LEAN_AND_MEAN             // 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
+#define WIN_WIDTH	1280
+#define WIN_HEIGHT	720
+
 // Windows 헤더 파일:
 #include <windows.h>
 
@@ -131,8 +134,32 @@ struct ST_PNT_VERTEX
 	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 };
 };
 
-// 매니저 클래스 인클루드 목록
+struct ST_TRIANGLE
+{
+	D3DXVECTOR2 a;
+	D3DXVECTOR2	b;
+	D3DXVECTOR2	c;
 
+	ST_TRIANGLE(
+		D3DXVECTOR2 _a = D3DXVECTOR2(0, 0),
+		D3DXVECTOR2 _b = D3DXVECTOR2(0, 0),
+		D3DXVECTOR2 _c = D3DXVECTOR2(0, 0)) : a(_a), b(_b), c(_c) {}
+};
+
+
+struct ST_SQUARE
+{
+	D3DXVECTOR2 a; //left-bottom min x y
+	D3DXVECTOR2 b;
+	D3DXVECTOR3 c;
+	D3DXVECTOR2 d; //right-top max x y
+
+	ST_SQUARE(
+		D3DXVECTOR2 leftBottom = D3DXVECTOR2(0, 0),
+		D3DXVECTOR2 rightTop = D3DXVECTOR2(0, 0)) : a(D3DXVECTOR2(leftBottom.x, leftBottom.y)), b(D3DXVECTOR2(rightTop.x, leftBottom.y)) , c(D3DXVECTOR2(leftBottom.x, rightTop.y)) , d(D3DXVECTOR2(rightTop.x, rightTop.y)) {}
+};
+
+// 매니저 클래스 인클루드 목록
 #include "cObject.h"
 #include "cDeviceManager.h"
 #include "cKeyManager.h"

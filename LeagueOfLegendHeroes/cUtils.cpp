@@ -139,4 +139,43 @@ namespace MY_UTIL
 
 		return result;
 	}
+
+	//테스트 결과 성공
+	bool PtInTri(ST_TRIANGLE triangle, D3DXVECTOR2 point)
+	{
+		D3DXVECTOR3 ab = triangle.b - triangle.a;
+		D3DXVECTOR3 ac = triangle.c - triangle.a;
+		D3DXVECTOR3 ad = point - triangle.a;
+
+		//ab, ac 벡터로 이루어진 삼각형 이 점d 를 포함하기위해서는
+		// k*ab+l*ac = ad 의 k,l에대한 연립방정식의 해가 k>=0, l>= 0, k+l<=1을 만족할떄 성립한다.
+		
+		//연립방정식의 일반해는 다음과 같으므로
+		//float k = (ac.y*ad.x-ac.x*ad.y) / (ab.x*ac.y - ab.y*ac.x);
+		//float l = (ab.x*ad.y- ab.y*ad.x) / (ab.x*ac.y - ab.y*ac.x);
+		//먼저 (ab.x*ac.y - ab.y*ac.x); 가 0이 아니어야한다. 
+		//이는 두 벡터가 평행함을 의미하므로 삼각형이면 성립하지 않는다 따라서 고려할 필요는 없지만 혹시나해서
+
+		float denominator = (ab.x*ac.y - ab.y*ac.x);
+		if (denominator <= FLT_EPSILON) return false;
+
+		float k = (ac.y*ad.x - ac.x*ad.y) / (ab.x*ac.y - ab.y*ac.x);
+		float l = (ab.x*ad.y - ab.y*ad.x) / (ab.x*ac.y - ab.y*ac.x);
+
+		if (k < 0) return false;
+		if (l < 0)	return false;
+		if (k + l > 1) return false;
+		
+		//위의 세조건을 피하면 점 d는 삼각형 abc 안에 위치한다.
+		return true;
+	}
+
+	bool PtInSquare(ST_SQUARE square, D3DXVECTOR2 point)
+	{
+		if (square.a.x > point.x) return false;
+		if (square.d.x < point.x) return false;
+		if (square.a.y > point.y) return false;
+		if (square.d.y < point.y) return false;
+		return true;
+	}
 }

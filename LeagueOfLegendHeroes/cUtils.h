@@ -22,6 +22,8 @@ struct HitInfo
 };
 
 struct ST_PC_VERTEX;
+struct ST_TRIANGLE;
+struct ST_SQUARE;
 
 namespace MY_UTIL
 {
@@ -43,4 +45,6 @@ namespace MY_UTIL
 	DWORD FtoDw(float f);
 
 	D3DXVECTOR3 WorldToScreenPosition(D3DXVECTOR3 worldPosition);
+	
+	bool PtInTri(ST_TRIANGLE triangle, D3DXVECTOR2 point);
 }

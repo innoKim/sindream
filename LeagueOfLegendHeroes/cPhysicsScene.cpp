@@ -67,8 +67,7 @@ void cPhysicsScene::Setup()
 		enemy->SetPosition(D3DXVECTOR3(i * 100, 100 , i * 10));
 		m_vecEnemy.push_back(enemy);
 	}
-
-
+	
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
 	///요기까지 물리
