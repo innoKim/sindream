@@ -78,6 +78,7 @@ void cPhysicsScene::Setup()
 void cPhysicsScene::Update()
 {
 	m_pPlayer->Update();
+	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
 
 	for each(auto p in m_vecEnemy)
 	{

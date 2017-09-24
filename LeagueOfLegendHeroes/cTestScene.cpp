@@ -8,6 +8,7 @@
 cTestScene::cTestScene()
 	: m_pPlayer(NULL)
 	, m_pMap(NULL)
+	, m_bEditOn(false)
 {
 }
 
@@ -28,17 +29,16 @@ void cTestScene::Setup()
 	vector<ST_UNITLOADINFO> temp;
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
-<<<<<<< HEAD
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer)});
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",{ 0.0f,AlistarSpell2CallBack,m_pPlayer } });
-	m_pPlayer->Setup(temp);
+	m_pPlayer->Setup(temp, m_pMap);
 
 	m_pPlayer->SetPosition(D3DXVECTOR3(0.f, 0.f, 0.f));
 
 	//카메라 설정 이렇게 할 수 있습니다.
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pCamera->Zoom(20.f);
-=======
+
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer) });
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer) });
 	m_pPlayer->Setup(temp, m_pMap);
@@ -48,11 +48,10 @@ void cTestScene::Setup()
 	//카메라 설정 이렇게 할 수 있습니다.
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pCamera->Zoom(5.f);
->>>>>>> 2f8cbe4b0335e7545728f8908b0d42c74e7750e9
 	
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
-	cUnit* pOrderNexus = new cBuilding;
+	cBuilding* pOrderNexus = new cBuilding;
 	vector<ST_UNITLOADINFO> tempBuilding;
 	tempBuilding.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x" ,NULL,NULL });
 	pOrderNexus->Setup(tempBuilding, m_pMap);
@@ -64,11 +63,10 @@ void cTestScene::Setup()
 
 void cTestScene::Update()
 {
-<<<<<<< HEAD
 	if (m_pPlayer)
 	{
 		m_pPlayer->Update();
-		if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetGroundHeight(m_pPlayer->GetPosition()));
+		if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
 	}
 
 	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('1'))
@@ -77,7 +75,7 @@ void cTestScene::Update()
 		cBuilding* pOrderNexus = new cBuilding;
 		vector<ST_UNITLOADINFO> tempOrderNexus;
 		tempOrderNexus.push_back({ STATE_IDLE, "unit/OrderNexus.x", NULL, NULL });
-		pOrderNexus->Setup(tempOrderNexus);
+		pOrderNexus->Setup(tempOrderNexus, m_pMap);
 		pOrderNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pOrderNexus->SetSelect(true);
 		g_pCamera->SetTarget(pOrderNexus->GetPosPtr());
@@ -90,7 +88,7 @@ void cTestScene::Update()
 		cBuilding* pOrderInhibitor = new cBuilding;
 		vector<ST_UNITLOADINFO> tempOrderInhibitor;
 		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x", NULL, NULL });
-		pOrderInhibitor->Setup(tempOrderInhibitor);
+		pOrderInhibitor->Setup(tempOrderInhibitor, m_pMap);
 		pOrderInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pOrderInhibitor->SetSelect(true);
 		g_pCamera->SetTarget(pOrderInhibitor->GetPosPtr());
@@ -103,7 +101,7 @@ void cTestScene::Update()
 		cBuilding* pOrderTurret = new cBuilding;
 		vector<ST_UNITLOADINFO> tempOrderTurret;
 		tempOrderTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
-		pOrderTurret->Setup(tempOrderTurret);
+		pOrderTurret->Setup(tempOrderTurret, m_pMap);
 		pOrderTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pOrderTurret->SetSelect(true);
 		g_pCamera->SetTarget(pOrderTurret->GetPosPtr());
@@ -116,7 +114,7 @@ void cTestScene::Update()
 		cBuilding* pChaosNexus = new cBuilding;
 		vector<ST_UNITLOADINFO> tempChaosNexus;
 		tempChaosNexus.push_back({ STATE_IDLE, "unit/ChaosNexus.x", NULL, NULL });
-		pChaosNexus->Setup(tempChaosNexus);
+		pChaosNexus->Setup(tempChaosNexus, m_pMap);
 		pChaosNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pChaosNexus->SetSelect(true);
 		g_pCamera->SetTarget(pChaosNexus->GetPosPtr());
@@ -129,7 +127,7 @@ void cTestScene::Update()
 		cBuilding* pChaosInhibitor = new cBuilding;
 		vector<ST_UNITLOADINFO> tempChaosInhibitor;
 		tempChaosInhibitor.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x", NULL, NULL });
-		pChaosInhibitor->Setup(tempChaosInhibitor);
+		pChaosInhibitor->Setup(tempChaosInhibitor, m_pMap);
 		pChaosInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pChaosInhibitor->SetSelect(true);
 		g_pCamera->SetTarget(pChaosInhibitor->GetPosPtr());
@@ -142,7 +140,7 @@ void cTestScene::Update()
 		cBuilding* pChaosTurret = new cBuilding;
 		vector<ST_UNITLOADINFO> tempChaosTurret;
 		tempChaosTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
-		pChaosTurret->Setup(tempChaosTurret);
+		pChaosTurret->Setup(tempChaosTurret, m_pMap);
 		pChaosTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pChaosTurret->SetSelect(true);
 		g_pCamera->SetTarget(pChaosTurret->GetPosPtr());
@@ -168,10 +166,9 @@ void cTestScene::Update()
 	{
 		m_vecBuilding[i]->Update();
 	}
-=======
+
 	m_pPlayer->Update();
 	if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
->>>>>>> 2f8cbe4b0335e7545728f8908b0d42c74e7750e9
 }
 
 void cTestScene::Render()

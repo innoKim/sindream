@@ -123,7 +123,7 @@ float cMap::GetHeight(D3DXVECTOR3 pos)
 	//return 0.f;
 
 	//먼저 대상노드를 찾고
-	float width = MAP_SIZE*MAP_RATIO / MAP_GRID;
+	float width = MAP_SIZE * MAP_RATIO / MAP_GRID;
 
 	int indexX = pos.x / width;
 	int indexZ = pos.z / width;

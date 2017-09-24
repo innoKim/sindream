@@ -1,7 +1,7 @@
 #pragma once
 #include "cGroup.h"
 
-#define MAP_SIZE 15000
+#define MAP_SIZE	15000
 #define MAP_RATIO	0.5f
 #define MAP_GRID	5
 
