@@ -25,5 +25,6 @@ public:
 
 	void ObjVSObj(cPhysics& obj1, cPhysics& obj2, bool byObstacle);		//오브젝트간의 충돌
 	void ObjVSObstacle(cPhysics& obj);					//지형과의 충돌 일단 바닥만 만들었어요 나머지는 벽 체크할수 있으면 추가
+	void ObjVSWall(cPhysics & obj);
 };
 

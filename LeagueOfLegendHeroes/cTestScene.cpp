@@ -8,7 +8,6 @@
 cTestScene::cTestScene()
 	: m_pPlayer(NULL)
 	, m_pMap(NULL)
-	, m_bEditOn(false)
 {
 }
 
@@ -17,24 +16,19 @@ cTestScene::~cTestScene()
 {
 	SAFE_DELETE(m_pMap);
 	SAFE_DELETE(m_pPlayer);
-
-	for each (auto p in m_vecBuilding)
-	{
-		SAFE_DELETE(p);
-	}
 }
 
 void cTestScene::Setup()
 {
 	m_pMap = new cMap;
-	m_pMap->LoadMap("map/", "room.obj");
-	
+	m_pMap->LoadMap("map/", "room.obj");	
 	m_pMap->LoadSur("LoL/room_surface.obj");
 
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
+<<<<<<< HEAD
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer)});
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",{ 0.0f,AlistarSpell2CallBack,m_pPlayer } });
 	m_pPlayer->Setup(temp);
@@ -44,12 +38,33 @@ void cTestScene::Setup()
 	//카메라 설정 이렇게 할 수 있습니다.
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pCamera->Zoom(20.f);
+=======
+	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer) });
+	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer) });
+	m_pPlayer->Setup(temp, m_pMap);
+	
+	m_pPlayer->SetPosition(D3DXVECTOR3(1000.0f, 0, 1000.0f));
+
+	//카메라 설정 이렇게 할 수 있습니다.
+	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+	g_pCamera->Zoom(5.f);
+>>>>>>> 2f8cbe4b0335e7545728f8908b0d42c74e7750e9
 	
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
+
+	cUnit* pOrderNexus = new cBuilding;
+	vector<ST_UNITLOADINFO> tempBuilding;
+	tempBuilding.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x" ,NULL,NULL });
+	pOrderNexus->Setup(tempBuilding, m_pMap);
+	pOrderNexus->SetPosition(D3DXVECTOR3(750, 50, 750));
+	m_vecBuilding.push_back(pOrderNexus);
+
+	//SetLight();
 }
 
 void cTestScene::Update()
 {
+<<<<<<< HEAD
 	if (m_pPlayer)
 	{
 		m_pPlayer->Update();
@@ -153,11 +168,15 @@ void cTestScene::Update()
 	{
 		m_vecBuilding[i]->Update();
 	}
+=======
+	m_pPlayer->Update();
+	if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
+>>>>>>> 2f8cbe4b0335e7545728f8908b0d42c74e7750e9
 }
 
 void cTestScene::Render()
 {
-	if (m_pPlayer) m_pPlayer->Render();
+	m_pPlayer->Render();
 
 	for (int i = 0; i < m_vecBuilding.size(); i++)
 	{
@@ -179,6 +198,18 @@ void cTestScene::SetLight()
 	g_pD3DDevice->LightEnable(0, true);
 
 	g_pD3DDevice->SetRenderState(D3DRS_SPECULARENABLE, true);
+}
+
+D3DXVECTOR3 cTestScene::playerPos()
+{
+	if (m_pPlayer)
+	{
+		m_pPlayer->GetPosition();
+	}
+	else
+	{
+		return D3DXVECTOR3(0, 0, 0);
+	}
 }
 
 void cTestScene::AlistarSpell1CallBack(void *CallBackObj)

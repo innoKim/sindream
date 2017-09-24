@@ -185,6 +185,7 @@
     <ClInclude Include="cTestScene.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
+    <ClInclude Include="cUIBar.h" />
     <ClInclude Include="cUIButton.h" />
     <ClInclude Include="cUIImage.h" />
     <ClInclude Include="cUIObject.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="cTestScene.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
+    <ClCompile Include="cUIBar.cpp" />
     <ClCompile Include="cUIButton.cpp" />
     <ClCompile Include="cUIImage.cpp" />
     <ClCompile Include="cUIObject.cpp" />

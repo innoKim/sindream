@@ -52,13 +52,28 @@ void cCollision::ObjVSObstacle(cPhysics& obj)
 	//벽이랑 충돌할때에는 충돌점에 잠시 물리요소를 생성해서 일반 충돌과 똑같이 작동하도록
 	cPhysics obstacle;
 	D3DXVECTOR3 obsPos = *obj.GetPositionPtr();
-	obstacle.SetPositionPtr(&D3DXVECTOR3(obsPos.x,0,obsPos.z));
+	obstacle.SetPositionPtr(&D3DXVECTOR3(obsPos.x, obj.Height(),obsPos.z));
 	obstacle.SetMass(OBSTACLE_MASS);
 
 	ObjVSObj(obj, obstacle,true);
 
-	(*obj.GetPositionPtr()).y = 0.0f;
+	(*obj.GetPositionPtr()).y = obj.Height();
 }
+
+void cCollision::ObjVSWall(cPhysics& obj)
+{
+	//벽이랑 충돌할때에는 충돌점에 잠시 물리요소를 생성해서 일반 충돌과 똑같이 작동하도록
+	cPhysics obstacle;
+	D3DXVECTOR3 obsPos = *obj.GetPositionPtr();
+	D3DXVECTOR3 dir;
+	D3DXVec3Normalize(&dir,&obstacle.GetVelocity());
+	obstacle.SetPositionPtr(&(obsPos+dir));
+	obstacle.SetRadius(obj.GetRadius());
+	obstacle.SetMass(OBSTACLE_MASS);
+
+	ObjVSObj(obj, obstacle, true);
+}
+
 
 void cCollision::FindCollidedVelocity(OUT float & v1, OUT float & v2, IN cPhysics & obj1, IN cPhysics & obj2)
 {

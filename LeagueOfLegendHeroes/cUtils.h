@@ -22,6 +22,8 @@ struct HitInfo
 };
 
 struct ST_PC_VERTEX;
+struct ST_TRIANGLE;
+struct ST_SQUARE;
 
 namespace MY_UTIL
 {
@@ -41,4 +43,10 @@ namespace MY_UTIL
 	bool RayCastPC(IN RayInfo& ray, OUT HitInfo& hit, IN vector<ST_PC_VERTEX>* target);
 
 	DWORD FtoDw(float f);
+
+	D3DXVECTOR3 WorldToScreenPosition(D3DXVECTOR3 worldPosition);
+	
+	bool PtInTri(ST_TRIANGLE& triangle, D3DXVECTOR2& point);
+	bool PtInSquare(ST_SQUARE & square, D3DXVECTOR2 & point);
+	bool TriVsSq(ST_TRIANGLE& tri, ST_SQUARE& sq);
 }

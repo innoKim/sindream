@@ -30,14 +30,14 @@ cMainGame::~cMainGame()
 
 void cMainGame::Setup()
 {
-	m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
-//	m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
+//	m_pScene = new cTestScene; //<<-테스트 씬 만들면 요녀석만 바꾸면 됩니다. 헤더 당연히 추가하고
+	m_pScene = new cPhysicsScene; // 인호-물리 테스트씬
 //	m_pScene = new cParticleScene;
 
 	m_pScene->Setup();
 
-	//m_pGrid = new cGridPlane;
-	//m_pGrid->Setup(100,50);
+	m_pGrid = new cGridPlane;
+	m_pGrid->Setup(100, 50);
 
 	g_pShaderManager->SetupShadow();
 }
@@ -66,6 +66,10 @@ void cMainGame::Render()
 	char str[256];
 	sprintf(str, "%.2f FPS", g_pTimeManager->GetFrameRate());
 	g_pDebug->Print(str);
+
+
+	sprintf(str, "%.2f, %.2f, %.2f", m_pScene->playerPos().x, m_pScene->playerPos().y, m_pScene->playerPos().z);
+	g_pDebug->Print(str,0,100);
 	
 	/////  렌더 끝
 	g_pD3DDevice->EndScene();

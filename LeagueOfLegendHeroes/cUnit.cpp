@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "cUnit.h"
 #include "cSkinnedMesh.h"
-//#include "cRigidbody.h"
 #include "cPhysics.h"
+#include "cMap.h"
 
 void cUnit::Destroy()
 {
@@ -10,15 +10,14 @@ void cUnit::Destroy()
 	{
 		SAFE_DELETE(p.second);
 	}
-	//SAFE_DELETE(m_pRigidbody);
 	SAFE_DELETE(m_pPhysics);
 }
 
 cUnit::cUnit() :
 	m_vPos(0, 0, 0),
 	m_vDir(0, 0, -1),
-	//m_pRigidbody(NULL)
-	m_pPhysics(NULL)
+	m_pPhysics(NULL),
+	m_pMap(NULL)
 {
 }
 
@@ -26,7 +25,7 @@ cUnit::~cUnit()
 {
 }
 
-void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
+void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector, cMap* mapPtr)
 {
 	for (int i = 0; i < statesVector.size(); i++)
 	{
@@ -38,6 +37,8 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
 	}
 	SetState(STATE_IDLE);
 
+	m_pMap = mapPtr;
+
 	/*m_pRigidbody = new cRigidbody;
 	m_pRigidbody->SetPositionPtr(&m_vPos);
 	m_pRigidbody->SetDirectionPtr(&m_vDir);
@@ -48,6 +49,7 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector)
 	m_pPhysics->SetDirectionPtr(&m_vDir);
 	m_pPhysics->SetRadius(15.0f);
 	m_pPhysics->Setup();
+	m_pPhysics->SetMapPtr(mapPtr);
 }
 
 void cUnit::Update()

@@ -2,6 +2,7 @@
 
 class cPhysics;
 class cRigidbody;
+class cMap;
 
 #include "cSkinnedMesh.h"
 
@@ -32,17 +33,19 @@ protected:
 	eSTATE   m_eStateNum;
 	cSkinnedMesh* m_pCurState;
 
-	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vPos, Position)
-	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vDir, Direction)
-	SYNTHESIZE(cPhysics*, m_pPhysics, Physics)
-//	SYNTHESIZE(cRigidbody*, m_pRigidbody, Rigidbody)
-
+	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vPos, Position);
+	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vDir, Direction);
+	
+	SYNTHESIZE(cPhysics*, m_pPhysics, Physics);
+	SYNTHESIZE(cMap*, m_pMap, MapPtr);
+	
 	void Destroy();
+
 public:
 	cUnit();
 	~cUnit();
 
-	virtual void Setup(vector<ST_UNITLOADINFO> statesVector);
+	virtual void Setup(vector<ST_UNITLOADINFO> statesVector, cMap* mapPtr);
 	virtual void Update();
 	virtual void Render();
 

@@ -103,6 +103,9 @@ void cParticleGroup::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 
 	g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, true);
+
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+
 }
 
 void cParticleGroup::AddParticle()
