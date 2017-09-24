@@ -7,8 +7,7 @@
 #include "cEnemy.h"
 #include "cPhysics.h"
 #include "cRigidbody.h"
-
-#include "cPlane.h"
+#include "cMap.h"
 
 void cPhysicsScene::SetLight()
 {
@@ -26,7 +25,7 @@ void cPhysicsScene::SetLight()
 
 cPhysicsScene::cPhysicsScene():
 	m_pPlayer(NULL),
-	m_pPlane(NULL)
+	m_pMap(NULL)
 {
 	
 }
@@ -34,7 +33,7 @@ cPhysicsScene::cPhysicsScene():
 cPhysicsScene::~cPhysicsScene()
 {
 	SAFE_DELETE(m_pPlayer);
-	SAFE_DELETE(m_pPlane);
+	SAFE_DELETE(m_pMap);
 
 	for each(auto p in m_vecEnemy)
 	{
@@ -44,27 +43,28 @@ cPhysicsScene::~cPhysicsScene()
 
 void cPhysicsScene::Setup()
 {
+	m_pMap = new cMap;
+	m_pMap->LoadMap("map/", "room.obj");
+	m_pMap->LoadSur("LoL/room_surface.obj");
+
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x"});
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x"});
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell1CallBack2,m_pPlayer)});
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",{0.0f,AlistarSpell2CallBack,m_pPlayer}});
-	m_pPlayer->Setup(temp);
-	m_pPlayer->SetPosition(D3DXVECTOR3(-100, 0, 0));
+	m_pPlayer->Setup(temp, m_pMap);
+	m_pPlayer->SetPosition(D3DXVECTOR3(1000, 0, 1000));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
-
-	m_pPlane = new cPlane;
-	m_pPlane->Setup(5000);
 
 	for (int i = 0; i < 3; i++)
 	{
 		cUnit* enemy = new cEnemy;
 		vector<ST_UNITLOADINFO> temp;
 		temp.push_back({ STATE_IDLE, "unit/PoroIdle.x" ,NULL,NULL });
-		enemy->Setup(temp);
-		enemy->SetPosition(D3DXVECTOR3(i * 100, 100 , i * 10));
+		enemy->Setup(temp, m_pMap);
+		enemy->SetPosition(D3DXVECTOR3(1000+i * 100, 100 , 1000 + i * 10));
 		m_vecEnemy.push_back(enemy);
 	}
 	
@@ -128,4 +128,9 @@ void cPhysicsScene::AlistarSpell2CallBack(void * CallBackObj)
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
 	Alistar->SetState(STATE_IDLE);
+}
+
+D3DXVECTOR3 cPhysicsScene::playerPos()
+{
+	return m_pPlayer->GetPosition();
 }

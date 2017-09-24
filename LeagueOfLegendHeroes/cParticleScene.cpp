@@ -78,7 +78,7 @@ void cParticleScene::Setup()
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer) });
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer) });
-	m_pPlayer->Setup(temp);
+	m_pPlayer->Setup(temp,NULL);
 	m_pPlayer->SetPosition(D3DXVECTOR3(-100, 0, 0));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());

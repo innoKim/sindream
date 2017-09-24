@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "cPlayer.h"
+#include "cMap.h"
 
 cPlayer::cPlayer()
 {
@@ -29,7 +30,23 @@ void cPlayer::KeyControl()
 	{
 		//Lerp Dir and MoveDir
 		m_vDir = D3DXVECTOR3(m_vDir.x*0.9f + m_moveInfo.vMoveDir.x*0.1f, m_vDir.y, m_vDir.z*0.9f + m_moveInfo.vMoveDir.z*0.1f);
-		m_vPos += PLAYER_SPD*m_vDir;
+		
+		if (m_pMap)
+		{
+			if (m_pMap->GetHeight(m_vPos + D3DXVECTOR3(PLAYER_SPD*m_vDir.x,0,0)) > FLT_EPSILON)
+			{
+				m_vPos += D3DXVECTOR3(PLAYER_SPD*m_vDir.x, 0, 0);
+			}
+			if (m_pMap->GetHeight(m_vPos + D3DXVECTOR3(0, 0, PLAYER_SPD*m_vDir.z)) > FLT_EPSILON)
+			{
+				m_vPos += D3DXVECTOR3(0, 0, PLAYER_SPD*m_vDir.z);
+			}
+		}
+		else
+		{
+			m_vPos += PLAYER_SPD*m_vDir;
+		}
+
 		SetState(STATE_RUN);
 	}
 

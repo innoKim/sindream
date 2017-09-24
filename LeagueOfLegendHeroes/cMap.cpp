@@ -110,7 +110,7 @@ void cMap::LoadSur(char * FileFullPath)
 	surLoader.LoadSur(FileFullPath, m_vecSur, m_gridHeightNode);
 }
 
-float cMap::GetGroundHeight(D3DXVECTOR3 pos)
+float cMap::GetHeight(D3DXVECTOR3 pos)
 {
 	//RayInfo m_stRay = Ray(D3DXVECTOR3(pos.x, 1000.f, pos.z), pos);
 	//HitInfo m_stHit;

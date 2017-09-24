@@ -19,8 +19,7 @@ cTestScene::~cTestScene()
 void cTestScene::Setup()
 {
 	m_pMap = new cMap;
-	m_pMap->LoadMap("map/", "room.obj");
-	
+	m_pMap->LoadMap("map/", "room.obj");	
 	m_pMap->LoadSur("LoL/room_surface.obj");
 
 	m_pPlayer = new cPlayer;
@@ -29,8 +28,8 @@ void cTestScene::Setup()
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer) });
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer) });
-	m_pPlayer->Setup(temp);
-
+	m_pPlayer->Setup(temp, m_pMap);
+	
 	m_pPlayer->SetPosition(D3DXVECTOR3(1000.0f, 0, 1000.0f));
 
 	//카메라 설정 이렇게 할 수 있습니다.
@@ -42,7 +41,7 @@ void cTestScene::Setup()
 	cUnit* pOrderNexus = new cBuilding;
 	vector<ST_UNITLOADINFO> tempBuilding;
 	tempBuilding.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x" ,NULL,NULL });
-	pOrderNexus->Setup(tempBuilding);
+	pOrderNexus->Setup(tempBuilding, m_pMap);
 	pOrderNexus->SetPosition(D3DXVECTOR3(750, 50, 750));
 	m_vecBuilding.push_back(pOrderNexus);
 
@@ -52,7 +51,7 @@ void cTestScene::Setup()
 void cTestScene::Update()
 {
 	m_pPlayer->Update();
-	if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetGroundHeight(m_pPlayer->GetPosition()));
+	if (m_pMap)	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
 }
 
 void cTestScene::Render()

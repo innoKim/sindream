@@ -2,6 +2,8 @@
 
 #define PHYSICS_GRAVITY -1000.0f
 
+class cMap;
+
 class cPhysics
 {
 private:
@@ -21,6 +23,8 @@ private:
 	SYNTHESIZE(D3DXVECTOR3*, m_pvDir, DirectionPtr);
 	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vAngularVelocity, AngularVelocity);
 
+	SYNTHESIZE(cMap*, m_pMap, MapPtr);
+
 public:
 	cPhysics();
 	virtual ~cPhysics();
@@ -30,5 +34,7 @@ public:
 	bool ColisionWith(set<cPhysics*> setVersusObject);
 
 	float GetVelocityScalar() { return D3DXVec3Length(&m_vVelocity); }
+
+	float Height();
 };
 
