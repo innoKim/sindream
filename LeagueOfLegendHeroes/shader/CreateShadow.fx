@@ -22,18 +22,10 @@
 //--------------------------------------------------------------//
 string ShadowMapping_CreateShadow_Model : ModelData = ".\\ShaderProgramming\\10_ShadowMapping\\Torus.x";
 
-texture ShadowMap_Tex : RenderColorTarget
-<
-   float2 RenderTargetDimensions = {2048,2048};
-   string Format="D3DFMT_R32F";
-   float  ClearDepth=1.000000;
-   int    ClearColor=-1;
->;
+texture ShadowMap_Tex : RenderColorTarget;
 float4x4 matWorld : World;
 float4x4 matLightView;
 float4x4 matLightProjection : Projection;
-
-float4 vLightPos;
 
 struct VS_INPUT
 {
@@ -79,11 +71,6 @@ float4 ShadowMapping_CreateShadow_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
 technique ShadowMapping
 {
    pass CreateShadow
-   <
-      string Script = "RenderColorTarget0 = ShadowMap_Tex;"
-                      "ClearColor = (255, 255, 255, 255);"
-                      "ClearDepth = 1.000000;";
-   >
    {
       VertexShader = compile vs_3_0 ShadowMapping_CreateShadow_Vertex_Shader_vs_main();
       PixelShader = compile ps_3_0 ShadowMapping_CreateShadow_Pixel_Shader_ps_main();

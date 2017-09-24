@@ -10,6 +10,7 @@ cShaderManager::cShaderManager()
 	, m_pShadowDepthStencil(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
 	, m_vLightPos(-100, 1000, -100, 1.0f)
+	, m_vLightDirection(100, -1000, 100, 0.0f)
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
@@ -116,7 +117,6 @@ void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture,
 
 	m_pCreateShadow->SetMatrix("matWorld", &matWorld);
 	m_pCreateShadow->SetMatrix("matLightView", &m_matLightView);
-	m_pCreateShadow->SetVector("vLightPos", &D3DXVECTOR4(vEyePt, 1));
 
 	//현재 렌더 타겟은 쉐도우 맵, 쉐도우 맵에 광원 위치에서 본 오브젝트의 모양을 그린다
 	UINT numPasses = 0;

@@ -4,15 +4,18 @@
 class cUnit;
 class cPlane;
 class cMap;
+class cBuilding;
 
 class cPhysicsScene : public iScene
 {
 private:
-	cUnit* m_pPlayer;
-	cMap* m_pMap;
-	D3DLIGHT9	m_light;
+	cUnit*				m_pPlayer;
+	cMap*				m_pMap;
+	D3DLIGHT9			m_light;
+	bool				m_bEditOn;
 
-	vector<cUnit*> m_vecEnemy;
+	vector<cUnit*>		m_vecEnemy;
+	vector<cBuilding*>	m_vecBuilding;
 	
 	void SetLight();
 public:
@@ -26,6 +29,9 @@ public:
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell1CallBack2(void * CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
+
+	void SaveBuilding();
+	void LoadBuilding();
 
 	virtual D3DXVECTOR3 playerPos() override;
 };
