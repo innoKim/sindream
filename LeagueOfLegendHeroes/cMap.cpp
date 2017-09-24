@@ -144,7 +144,6 @@ float cMap::GetHeight(D3DXVECTOR3 pos)
 			}
 		}
 	}*/
-
 	if (RayCast(Ray, Hit, m_gridHeightNode[indexX][indexZ].vecVertex))
 	{
 		return 1000.f - Hit.dist;

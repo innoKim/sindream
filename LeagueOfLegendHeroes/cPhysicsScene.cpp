@@ -86,7 +86,7 @@ void cPhysicsScene::Update()
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
 	{
-		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(100, 500, 0));
+		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(500, 500, 0));
 	}
 
 	g_pPhysicsManager->RigidbodyUpdate();
