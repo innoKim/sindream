@@ -140,9 +140,9 @@ struct ST_PNT_VERTEX
 #include "cTextureManager.h"
 #include "cFontManager.h"
 #include "cTimeManager.h"
-#include "cCamera.h"
 #include "cDebugManager.h"
 #include "cShaderManager.h"
+#include "cCamera.h"
 
 #include "cPhysicsManager.h"
 #include "cCollision.h"

@@ -3,16 +3,16 @@
 #define RAY 9999.f
 
 #include "iScene.h"
-#include "cMap.h"
-
+class cMap;
 class cUnit;
+class cBuilding;
 
 class cTestScene : public iScene
 {
 private:
 	cUnit*					m_pPlayer;
 	cMap*					m_pMap;
-	vector<cUnit*>			m_vecBuilding;
+	vector<cBuilding*>		m_vecBuilding;
 	bool					m_bEditOn;
 
 public:

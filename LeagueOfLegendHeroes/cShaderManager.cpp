@@ -9,7 +9,7 @@ cShaderManager::cShaderManager()
 	, m_pShadowRenderTarget(NULL)
 	, m_pShadowDepthStencil(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(-100, 3000, -100, 1.0f)
+	, m_vLightPos(-100, 1000, -100, 1.0f)
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
@@ -42,6 +42,10 @@ void cShaderManager::SetupShadow()
 	m_pApplyShadow = LoadEffect("shader/ApplyShadow.fx");
 
 	m_pSkybox = LoadEffect("shader/Skybox.fx");
+
+	//광원-투영 행렬을 만든다
+	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3000);
+	m_pCreateShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 
 	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/cubeTexture1.dds", &m_pCubeTexture);
 
@@ -81,6 +85,17 @@ void cShaderManager::BeginRender()
 
 	g_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
 
+	m_pApplyShadow->SetFloat("fLightWeight", 1.0f);
+	m_pApplyShadow->SetBool("bTexture", true);
+}
+
+void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture, D3DXMATRIXA16 matWorld)
+{
+	//2패스 렌더링을 위해 벡터에 메쉬와 텍스처, 월드 매트릭스들을 저장
+	m_vecMesh.push_back(pMesh);
+	m_vecTexture.push_back(pTexture);
+	m_vecMatWorld.push_back(matWorld);
+
 	//광원-뷰 행렬을 만든다
 	D3DXVECTOR3 vEyePt, vLookatPt;
 	if (m_pvTarget)
@@ -98,34 +113,10 @@ void cShaderManager::BeginRender()
 
 	D3DXMatrixLookAtLH(&m_matLightView, &vEyePt, &vLookatPt, &vUpVec);
 
-	//광원-투영 행렬을 만든다
-	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3000);
-
-	D3DXMATRIXA16 matWorld;
-	D3DXMatrixIdentity(&matWorld);
 
 	m_pCreateShadow->SetMatrix("matWorld", &matWorld);
 	m_pCreateShadow->SetMatrix("matLightView", &m_matLightView);
-	m_pCreateShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 	m_pCreateShadow->SetVector("vLightPos", &D3DXVECTOR4(vEyePt, 1));
-
-	m_pApplyShadow->SetFloat("fLightWeight", 1.0f);
-	m_pApplyShadow->SetBool("bTexture", true);
-
-	D3DXMATRIXA16 matView, matProjection;
-
-	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
-	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
-}
-
-void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture, D3DXMATRIXA16 matWorld)
-{
-	//2패스 렌더링을 위해 벡터에 메쉬와 텍스처, 월드 매트릭스들을 저장
-	m_vecMesh.push_back(pMesh);
-	m_vecTexture.push_back(pTexture);
-	m_vecMatWorld.push_back(matWorld);
-
-	m_pCreateShadow->SetMatrix("matWorld", &matWorld);
 
 	//현재 렌더 타겟은 쉐도우 맵, 쉐도우 맵에 광원 위치에서 본 오브젝트의 모양을 그린다
 	UINT numPasses = 0;

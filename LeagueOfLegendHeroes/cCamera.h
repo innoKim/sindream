@@ -32,7 +32,7 @@ private:
 public:
 	void Destroy();
 	void Update();
-	void SetTarget(D3DXVECTOR3* target) { m_pvTarget = target; }
+	void SetTarget(D3DXVECTOR3* target) { m_pvTarget = target; g_pShaderManager->SetTarget(target); }
 	D3DXVECTOR3* GetTarget() { return m_pvTarget; }
 
 	void Zoom(float spd);
