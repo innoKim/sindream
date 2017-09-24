@@ -2,10 +2,21 @@
 #include "cUnit.h"
 class cBuilding : public cUnit
 {
-private:
-	bool	m_bSelect;
-	float	m_fSpeed;
+public:
+	enum eBuildingType
+	{
+		E_ORDERNEXUS,
+		E_ORDERINHIBITOR,
+		E_ORDERTURRET,
+		E_CHAOSNEXUS,
+		E_CHAOSINHIBITOR,
+		E_CHAOSTURRET,
+	};
 
+private:
+	bool			m_bSelect;
+	float			m_fSpeed;
+	SYNTHESIZE(eBuildingType, m_eType, Type);
 public:
 	cBuilding();
 	~cBuilding();

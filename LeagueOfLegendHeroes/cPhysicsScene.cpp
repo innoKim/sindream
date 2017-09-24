@@ -95,6 +95,7 @@ void cPhysicsScene::Update()
 		pOrderNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pOrderNexus->SetSelect(true);
 		g_pCamera->SetTarget(pOrderNexus->GetPosPtr());
+		pOrderNexus->SetType(cBuilding::E_ORDERNEXUS);
 		m_vecBuilding.push_back(pOrderNexus);
 	}
 
@@ -108,6 +109,7 @@ void cPhysicsScene::Update()
 		pOrderInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pOrderInhibitor->SetSelect(true);
 		g_pCamera->SetTarget(pOrderInhibitor->GetPosPtr());
+		pOrderInhibitor->SetType(cBuilding::E_ORDERINHIBITOR);
 		m_vecBuilding.push_back(pOrderInhibitor);
 	}
 
@@ -121,6 +123,7 @@ void cPhysicsScene::Update()
 		pOrderTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pOrderTurret->SetSelect(true);
 		g_pCamera->SetTarget(pOrderTurret->GetPosPtr());
+		pOrderTurret->SetType(cBuilding::E_ORDERTURRET);
 		m_vecBuilding.push_back(pOrderTurret);
 	}
 
@@ -134,6 +137,7 @@ void cPhysicsScene::Update()
 		pChaosNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pChaosNexus->SetSelect(true);
 		g_pCamera->SetTarget(pChaosNexus->GetPosPtr());
+		pChaosNexus->SetType(cBuilding::E_CHAOSNEXUS);
 		m_vecBuilding.push_back(pChaosNexus);
 	}
 
@@ -147,6 +151,7 @@ void cPhysicsScene::Update()
 		pChaosInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pChaosInhibitor->SetSelect(true);
 		g_pCamera->SetTarget(pChaosInhibitor->GetPosPtr());
+		pChaosInhibitor->SetType(cBuilding::E_CHAOSINHIBITOR);
 		m_vecBuilding.push_back(pChaosInhibitor);
 	}
 
@@ -160,7 +165,21 @@ void cPhysicsScene::Update()
 		pChaosTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pChaosTurret->SetSelect(true);
 		g_pCamera->SetTarget(pChaosTurret->GetPosPtr());
+		pChaosTurret->SetType(cBuilding::E_CHAOSTURRET);
 		m_vecBuilding.push_back(pChaosTurret);
+	}
+
+	if (g_pKeyManager->IsStayKeyDown(VK_CONTROL))
+	{
+		if (g_pKeyManager->IsOnceKeyDown('S'))
+		{
+			SaveBuilding();
+		}
+
+		if (g_pKeyManager->IsOnceKeyDown('L'))
+		{
+			LoadBuilding();
+		}
 	}
 
 	if (g_pKeyManager->IsStayKeyDown(VK_RETURN))
@@ -241,10 +260,140 @@ void cPhysicsScene::AlistarSpell2CallBack(void * CallBackObj)
 
 void cPhysicsScene::SaveBuilding()
 {
+	HANDLE file;
+	DWORD write;
+
+	string strData;
+
+	strData += to_string(m_vecBuilding.size()) + '\n';
+
+	for (int i = 0; i < m_vecBuilding.size(); i++)
+	{
+		switch (m_vecBuilding[i]->GetType())
+		{
+		case cBuilding::E_ORDERNEXUS:
+			strData += "ORDERNEXUS ";
+			break;
+		case cBuilding::E_ORDERINHIBITOR:
+			strData += "ORDERINHIBITOR ";
+			break;
+		case cBuilding::E_ORDERTURRET:
+			strData += "ORDERTURRET ";
+			break;
+		case cBuilding::E_CHAOSNEXUS:
+			strData += "CHAOSNEXUS ";
+			break;
+		case cBuilding::E_CHAOSINHIBITOR:
+			strData += "CHAOSINHIBITOR ";
+			break;
+		case cBuilding::E_CHAOSTURRET:
+			strData += "CHAOSTURRET ";
+			break;
+		}
+
+		strData += to_string(m_vecBuilding[i]->GetPosition().x) + " ";
+		strData += to_string(m_vecBuilding[i]->GetPosition().y) + " ";
+		strData += to_string(m_vecBuilding[i]->GetPosition().z) + " ";
+
+		strData += to_string(m_vecBuilding[i]->GetDirection().x) + " ";
+		strData += to_string(m_vecBuilding[i]->GetDirection().y) + " ";
+		strData += to_string(m_vecBuilding[i]->GetDirection().z) + " ";
+
+		strData += '\n';
+	}
+
+	file = CreateFile("unit/buildings.txt", GENERIC_WRITE, 0,
+		NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	WriteFile(file, strData.c_str(), strData.length(), &write, NULL);
+	CloseHandle(file);
 }
 
 void cPhysicsScene::LoadBuilding()
 {
+	ifstream inFile("unit/buildings.txt", ios::in);
+
+	vector<string> vecStrMap;
+
+	while (!inFile.eof())
+	{
+		string str;
+		inFile >> str;
+		vecStrMap.push_back(str);
+	}
+
+	for (int i = 1; i < vecStrMap.size(); i += 7)
+	{
+		if (vecStrMap[i] == "ORDERNEXUS")
+		{
+			cBuilding* pOrderNexus = new cBuilding;
+			vector<ST_UNITLOADINFO> tempOrderNexus;
+			tempOrderNexus.push_back({ STATE_IDLE, "unit/OrderNexus.x", NULL, NULL });
+			pOrderNexus->Setup(tempOrderNexus, m_pMap);
+			pOrderNexus->SetPosition(D3DXVECTOR3(atof(vecStrMap[i + 1].c_str()), atof(vecStrMap[i + 2].c_str()), atof(vecStrMap[i + 3].c_str())));
+			pOrderNexus->SetDirection(D3DXVECTOR3(atof(vecStrMap[i + 4].c_str()), atof(vecStrMap[i + 5].c_str()), atof(vecStrMap[i + 6].c_str())));
+			pOrderNexus->SetType(cBuilding::E_ORDERNEXUS);
+			m_vecBuilding.push_back(pOrderNexus);
+		}
+		else if (vecStrMap[i] == "ORDERINHIBITOR")
+		{
+			cBuilding* pOrderInhibitor = new cBuilding;
+			vector<ST_UNITLOADINFO> tempOrderInhibitor;
+			tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x", NULL, NULL });
+			pOrderInhibitor->Setup(tempOrderInhibitor, m_pMap);
+			pOrderInhibitor->SetPosition(D3DXVECTOR3(atof(vecStrMap[i + 1].c_str()), atof(vecStrMap[i + 2].c_str()), atof(vecStrMap[i + 3].c_str())));
+			pOrderInhibitor->SetDirection(D3DXVECTOR3(atof(vecStrMap[i + 4].c_str()), atof(vecStrMap[i + 5].c_str()), atof(vecStrMap[i + 6].c_str())));
+			pOrderInhibitor->SetType(cBuilding::E_ORDERINHIBITOR);
+			m_vecBuilding.push_back(pOrderInhibitor);
+		}
+		else if (vecStrMap[i] == "ORDERTURRET")
+		{
+			cBuilding* pOrderTurret = new cBuilding;
+			vector<ST_UNITLOADINFO> tempOrderTurret;
+			tempOrderTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
+			pOrderTurret->Setup(tempOrderTurret, m_pMap);
+			pOrderTurret->SetPosition(D3DXVECTOR3(atof(vecStrMap[i + 1].c_str()), atof(vecStrMap[i + 2].c_str()), atof(vecStrMap[i + 3].c_str())));
+			pOrderTurret->SetDirection(D3DXVECTOR3(atof(vecStrMap[i + 4].c_str()), atof(vecStrMap[i + 5].c_str()), atof(vecStrMap[i + 6].c_str())));
+			pOrderTurret->SetType(cBuilding::E_ORDERTURRET);
+			m_vecBuilding.push_back(pOrderTurret);
+		}
+		else if (vecStrMap[i] == "CHAOSNEXUS")
+		{
+			cBuilding* pChaosNexus = new cBuilding;
+			vector<ST_UNITLOADINFO> tempChaosNexus;
+			tempChaosNexus.push_back({ STATE_IDLE, "unit/ChaosNexus.x", NULL, NULL });
+			pChaosNexus->Setup(tempChaosNexus, m_pMap);
+			pChaosNexus->SetPosition(D3DXVECTOR3(atof(vecStrMap[i + 1].c_str()), atof(vecStrMap[i + 2].c_str()), atof(vecStrMap[i + 3].c_str())));
+			pChaosNexus->SetDirection(D3DXVECTOR3(atof(vecStrMap[i + 4].c_str()), atof(vecStrMap[i + 5].c_str()), atof(vecStrMap[i + 6].c_str())));
+			pChaosNexus->SetType(cBuilding::E_CHAOSNEXUS);
+			m_vecBuilding.push_back(pChaosNexus);
+		}
+		else if (vecStrMap[i] == "CHAOSINHIBITOR")
+		{
+			cBuilding* pChaosInhibitor = new cBuilding;
+			vector<ST_UNITLOADINFO> tempChaosInhibitor;
+			tempChaosInhibitor.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x", NULL, NULL });
+			pChaosInhibitor->Setup(tempChaosInhibitor, m_pMap);
+			pChaosInhibitor->SetPosition(D3DXVECTOR3(atof(vecStrMap[i + 1].c_str()), atof(vecStrMap[i + 2].c_str()), atof(vecStrMap[i + 3].c_str())));
+			pChaosInhibitor->SetDirection(D3DXVECTOR3(atof(vecStrMap[i + 4].c_str()), atof(vecStrMap[i + 5].c_str()), atof(vecStrMap[i + 6].c_str())));
+			pChaosInhibitor->SetType(cBuilding::E_CHAOSINHIBITOR);
+			m_vecBuilding.push_back(pChaosInhibitor);
+		}
+		else if (vecStrMap[i] == "CHAOSTURRET")
+		{
+			cBuilding* pChaosTurret = new cBuilding;
+			vector<ST_UNITLOADINFO> tempChaosTurret;
+			tempChaosTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
+			pChaosTurret->Setup(tempChaosTurret, m_pMap);
+			pChaosTurret->SetPosition(D3DXVECTOR3(atof(vecStrMap[i + 1].c_str()), atof(vecStrMap[i + 2].c_str()), atof(vecStrMap[i + 3].c_str())));
+			pChaosTurret->SetDirection(D3DXVECTOR3(atof(vecStrMap[i + 4].c_str()), atof(vecStrMap[i + 5].c_str()), atof(vecStrMap[i + 6].c_str())));
+			pChaosTurret->SetType(cBuilding::E_CHAOSTURRET);
+			m_vecBuilding.push_back(pChaosTurret);
+		}
+	}
+
+	vecStrMap;
+
+	inFile.close();
 }
 
 D3DXVECTOR3 cPhysicsScene::playerPos()

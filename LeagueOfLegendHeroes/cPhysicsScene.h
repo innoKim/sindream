@@ -30,8 +30,8 @@ public:
 	static void AlistarSpell1CallBack2(void * CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
 
-	void SaveBuilding();
-	void LoadBuilding();
+	void	SaveBuilding();
+	void	LoadBuilding();
 
 	virtual D3DXVECTOR3 playerPos() override;
 };
