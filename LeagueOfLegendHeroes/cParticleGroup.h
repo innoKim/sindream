@@ -41,6 +41,8 @@ public:
 	void Update();
 	void Render();
 
+	bool IsDead() { return (m_vecParticle.size() == 0); }
+
 private:
 	void AddParticle();
 	void ContinuousAdd();

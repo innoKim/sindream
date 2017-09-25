@@ -34,5 +34,7 @@ public:
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
+
+	virtual D3DXVECTOR3 playerPos() override;
 };
 

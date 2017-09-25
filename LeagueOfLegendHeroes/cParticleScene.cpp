@@ -171,3 +171,8 @@ void cParticleScene::AlistarSpell2CallBack(void * CallBackObj)
 
 	Alistar->SetState(STATE_IDLE);
 }
+
+D3DXVECTOR3 cParticleScene::playerPos()
+{
+	return (m_pPlayer)? m_pPlayer->GetPosition():D3DXVECTOR3(0,0,0);
+}

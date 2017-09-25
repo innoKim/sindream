@@ -174,6 +174,8 @@ struct ST_SQUARE
 #include "cShaderManager.h"
 #include "cCamera.h"
 
+#include "cEffectManager.h"
+
 #include "cPhysicsManager.h"
 #include "cCollision.h"
 
