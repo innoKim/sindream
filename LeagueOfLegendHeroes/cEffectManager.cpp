@@ -9,15 +9,7 @@ cEffectManager::cEffectManager()
 
 cEffectManager::~cEffectManager()
 {
-	for each(auto p in m_mapStorage)
-	{
-		SAFE_DELETE(p.second);
-	}
-
-	for each(auto p in m_vecWork)
-	{
-		SAFE_DELETE(p);
-	}
+	
 }
 
 void cEffectManager::SaveEffects()
@@ -70,12 +62,42 @@ void cEffectManager::DeleteFromStorage(string effectKey)
 
 void cEffectManager::PlayEffect(string effectKey)
 {
-	map<string, cParticleGroup*>::iterator itor; 
+	map<string, cParticleGroup*>::iterator itor;
 	itor = m_mapStorage.find(effectKey);
 
 	if (itor == m_mapStorage.end()) return;
 
-	m_vecWork.push_back(itor->second);
+	cParticleGroup* clone = new cParticleGroup;
+
+	clone->SetTexturePath			(itor->second->GetTexturePath());
+
+	clone->SetIsContinueus			(itor->second->GetIsContinueus());
+	
+	clone->SetInitParticleNumber	(itor->second->GetInitParticleNumber());
+	clone->SetGenParticleNumber		(itor->second->GetGenParticleNumber());
+	
+	clone->SetLifeTime				(itor->second->GetLifeTime());
+	clone->SetLifeTimeVariation		(itor->second->GetLifeTimeVariation());
+	
+	clone->SetStartPosition			(itor->second->GetStartPosition());
+	clone->SetStartPositionVariation(itor->second->GetStartPositionVariation());
+	
+	clone->SetVelocity				(itor->second->GetVelocity());
+	clone->SetVelocityVariation		(itor->second->GetVelocityVariation());
+	clone->SetDragVelocity			(itor->second->GetDragVelocity());
+	
+	clone->SetAcceleration			(itor->second->GetAcceleration());
+	clone->SetAccelerationVariation	(itor->second->GetAccelerationVariation());
+	
+	clone->SetStartColor			(itor->second->GetStartColor());
+	clone->SetStartColorVariation	(itor->second->GetStartColorVariation());
+	
+	clone->SetEndColor				(itor->second->GetEndColor());
+	clone->SetEndColorVariation		(itor->second->GetEndColorVariation());
+
+	clone->Setup();
+	
+	m_vecWork.push_back(clone);
 }
 
 void cEffectManager::Update()
@@ -102,6 +124,19 @@ void cEffectManager::Render()
 	for each (auto p in m_vecWork)
 	{
 		p->Render();
+	}
+}
+
+void cEffectManager::Destroy()
+{
+	for each(auto p in m_mapStorage)
+	{
+		SAFE_DELETE(p.second);
+	}
+
+	for each(auto p in m_vecWork)
+	{
+		SAFE_DELETE(p);
 	}
 }
 
