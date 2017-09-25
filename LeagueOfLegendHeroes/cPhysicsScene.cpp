@@ -25,7 +25,9 @@ void cPhysicsScene::SetLight()
 cPhysicsScene::cPhysicsScene():
 	m_pPlayer(NULL),
 	m_pMap(NULL),
-	m_bEditOn(false)
+	m_bEditOn(false),
+	m_pCurrentBuilding(NULL),
+	m_nIndexBuilding(0)
 {
 	
 }
@@ -160,7 +162,7 @@ void cPhysicsScene::Update()
 		m_bEditOn = true;
 		cBuilding* pChaosTurret = new cBuilding;
 		vector<ST_UNITLOADINFO> tempChaosTurret;
-		tempChaosTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
+		tempChaosTurret.push_back({ STATE_IDLE, "unit/ChaosTurret.x", NULL, NULL });
 		pChaosTurret->Setup(tempChaosTurret, m_pMap);
 		pChaosTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
 		pChaosTurret->SetSelect(true);
@@ -195,6 +197,44 @@ void cPhysicsScene::Update()
 		{
 			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 		}
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown(VK_F1))
+	{
+		m_vecBuilding[m_nIndexBuilding]->SetSelect(false);
+
+		if (m_pPlayer)
+		{
+			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		}
+
+		if (m_nIndexBuilding > 0)
+		{
+			m_nIndexBuilding--;
+		}
+
+		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
+		m_pCurrentBuilding->SetSelect(true);
+		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown(VK_F2))
+	{
+		m_vecBuilding[m_nIndexBuilding]->SetSelect(false);
+
+		if (m_pPlayer)
+		{
+			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		}
+
+		if (m_nIndexBuilding < m_vecBuilding.size() - 1)
+		{
+			m_nIndexBuilding++;
+		}
+
+		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
+		m_pCurrentBuilding->SetSelect(true);
+		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
 	}
 
 	for each(auto p in m_vecBuilding)
@@ -327,6 +367,12 @@ void cPhysicsScene::SaveBuilding()
 
 void cPhysicsScene::LoadBuilding()
 {
+	for each(auto p in m_vecBuilding)
+	{
+		SAFE_DELETE(p);
+	}
+	m_vecBuilding.clear();
+
 	ifstream inFile("unit/buildings.txt", ios::in);
 
 	vector<string> vecStrMap;
@@ -399,7 +445,7 @@ void cPhysicsScene::LoadBuilding()
 		{
 			cBuilding* pChaosTurret = new cBuilding;
 			vector<ST_UNITLOADINFO> tempChaosTurret;
-			tempChaosTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
+			tempChaosTurret.push_back({ STATE_IDLE, "unit/ChaosTurret.x", NULL, NULL });
 			pChaosTurret->Setup(tempChaosTurret, m_pMap);
 			pChaosTurret->SetPosition(D3DXVECTOR3(atof(vecStrMap[i + 1].c_str()), atof(vecStrMap[i + 2].c_str()), atof(vecStrMap[i + 3].c_str())));
 			pChaosTurret->SetDirection(D3DXVECTOR3(atof(vecStrMap[i + 4].c_str()), atof(vecStrMap[i + 5].c_str()), atof(vecStrMap[i + 6].c_str())));
