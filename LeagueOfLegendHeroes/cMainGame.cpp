@@ -60,12 +60,12 @@ void cMainGame::Render()
 
 	g_pShaderManager->BeginRender();
 
-	//m_pScene->Render();
+	m_pScene->Render();
 
 	g_pShaderManager->Render();
 	
 	//if (m_pGrid) m_pGrid->Render();
-	m_pScene->Render();
+	//m_pScene->Render();
 
 	g_pEffectManager->Render();
 

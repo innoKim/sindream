@@ -45,7 +45,7 @@ void cShaderManager::SetupShadow()
 	m_pSkybox = LoadEffect("shader/Skybox.fx");
 
 	//광원-투영 행렬을 만든다
-	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 5000);
+	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3600);
 	m_pCreateShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 
 	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/cubeTexture1.dds", &m_pCubeTexture);
