@@ -181,3 +181,5 @@ struct ST_SQUARE
 
 //타입 정의
 typedef void(*CALLBACKFUNC)(void*);
+
+typedef void(*CALLBACKFUNC2)(void*,void*);

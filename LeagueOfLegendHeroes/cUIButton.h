@@ -16,7 +16,7 @@ protected:
 	eButtonStatus	m_eButtonStatus;
 	string			m_arrTexture[E_STATUS_COUNT];
 	
-	SYNTHESIZE(CALLBACKFUNC, m_pfnCallback, Callback);
+	SYNTHESIZE(CALLBACKFUNC2, m_pfnCallback, Callback);
 	SYNTHESIZE(void*, m_pCallbackObj, CallbackObject);
 	SYNTHESIZE(void*, m_pCallbackObj2, CallbackObject2);
 

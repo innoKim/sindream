@@ -6,6 +6,7 @@ cUIButton::cUIButton()
 	: m_eButtonStatus(E_NORMAL)
 	, m_pfnCallback(NULL)
 	, m_pCallbackObj(NULL)
+	, m_pCallbackObj2(NULL)
 {
 }
 
@@ -37,7 +38,7 @@ void cUIButton::Update()
 			if (m_eButtonStatus == E_SELECTED)
 			{
 				if (m_pfnCallback)
-					m_pfnCallback(m_pCallbackObj);
+					m_pfnCallback(m_pCallbackObj, m_pCallbackObj2);
 			}
 			m_eButtonStatus = E_MOUSEOVER;
 		}
