@@ -7,7 +7,7 @@
 #include "cUnit.h"
 #include "cPlayer.h"
 #include "cUIButton.h"
-
+#include "cUIText.h"
 #include "cMap.h"
 
 cParticleScene::cParticleScene():
@@ -88,9 +88,11 @@ void cParticleScene::Setup()
 		cUIButton* button = new cUIButton;
 		button->SetTag(str);
 		buttonSet->AddChild(button);
-		button->SetTexture("texture/button_norm.png", "texture/button_over.png", "texture/button_selected.png");
-		button->SetPosition(1100, (i+1) * 48);
+		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
+		button->SetPosition(1000+(i%2)*80, ((i/2)+1) * 80);
 	}
+
+
 	
 	//////////////////////
 	m_pMap = new cMap;
