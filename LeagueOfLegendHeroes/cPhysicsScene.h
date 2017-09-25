@@ -16,6 +16,8 @@ private:
 
 	vector<cUnit*>		m_vecEnemy;
 	vector<cBuilding*>	m_vecBuilding;
+	cBuilding*			m_pCurrentBuilding;
+	int					m_nIndexBuilding;
 	
 	void SetLight();
 public:

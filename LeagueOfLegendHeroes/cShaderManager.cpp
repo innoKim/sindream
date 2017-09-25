@@ -9,7 +9,7 @@ cShaderManager::cShaderManager()
 	, m_pShadowRenderTarget(NULL)
 	, m_pShadowDepthStencil(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(-100, 1000, -100, 1.0f)
+	, m_vLightPos(-1, 3500, -1, 1.0f)
 	, m_vLightDirection(100, -1000, 100, 0.0f)
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
@@ -45,7 +45,7 @@ void cShaderManager::SetupShadow()
 	m_pSkybox = LoadEffect("shader/Skybox.fx");
 
 	//광원-투영 행렬을 만든다
-	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3000);
+	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 5000);
 	m_pCreateShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 
 	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/cubeTexture1.dds", &m_pCubeTexture);
