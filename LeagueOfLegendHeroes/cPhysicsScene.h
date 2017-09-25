@@ -30,6 +30,7 @@ public:
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell1CallBack2(void * CallBackObj);
+	static void AlistarSpell2CallBack2(void * CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
 
 	void	SaveBuilding();

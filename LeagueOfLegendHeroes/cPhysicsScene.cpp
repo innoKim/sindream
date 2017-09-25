@@ -59,7 +59,7 @@ void cPhysicsScene::Setup()
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x"});
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x"});
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell1CallBack2,m_pPlayer)});
-	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",{0.0f,AlistarSpell2CallBack,m_pPlayer}});
+	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell2CallBack2,m_pPlayer)});
 	m_pPlayer->Setup(temp, m_pMap);
 	m_pPlayer->SetPosition(D3DXVECTOR3(1000, 0, 1000));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
@@ -277,6 +277,23 @@ void cPhysicsScene::AlistarSpell1CallBack(void *CallBackObj)
 	Alistar->SetState(STATE_IDLE);
 }
 
+void cPhysicsScene::AlistarSpell2CallBack2(void *CallBackObj)
+{
+	cUnit* Alistar = (cUnit*)CallBackObj;
+
+	set<cPhysics*> targets = g_pPhysicsManager->GetTargets(Alistar->GetPosition(), 100);
+
+	D3DXVECTOR3 dir = Alistar->GetDirection();
+
+	for each (auto target in targets)
+	{
+		target->SetAcceleration(D3DXVECTOR3(0, 0, 0));
+		target->SetVelocity(target->GetVelocity() + D3DXVECTOR3(dir.x*500, 100, dir.z * 500));
+		target->SetAngularVelocity(D3DXVECTOR3(rand()%20-10, rand() % 20 - 10, rand() % 20 - 10));
+	}
+}
+
+
 void cPhysicsScene::AlistarSpell1CallBack2(void *CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
@@ -286,8 +303,8 @@ void cPhysicsScene::AlistarSpell1CallBack2(void *CallBackObj)
 	for each (auto target in targets)
 	{
 		target->SetAcceleration(D3DXVECTOR3(0, 0, 0));
-		target->SetVelocity(target->GetVelocity() + D3DXVECTOR3(rand() % 100-50, 700, rand() % 100-50));
-		target->SetAngularVelocity(D3DXVECTOR3(rand()%20-10, rand() % 20 - 10, rand() % 20 - 10));
+		target->SetVelocity(target->GetVelocity() + D3DXVECTOR3(rand() % 100 - 50, 700, rand() % 100 - 50));
+		target->SetAngularVelocity(D3DXVECTOR3(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10));
 	}
 }
 

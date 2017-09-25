@@ -14,7 +14,7 @@ private:
 	D3DXVECTOR3 target;
 	cUnit* m_pPlayer;
 
-	cParticleGroup* m_pParticleGroup;
+	cParticleGroup* m_pCurParticleGroup;
 
 	//for UI
 	LPD3DXSPRITE m_pSprite;
@@ -34,5 +34,7 @@ public:
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
+
+	virtual D3DXVECTOR3 playerPos() override;
 };
 

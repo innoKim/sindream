@@ -26,6 +26,7 @@ cMainGame::~cMainGame()
 	g_pTimeManager->Destroy();
 	g_pShaderManager->Destroy();
 	g_pDeviceManager->Destroy();
+	g_pEffectManager->Destroy();
 }
 
 void cMainGame::Setup()
@@ -40,12 +41,15 @@ void cMainGame::Setup()
 	//m_pGrid->Setup(100, 50);
 
 	g_pShaderManager->SetupShadow();
+	g_pEffectManager->LoadEffects();
 }
 
 void cMainGame::Update()
 {
-	g_pCamera->Update();
 	m_pScene->Update();
+
+	g_pCamera->Update();
+	g_pEffectManager->Update();
 }
 
 void cMainGame::Render()
@@ -56,18 +60,22 @@ void cMainGame::Render()
 
 	g_pShaderManager->BeginRender();
 
-	m_pScene->Render();
+	//m_pScene->Render();
 
 	g_pShaderManager->Render();
 	
 	//if (m_pGrid) m_pGrid->Render();
-	//m_pScene->Render();
+	m_pScene->Render();
+
+	g_pEffectManager->Render();
+
+
+	/////// 디버깅 폰트 내용
 
 	char str[256];
 	sprintf(str, "%.2f FPS", g_pTimeManager->GetFrameRate());
 	g_pDebug->Print(str);
-
-
+	
 	sprintf(str, "%.2f, %.2f, %.2f", m_pScene->playerPos().x, m_pScene->playerPos().y, m_pScene->playerPos().z);
 	g_pDebug->Print(str,0,100);
 	

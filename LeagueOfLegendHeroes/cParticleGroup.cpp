@@ -3,7 +3,7 @@
 #include "cParticle.h"
 
 cParticleGroup::cParticleGroup() :
-	m_szTexturePath(""),
+	m_szTexturePath("texture/particleTex.tga"),
 	m_bIsContinuous(false),
 	m_nInitParticle(1),
 	m_nGenParticle(0),
@@ -14,10 +14,12 @@ cParticleGroup::cParticleGroup() :
 	m_vVelocity(0, 0, 0),
 	m_fVelocityVariation(0.0f),
 	m_fDragVelocity(0.0f),
-	m_vAcceleration(0,0,0),
+	m_vAcceleration(0, 0, 0),
 	m_fAccelerationVariation(0.0f),
-	m_dStartColor(1,1,1,1),
-	m_dEndColor(0,0,0,0)
+	m_dStartColor(1, 1, 1, 1),
+	m_cStartColorVariation(0, 0, 0, 0),
+	m_dEndColor(0,0,0,0),
+	m_cEndColorVariation(0, 0, 0, 0)
 {
 }
 

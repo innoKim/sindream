@@ -174,8 +174,12 @@ struct ST_SQUARE
 #include "cShaderManager.h"
 #include "cCamera.h"
 
+#include "cEffectManager.h"
+
 #include "cPhysicsManager.h"
 #include "cCollision.h"
 
 //타입 정의
 typedef void(*CALLBACKFUNC)(void*);
+
+typedef void(*CALLBACKFUNC2)(void*,void*);
