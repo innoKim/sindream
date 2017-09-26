@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="cAllocateHierachy.h" />
     <ClInclude Include="cBuilding.h" />
+    <ClInclude Include="cBuildingLoader.h" />
     <ClInclude Include="cCamera.h" />
     <ClInclude Include="cCollision.h" />
     <ClInclude Include="cDebugManager.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="cKeyManager.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMap.h" />
+    <ClInclude Include="cMapEditorScene.h" />
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cObject.h" />
     <ClInclude Include="cOBJLoader.h" />
@@ -205,6 +207,7 @@
   <ItemGroup>
     <ClCompile Include="cAllocateHierachy.cpp" />
     <ClCompile Include="cBuilding.cpp" />
+    <ClCompile Include="cBuildingLoader.cpp" />
     <ClCompile Include="cCamera.cpp" />
     <ClCompile Include="cCollision.cpp" />
     <ClCompile Include="cDebugManager.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="cKeyManager.cpp" />
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMap.cpp" />
+    <ClCompile Include="cMapEditorScene.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cOBJLoader.cpp" />
