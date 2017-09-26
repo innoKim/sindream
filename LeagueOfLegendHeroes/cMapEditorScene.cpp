@@ -8,6 +8,7 @@
 #include "cBuildingLoader.h"
 #include "cUIObject.h"
 #include "cUIButton.h"
+#include "cUIText.h"
 
 cMapEditorScene::cMapEditorScene()
 	: m_pPlayer(NULL)
@@ -53,6 +54,20 @@ void cMapEditorScene::Setup()
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
+	string buttonTag[12];
+	buttonTag[0] = "블루 넥서스";
+	buttonTag[1] = "레드 넥서스";
+	buttonTag[2] = "블루 억제기";
+	buttonTag[3] = "레드 억제기";
+	buttonTag[4] = "블루 타워";
+	buttonTag[5] = "레드 타워";
+	buttonTag[6] = "이전 건물";
+	buttonTag[7] = "다음 건물";
+	buttonTag[8] = "건물 삭제";
+	buttonTag[9] = "건물 세우기";
+	buttonTag[10] = "저장";
+	buttonTag[11] = "불러오기";
+
 	cUIObject* buttonSet = new cUIObject;
 	m_vecUIObject.push_back(buttonSet);
 
@@ -65,6 +80,16 @@ void cMapEditorScene::Setup()
 		buttonSet->AddChild(button);
 		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
 		button->SetPosition(1000 + (i % 2) * 80, ((i / 2) + 1) * 80);
+
+		cUIText* text = new cUIText;
+		text->SetTag(buttonTag[i]);
+		text->SetText(buttonTag[i]);
+		text->SetFontType(cFontManager::E_SMALL);
+		text->SetWidth(50);
+		text->SetHeight(50);
+		text->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
+		text->SetTag("text");
+		button->AddChild(text);
 	}
 
 	cUIButton* pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button0");
@@ -150,8 +175,7 @@ void cMapEditorScene::AddOrderNexusCallback(void * CallBackObj1, void * CallBack
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (!pThis->GetEditOn())
 	{
-		pThis->SetEditOn(true);
-		pThis->AddOrderNexus();
+		if (pThis->AddOrderNexus()) pThis->SetEditOn(true);
 	}
 }
 
@@ -160,8 +184,7 @@ void cMapEditorScene::AddOrderInhibitorCallback(void * CallBackObj1, void * Call
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (!pThis->GetEditOn())
 	{
-		pThis->SetEditOn(true);
-		pThis->AddOrderInhibitor();
+		if (pThis->AddOrderInhibitor()) pThis->SetEditOn(true);
 	}
 }
 
@@ -170,8 +193,7 @@ void cMapEditorScene::AddOrderTurretCallback(void * CallBackObj1, void * CallBac
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (!pThis->GetEditOn())
 	{
-		pThis->SetEditOn(true);
-		pThis->AddOrderTurret();
+		if (pThis->AddOrderTurret()) pThis->SetEditOn(true);
 	}
 }
 
@@ -180,8 +202,7 @@ void cMapEditorScene::AddChaosNexusCallback(void * CallBackObj1, void * CallBack
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (!pThis->GetEditOn())
 	{
-		pThis->SetEditOn(true);
-		pThis->AddChaosNexus();
+		if (pThis->AddChaosNexus()) pThis->SetEditOn(true);
 	}
 }
 
@@ -190,8 +211,7 @@ void cMapEditorScene::AddChaosInhibitorCallback(void * CallBackObj1, void * Call
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (!pThis->GetEditOn())
 	{
-		pThis->SetEditOn(true);
-		pThis->AddChaosInhibitor();
+		if (pThis->AddChaosInhibitor()) pThis->SetEditOn(true);
 	}
 }
 
@@ -200,29 +220,22 @@ void cMapEditorScene::AddChaosTurretCallback(void * CallBackObj1, void * CallBac
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (!pThis->GetEditOn())
 	{
-		pThis->SetEditOn(true);
-		pThis->AddChaosTurret();
+		if (pThis->AddChaosTurret()) pThis->SetEditOn(true);
 	}
 }
 
 void cMapEditorScene::PrevBuildingCallback(void * CallBackObj1, void * CallBackObj2)
 {
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
-	if (!pThis->GetEditOn())
-	{
-		pThis->SetEditOn(true);
-		pThis->PrevBuilding();
-	}
+	
+	if (pThis->PrevBuilding()) pThis->SetEditOn(true);
 }
 
 void cMapEditorScene::NextBuildingCallback(void * CallBackObj1, void * CallBackObj2)
 {
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
-	if (!pThis->GetEditOn())
-	{
-		pThis->SetEditOn(true);
-		pThis->NextBuilding();
-	}
+	
+	if (pThis->NextBuilding()) pThis->SetEditOn(true);
 }
 
 void cMapEditorScene::SaveBuildingCallback(void * CallBackObj1, void * CallBackObj2)
@@ -230,7 +243,7 @@ void cMapEditorScene::SaveBuildingCallback(void * CallBackObj1, void * CallBackO
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (!pThis->GetEditOn())
 	{
-		pThis->SaveBuilding();
+		pThis->SaveBuilding("BuildingTest.txt");
 	}
 }
 
@@ -239,7 +252,7 @@ void cMapEditorScene::LoadBuildingCallback(void * CallBackObj1, void * CallBackO
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (!pThis->GetEditOn())
 	{
-		pThis->LoadBuilding();
+		pThis->LoadBuilding("BuildingTest.txt");
 	}
 }
 
@@ -248,8 +261,7 @@ void cMapEditorScene::DeleteBuildingCallback(void * CallBackObj1, void * CallBac
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (pThis->GetEditOn())
 	{
-		pThis->DeleteBuilding();
-		pThis->SetEditOn(false);
+		if (pThis->DeleteBuilding()) pThis->SetEditOn(false);
 	}
 }
 
@@ -258,8 +270,7 @@ void cMapEditorScene::EnterBuildingCallback(void * CallBackObj1, void * CallBack
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
 	if (pThis->GetEditOn())
 	{
-		pThis->EnterBuilding();
-		pThis->SetEditOn(false);
+		if (pThis->EnterBuilding()) pThis->SetEditOn(false);
 	}
 }
 
@@ -312,7 +323,7 @@ D3DXVECTOR3 cMapEditorScene::playerPos()
 	return m_pPlayer->GetPosition();
 }
 
-void cMapEditorScene::AddOrderNexus(void)
+bool cMapEditorScene::AddOrderNexus(void)
 {
 	cBuilding* pOrderNexus = new cBuilding;
 	vector<ST_UNITLOADINFO> tempOrderNexus;
@@ -322,10 +333,13 @@ void cMapEditorScene::AddOrderNexus(void)
 	pOrderNexus->SetSelect(true);
 	g_pCamera->SetTarget(pOrderNexus->GetPosPtr());
 	pOrderNexus->SetType(cBuilding::E_ORDERNEXUS);
+	m_pCurrentBuilding = pOrderNexus;
 	m_vecBuilding.push_back(pOrderNexus);
+
+	return true;
 }
 
-void cMapEditorScene::AddOrderInhibitor(void)
+bool cMapEditorScene::AddOrderInhibitor(void)
 {
 	cBuilding* pOrderInhibitor = new cBuilding;
 	vector<ST_UNITLOADINFO> tempOrderInhibitor;
@@ -335,10 +349,13 @@ void cMapEditorScene::AddOrderInhibitor(void)
 	pOrderInhibitor->SetSelect(true);
 	g_pCamera->SetTarget(pOrderInhibitor->GetPosPtr());
 	pOrderInhibitor->SetType(cBuilding::E_ORDERINHIBITOR);
+	m_pCurrentBuilding = pOrderInhibitor;
 	m_vecBuilding.push_back(pOrderInhibitor);
+
+	return true;
 }
 
-void cMapEditorScene::AddOrderTurret(void)
+bool cMapEditorScene::AddOrderTurret(void)
 {
 	cBuilding* pOrderTurret = new cBuilding;
 	vector<ST_UNITLOADINFO> tempOrderTurret;
@@ -348,10 +365,13 @@ void cMapEditorScene::AddOrderTurret(void)
 	pOrderTurret->SetSelect(true);
 	g_pCamera->SetTarget(pOrderTurret->GetPosPtr());
 	pOrderTurret->SetType(cBuilding::E_ORDERTURRET);
+	m_pCurrentBuilding = pOrderTurret;
 	m_vecBuilding.push_back(pOrderTurret);
+
+	return true;
 }
 
-void cMapEditorScene::AddChaosNexus(void)
+bool cMapEditorScene::AddChaosNexus(void)
 {
 	cBuilding* pChaosNexus = new cBuilding;
 	vector<ST_UNITLOADINFO> tempChaosNexus;
@@ -361,10 +381,13 @@ void cMapEditorScene::AddChaosNexus(void)
 	pChaosNexus->SetSelect(true);
 	g_pCamera->SetTarget(pChaosNexus->GetPosPtr());
 	pChaosNexus->SetType(cBuilding::E_CHAOSNEXUS);
+	m_pCurrentBuilding = pChaosNexus;
 	m_vecBuilding.push_back(pChaosNexus);
+
+	return true;
 }
 
-void cMapEditorScene::AddChaosInhibitor(void)
+bool cMapEditorScene::AddChaosInhibitor(void)
 {
 	cBuilding* pChaosInhibitor = new cBuilding;
 	vector<ST_UNITLOADINFO> tempChaosInhibitor;
@@ -374,10 +397,13 @@ void cMapEditorScene::AddChaosInhibitor(void)
 	pChaosInhibitor->SetSelect(true);
 	g_pCamera->SetTarget(pChaosInhibitor->GetPosPtr());
 	pChaosInhibitor->SetType(cBuilding::E_CHAOSINHIBITOR);
+	m_pCurrentBuilding = pChaosInhibitor;
 	m_vecBuilding.push_back(pChaosInhibitor);
+
+	return true;
 }
 
-void cMapEditorScene::AddChaosTurret(void)
+bool cMapEditorScene::AddChaosTurret(void)
 {
 	cBuilding* pChaosTurret = new cBuilding;
 	vector<ST_UNITLOADINFO> tempChaosTurret;
@@ -387,52 +413,87 @@ void cMapEditorScene::AddChaosTurret(void)
 	pChaosTurret->SetSelect(true);
 	g_pCamera->SetTarget(pChaosTurret->GetPosPtr());
 	pChaosTurret->SetType(cBuilding::E_CHAOSTURRET);
+	m_pCurrentBuilding = pChaosTurret;
 	m_vecBuilding.push_back(pChaosTurret);
+
+	return true;
 }
 
-void cMapEditorScene::PrevBuilding()
+bool cMapEditorScene::PrevBuilding()
 {
-	m_vecBuilding[m_nIndexBuilding]->SetSelect(false);
-
-	if (m_pPlayer)
+	if (!m_vecBuilding.empty())
 	{
-		g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		if (m_pCurrentBuilding) m_pCurrentBuilding->SetSelect(false);
+
+		if (m_pPlayer)
+		{
+			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		}
+
+		if (m_nIndexBuilding > 0)
+		{
+			m_nIndexBuilding--;
+		}
+
+		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
+		m_pCurrentBuilding->SetSelect(true);
+		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+
+		return true;
 	}
 
-	if (m_nIndexBuilding > 0)
-	{
-		m_nIndexBuilding--;
-	}
-
-	m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
-	m_pCurrentBuilding->SetSelect(true);
-	g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+	return false;
 }
 
-void cMapEditorScene::NextBuilding()
+bool cMapEditorScene::NextBuilding()
 {
-	m_vecBuilding[m_nIndexBuilding]->SetSelect(false);
-
-	if (m_pPlayer)
+	if (!m_vecBuilding.empty())
 	{
-		g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		if (m_pCurrentBuilding) m_pCurrentBuilding->SetSelect(false);
+
+		if (m_pPlayer)
+		{
+			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		}
+
+		if (m_nIndexBuilding < m_vecBuilding.size() - 1)
+		{
+			m_nIndexBuilding++;
+		}
+
+		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
+		m_pCurrentBuilding->SetSelect(true);
+		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+
+		return true;
 	}
 
-	if (m_nIndexBuilding < m_vecBuilding.size() - 1)
-	{
-		m_nIndexBuilding++;
-	}
-
-	m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
-	m_pCurrentBuilding->SetSelect(true);
-	g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+	return false;
 }
 
-void cMapEditorScene::DeleteBuilding()
+bool cMapEditorScene::DeleteBuilding()
 {
+	if (m_pCurrentBuilding)
+	{
+		for (int i = 0; i < m_vecBuilding.size(); i++)
+		{
+			if (m_pCurrentBuilding == m_vecBuilding[i])
+			{
+				SAFE_DELETE(m_pCurrentBuilding);
+				m_vecBuilding.erase(m_vecBuilding.begin() + i);
+				break;
+			}
+		}
+
+		EnterBuilding();
+
+		return true;
+	}
+
+	return false;
 }
 
-void cMapEditorScene::EnterBuilding()
+bool cMapEditorScene::EnterBuilding()
 {
 	for (int i = 0; i < m_vecBuilding.size(); i++)
 	{
@@ -443,16 +504,24 @@ void cMapEditorScene::EnterBuilding()
 	{
 		g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	}
+
+	m_pCurrentBuilding = NULL;
+
+	return true;
 }
 
-void cMapEditorScene::SaveBuilding()
+bool cMapEditorScene::SaveBuilding(char* szFileName)
 {
 	cBuildingLoader buildingLoader;
-	buildingLoader.SaveBuilding(m_vecBuilding);
+	buildingLoader.SaveBuilding(szFileName, m_vecBuilding);
+
+	return true;
 }
 
-void cMapEditorScene::LoadBuilding()
+bool cMapEditorScene::LoadBuilding(char* szFileName)
 {
 	cBuildingLoader buildingLoader;
-	buildingLoader.LoadBuilding(m_pMap, m_vecBuilding);
+	buildingLoader.LoadBuilding(szFileName, m_pMap, m_vecBuilding);
+
+	return true;
 }

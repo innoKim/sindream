@@ -52,20 +52,20 @@ public:
 
 	virtual D3DXVECTOR3 playerPos() override;
 private:
-	void AddOrderNexus(void);
-	void AddOrderInhibitor(void);
-	void AddOrderTurret(void);
-	void AddChaosNexus(void);
-	void AddChaosInhibitor(void);
-	void AddChaosTurret(void);
+	bool AddOrderNexus(void);
+	bool AddOrderInhibitor(void);
+	bool AddOrderTurret(void);
+	bool AddChaosNexus(void);
+	bool AddChaosInhibitor(void);
+	bool AddChaosTurret(void);
 
-	void PrevBuilding();
-	void NextBuilding();
+	bool PrevBuilding();
+	bool NextBuilding();
 
-	void DeleteBuilding();
-	void EnterBuilding();
+	bool DeleteBuilding();
+	bool EnterBuilding();
 
-	void SaveBuilding();
-	void LoadBuilding();
+	bool SaveBuilding(char* szFileName);
+	bool LoadBuilding(char* szFileName);
 };
 

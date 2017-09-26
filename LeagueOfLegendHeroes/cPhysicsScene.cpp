@@ -56,7 +56,7 @@ void cPhysicsScene::Setup()
 	m_pMap->LoadSur("LoL/room_surface.obj");
 
 	cBuildingLoader buildingLoader;
-	buildingLoader.LoadBuilding(m_pMap, m_vecBuilding);
+	buildingLoader.LoadBuilding("building.txt", m_pMap, m_vecBuilding);
 
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;

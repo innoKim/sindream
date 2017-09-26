@@ -9,7 +9,7 @@ public:
 	cBuildingLoader();
 	~cBuildingLoader();
 
-	void LoadBuilding(IN cMap* pMap, OUT vector<cBuilding*>& vecBuilding);
-	void SaveBuilding(IN vector<cBuilding*>& vecBuilding);
+	void LoadBuilding(IN char* szFileName, IN cMap* pMap, OUT vector<cBuilding*>& vecBuilding);
+	void SaveBuilding(IN char* szFileName, IN vector<cBuilding*>& vecBuilding);
 };
 
