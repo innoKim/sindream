@@ -16,6 +16,7 @@ private:
 		eFloat,
 		eInt,
 		eVector3,
+		eColor,
 		eEnd
 	};
 
@@ -24,11 +25,14 @@ public:
 	eType m_eFloat;
 	eType m_eInt;
 	eType m_eVector3;
+	eType m_eColor;
+
 
 	D3DXVECTOR3 target;
 	cUnit* m_pPlayer;
 
 	cParticleGroup* m_pCurParticleGroup;
+	vector<cParticleGroup*> m_vecCurParticleGroup;
 
 	//for UI
 	LPD3DXSPRITE m_pSprite;
@@ -38,6 +42,7 @@ public:
 
 	SYNTHESIZE(void*, m_pCurValue,CurValuePtr);
 	SYNTHESIZE(eType, m_eValueType, ValueType);
+
 
 public:
 	cParticleScene();
@@ -49,7 +54,6 @@ public:
 	virtual void UIRender() override;
 
 	void Pop();
-
 	void RenderInfo();
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
@@ -57,5 +61,11 @@ public:
 	static void SetVariableToChange(void * scene, void * variable, void *variabletype);
 
 	virtual D3DXVECTOR3 playerPos() override;
+
+private:
+
+	void UISetup();
+	void TextBoxPrint();
+	void ValueControl();
 };
 
