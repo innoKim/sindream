@@ -17,6 +17,8 @@ cUIText::~cUIText()
 void cUIText::Render(LPD3DXSPRITE SpritePtr)
 {
 	RECT rc;
+
+	//GetRect(rc)
 	rc.left = m_matWorld._41;
 	rc.top = m_matWorld._42;
 	rc.right = m_matWorld._41 + m_fWidth;

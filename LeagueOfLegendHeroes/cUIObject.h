@@ -7,7 +7,7 @@ protected:
 
 	SYNTHESIZE(float,	m_fWidth,	Width);
 	SYNTHESIZE(float,	m_fHeight,	Height);
-	
+
 	D3DXVECTOR3			m_vRelativePosition;
 	D3DXMATRIX			m_matWorld;
 

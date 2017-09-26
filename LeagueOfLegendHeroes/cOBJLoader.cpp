@@ -126,7 +126,7 @@ void cOBJLoader::LoadSur(IN char * Filepath, OUT vector<ST_PC_VERTEX> &vecSur, v
 
 			float width = MAP_SIZE*MAP_RATIO / (float)MAP_GRID;
 
-			gridHeightNode[x][z].sq = ST_SQUARE(x*width, z*width, (x + 1)*width, (z + 1)*width);
+			gridHeightNode[x][z].sq = ST_SQUARE(x*width-MAP_EPSILON, z*width- MAP_EPSILON, (x + 1)*width+ MAP_EPSILON, (z + 1)*width+ MAP_EPSILON);
 		}
 	}
 		
@@ -174,7 +174,7 @@ void cOBJLoader::LoadSur(IN char * Filepath, OUT vector<ST_PC_VERTEX> &vecSur, v
 	}
 	fclose(fp);
 }
-//
+
 //void cOBJLoader::CreateGrid()
 //{
 //	// 15000
