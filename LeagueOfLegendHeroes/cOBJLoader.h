@@ -4,6 +4,7 @@
 #define MAP_SIZE	15000
 #define MAP_RATIO	0.5f
 #define MAP_GRID	5
+#define MAP_EPSILON 100
 
 //struct stGrid
 //{
@@ -33,8 +34,6 @@ public:
 
 	void Load(IN char* Folder, char* FilePath, OUT vector<cGroup*> &vecGroup, OUT map<string, cMtlTex*>& mapMtlTex);
 	void LoadSur(IN char* Filepath, OUT vector<ST_PC_VERTEX> &vecSur, vector<vector<ST_HEIGHTNODE>>& gridHeightNode );
-
-
 
 	//void CreateGrid();
 	//void DivideVertex(stGrid &Grid, vector<ST_PC_VERTEX> vecSur);

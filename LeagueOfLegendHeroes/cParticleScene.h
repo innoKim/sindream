@@ -21,6 +21,7 @@ private:
 	vector<cUIObject*>		m_vecUIObject;
 
 	cMap* m_pMap;
+
 public:
 	cParticleScene();
 	~cParticleScene();

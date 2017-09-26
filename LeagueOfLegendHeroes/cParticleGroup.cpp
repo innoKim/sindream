@@ -94,20 +94,16 @@ void cParticleGroup::Render()
 	else g_pD3DDevice->SetTexture(0, NULL);
 
 	g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_POINTLIST,
+	
 		m_vecVertex.size(),
 		&m_vecVertex[0],
 		sizeof(ST_PC_VERTEX));
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-
 	g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, true);
-
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
-
 }
 
 void cParticleGroup::AddParticle()

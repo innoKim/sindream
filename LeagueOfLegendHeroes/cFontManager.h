@@ -10,6 +10,7 @@ public:
 	enum eFontType
 	{
 		E_NORMAL,
+		E_SMALL,
 		E_END,
 	};
 

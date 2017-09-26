@@ -8,6 +8,7 @@
 #include "cPlayer.h"
 #include "cUIButton.h"
 #include "cUIText.h"
+#include "cUIImage.h"
 #include "cMap.h"
 
 cParticleScene::cParticleScene():
@@ -40,6 +41,8 @@ void cParticleScene::Setup()
 	g_pShaderManager->SetTarget(&target);
 
 	m_pCurParticleGroup = g_pEffectManager->NewEffect();
+
+	//////////////////////////////////////////////////////
 
 	/*m_pParticleGroup->SetInitParticleNumber(20);
 	m_pParticleGroup->SetIsContinueus(false);
@@ -81,19 +84,56 @@ void cParticleScene::Setup()
 	cUIObject* buttonSet = new cUIObject;
 	m_vecUIObject.push_back(buttonSet);
 
+	string buttonTag[12];
+	buttonTag[0] = "시작 갯수";
+	buttonTag[1] = "추가 갯수";
+	buttonTag[2] = "수명";
+	buttonTag[3] = "수명 랜덤";
+	buttonTag[4] = "속도";
+	buttonTag[5] = "속도 랜덤";
+	buttonTag[6] = "가속도";
+	buttonTag[7] = "가속도 랜덤";
+	buttonTag[8] = "시작 색";
+	buttonTag[9] = "시작 색 랜덤";
+	buttonTag[10] = "끝 색";
+	buttonTag[11] = "끝 색 랜덤";
+	
 	for (int i = 0; i < 12; i++)
 	{
 		char str[128];
-		sprintf(str, "button%d", i);
+		sprintf(str, "%d", i);
 		cUIButton* button = new cUIButton;
-		button->SetTag(str);
+		button->SetTag(string(str)+buttonTag[i]);
 		buttonSet->AddChild(button);
 		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
 		button->SetPosition(1000+(i%2)*80, ((i/2)+1) * 80);
+
+		cUIText* text = new cUIText;
+		text->SetTag(buttonTag[i]);
+		text->SetText(buttonTag[i]);
+		text->SetFontType(cFontManager::E_SMALL);
+		text->SetWidth(50);
+		text->SetHeight(50);
+		text->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
+		text->SetTag("text");
+		button->AddChild(text);
 	}
-
-
 	
+	cUIImage* textBox = new cUIImage;
+	textBox->SetTexture("texture/textbox.png");
+	textBox->SetTag("textBox");
+	buttonSet->AddChild(textBox);
+	textBox->SetPosition(975, 600);
+	
+	cUIText* text = new cUIText;
+	text->SetText("이건데...");
+	text->SetFontType(cFontManager::E_NORMAL);
+	text->SetWidth(180);
+	text->SetHeight(40);
+	text->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
+	text->SetTag("text");
+	textBox->AddChild(text);
+
 	//////////////////////
 	m_pMap = new cMap;
 	m_pMap->LoadSur("LoL/room_surface.obj");
@@ -112,6 +152,7 @@ void cParticleScene::Update()
 	{
 		Pop();
 	}
+
 	m_pPlayer->Update();
 }
 
