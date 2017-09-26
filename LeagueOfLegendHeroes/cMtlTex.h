@@ -9,8 +9,5 @@ protected:
 public:
 	cMtlTex();
 	~cMtlTex();
-
-	LPDIRECT3DTEXTURE9* GetpTexture() { return &m_pTexture; }
-
 };
 

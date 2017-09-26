@@ -27,6 +27,8 @@ void cBuildingLoader::LoadBuilding(IN char* szFileName, IN cMap* pMap, OUT vecto
 
 	ifstream inFile(sFullPath, ios::in);
 
+	if (!inFile) return;
+
 	vector<string> vecStrMap;
 
 	while (!inFile.eof())

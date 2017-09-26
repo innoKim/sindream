@@ -14,7 +14,6 @@ private:
 	LPD3DXEFFECT				m_pApplyShadow;				//2패스때 사용할 쉐이더
 	LPD3DXEFFECT				m_pCreateShadow;			//1패스때 사용할 쉐이더
 	D3DXVECTOR4					m_vLightPos;				//캐릭터를 기준으로 한 광원의 상대적 위치
-	D3DXVECTOR4					m_vLightDirection;			//광원의 Direction
 	LPDIRECT3DTEXTURE9			m_pShadowRenderTarget;		//1패스때 쉐도우맵 그리는데 사용할 렌더타겟
 	LPDIRECT3DSURFACE9			m_pShadowDepthStencil;		//쉐도우맵 그리는데 사용할 깊이 버퍼
 	D3DXVECTOR4					m_vLightColor;				//광원의 색

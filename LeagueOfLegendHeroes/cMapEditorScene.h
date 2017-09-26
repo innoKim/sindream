@@ -29,21 +29,21 @@ public:
 
 	virtual void UIRender() override;
 
-	static void AddOrderNexusCallback(void * CallBackObj1, void * CallBackObj2);
-	static void AddOrderInhibitorCallback(void * CallBackObj1, void * CallBackObj2);
-	static void AddOrderTurretCallback(void * CallBackObj1, void * CallBackObj2);
-	static void AddChaosNexusCallback(void * CallBackObj1, void * CallBackObj2);
-	static void AddChaosInhibitorCallback(void * CallBackObj1, void * CallBackObj2);
-	static void AddChaosTurretCallback(void * CallBackObj1, void * CallBackObj2);
+	static void AddOrderNexusCallback(void * CallBackObj);
+	static void AddOrderInhibitorCallback(void * CallBackObj);
+	static void AddOrderTurretCallback(void * CallBackObj);
+	static void AddChaosNexusCallback(void * CallBackObj);
+	static void AddChaosInhibitorCallback(void * CallBackObj);
+	static void AddChaosTurretCallback(void * CallBackObj);
 
-	static void PrevBuildingCallback(void * CallBackObj1, void * CallBackObj2);
-	static void NextBuildingCallback(void * CallBackObj1, void * CallBackObj2);
+	static void PrevBuildingCallback(void * CallBackObj);
+	static void NextBuildingCallback(void * CallBackObj);
 
-	static void DeleteBuildingCallback(void * CallBackObj1, void * CallBackObj2);
-	static void EnterBuildingCallback(void * CallBackObj1, void * CallBackObj2);
+	static void DeleteBuildingCallback(void * CallBackObj);
+	static void EnterBuildingCallback(void * CallBackObj);
 
-	static void SaveBuildingCallback(void * CallBackObj1, void * CallBackObj2);
-	static void LoadBuildingCallback(void * CallBackObj1, void * CallBackObj2);
+	static void SaveBuildingCallback(void * CallBackObj);
+	static void LoadBuildingCallback(void * CallBackObj);
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell1CallBack2(void * CallBackObj);

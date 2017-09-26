@@ -71,7 +71,7 @@ void cMapEditorScene::Setup()
 	cUIObject* buttonSet = new cUIObject;
 	m_vecUIObject.push_back(buttonSet);
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		char str[128];
 		sprintf(str, "button%d", i);
@@ -79,7 +79,7 @@ void cMapEditorScene::Setup()
 		button->SetTag(str);
 		buttonSet->AddChild(button);
 		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
-		button->SetPosition(1000 + (i % 2) * 80, ((i / 2) + 1) * 80);
+		button->SetPosition(750 + (i % 6) * 80, (i / 6) * 80 + 50);
 
 		cUIText* text = new cUIText;
 		text->SetTag(buttonTag[i]);
@@ -132,6 +132,14 @@ void cMapEditorScene::Setup()
 	pButton->SetCallback(EnterBuildingCallback);
 	pButton->SetCallbackObject(this);
 
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button10");
+	pButton->SetCallback(SaveBuildingCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button11");
+	pButton->SetCallback(LoadBuildingCallback);
+	pButton->SetCallbackObject(this);
+
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
 }
@@ -170,104 +178,104 @@ void cMapEditorScene::UIRender()
 	}
 }
 
-void cMapEditorScene::AddOrderNexusCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::AddOrderNexusCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddOrderNexus()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddOrderInhibitorCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::AddOrderInhibitorCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddOrderInhibitor()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddOrderTurretCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::AddOrderTurretCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddOrderTurret()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddChaosNexusCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::AddChaosNexusCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddChaosNexus()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddChaosInhibitorCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::AddChaosInhibitorCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddChaosInhibitor()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddChaosTurretCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::AddChaosTurretCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddChaosTurret()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::PrevBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::PrevBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	
 	if (pThis->PrevBuilding()) pThis->SetEditOn(true);
 }
 
-void cMapEditorScene::NextBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::NextBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	
 	if (pThis->NextBuilding()) pThis->SetEditOn(true);
 }
 
-void cMapEditorScene::SaveBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::SaveBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		pThis->SaveBuilding("BuildingTest.txt");
 	}
 }
 
-void cMapEditorScene::LoadBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::LoadBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		pThis->LoadBuilding("BuildingTest.txt");
 	}
 }
 
-void cMapEditorScene::DeleteBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::DeleteBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (pThis->GetEditOn())
 	{
 		if (pThis->DeleteBuilding()) pThis->SetEditOn(false);
 	}
 }
 
-void cMapEditorScene::EnterBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+void cMapEditorScene::EnterBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (pThis->GetEditOn())
 	{
 		if (pThis->EnterBuilding()) pThis->SetEditOn(false);
