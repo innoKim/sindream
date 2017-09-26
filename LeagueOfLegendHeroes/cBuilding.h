@@ -21,6 +21,7 @@ public:
 	cBuilding();
 	~cBuilding();
 
+	virtual void Setup(vector<ST_UNITLOADINFO> statesVector, cMap* mapPtr) override;
 	virtual void Update() override;
 
 	void KeyControl();

@@ -168,6 +168,12 @@
     <ClInclude Include="cEffectManager.h">
       <Filter>매니저</Filter>
     </ClInclude>
+    <ClInclude Include="cMapEditorScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cBuildingLoader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -310,6 +316,12 @@
     </ClCompile>
     <ClCompile Include="cEffectManager.cpp">
       <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cMapEditorScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cBuildingLoader.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -88,6 +88,10 @@ void cTestScene::Render()
 	}
 }
 
+void cTestScene::UIRender()
+{
+}
+
 void cTestScene::SetLight()
 {
 	D3DLIGHT9	stLight;

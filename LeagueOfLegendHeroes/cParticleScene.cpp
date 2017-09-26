@@ -169,6 +169,10 @@ void cParticleScene::Render()
 	RenderInfo();
 }
 
+void cParticleScene::UIRender()
+{
+}
+
 void cParticleScene::Pop()
 {
 	m_pCurParticleGroup->Setup();

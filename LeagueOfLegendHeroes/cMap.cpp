@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cMap.h"
 #include "cBuilding.h"
+#include "cGroup.h"
 
 cMap::cMap()
 	: m_pMesh(NULL)

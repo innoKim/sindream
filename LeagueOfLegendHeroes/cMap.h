@@ -1,10 +1,10 @@
 #pragma once
-#include "cGroup.h"
 #include "cOBJLoader.h"
 
 #define INFH	FLT_MAX
 
 class cUnit;
+class cGroup;
 
 class cMap
 {

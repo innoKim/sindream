@@ -2,31 +2,30 @@
 #include "iScene.h"
 
 class cUnit;
-class cPlane;
 class cMap;
 class cBuilding;
+class cUIObject;
 
-class cPhysicsScene : public iScene
+class cMapEditorScene : public iScene
 {
 private:
 	cUnit*				m_pPlayer;
 	cMap*				m_pMap;
-	D3DLIGHT9			m_light;
 	bool				m_bEditOn;
-
-	vector<cUnit*>		m_vecEnemy;
 	vector<cBuilding*>	m_vecBuilding;
 	cBuilding*			m_pCurrentBuilding;
 	int					m_nIndexBuilding;
-	
-	void SetLight();
+	vector<cUIObject*>	m_vecUIObject;
+	LPD3DXSPRITE		m_pSprite;
+
 public:
-	cPhysicsScene();
-	virtual ~cPhysicsScene();
+	cMapEditorScene();
+	~cMapEditorScene();
 
 	virtual void Setup() override;
 	virtual void Update() override;
 	virtual void Render() override;
+
 	virtual void UIRender() override;
 
 	static void AlistarSpell1CallBack(void* CallBackObj);

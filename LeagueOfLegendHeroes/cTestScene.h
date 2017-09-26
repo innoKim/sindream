@@ -22,6 +22,7 @@ public:
 	virtual void Setup() override;
 	virtual void Update() override;
 	virtual void Render() override;
+	virtual void UIRender() override;
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
