@@ -4,7 +4,7 @@
 class cUnit;
 class cMap;
 class cBuilding;
-class cUIButton;
+class cUIObject;
 
 class cMapEditorScene : public iScene
 {
@@ -15,7 +15,8 @@ private:
 	vector<cBuilding*>	m_vecBuilding;
 	cBuilding*			m_pCurrentBuilding;
 	int					m_nIndexBuilding;
-	vector<cUIButton*>	m_vecButton;
+	vector<cUIObject*>	m_vecUIObject;
+	LPD3DXSPRITE		m_pSprite;
 
 public:
 	cMapEditorScene();
@@ -24,6 +25,8 @@ public:
 	virtual void Setup() override;
 	virtual void Update() override;
 	virtual void Render() override;
+
+	virtual void UIRender() override;
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell1CallBack2(void * CallBackObj);

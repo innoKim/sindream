@@ -71,6 +71,7 @@ void cMainGame::Render()
 
 	g_pEffectManager->Render();
 
+	m_pScene->UIRender();
 
 	/////// 디버깅 폰트 내용
 

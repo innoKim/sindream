@@ -122,6 +122,10 @@ void cPhysicsScene::Render()
 	}
 }
 
+void cPhysicsScene::UIRender()
+{
+}
+
 void cPhysicsScene::AlistarSpell1CallBack(void *CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;

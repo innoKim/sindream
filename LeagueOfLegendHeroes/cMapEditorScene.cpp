@@ -4,14 +4,15 @@
 #include "cUnit.h"
 #include "cPlayer.h"
 #include "cPhysics.h"
-#include "cRigidbody.h"
 #include "cMap.h"
 #include "cBuildingLoader.h"
-
+#include "cUIObject.h"
+#include "cUIButton.h"
 
 cMapEditorScene::cMapEditorScene()
 	: m_pPlayer(NULL)
 	, m_pMap(NULL)
+	, m_pSprite(NULL)
 	, m_bEditOn(NULL)
 	, m_pCurrentBuilding(NULL)
 	, m_nIndexBuilding(0)
@@ -25,6 +26,8 @@ cMapEditorScene::~cMapEditorScene()
 	SAFE_DELETE(m_pMap);
 	m_pCurrentBuilding = NULL;
 
+	SAFE_RELEASE(m_pSprite);
+
 	for each (auto p in m_vecBuilding)
 	{
 		SAFE_DELETE(p);
@@ -33,6 +36,8 @@ cMapEditorScene::~cMapEditorScene()
 
 void cMapEditorScene::Setup()
 {
+	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
+
 	m_pMap = new cMap;
 	m_pMap->LoadMap("map/", "room.obj");
 	m_pMap->LoadSur("LoL/room_surface.obj");
@@ -47,6 +52,20 @@ void cMapEditorScene::Setup()
 	m_pPlayer->SetPosition(D3DXVECTOR3(1000, 0, 1000));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
+
+	cUIObject* buttonSet = new cUIObject;
+	m_vecUIObject.push_back(buttonSet);
+
+	for (int i = 0; i < 12; i++)
+	{
+		char str[128];
+		sprintf(str, "button%d", i);
+		cUIButton* button = new cUIButton;
+		button->SetTag(str);
+		buttonSet->AddChild(button);
+		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
+		button->SetPosition(1000 + (i % 2) * 80, ((i / 2) + 1) * 80);
+	}
 
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
@@ -209,6 +228,11 @@ void cMapEditorScene::Update()
 		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
 	}
 
+	for each (auto p in m_vecUIObject)
+	{
+		p->Update();
+	}
+
 	for each(auto p in m_vecBuilding)
 	{
 		p->Update();
@@ -222,6 +246,14 @@ void cMapEditorScene::Render()
 	for each(auto p in m_vecBuilding)
 	{
 		p->Render();
+	}
+}
+
+void cMapEditorScene::UIRender()
+{
+	for each (auto p in m_vecUIObject)
+	{
+		p->Render(m_pSprite);
 	}
 }
 
