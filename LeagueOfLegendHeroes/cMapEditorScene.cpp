@@ -8,6 +8,7 @@
 #include "cBuildingLoader.h"
 #include "cUIObject.h"
 #include "cUIButton.h"
+#include "cUIText.h"
 
 cMapEditorScene::cMapEditorScene()
 	: m_pPlayer(NULL)
@@ -53,10 +54,24 @@ void cMapEditorScene::Setup()
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
 
+	string buttonTag[12];
+	buttonTag[0] = "블루 넥서스";
+	buttonTag[1] = "레드 넥서스";
+	buttonTag[2] = "블루 억제기";
+	buttonTag[3] = "레드 억제기";
+	buttonTag[4] = "블루 타워";
+	buttonTag[5] = "레드 타워";
+	buttonTag[6] = "이전 건물";
+	buttonTag[7] = "다음 건물";
+	buttonTag[8] = "건물 삭제";
+	buttonTag[9] = "건물 세우기";
+	buttonTag[10] = "저장";
+	buttonTag[11] = "불러오기";
+
 	cUIObject* buttonSet = new cUIObject;
 	m_vecUIObject.push_back(buttonSet);
 
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		char str[128];
 		sprintf(str, "button%d", i);
@@ -65,7 +80,57 @@ void cMapEditorScene::Setup()
 		buttonSet->AddChild(button);
 		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
 		button->SetPosition(1000 + (i % 2) * 80, ((i / 2) + 1) * 80);
+
+		cUIText* text = new cUIText;
+		text->SetTag(buttonTag[i]);
+		text->SetText(buttonTag[i]);
+		text->SetFontType(cFontManager::E_SMALL);
+		text->SetWidth(50);
+		text->SetHeight(50);
+		text->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
+		text->SetTag("text");
+		button->AddChild(text);
 	}
+
+	cUIButton* pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button0");
+	pButton->SetCallback(AddOrderNexusCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button1");
+	pButton->SetCallback(AddChaosNexusCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button2");
+	pButton->SetCallback(AddOrderInhibitorCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button3");
+	pButton->SetCallback(AddChaosInhibitorCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button4");
+	pButton->SetCallback(AddOrderTurretCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button5");
+	pButton->SetCallback(AddChaosTurretCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button6");
+	pButton->SetCallback(PrevBuildingCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button7");
+	pButton->SetCallback(NextBuildingCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button8");
+	pButton->SetCallback(DeleteBuildingCallback);
+	pButton->SetCallbackObject(this);
+
+	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button9");
+	pButton->SetCallback(EnterBuildingCallback);
+	pButton->SetCallbackObject(this);
 
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
@@ -75,158 +140,6 @@ void cMapEditorScene::Update()
 {
 	m_pPlayer->Update();
 	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
-
-	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('1'))
-	{
-		m_bEditOn = true;
-		cBuilding* pOrderNexus = new cBuilding;
-		vector<ST_UNITLOADINFO> tempOrderNexus;
-		tempOrderNexus.push_back({ STATE_IDLE, "unit/OrderNexus.x", NULL, NULL });
-		pOrderNexus->Setup(tempOrderNexus, m_pMap);
-		pOrderNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
-		pOrderNexus->SetSelect(true);
-		g_pCamera->SetTarget(pOrderNexus->GetPosPtr());
-		pOrderNexus->SetType(cBuilding::E_ORDERNEXUS);
-		m_vecBuilding.push_back(pOrderNexus);
-	}
-
-	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('2'))
-	{
-		m_bEditOn = true;
-		cBuilding* pOrderInhibitor = new cBuilding;
-		vector<ST_UNITLOADINFO> tempOrderInhibitor;
-		tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x", NULL, NULL });
-		pOrderInhibitor->Setup(tempOrderInhibitor, m_pMap);
-		pOrderInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
-		pOrderInhibitor->SetSelect(true);
-		g_pCamera->SetTarget(pOrderInhibitor->GetPosPtr());
-		pOrderInhibitor->SetType(cBuilding::E_ORDERINHIBITOR);
-		m_vecBuilding.push_back(pOrderInhibitor);
-	}
-
-	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('3'))
-	{
-		m_bEditOn = true;
-		cBuilding* pOrderTurret = new cBuilding;
-		vector<ST_UNITLOADINFO> tempOrderTurret;
-		tempOrderTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
-		pOrderTurret->Setup(tempOrderTurret, m_pMap);
-		pOrderTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
-		pOrderTurret->SetSelect(true);
-		g_pCamera->SetTarget(pOrderTurret->GetPosPtr());
-		pOrderTurret->SetType(cBuilding::E_ORDERTURRET);
-		m_vecBuilding.push_back(pOrderTurret);
-	}
-
-	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('4'))
-	{
-		m_bEditOn = true;
-		cBuilding* pChaosNexus = new cBuilding;
-		vector<ST_UNITLOADINFO> tempChaosNexus;
-		tempChaosNexus.push_back({ STATE_IDLE, "unit/ChaosNexus.x", NULL, NULL });
-		pChaosNexus->Setup(tempChaosNexus, m_pMap);
-		pChaosNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
-		pChaosNexus->SetSelect(true);
-		g_pCamera->SetTarget(pChaosNexus->GetPosPtr());
-		pChaosNexus->SetType(cBuilding::E_CHAOSNEXUS);
-		m_vecBuilding.push_back(pChaosNexus);
-	}
-
-	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('5'))
-	{
-		m_bEditOn = true;
-		cBuilding* pChaosInhibitor = new cBuilding;
-		vector<ST_UNITLOADINFO> tempChaosInhibitor;
-		tempChaosInhibitor.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x", NULL, NULL });
-		pChaosInhibitor->Setup(tempChaosInhibitor, m_pMap);
-		pChaosInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
-		pChaosInhibitor->SetSelect(true);
-		g_pCamera->SetTarget(pChaosInhibitor->GetPosPtr());
-		pChaosInhibitor->SetType(cBuilding::E_CHAOSINHIBITOR);
-		m_vecBuilding.push_back(pChaosInhibitor);
-	}
-
-	if (!m_bEditOn && g_pKeyManager->IsOnceKeyDown('6'))
-	{
-		m_bEditOn = true;
-		cBuilding* pChaosTurret = new cBuilding;
-		vector<ST_UNITLOADINFO> tempChaosTurret;
-		tempChaosTurret.push_back({ STATE_IDLE, "unit/ChaosTurret.x", NULL, NULL });
-		pChaosTurret->Setup(tempChaosTurret, m_pMap);
-		pChaosTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
-		pChaosTurret->SetSelect(true);
-		g_pCamera->SetTarget(pChaosTurret->GetPosPtr());
-		pChaosTurret->SetType(cBuilding::E_CHAOSTURRET);
-		m_vecBuilding.push_back(pChaosTurret);
-	}
-
-	if (g_pKeyManager->IsStayKeyDown(VK_CONTROL))
-	{
-		if (g_pKeyManager->IsOnceKeyDown('S'))
-		{
-			cBuildingLoader buildingLoader;
-			buildingLoader.SaveBuilding(m_vecBuilding);
-		}
-
-		if (g_pKeyManager->IsOnceKeyDown('L'))
-		{
-			cBuildingLoader buildingLoader;
-			buildingLoader.LoadBuilding(m_pMap, m_vecBuilding);
-		}
-	}
-
-	if (g_pKeyManager->IsStayKeyDown(VK_RETURN))
-	{
-		m_bEditOn = false;
-
-		for (int i = 0; i < m_vecBuilding.size(); i++)
-		{
-			m_vecBuilding[i]->SetSelect(false);
-		}
-
-		if (m_pPlayer)
-		{
-			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
-		}
-	}
-
-	if (g_pKeyManager->IsOnceKeyDown(VK_LEFT))
-	{
-		m_vecBuilding[m_nIndexBuilding]->SetSelect(false);
-
-		if (m_pPlayer)
-		{
-			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
-		}
-
-		if (m_nIndexBuilding > 0)
-		{
-			m_nIndexBuilding--;
-		}
-
-		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
-		m_pCurrentBuilding->SetSelect(true);
-		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
-	}
-
-	if (g_pKeyManager->IsOnceKeyDown(VK_RIGHT))
-	{
-		m_vecBuilding[m_nIndexBuilding]->SetSelect(false);
-
-		if (m_pPlayer)
-		{
-			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
-		}
-
-		if (m_nIndexBuilding < m_vecBuilding.size() - 1)
-		{
-			m_nIndexBuilding++;
-		}
-
-		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
-		m_pCurrentBuilding->SetSelect(true);
-		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
-	}
 
 	for each (auto p in m_vecUIObject)
 	{
@@ -254,6 +167,110 @@ void cMapEditorScene::UIRender()
 	for each (auto p in m_vecUIObject)
 	{
 		p->Render(m_pSprite);
+	}
+}
+
+void cMapEditorScene::AddOrderNexusCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (!pThis->GetEditOn())
+	{
+		if (pThis->AddOrderNexus()) pThis->SetEditOn(true);
+	}
+}
+
+void cMapEditorScene::AddOrderInhibitorCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (!pThis->GetEditOn())
+	{
+		if (pThis->AddOrderInhibitor()) pThis->SetEditOn(true);
+	}
+}
+
+void cMapEditorScene::AddOrderTurretCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (!pThis->GetEditOn())
+	{
+		if (pThis->AddOrderTurret()) pThis->SetEditOn(true);
+	}
+}
+
+void cMapEditorScene::AddChaosNexusCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (!pThis->GetEditOn())
+	{
+		if (pThis->AddChaosNexus()) pThis->SetEditOn(true);
+	}
+}
+
+void cMapEditorScene::AddChaosInhibitorCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (!pThis->GetEditOn())
+	{
+		if (pThis->AddChaosInhibitor()) pThis->SetEditOn(true);
+	}
+}
+
+void cMapEditorScene::AddChaosTurretCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (!pThis->GetEditOn())
+	{
+		if (pThis->AddChaosTurret()) pThis->SetEditOn(true);
+	}
+}
+
+void cMapEditorScene::PrevBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	
+	if (pThis->PrevBuilding()) pThis->SetEditOn(true);
+}
+
+void cMapEditorScene::NextBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	
+	if (pThis->NextBuilding()) pThis->SetEditOn(true);
+}
+
+void cMapEditorScene::SaveBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (!pThis->GetEditOn())
+	{
+		pThis->SaveBuilding("BuildingTest.txt");
+	}
+}
+
+void cMapEditorScene::LoadBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (!pThis->GetEditOn())
+	{
+		pThis->LoadBuilding("BuildingTest.txt");
+	}
+}
+
+void cMapEditorScene::DeleteBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (pThis->GetEditOn())
+	{
+		if (pThis->DeleteBuilding()) pThis->SetEditOn(false);
+	}
+}
+
+void cMapEditorScene::EnterBuildingCallback(void * CallBackObj1, void * CallBackObj2)
+{
+	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj1;
+	if (pThis->GetEditOn())
+	{
+		if (pThis->EnterBuilding()) pThis->SetEditOn(false);
 	}
 }
 
@@ -304,4 +321,207 @@ void cMapEditorScene::AlistarSpell2CallBack(void * CallBackObj)
 D3DXVECTOR3 cMapEditorScene::playerPos()
 {
 	return m_pPlayer->GetPosition();
+}
+
+bool cMapEditorScene::AddOrderNexus(void)
+{
+	cBuilding* pOrderNexus = new cBuilding;
+	vector<ST_UNITLOADINFO> tempOrderNexus;
+	tempOrderNexus.push_back({ STATE_IDLE, "unit/OrderNexus.x", NULL, NULL });
+	pOrderNexus->Setup(tempOrderNexus, m_pMap);
+	pOrderNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
+	pOrderNexus->SetSelect(true);
+	g_pCamera->SetTarget(pOrderNexus->GetPosPtr());
+	pOrderNexus->SetType(cBuilding::E_ORDERNEXUS);
+	m_pCurrentBuilding = pOrderNexus;
+	m_vecBuilding.push_back(pOrderNexus);
+
+	return true;
+}
+
+bool cMapEditorScene::AddOrderInhibitor(void)
+{
+	cBuilding* pOrderInhibitor = new cBuilding;
+	vector<ST_UNITLOADINFO> tempOrderInhibitor;
+	tempOrderInhibitor.push_back({ STATE_IDLE, "unit/OrderInhibitor.x", NULL, NULL });
+	pOrderInhibitor->Setup(tempOrderInhibitor, m_pMap);
+	pOrderInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
+	pOrderInhibitor->SetSelect(true);
+	g_pCamera->SetTarget(pOrderInhibitor->GetPosPtr());
+	pOrderInhibitor->SetType(cBuilding::E_ORDERINHIBITOR);
+	m_pCurrentBuilding = pOrderInhibitor;
+	m_vecBuilding.push_back(pOrderInhibitor);
+
+	return true;
+}
+
+bool cMapEditorScene::AddOrderTurret(void)
+{
+	cBuilding* pOrderTurret = new cBuilding;
+	vector<ST_UNITLOADINFO> tempOrderTurret;
+	tempOrderTurret.push_back({ STATE_IDLE, "unit/OrderTurret.x", NULL, NULL });
+	pOrderTurret->Setup(tempOrderTurret, m_pMap);
+	pOrderTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
+	pOrderTurret->SetSelect(true);
+	g_pCamera->SetTarget(pOrderTurret->GetPosPtr());
+	pOrderTurret->SetType(cBuilding::E_ORDERTURRET);
+	m_pCurrentBuilding = pOrderTurret;
+	m_vecBuilding.push_back(pOrderTurret);
+
+	return true;
+}
+
+bool cMapEditorScene::AddChaosNexus(void)
+{
+	cBuilding* pChaosNexus = new cBuilding;
+	vector<ST_UNITLOADINFO> tempChaosNexus;
+	tempChaosNexus.push_back({ STATE_IDLE, "unit/ChaosNexus.x", NULL, NULL });
+	pChaosNexus->Setup(tempChaosNexus, m_pMap);
+	pChaosNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
+	pChaosNexus->SetSelect(true);
+	g_pCamera->SetTarget(pChaosNexus->GetPosPtr());
+	pChaosNexus->SetType(cBuilding::E_CHAOSNEXUS);
+	m_pCurrentBuilding = pChaosNexus;
+	m_vecBuilding.push_back(pChaosNexus);
+
+	return true;
+}
+
+bool cMapEditorScene::AddChaosInhibitor(void)
+{
+	cBuilding* pChaosInhibitor = new cBuilding;
+	vector<ST_UNITLOADINFO> tempChaosInhibitor;
+	tempChaosInhibitor.push_back({ STATE_IDLE, "unit/ChaosInhibitor.x", NULL, NULL });
+	pChaosInhibitor->Setup(tempChaosInhibitor, m_pMap);
+	pChaosInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
+	pChaosInhibitor->SetSelect(true);
+	g_pCamera->SetTarget(pChaosInhibitor->GetPosPtr());
+	pChaosInhibitor->SetType(cBuilding::E_CHAOSINHIBITOR);
+	m_pCurrentBuilding = pChaosInhibitor;
+	m_vecBuilding.push_back(pChaosInhibitor);
+
+	return true;
+}
+
+bool cMapEditorScene::AddChaosTurret(void)
+{
+	cBuilding* pChaosTurret = new cBuilding;
+	vector<ST_UNITLOADINFO> tempChaosTurret;
+	tempChaosTurret.push_back({ STATE_IDLE, "unit/ChaosTurret.x", NULL, NULL });
+	pChaosTurret->Setup(tempChaosTurret, m_pMap);
+	pChaosTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
+	pChaosTurret->SetSelect(true);
+	g_pCamera->SetTarget(pChaosTurret->GetPosPtr());
+	pChaosTurret->SetType(cBuilding::E_CHAOSTURRET);
+	m_pCurrentBuilding = pChaosTurret;
+	m_vecBuilding.push_back(pChaosTurret);
+
+	return true;
+}
+
+bool cMapEditorScene::PrevBuilding()
+{
+	if (!m_vecBuilding.empty())
+	{
+		if (m_pCurrentBuilding) m_pCurrentBuilding->SetSelect(false);
+
+		if (m_pPlayer)
+		{
+			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		}
+
+		if (m_nIndexBuilding > 0)
+		{
+			m_nIndexBuilding--;
+		}
+
+		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
+		m_pCurrentBuilding->SetSelect(true);
+		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool cMapEditorScene::NextBuilding()
+{
+	if (!m_vecBuilding.empty())
+	{
+		if (m_pCurrentBuilding) m_pCurrentBuilding->SetSelect(false);
+
+		if (m_pPlayer)
+		{
+			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		}
+
+		if (m_nIndexBuilding < m_vecBuilding.size() - 1)
+		{
+			m_nIndexBuilding++;
+		}
+
+		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
+		m_pCurrentBuilding->SetSelect(true);
+		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool cMapEditorScene::DeleteBuilding()
+{
+	if (m_pCurrentBuilding)
+	{
+		for (int i = 0; i < m_vecBuilding.size(); i++)
+		{
+			if (m_pCurrentBuilding == m_vecBuilding[i])
+			{
+				SAFE_DELETE(m_pCurrentBuilding);
+				m_vecBuilding.erase(m_vecBuilding.begin() + i);
+				break;
+			}
+		}
+
+		EnterBuilding();
+
+		return true;
+	}
+
+	return false;
+}
+
+bool cMapEditorScene::EnterBuilding()
+{
+	for (int i = 0; i < m_vecBuilding.size(); i++)
+	{
+		m_vecBuilding[i]->SetSelect(false);
+	}
+
+	if (m_pPlayer)
+	{
+		g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+	}
+
+	m_pCurrentBuilding = NULL;
+
+	return true;
+}
+
+bool cMapEditorScene::SaveBuilding(char* szFileName)
+{
+	cBuildingLoader buildingLoader;
+	buildingLoader.SaveBuilding(szFileName, m_vecBuilding);
+
+	return true;
+}
+
+bool cMapEditorScene::LoadBuilding(char* szFileName)
+{
+	cBuildingLoader buildingLoader;
+	buildingLoader.LoadBuilding(szFileName, m_pMap, m_vecBuilding);
+
+	return true;
 }

@@ -12,7 +12,7 @@ cBuildingLoader::~cBuildingLoader()
 {
 }
 
-void cBuildingLoader::LoadBuilding(IN cMap* pMap, OUT vector<cBuilding*>& vecBuilding)
+void cBuildingLoader::LoadBuilding(IN char* szFileName, IN cMap* pMap, OUT vector<cBuilding*>& vecBuilding)
 {
 	for each(auto p in vecBuilding)
 	{
@@ -20,7 +20,12 @@ void cBuildingLoader::LoadBuilding(IN cMap* pMap, OUT vector<cBuilding*>& vecBui
 	}
 	vecBuilding.clear();
 
-	ifstream inFile("unit/buildings.txt", ios::in);
+	string sFolder = "unit/";
+	string sFileName = szFileName;
+
+	string sFullPath = sFolder + sFileName;
+
+	ifstream inFile(sFullPath, ios::in);
 
 	vector<string> vecStrMap;
 
@@ -104,7 +109,7 @@ void cBuildingLoader::LoadBuilding(IN cMap* pMap, OUT vector<cBuilding*>& vecBui
 	inFile.close();
 }
 
-void cBuildingLoader::SaveBuilding(IN vector<cBuilding*>& vecBuilding)
+void cBuildingLoader::SaveBuilding(IN char* szFileName, IN vector<cBuilding*>& vecBuilding)
 {
 	HANDLE file;
 	DWORD write;
@@ -148,7 +153,12 @@ void cBuildingLoader::SaveBuilding(IN vector<cBuilding*>& vecBuilding)
 		strData += '\n';
 	}
 
-	file = CreateFile("unit/buildings.txt", GENERIC_WRITE, 0,
+	string sFolder = "unit/";
+	string sFileName = szFileName;
+
+	string sFullPath = sFolder + sFileName;
+
+	file = CreateFile(sFullPath.c_str(), GENERIC_WRITE, 0,
 		NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, strData.c_str(), strData.length(), &write, NULL);
 	CloseHandle(file);
