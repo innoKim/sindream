@@ -7,6 +7,7 @@
 #include "cPhysics.h"
 #include "cRigidbody.h"
 #include "cMap.h"
+#include "cBuildingLoader.h"
 
 void cPhysicsScene::SetLight()
 {
@@ -53,6 +54,9 @@ void cPhysicsScene::Setup()
 	m_pMap = new cMap;
 	m_pMap->LoadMap("map/", "room.obj");
 	m_pMap->LoadSur("LoL/room_surface.obj");
+
+	cBuildingLoader buildingLoader;
+	buildingLoader.LoadBuilding(m_pMap, m_vecBuilding);
 
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;

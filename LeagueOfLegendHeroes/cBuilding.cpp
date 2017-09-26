@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "cBuilding.h"
-
+#include "cPhysics.h"
 
 cBuilding::cBuilding()
 	: m_bSelect(false)
@@ -14,8 +14,15 @@ cBuilding::~cBuilding()
 	Destroy();
 }
 
+void cBuilding::Setup(vector<ST_UNITLOADINFO> statesVector, cMap * mapPtr)
+{
+	cUnit::Setup(statesVector, mapPtr);
+	m_pPhysics->SetIsActivate(false);
+}
+
 void cBuilding::Update()
 {
+	cUnit::Update();
 	KeyControl();
 }
 

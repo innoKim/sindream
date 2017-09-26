@@ -145,14 +145,14 @@ void cMapEditorScene::Update()
 	{
 		if (g_pKeyManager->IsOnceKeyDown('S'))
 		{
-			cBuildingLoader pLoader;
-			pLoader.SaveBuilding(m_vecBuilding);
+			cBuildingLoader buildingLoader;
+			buildingLoader.SaveBuilding(m_vecBuilding);
 		}
 
 		if (g_pKeyManager->IsOnceKeyDown('L'))
 		{
-			cBuildingLoader pLoader;
-			pLoader.LoadBuilding(m_pMap, m_vecBuilding);
+			cBuildingLoader buildingLoader;
+			buildingLoader.LoadBuilding(m_pMap, m_vecBuilding);
 		}
 	}
 
