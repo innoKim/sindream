@@ -4,12 +4,14 @@
 
 cUIButton::cUIButton()
 	: m_eButtonStatus(E_NORMAL)
-	, m_pfnCallback(NULL)
-	, m_pCallbackObj(NULL)
+	, m_pfnCallback1(NULL)
+	, m_pfnCallback2(NULL)
+	, m_pfnCallback3(NULL)
+	, m_pCallbackObj1(NULL)
 	, m_pCallbackObj2(NULL)
+	, m_pCallbackObj3(NULL)
 {
 }
-
 
 cUIButton::~cUIButton()
 {
@@ -37,8 +39,12 @@ void cUIButton::Update()
 		{
 			if (m_eButtonStatus == E_SELECTED)
 			{
-				if (m_pfnCallback)
-					m_pfnCallback(m_pCallbackObj, m_pCallbackObj2);
+				if (m_pfnCallback1)
+					m_pfnCallback1(m_pCallbackObj1);
+				if (m_pfnCallback2)
+					m_pfnCallback2(m_pCallbackObj1, m_pCallbackObj2);
+				if (m_pfnCallback3)
+					m_pfnCallback3(m_pCallbackObj1, m_pCallbackObj2, m_pCallbackObj3);
 			}
 			m_eButtonStatus = E_MOUSEOVER;
 		}

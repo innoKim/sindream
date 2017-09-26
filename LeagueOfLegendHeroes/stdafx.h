@@ -183,3 +183,5 @@ struct ST_SQUARE
 typedef void(*CALLBACKFUNC)(void*);
 
 typedef void(*CALLBACKFUNC2)(void*,void*);
+
+typedef void(*CALLBACKFUNC3)(void*, void*, void*);

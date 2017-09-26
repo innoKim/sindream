@@ -10,7 +10,21 @@ class cMap;
 class cParticleScene : public iScene
 {
 private:
-	
+	enum  eType
+	{
+		eNone,
+		eFloat,
+		eInt,
+		eVector3,
+		eEnd
+	};
+
+public:
+	eType m_eNone;
+	eType m_eFloat;
+	eType m_eInt;
+	eType m_eVector3;
+
 	D3DXVECTOR3 target;
 	cUnit* m_pPlayer;
 
@@ -21,6 +35,9 @@ private:
 	vector<cUIObject*>		m_vecUIObject;
 
 	cMap* m_pMap;
+
+	SYNTHESIZE(void*, m_pCurValue,CurValuePtr);
+	SYNTHESIZE(eType, m_eValueType, ValueType);
 
 public:
 	cParticleScene();
@@ -37,6 +54,7 @@ public:
 
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
+	static void SetVariableToChange(void * scene, void * variable, void *variabletype);
 
 	virtual D3DXVECTOR3 playerPos() override;
 };

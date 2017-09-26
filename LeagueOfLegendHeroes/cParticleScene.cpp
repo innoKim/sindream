@@ -11,12 +11,18 @@
 #include "cUIImage.h"
 #include "cMap.h"
 
-cParticleScene::cParticleScene():
-	target(0,0,0),
+cParticleScene::cParticleScene() :
+	target(0, 0, 0),
 	m_pSprite(NULL),
 	m_pPlayer(NULL),
 	m_pMap(NULL),
-	m_pCurParticleGroup(NULL)
+	m_pCurParticleGroup(NULL),
+	m_pCurValue(NULL),
+	m_eValueType(eNone),
+	m_eNone(eType::eNone),
+	m_eFloat(eType::eFloat),
+	m_eInt(eType::eInt),
+	m_eVector3(eType::eVector3)
 {
 }
 
@@ -100,13 +106,90 @@ void cParticleScene::Setup()
 	
 	for (int i = 0; i < 12; i++)
 	{
-		char str[128];
-		sprintf(str, "%d", i);
 		cUIButton* button = new cUIButton;
-		button->SetTag(string(str)+buttonTag[i]);
+		button->SetTag(buttonTag[i]+" 버튼");
 		buttonSet->AddChild(button);
 		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
 		button->SetPosition(1000+(i%2)*80, ((i/2)+1) * 80);
+
+		switch (i)
+		{
+		case 0:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+		break;
+
+		case 1:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetGenParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+
+		case 2:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetLifeTime());
+			button->SetCallbackObject3(&m_eFloat);
+			break;
+		case 3:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetLifeTimeVariation());
+			button->SetCallbackObject3(&m_eFloat);
+			break;
+		case 4:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+		case 5:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+		case 6:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+		case 7:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+		case 8:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+		case 9:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+		case 10:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+		case 11:
+			button->SetCallback3(SetVariableToChange);
+			button->SetCallbackObject(this);
+			button->SetCallbackObject2(&m_pCurParticleGroup->GetInitParticleNumber());
+			button->SetCallbackObject3(&m_eInt);
+			break;
+		}
+
 
 		cUIText* text = new cUIText;
 		text->SetTag(buttonTag[i]);
@@ -115,23 +198,24 @@ void cParticleScene::Setup()
 		text->SetWidth(50);
 		text->SetHeight(50);
 		text->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
-		text->SetTag("text");
 		button->AddChild(text);
 	}
+
+
 	
 	cUIImage* textBox = new cUIImage;
 	textBox->SetTexture("texture/textbox.png");
-	textBox->SetTag("textBox");
+	textBox->SetTag("텍스트 박스");
 	buttonSet->AddChild(textBox);
 	textBox->SetPosition(975, 600);
 	
 	cUIText* text = new cUIText;
+	text->SetTag("텍스트");
 	text->SetText("이건데...");
 	text->SetFontType(cFontManager::E_NORMAL);
 	text->SetWidth(180);
 	text->SetHeight(40);
 	text->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
-	text->SetTag("text");
 	textBox->AddChild(text);
 
 	//////////////////////
@@ -146,6 +230,30 @@ void cParticleScene::Update()
 	for each (auto p in m_vecUIObject)
 	{
 		p->Update();
+		if (p->GetChild("텍스트 박스"))
+		{
+			char str[128];
+			
+			if (m_eValueType==eFloat)
+			{
+				if(m_pCurValue)
+				sprintf(str, "%.2f",*((float*)m_pCurValue));
+			}
+
+			else if (m_eValueType == eInt)
+			{
+				if (m_pCurValue)
+				sprintf(str, "%d", *((int*)m_pCurValue));
+			}
+
+			else if (m_eValueType == eNone)
+			{
+				sprintf(str, "원하는 변수를 골라주세요");
+			}
+
+			cUIText* text = (cUIText*)p->GetChild("텍스트 박스")->GetChild("텍스트");
+			text->SetText(str);
+		}
 	}
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
@@ -158,19 +266,17 @@ void cParticleScene::Update()
 
 void cParticleScene::Render()
 {
-	m_pCurParticleGroup->Render();
-
-	for each (auto p in m_vecUIObject)
-	{
-		p->Render(m_pSprite);
-	}
 	m_pPlayer->Render();
-
-	RenderInfo();
 }
 
 void cParticleScene::UIRender()
 {
+	for each (auto p in m_vecUIObject)
+	{
+		p->Render(m_pSprite);
+	}
+	m_pCurParticleGroup->Render();
+	RenderInfo();
 }
 
 void cParticleScene::Pop()
@@ -205,6 +311,14 @@ void cParticleScene::AlistarSpell2CallBack(void * CallBackObj)
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
 	Alistar->SetState(STATE_IDLE);
+}
+
+void cParticleScene::SetVariableToChange(void * scene, void * variable, void *variabletype)
+{
+	cParticleScene* thisScene = (cParticleScene*)scene;
+
+	thisScene->SetCurValuePtr(variable);
+	thisScene->SetValueType(*(eType*)variabletype);
 }
 
 D3DXVECTOR3 cParticleScene::playerPos()
