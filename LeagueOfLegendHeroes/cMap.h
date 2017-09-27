@@ -5,6 +5,7 @@
 
 class cUnit;
 class cGroup;
+class cAStarGrid;
 
 class cMap
 {
@@ -22,6 +23,8 @@ private:
 	D3DXMATRIX						m_matW, m_matS, m_matR, m_matT;
 	
 	vector<vector<ST_HEIGHTNODE>>	m_gridHeightNode; // 잘 나눠져서 들어왔네요
+
+	SYNTHESIZE(cAStarGrid*,			m_pAStarGrid, Grid);
 public:
 	cMap();
 	~cMap();

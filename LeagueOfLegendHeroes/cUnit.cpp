@@ -3,9 +3,12 @@
 #include "cSkinnedMesh.h"
 #include "cPhysics.h"
 #include "cMap.h"
+#include "cAStar.h"
 
 void cUnit::Destroy()
 {
+	SAFE_DELETE(m_pAStar);
+
 	for each(auto p in m_mapStates)
 	{
 		SAFE_DELETE(p.second);
@@ -17,7 +20,8 @@ cUnit::cUnit() :
 	m_vPos(0, 0, 0),
 	m_vDir(0, 0, -1),
 	m_pPhysics(NULL),
-	m_pMap(NULL)
+	m_pMap(NULL),
+	m_pAStar(NULL)
 {
 }
 
@@ -38,6 +42,11 @@ void cUnit::Setup(vector<ST_UNITLOADINFO> statesVector, cMap* mapPtr)
 	SetState(STATE_IDLE);
 
 	m_pMap = mapPtr;
+
+	m_pAStarGrid = m_pMap->GetGrid();
+
+	m_pAStar = new cAStar;
+	m_pAStar->Setup(m_pAStarGrid);
 
 	/*m_pRigidbody = new cRigidbody;
 	m_pRigidbody->SetPositionPtr(&m_vPos);

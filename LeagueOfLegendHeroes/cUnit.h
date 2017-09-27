@@ -25,13 +25,17 @@ struct ST_UNITLOADINFO
 	ST_CallbackInfo cbInfo2;
 };
 
+class cAStar;
+class cAStarGrid;
 
 class cUnit
 {
 protected:
-	map<eSTATE, cSkinnedMesh*> m_mapStates;
-	eSTATE   m_eStateNum;
-	cSkinnedMesh* m_pCurState;
+	map<eSTATE, cSkinnedMesh*>	m_mapStates;
+	eSTATE						m_eStateNum;
+	cSkinnedMesh*				m_pCurState;
+	cAStar*						m_pAStar;
+	cAStarGrid*					m_pAStarGrid;
 
 	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vPos, Position);
 	SYNTHESIZE_PASS_BY_REF(D3DXVECTOR3, m_vDir, Direction);

@@ -1,7 +1,10 @@
 #pragma once
 #include "cUnit.h"
+
 class cEnemy : public cUnit
 {
+private:
+
 public:
 	cEnemy();
 	virtual ~cEnemy();

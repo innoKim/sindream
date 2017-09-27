@@ -2,6 +2,7 @@
 #include "cMap.h"
 #include "cBuilding.h"
 #include "cGroup.h"
+#include "cAStarGrid.h"
 
 cMap::cMap()
 	: m_pMesh(NULL)
@@ -103,6 +104,9 @@ void cMap::LoadMap(IN char * Folder, IN char * File)
 	m_pMesh->OptimizeInplace(D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE, &vecAdj[0], NULL, NULL, NULL);
 
 	g_pShaderManager->SetMap(m_pMesh, m_vecMtlTex, (D3DXMATRIXA16)m_matW);
+
+	m_pAStarGrid = new cAStarGrid;
+	m_pAStarGrid->Setup(this);
 }
 
 void cMap::LoadSur(char * FileFullPath)

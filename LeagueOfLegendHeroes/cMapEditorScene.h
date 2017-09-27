@@ -12,11 +12,12 @@ class cMapEditorScene : public iScene
 private:
 	cUnit*					m_pPlayer;
 	cMap*					m_pMap;
-	vector<cBuilding*>		m_vecBuilding;
 	cBuilding*				m_pCurrentBuilding;
 	int						m_nIndexBuilding;
-	vector<cUIObject*>		m_vecUIObject;
 	LPD3DXSPRITE			m_pSprite;
+	vector<cBuilding*>		m_vecBuilding;
+	vector<cUIObject*>		m_vecUIObject;
+	vector<cUnit*>			m_vecEnemy;
 
 	SYNTHESIZE(bool, m_bEditOn, EditOn);
 
@@ -27,7 +28,6 @@ public:
 	virtual void Setup() override;
 	virtual void Update() override;
 	virtual void Render() override;
-
 	virtual void UIRender() override;
 
 	static void AddOrderNexusCallback(void * CallBackObj);

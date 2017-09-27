@@ -10,6 +10,9 @@
 #include "cUIButton.h"
 #include "cUIText.h"
 #include "cAlphablending.h"
+#include "cAStar.h"
+#include "cAStarGrid.h"
+#include "cEnemy.h"
 
 cMapEditorScene::cMapEditorScene()
 	: m_pPlayer(NULL)
@@ -32,6 +35,11 @@ cMapEditorScene::~cMapEditorScene()
 	SAFE_RELEASE(m_pSprite);
 
 	for each (auto p in m_vecBuilding)
+	{
+		SAFE_DELETE(p);
+	}
+
+	for each(auto p in m_vecEnemy)
 	{
 		SAFE_DELETE(p);
 	}
@@ -144,6 +152,16 @@ void cMapEditorScene::Setup()
 
 	g_pAlphablending->AddAlphablending("AlistarQ", "AlistarQgroundcrack.dds", m_pPlayer->GetPosition(), D3DXVECTOR3(0, 1, 0), 1.0f, 150, true, false);
 
+	for (int i = 0; i < 3; i++)
+	{
+		cUnit* enemy = new cEnemy;
+		vector<ST_UNITLOADINFO> temp;
+		temp.push_back({ STATE_IDLE, "unit/PoroIdle.x" ,NULL,NULL });
+		enemy->Setup(temp, m_pMap);
+		enemy->SetPosition(D3DXVECTOR3(1000 + i * 100, 100, 1000 + i * 10));
+		m_vecEnemy.push_back(enemy);
+	}
+
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
 }
@@ -159,6 +177,11 @@ void cMapEditorScene::Update()
 	}
 
 	for each(auto p in m_vecBuilding)
+	{
+		p->Update();
+	}
+
+	for each(auto p in m_vecEnemy)
 	{
 		p->Update();
 	}

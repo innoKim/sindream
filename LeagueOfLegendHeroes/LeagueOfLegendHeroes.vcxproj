@@ -155,6 +155,10 @@
     <ClInclude Include="cAllocateHierachy.h" />
     <ClInclude Include="cAlphablending.h" />
     <ClInclude Include="cAlphablendingManager.h" />
+    <ClInclude Include="cAStar.h" />
+    <ClInclude Include="cAStarGrid.h" />
+    <ClInclude Include="cAStarHeap.h" />
+    <ClInclude Include="cAStarNode.h" />
     <ClInclude Include="cBuilding.h" />
     <ClInclude Include="cBuildingLoader.h" />
     <ClInclude Include="cCamera.h" />
@@ -211,6 +215,10 @@
     <ClCompile Include="cAllocateHierachy.cpp" />
     <ClCompile Include="cAlphablending.cpp" />
     <ClCompile Include="cAlphablendingManager.cpp" />
+    <ClCompile Include="cAStar.cpp" />
+    <ClCompile Include="cAStarGrid.cpp" />
+    <ClCompile Include="cAStarHeap.cpp" />
+    <ClCompile Include="cAStarNode.cpp" />
     <ClCompile Include="cBuilding.cpp" />
     <ClCompile Include="cBuildingLoader.cpp" />
     <ClCompile Include="cCamera.cpp" />
