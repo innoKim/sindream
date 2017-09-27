@@ -11,7 +11,7 @@ class cUITextInput : public cUIObject
 private:
 	cUIImage*	m_pBack;
 	cUIText*	m_pText;
-	string		m_szText;
+	SYNTHESIZE_PASS_BY_REF(string, m_szText, Text);
 	bool		m_bSelected;
 
 public:

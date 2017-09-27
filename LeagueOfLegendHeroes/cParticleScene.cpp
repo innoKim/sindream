@@ -17,7 +17,6 @@ cParticleScene::cParticleScene() :
 	target(0, 0, 0),
 	m_pSprite(NULL),
 	m_pPlayer(NULL),
-	m_pMap(NULL),
 	m_pCurParticleGroup(NULL),
 	m_pCurValue(NULL),
 	m_eValueType(eNone),
@@ -26,7 +25,8 @@ cParticleScene::cParticleScene() :
 	m_eInt(eType::eInt),
 	m_eVector3(eType::eVector3),
 	m_eColor(eType::eColor),
-	m_pGrid(NULL)
+	m_pGrid(NULL),
+	m_pTextInput(NULL)
 {
 }
 
@@ -43,8 +43,6 @@ cParticleScene::~cParticleScene()
 
 	SAFE_RELEASE(m_pSprite);
 
-	SAFE_DELETE(m_pMap);
-
 	SAFE_DELETE(m_pGrid)
 }
 
@@ -59,7 +57,6 @@ void cParticleScene::Setup()
 	//////////////////////////////////////////////////////
 
 	/*m_pParticleGroup->SetInitParticleNumber(20);
-	m_pParticleGroup->SetIsContinueus(false);
 	m_pParticleGroup->SetGenParticleNumber(5);
 	m_pParticleGroup->SetLifeTime(1.0f);
 	m_pParticleGroup->SetLifeTimeVariation(0.5f);
@@ -79,7 +76,7 @@ void cParticleScene::Setup()
 
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
 
-	m_pPlayer = new cPlayer;
+	/*m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
@@ -88,16 +85,13 @@ void cParticleScene::Setup()
 	m_pPlayer->Setup(temp,NULL);
 	m_pPlayer->SetPosition(D3DXVECTOR3(-100, 0, 0));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
-	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
+	g_pShaderManager->SetTarget(g_pCamera->GetTarget());*/
 
 	////////////////////////////////////////////////////////
 
 	UISetup();
 
 	//////////////////////
-	m_pMap = new cMap;
-	m_pMap->LoadSur("LoL/room_surface.obj");
-
 	m_pGrid = new cGridPlane;
 	m_pGrid->Setup(100, 50);
 }
@@ -106,20 +100,36 @@ void cParticleScene::Update()
 {
 	m_pCurParticleGroup->Update();
 
+	for each (auto p in m_vecCurParticleGroup)
+	{
+		p->Update();
+	}
+
 	TextBoxPrint();
 	ValueControl();
+
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
 	{
 		Pop();
 	}
 
-	m_pPlayer->Update();
+	if (g_pKeyManager->IsOnceKeyDown(VK_CONTROL))
+	{
+		PopVector();
+	}
+
+	if (g_pKeyManager->IsStayKeyDown(VK_LSHIFT)&&g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
+	{
+		SetParticlePos();
+	}
+
+	if(m_pPlayer)m_pPlayer->Update();
 }
 
 void cParticleScene::Render()
 {
-	m_pPlayer->Render();
+	if (m_pPlayer)m_pPlayer->Render();
 }
 
 void cParticleScene::UIRender()
@@ -128,7 +138,14 @@ void cParticleScene::UIRender()
 	{
 		p->Render(m_pSprite);
 	}
+
 	m_pCurParticleGroup->Render();
+
+	for each (auto p in m_vecCurParticleGroup)
+	{
+		p->Render();
+	}
+	
 	RenderInfo();
 
 	if(m_pGrid) m_pGrid->Render();
@@ -138,6 +155,15 @@ void cParticleScene::Pop()
 {
 	m_pCurParticleGroup->Setup();
 	m_pCurParticleGroup->Update();
+}
+
+void cParticleScene::PopVector()
+{
+	for each(auto p in m_vecCurParticleGroup)
+	{
+		p->Setup();
+		p->Update();
+	}
 }
 
 void cParticleScene::RenderInfo()
@@ -152,6 +178,16 @@ void cParticleScene::RenderInfo()
 	g_pDebug->Print(str, x, y + between * 0);
 	sprintf(str, "LifeTimeVariation %.2f", m_pCurParticleGroup->GetLifeTimeVariation());
 	g_pDebug->Print(str, x, y + between * 1);
+}
+
+void cParticleScene::ClearParticleVector()
+{
+	for each(auto p in m_vecCurParticleGroup)
+	{
+		SAFE_DELETE(p);
+	}
+
+	m_vecCurParticleGroup.clear();
 }
 
 void cParticleScene::AlistarSpell1CallBack(void *CallBackObj)
@@ -176,7 +212,7 @@ void cParticleScene::SetVariableToChange(void * scene, void * variable, void *va
 	thisScene->SetValueType(*(eType*)variabletype);
 }
 
-void cParticleScene::SaveButton(void * CallBackObj)
+void cParticleScene::SaveButtonCallBack(void * CallBackObj)
 {
 	cParticleScene* thisScene = (cParticleScene*)CallBackObj;
 
@@ -184,11 +220,39 @@ void cParticleScene::SaveButton(void * CallBackObj)
 
 }
 
-void cParticleScene::LoadButton(void * CallBackObj)
+void cParticleScene::LoadButtonCallBack(void * CallBackObj)
 {
 	cParticleScene* thisScene = (cParticleScene*)CallBackObj;
 
 	thisScene->Load();
+}
+
+void cParticleScene::SetTextureCallBack(void * CallBackObj)
+{
+	cParticleScene* thisScene = (cParticleScene*)CallBackObj;
+
+	cUITextInput* ti = thisScene->GetTextInputPtr();
+
+	thisScene->GetCurParticleGroupPtr()->SetTexturePath(ti->GetText());
+}
+
+void cParticleScene::NewParticleCallBack(void * CallBackObj)
+{
+	cParticleScene* thisScene = (cParticleScene*)CallBackObj;
+	
+	cParticleGroup* newParticleGroup = new cParticleGroup;
+	newParticleGroup->Clone(thisScene->GetCurParticleGroupPtr());
+	thisScene->GetCurParticleGroupVectorRef().push_back(newParticleGroup);
+
+	thisScene->GetCurParticleGroupPtr()->Init();
+}
+
+void cParticleScene::InitCallBack(void * CallBackObj)
+{
+	cParticleScene* thisScene = (cParticleScene*)CallBackObj;
+
+	thisScene->ClearParticleVector();
+	thisScene->GetCurParticleGroupPtr()->Init();
 }
 
 D3DXVECTOR3 cParticleScene::playerPos()
@@ -205,38 +269,40 @@ void cParticleScene::UISetup()
 	cUIObject* buttonSet = new cUIObject;
 	m_vecUIObject.push_back(buttonSet);
 
-	string buttonTag[16];
+	string buttonTag[19];
 	buttonTag[0] = "시작 갯수";
-	buttonTag[1] = "추가 갯수";
-	buttonTag[2] = "수명";
-	buttonTag[3] = "수명 랜덤";
-	buttonTag[4] = "위치 랜덤";
-	buttonTag[5] = "속도 제한";
-	buttonTag[6] = "속도";
-	buttonTag[7] = "속도 랜덤";
-	buttonTag[8] = "가속도";
-	buttonTag[9] = "가속도 랜덤";
-	buttonTag[10] = "시작 색";
-	buttonTag[11] = "시작 색 랜덤";
-	buttonTag[12] = "끝 색";
-	buttonTag[13] = "끝 색 랜덤";
-	buttonTag[14] = "저장 하기";
-	buttonTag[15] = "불러 오기";
-	
-	for (int i = 0; i < 16; i++)
+	buttonTag[1] = "수명";
+	buttonTag[2] = "수명 랜덤";
+	buttonTag[3] = "위치 랜덤";
+	buttonTag[4] = "속도 제한";
+	buttonTag[5] = "속도";
+	buttonTag[6] = "속도 랜덤";
+	buttonTag[7] = "가속도";
+	buttonTag[8] = "가속도 랜덤";
+	buttonTag[9] = "시작 색";
+	buttonTag[10] = "시작 색 랜덤";
+	buttonTag[11] = "끝 색";
+	buttonTag[12] = "끝 색 랜덤";
+	buttonTag[13] = "저장 하기";
+	buttonTag[14] = "불러 오기";
+	buttonTag[15] = "텍스쳐 가져오기";
+	buttonTag[16] = "추가 파티클";
+	buttonTag[17] = "초기화";
+
+	for (int i = 0; i < 18; i++)
 	{
 		cUIButton* button = new cUIButton;
 		button->SetTag(buttonTag[i] + " 버튼");
 		buttonSet->AddChild(button);
 		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
 		
-		if (i < 14)
+		if (i < 13)
 		{
-			button->SetPosition(1000 + (i % 2) * 80, ((i / 2) + 1) * 80);
+			button->SetPosition(920 + (i % 4) * 80, ((i / 4) + 1) * 80);
 		}
 		else
 		{
-			button->SetPosition((i % 2+1) * 80, (((i-14) / 2) + 1) * 80);
+			button->SetPosition(((i+1) % 2 + 1) * 80, (((i-13) / 2) + 1) * 80);
 		}
 		
 		switch (i)
@@ -251,94 +317,107 @@ void cParticleScene::UISetup()
 		case 1:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
-			button->SetCallbackObject2(&m_pCurParticleGroup->GetGenParticleNumber());
-			button->SetCallbackObject3(&m_eInt);
-			break;
-
-		case 2:
-			button->SetCallback3(SetVariableToChange);
-			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetLifeTime());
 			button->SetCallbackObject3(&m_eFloat);
 			break;
 
-		case 3:
+		case 2:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetLifeTimeVariation());
 			button->SetCallbackObject3(&m_eFloat);
 			break;
 
-		case 4:
+		case 3:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetStartPositionVariation());
 			button->SetCallbackObject3(&m_eFloat);
 			break;
 
-		case 5:
+		case 4:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetDragVelocity());
 			button->SetCallbackObject3(&m_eFloat);
 			break;
 
-		case 6:
+		case 5:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetVelocity());
 			button->SetCallbackObject3(&m_eVector3);
 			break;
 
-		case 7:
+		case 6:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetVelocityVariation());
 			button->SetCallbackObject3(&m_eFloat);
 			break;
 
-		case 8:
+		case 7:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetAcceleration());
 			button->SetCallbackObject3(&m_eVector3);
 			break;
-		case 9:
+
+		case 8:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetAccelerationVariation());
 			button->SetCallbackObject3(&m_eFloat);
 			break;
-		case 10:
+
+		case 9:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetStartColor());
 			button->SetCallbackObject3(&m_eColor);
 			break;
-		case 11:
+		case 10:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetStartColorVariation());
 			button->SetCallbackObject3(&m_eColor);
 			break;
-		case 12:
+		case 11:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetEndColor());
 			button->SetCallbackObject3(&m_eColor);
 			break;
-		case 13:
+
+		case 12:
 			button->SetCallback3(SetVariableToChange);
 			button->SetCallbackObject(this);
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetEndColorVariation());
 			button->SetCallbackObject3(&m_eColor);
 			break;
-		case 14:
-			button->SetCallback(SaveButton);
+
+		case 13:
+			button->SetCallback(SaveButtonCallBack);
 			button->SetCallbackObject(this);
 			break;
+
+		case 14:
+			button->SetCallback(LoadButtonCallBack);
+			button->SetCallbackObject(this);
+			break;
+
 		case 15:
-			button->SetCallback(LoadButton);
+			button->SetCallback(SetTextureCallBack);
+			button->SetCallbackObject(this);
+			break;
+
+		case 16:
+			button->SetCallback(NewParticleCallBack);
+			button->SetCallbackObject(this);
+			break;
+
+		case 17:
+			button->SetCallback(InitCallBack);
 			button->SetCallbackObject(this);
 			break;
 		}
@@ -370,8 +449,10 @@ void cParticleScene::UISetup()
 	textBox->AddChild(text);
 
 	cUITextInput* textInput = new cUITextInput("texture/textbox.png");
-	textInput->SetPosition(0, 0);
+	textInput->SetPosition(60, 320);
 	buttonSet->AddChild(textInput);
+
+	m_pTextInput = textInput;
 }
 
 void cParticleScene::TextBoxPrint()
@@ -524,4 +605,18 @@ void cParticleScene::Save()
 
 void cParticleScene::Load()
 {
+}
+
+void cParticleScene::SetParticlePos()
+{
+	RayInfo ray = RayToScreenPoint(g_ptMouse.x, g_ptMouse.y);
+
+	while (fabs(ray.pos.y)>0.1f&& fabs(ray.pos.y)<10000.0f)
+	{
+		ray.pos += ray.dir*0.1f;
+	}
+
+	D3DXVECTOR3 hitpos(ray.pos.x, 0, ray.pos.z);
+
+	m_pCurParticleGroup->SetStartPosition(hitpos);
 }

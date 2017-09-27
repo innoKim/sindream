@@ -10,10 +10,9 @@ private:
 	
 	SYNTHESIZE_PASS_BY_REF(string,		m_szTexturePath,			TexturePath);
 
-	SYNTHESIZE_PASS_BY_REF(bool,		m_bIsContinuous,			IsContinueus);
+	//SYNTHESIZE_PASS_BY_REF(bool,		m_bIsContinuous,			IsContinueus);
 	
 	SYNTHESIZE_PASS_BY_REF(int,			m_nInitParticle,			InitParticleNumber);
-	SYNTHESIZE_PASS_BY_REF(int,			m_nGenParticle,				GenParticleNumber);
 	
 	SYNTHESIZE_PASS_BY_REF(float,		m_fLifeTime,				LifeTime);
 	SYNTHESIZE_PASS_BY_REF(float,		m_fLifeTimeVariation,		LifeTimeVariation);
@@ -43,9 +42,11 @@ public:
 
 	bool IsDead() { return (m_vecParticle.size() == 0); }
 
+	void Init();
+	void Clone(cParticleGroup* target);
 private:
+
 	void AddParticle();
-	void ContinuousAdd();
 	void ParticleUpdate();
 };
 

@@ -4,9 +4,7 @@
 
 cParticleGroup::cParticleGroup() :
 	m_szTexturePath("texture/particleTex.tga"),
-	m_bIsContinuous(false),
 	m_nInitParticle(1),
-	m_nGenParticle(0),
 	m_fLifeTime(1.0f),
 	m_fLifeTimeVariation(0.0f),
 	m_vStartPosition(0, 0, 0),
@@ -41,11 +39,6 @@ void cParticleGroup::Setup()
 
 void cParticleGroup::Update()
 {
-	if (m_bIsContinuous)
-	{
-		ContinuousAdd();
-	}
-
 	ParticleUpdate();
 }
 
@@ -106,6 +99,52 @@ void cParticleGroup::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 }
 
+void cParticleGroup::Init()
+{	
+	m_szTexturePath = "texture/particleTex.tga";
+	m_nInitParticle = 1;
+	m_fLifeTime = 1.0f;
+	m_fLifeTimeVariation=0.0f;
+	m_vStartPosition=D3DXVECTOR3(0, 0, 0);
+	m_fStartPositionVariation=0.0f;
+	m_vVelocity= D3DXVECTOR3(0, 0, 0);
+	m_fVelocityVariation=0.0f;
+	m_fDragVelocity=0.0f;
+	m_vAcceleration= D3DXVECTOR3(0, 0, 0);
+	m_fAccelerationVariation=0.0f;
+	m_dStartColor=D3DXCOLOR(1, 1, 1, 1);
+	m_cStartColorVariation= D3DXCOLOR(0, 0, 0, 0);
+	m_dEndColor= D3DXCOLOR(0, 0, 0, 0);
+	m_cEndColorVariation= D3DXCOLOR(0, 0, 0, 0);
+
+	for each (auto p in m_vecParticle)
+	{
+		SAFE_DELETE(p);
+	}
+
+	m_vecParticle.clear();
+	m_vecVertex.clear();
+}
+
+void cParticleGroup::Clone(cParticleGroup * target)
+{
+	m_szTexturePath            = target->GetTexturePath ();
+	m_nInitParticle			   = target->GetInitParticleNumber();
+	m_fLifeTime				   = target->GetLifeTime				();  
+	m_fLifeTimeVariation	   = target->GetLifeTimeVariation	   ();
+	m_vStartPosition		   = target->GetStartPosition		   ();
+	m_fStartPositionVariation  = target->GetStartPositionVariation ();
+	m_vVelocity				   = target->GetVelocity				();  
+	m_fVelocityVariation	   = target->GetVelocityVariation	   ();
+	m_fDragVelocity			   = target->GetDragVelocity			();  
+	m_vAcceleration			   = target->GetAcceleration			();  
+	m_fAccelerationVariation   = target->GetAccelerationVariation  ();
+	m_dStartColor			   = target->GetStartColor			   ();
+	m_cStartColorVariation	   = target->GetStartColorVariation	   ();
+	m_dEndColor				   = target->GetEndColor				();  
+	m_cEndColorVariation	   = target->GetEndColorVariation	   ();
+}
+
 void cParticleGroup::AddParticle()
 {
 	m_vecVertex.resize(m_vecVertex.size() + 1);
@@ -123,14 +162,6 @@ void cParticleGroup::AddParticle()
 		, m_fDragVelocity);
 
 	m_vecParticle.push_back(newParticle);
-}
-
-void cParticleGroup::ContinuousAdd()
-{
-	for (int i = 0; i < g_pRND->GetInt(m_nGenParticle); i++)
-	{
-		AddParticle();
-	}
 }
 
 void cParticleGroup::ParticleUpdate()
