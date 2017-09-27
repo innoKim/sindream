@@ -7,6 +7,7 @@ class cUnit;
 class cPlayer;
 class cMap;
 class cGridPlane;
+class cUITextInput;
 
 class cParticleScene : public iScene
 {
@@ -27,24 +28,22 @@ public:
 	eType m_eInt;
 	eType m_eVector3;
 	eType m_eColor;
-
-
+	
 	D3DXVECTOR3 target;
 	cUnit* m_pPlayer;
-
-	cParticleGroup* m_pCurParticleGroup;
-	vector<cParticleGroup*> m_vecCurParticleGroup;
 
 	//for UI
 	LPD3DXSPRITE m_pSprite;
 	vector<cUIObject*>		m_vecUIObject;
-
-	cMap* m_pMap;
+	
 	cGridPlane* m_pGrid;
 
+	SYNTHESIZE(cParticleGroup*, m_pCurParticleGroup, CurParticleGroupPtr);
+	SYNTHESIZE(cUITextInput*, m_pTextInput, TextInputPtr);
 	SYNTHESIZE(void*, m_pCurValue,CurValuePtr);
 	SYNTHESIZE(eType, m_eValueType, ValueType);
 
+	SYNTHESIZE_PASS_BY_REF(vector<cParticleGroup*>, m_vecCurParticleGroup, CurParticleGroupVectorRef);
 
 public:
 	cParticleScene();
@@ -56,14 +55,21 @@ public:
 	virtual void UIRender() override;
 
 	void Pop();
+	void PopVector();
 	void RenderInfo();
+	void ClearParticleVector();
 
+	virtual D3DXVECTOR3 playerPos() override;
+
+//콜백 함수들
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
 	static void SetVariableToChange(void * scene, void * variable, void *variabletype);
-	static void SaveButton(void* CallBackObj);
-	static void LoadButton(void* CallBackObj);
-	virtual D3DXVECTOR3 playerPos() override;
+	static void SaveButtonCallBack(void* CallBackObj);
+	static void LoadButtonCallBack(void* CallBackObj);
+	static void SetTextureCallBack(void* CallBackObj);
+	static void NewParticleCallBack(void* CallBackObj);
+	static void InitCallBack(void* CallBackObj);
 
 private:
 
@@ -72,5 +78,6 @@ private:
 	void ValueControl();
 	void Save();
 	void Load();
+	void SetParticlePos();
 };
 

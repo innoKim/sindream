@@ -78,6 +78,8 @@ void cEffectManager::DeleteFromStorage(string effectKey)
 	}
 }
 
+
+
 void cEffectManager::PlayEffect(string effectKey)
 {
 	map<string, vector<cParticleGroup*>>::iterator itor;
@@ -91,35 +93,8 @@ void cEffectManager::PlayEffect(string effectKey)
 	for each (auto p in itor->second)
 	{
 		cParticleGroup* clone = new cParticleGroup;
-
-		clone->SetTexturePath(p->GetTexturePath());
-
-		clone->SetIsContinueus(p->GetIsContinueus());
-
-		clone->SetInitParticleNumber(p->GetInitParticleNumber());
-		clone->SetGenParticleNumber(p->GetGenParticleNumber());
-
-		clone->SetLifeTime(p->GetLifeTime());
-		clone->SetLifeTimeVariation(p->GetLifeTimeVariation());
-
-		clone->SetStartPosition(p->GetStartPosition());
-		clone->SetStartPositionVariation(p->GetStartPositionVariation());
-
-		clone->SetVelocity(p->GetVelocity());
-		clone->SetVelocityVariation(p->GetVelocityVariation());
-		clone->SetDragVelocity(p->GetDragVelocity());
-
-		clone->SetAcceleration(p->GetAcceleration());
-		clone->SetAccelerationVariation(p->GetAccelerationVariation());
-
-		clone->SetStartColor(p->GetStartColor());
-		clone->SetStartColorVariation(p->GetStartColorVariation());
-
-		clone->SetEndColor(p->GetEndColor());
-		clone->SetEndColorVariation(p->GetEndColorVariation());
-
+		clone->Clone(p);
 		clone->Setup();
-
 		newVector.push_back(clone);
 	}
 

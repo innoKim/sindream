@@ -165,6 +165,7 @@
     <ClInclude Include="cCollision.h" />
     <ClInclude Include="cDebugManager.h" />
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cEffectLoader.h" />
     <ClInclude Include="cEffectManager.h" />
     <ClInclude Include="cEnemy.h" />
     <ClInclude Include="cFontManager.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="cCollision.cpp" />
     <ClCompile Include="cDebugManager.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cEffectLoader.cpp" />
     <ClCompile Include="cEffectManager.cpp" />
     <ClCompile Include="cEnemy.cpp" />
     <ClCompile Include="cFontManager.cpp" />
