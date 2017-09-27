@@ -244,8 +244,6 @@ void cParticleScene::NewParticleCallBack(void * CallBackObj)
 	cParticleGroup* newParticleGroup = new cParticleGroup;
 	newParticleGroup->Clone(thisScene->GetCurParticleGroupPtr());
 	thisScene->GetCurParticleGroupVectorRef().push_back(newParticleGroup);
-
-	thisScene->GetCurParticleGroupPtr()->Init();
 }
 
 void cParticleScene::InitCallBack(void * CallBackObj)
