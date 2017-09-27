@@ -9,6 +9,7 @@
 #include "cUIObject.h"
 #include "cUIButton.h"
 #include "cUIText.h"
+#include "cAlphablending.h"
 
 cMapEditorScene::cMapEditorScene()
 	: m_pPlayer(NULL)
@@ -25,6 +26,7 @@ cMapEditorScene::~cMapEditorScene()
 {
 	SAFE_DELETE(m_pPlayer);
 	SAFE_DELETE(m_pMap);
+
 	m_pCurrentBuilding = NULL;
 
 	SAFE_RELEASE(m_pSprite);
@@ -139,6 +141,8 @@ void cMapEditorScene::Setup()
 	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button11");
 	pButton->SetCallback(LoadBuildingCallback);
 	pButton->SetCallbackObject(this);
+
+	g_pAlphablending->AddAlphablending("AlistarQ", "AlistarQgroundcrack.dds", m_pPlayer->GetPosition(), D3DXVECTOR3(0, 1, 0), 1.0f, 150, true, false);
 
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
@@ -296,6 +300,10 @@ void cMapEditorScene::AlistarSpell1CallBack2(void * CallBackObj)
 	set<cPhysics*> targets = g_pPhysicsManager->GetTargets(Alistar->GetPosition(), 100);
 
 	D3DXVECTOR3 dir = Alistar->GetDirection();
+
+	cAlphablending* pAlphablending = g_pAlphablending->GetAlphablending("AlistarQ");
+	pAlphablending->SetPositition(Alistar->GetPosition());
+	g_pAlphablending->Play("AlistarQ");
 
 	for each (auto target in targets)
 	{

@@ -5,17 +5,18 @@ class cUnit;
 class cMap;
 class cBuilding;
 class cUIObject;
+class cAlphablending;
 
 class cMapEditorScene : public iScene
 {
 private:
-	cUnit*				m_pPlayer;
-	cMap*				m_pMap;
-	vector<cBuilding*>	m_vecBuilding;
-	cBuilding*			m_pCurrentBuilding;
-	int					m_nIndexBuilding;
-	vector<cUIObject*>	m_vecUIObject;
-	LPD3DXSPRITE		m_pSprite;
+	cUnit*					m_pPlayer;
+	cMap*					m_pMap;
+	vector<cBuilding*>		m_vecBuilding;
+	cBuilding*				m_pCurrentBuilding;
+	int						m_nIndexBuilding;
+	vector<cUIObject*>		m_vecUIObject;
+	LPD3DXSPRITE			m_pSprite;
 
 	SYNTHESIZE(bool, m_bEditOn, EditOn);
 

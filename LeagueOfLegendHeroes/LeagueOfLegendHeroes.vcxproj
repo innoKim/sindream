@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="cAllocateHierachy.h" />
     <ClInclude Include="cAlphablending.h" />
+    <ClInclude Include="cAlphablendingManager.h" />
     <ClInclude Include="cBuilding.h" />
     <ClInclude Include="cBuildingLoader.h" />
     <ClInclude Include="cCamera.h" />
@@ -208,6 +209,7 @@
   <ItemGroup>
     <ClCompile Include="cAllocateHierachy.cpp" />
     <ClCompile Include="cAlphablending.cpp" />
+    <ClCompile Include="cAlphablendingManager.cpp" />
     <ClCompile Include="cBuilding.cpp" />
     <ClCompile Include="cBuildingLoader.cpp" />
     <ClCompile Include="cCamera.cpp" />

@@ -174,8 +174,11 @@
     <ClInclude Include="cBuildingLoader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="cAlphablendingManager.h">
+      <Filter>매니저</Filter>
+    </ClInclude>
     <ClInclude Include="cAlphablending.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>매니저</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -293,9 +296,6 @@
     <ClCompile Include="cRandomManager.cpp">
       <Filter>매니저</Filter>
     </ClCompile>
-    <ClCompile Include="cBuilding.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cUIObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -326,8 +326,14 @@
     <ClCompile Include="cBuildingLoader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="cAlphablending.cpp">
+    <ClCompile Include="cBuilding.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cAlphablendingManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cAlphablending.cpp">
+      <Filter>매니저</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

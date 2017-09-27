@@ -173,11 +173,10 @@ struct ST_SQUARE
 #include "cDebugManager.h"
 #include "cShaderManager.h"
 #include "cCamera.h"
-
 #include "cEffectManager.h"
-
 #include "cPhysicsManager.h"
 #include "cCollision.h"
+#include "cAlphablendingManager.h"
 
 //타입 정의
 typedef void(*CALLBACKFUNC)(void*);
