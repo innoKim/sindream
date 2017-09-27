@@ -31,6 +31,7 @@ private:
 	vector<cMtlTex*>			m_vecMtlTex;				//맵에 적용될 텍스처
 	LPDIRECT3DCUBETEXTURE9		m_pCubeTexture;				//스카이박스로 사용될 큐브 텍스처
 	LPD3DXEFFECT				m_pSkybox;					//스카이박스를 그리기 위한 쉐이더
+	bool						m_bSkyboxOn;				//스카이박스 온오프
 	LPD3DXMESH					m_pCube;
 
 public:
@@ -42,7 +43,7 @@ public:
 	void SetPlane(LPD3DXMESH pMesh, D3DXMATRIXA16 matWorld);	//텍스처 없이 단일 메쉬로 이루어진 맵 셋업
 	void SetMap(LPD3DXMESH pMesh, vector<cMtlTex*> vecMtlTex, D3DXMATRIXA16 matWorldGround);	//단일 메쉬이되 여러 개의 텍스처로 이루어진 맵 셋업
 	void SetTarget(D3DXVECTOR3* pvTarget) { m_pvTarget = pvTarget; }	//타겟 설정
-
+	void SetSkyBoxOn(bool on) { m_bSkyboxOn = on; }
 private:
 	LPD3DXEFFECT LoadEffect(char* szFileName);
 };

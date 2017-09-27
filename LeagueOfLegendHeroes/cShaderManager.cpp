@@ -16,6 +16,7 @@ cShaderManager::cShaderManager()
 	, m_pCubeTexture(NULL)
 	, m_pSkybox(NULL)
 	, m_pCube(NULL)
+	, m_bSkyboxOn(true)
 {
 }
 
@@ -41,15 +42,17 @@ void cShaderManager::SetupShadow()
 
 	m_pApplyShadow = LoadEffect("shader/ApplyShadow.fx");
 
-	m_pSkybox = LoadEffect("shader/Skybox.fx");
-
+	
 	//광원-투영 행렬을 만든다
 	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3600);
 	m_pCreateShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 
-	D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/cubeTexture1.dds", &m_pCubeTexture);
-
-	D3DXCreateBox(g_pD3DDevice, 20000, 20000, 20000, &m_pCube, NULL);
+	if (m_bSkyboxOn)
+	{
+		m_pSkybox = LoadEffect("shader/Skybox.fx");
+		D3DXCreateCubeTextureFromFile(g_pD3DDevice, "shader/cubeTexture1.dds", &m_pCubeTexture);
+		D3DXCreateBox(g_pD3DDevice, 20000, 20000, 20000, &m_pCube, NULL);
+	}
 
 	//쉐도우 맵 가로, 세로 사이즈
 	const int shadowMapSize = 8192;
@@ -153,24 +156,30 @@ void cShaderManager::Render()
 	m_matViewProjection = matView * matProjection;
 
 	D3DXVECTOR4 vCameraPos = D3DXVECTOR4(g_pCamera->GetPos(), 1.0f);
-	m_pSkybox->SetMatrix("matViewProjection", &m_matViewProjection);
-	m_pSkybox->SetVector("vCameraPos", &vCameraPos);
-	m_pSkybox->SetTexture("EnvironmentMap_Tex", m_pCubeTexture);
+	
 
-	UINT numPasses = 0;
-	m_pSkybox->Begin(&numPasses, NULL);
-
-	for (int i = 0; i < numPasses; i++)
+	UINT numPasses;
+	if (m_bSkyboxOn)
 	{
-		m_pSkybox->BeginPass(i);
+		m_pSkybox->SetMatrix("matViewProjection", &m_matViewProjection);
+		m_pSkybox->SetVector("vCameraPos", &vCameraPos);
+		m_pSkybox->SetTexture("EnvironmentMap_Tex", m_pCubeTexture);
 
-		m_pCube->DrawSubset(0);
+		numPasses = 0;
+		m_pSkybox->Begin(&numPasses, NULL);
 
-		m_pSkybox->EndPass();
+		for (int i = 0; i < numPasses; i++)
+		{
+			m_pSkybox->BeginPass(i);
+
+			m_pCube->DrawSubset(0);
+
+			m_pSkybox->EndPass();
+		}
+	
+		m_pSkybox->End();
 	}
-
-	m_pSkybox->End();
-
+	
 	//2패스 렌더링에 필요한 각종 변수 설정
 	m_pApplyShadow->SetMatrix("matLightView", &m_matLightView);
 	m_pApplyShadow->SetMatrix("matLightProjection", &m_matLightProjection);

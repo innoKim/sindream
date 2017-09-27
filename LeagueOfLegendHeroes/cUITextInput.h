@@ -11,7 +11,6 @@ class cUITextInput : public cUIObject
 private:
 	cUIImage*	m_pBack;
 	cUIText*	m_pText;
-	
 	string		m_szText;
 	bool		m_bSelected;
 

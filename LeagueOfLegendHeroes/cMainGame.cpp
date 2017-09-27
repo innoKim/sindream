@@ -38,10 +38,7 @@ void cMainGame::Setup()
 //	m_pScene = new cMapEditorScene;
 
 	m_pScene->Setup();
-
-	//m_pGrid = new cGridPlane;
-	//m_pGrid->Setup(100, 50);
-
+	
 	g_pShaderManager->SetupShadow();
 	g_pEffectManager->LoadEffects();
 }

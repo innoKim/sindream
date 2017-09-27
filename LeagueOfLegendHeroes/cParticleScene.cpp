@@ -11,6 +11,7 @@
 #include "cUIImage.h"
 #include "cUITextInput.h"
 #include "cMap.h"
+#include "cGridPlane.h"
 
 cParticleScene::cParticleScene() :
 	target(0, 0, 0),
@@ -24,7 +25,8 @@ cParticleScene::cParticleScene() :
 	m_eFloat(eType::eFloat),
 	m_eInt(eType::eInt),
 	m_eVector3(eType::eVector3),
-	m_eColor(eType::eColor)
+	m_eColor(eType::eColor),
+	m_pGrid(NULL)
 {
 }
 
@@ -42,10 +44,14 @@ cParticleScene::~cParticleScene()
 	SAFE_RELEASE(m_pSprite);
 
 	SAFE_DELETE(m_pMap);
+
+	SAFE_DELETE(m_pGrid)
 }
 
 void cParticleScene::Setup()
 {
+	g_pShaderManager->SetSkyBoxOn(false);
+
 	g_pShaderManager->SetTarget(&target);
 
 	m_pCurParticleGroup = g_pEffectManager->NewEffect();
@@ -91,6 +97,9 @@ void cParticleScene::Setup()
 	//////////////////////
 	m_pMap = new cMap;
 	m_pMap->LoadSur("LoL/room_surface.obj");
+
+	m_pGrid = new cGridPlane;
+	m_pGrid->Setup(100, 50);
 }
 
 void cParticleScene::Update()
@@ -121,6 +130,8 @@ void cParticleScene::UIRender()
 	}
 	m_pCurParticleGroup->Render();
 	RenderInfo();
+
+	if(m_pGrid) m_pGrid->Render();
 }
 
 void cParticleScene::Pop()

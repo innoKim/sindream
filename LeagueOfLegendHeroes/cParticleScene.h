@@ -6,6 +6,7 @@ class cUIObject;
 class cUnit;
 class cPlayer;
 class cMap;
+class cGridPlane;
 
 class cParticleScene : public iScene
 {
@@ -39,6 +40,7 @@ public:
 	vector<cUIObject*>		m_vecUIObject;
 
 	cMap* m_pMap;
+	cGridPlane* m_pGrid;
 
 	SYNTHESIZE(void*, m_pCurValue,CurValuePtr);
 	SYNTHESIZE(eType, m_eValueType, ValueType);
