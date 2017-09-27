@@ -30,7 +30,8 @@ void cPlayer::KeyControl()
 	{
 		//Lerp Dir and MoveDir
 		m_vDir = D3DXVECTOR3(m_vDir.x*0.9f + m_moveInfo.vMoveDir.x*0.1f, m_vDir.y, m_vDir.z*0.9f + m_moveInfo.vMoveDir.z*0.1f);
-		
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+
 		if (m_pMap)
 		{
 			if (m_pMap->GetHeight(m_vPos + D3DXVECTOR3(PLAYER_SPD*m_vDir.x,0,0)) > FLT_EPSILON)

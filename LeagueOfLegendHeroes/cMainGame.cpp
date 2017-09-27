@@ -69,10 +69,11 @@ void cMainGame::Render()
 	
 	g_pEffectManager->Render();
 
-	if (m_pGrid) m_pGrid->Render();
-	m_pScene->UIRender();
-
 	g_pAlphablending->UIRender();
+
+	if (m_pGrid) m_pGrid->Render();
+	
+	m_pScene->UIRender();
 
 	/////// 디버깅 폰트 내용
 

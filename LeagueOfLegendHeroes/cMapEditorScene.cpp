@@ -297,12 +297,12 @@ void cMapEditorScene::AlistarSpell1CallBack2(void * CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
-	set<cPhysics*> targets = g_pPhysicsManager->GetTargets(Alistar->GetPosition(), 100);
-
 	D3DXVECTOR3 dir = Alistar->GetDirection();
 
+	set<cPhysics*> targets = g_pPhysicsManager->GetTargets(Alistar->GetPosition() + dir * 30, 100);
+
 	cAlphablending* pAlphablending = g_pAlphablending->GetAlphablending("AlistarQ");
-	pAlphablending->SetPositition(Alistar->GetPosition());
+	pAlphablending->SetPositition(Alistar->GetPosition() + dir * 30);
 	g_pAlphablending->Play("AlistarQ");
 
 	for each (auto target in targets)
