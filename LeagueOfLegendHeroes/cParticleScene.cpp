@@ -12,6 +12,7 @@
 #include "cUITextInput.h"
 #include "cMap.h"
 #include "cGridPlane.h"
+#include "cEffectLoader.h"
 
 cParticleScene::cParticleScene() :
 	target(0, 0, 0),
@@ -601,10 +602,18 @@ void cParticleScene::ValueControl()
 
 void cParticleScene::Save()
 {
+	cEffectLoader el;
+	el.SaveEffect(m_pTextInput->GetText(),m_vecCurParticleGroup);
+
+	ClearParticleVector();
+	m_pCurParticleGroup->Init();
 }
 
 void cParticleScene::Load()
 {
+	cEffectLoader el;
+	ClearParticleVector();
+	el.LoadEffect(m_pTextInput->GetText(), m_vecCurParticleGroup);
 }
 
 void cParticleScene::SetParticlePos()

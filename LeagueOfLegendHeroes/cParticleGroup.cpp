@@ -128,21 +128,21 @@ void cParticleGroup::Init()
 
 void cParticleGroup::Clone(cParticleGroup * target)
 {
-	m_szTexturePath            = target->GetTexturePath ();
+	m_szTexturePath            = target->GetTexturePath();
 	m_nInitParticle			   = target->GetInitParticleNumber();
-	m_fLifeTime				   = target->GetLifeTime				();  
-	m_fLifeTimeVariation	   = target->GetLifeTimeVariation	   ();
-	m_vStartPosition		   = target->GetStartPosition		   ();
-	m_fStartPositionVariation  = target->GetStartPositionVariation ();
-	m_vVelocity				   = target->GetVelocity				();  
-	m_fVelocityVariation	   = target->GetVelocityVariation	   ();
-	m_fDragVelocity			   = target->GetDragVelocity			();  
-	m_vAcceleration			   = target->GetAcceleration			();  
-	m_fAccelerationVariation   = target->GetAccelerationVariation  ();
-	m_dStartColor			   = target->GetStartColor			   ();
-	m_cStartColorVariation	   = target->GetStartColorVariation	   ();
-	m_dEndColor				   = target->GetEndColor				();  
-	m_cEndColorVariation	   = target->GetEndColorVariation	   ();
+	m_fLifeTime				   = target->GetLifeTime();  
+	m_fLifeTimeVariation	   = target->GetLifeTimeVariation();
+	m_vStartPosition		   = target->GetStartPosition();
+	m_fStartPositionVariation  = target->GetStartPositionVariation();
+	m_vVelocity				   = target->GetVelocity();  
+	m_fVelocityVariation	   = target->GetVelocityVariation();
+	m_fDragVelocity			   = target->GetDragVelocity();  
+	m_vAcceleration			   = target->GetAcceleration();  
+	m_fAccelerationVariation   = target->GetAccelerationVariation();
+	m_dStartColor			   = target->GetStartColor();
+	m_cStartColorVariation	   = target->GetStartColorVariation();
+	m_dEndColor				   = target->GetEndColor();  
+	m_cEndColorVariation	   = target->GetEndColorVariation();
 }
 
 void cParticleGroup::AddParticle()
