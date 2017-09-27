@@ -9,6 +9,7 @@
 #include "cUIButton.h"
 #include "cUIText.h"
 #include "cUIImage.h"
+#include "cUITextInput.h"
 #include "cMap.h"
 
 cParticleScene::cParticleScene() :
@@ -164,6 +165,21 @@ void cParticleScene::SetVariableToChange(void * scene, void * variable, void *va
 	thisScene->SetValueType(*(eType*)variabletype);
 }
 
+void cParticleScene::SaveButton(void * CallBackObj)
+{
+	cParticleScene* thisScene = (cParticleScene*)CallBackObj;
+
+	thisScene->Save();
+
+}
+
+void cParticleScene::LoadButton(void * CallBackObj)
+{
+	cParticleScene* thisScene = (cParticleScene*)CallBackObj;
+
+	thisScene->Load();
+}
+
 D3DXVECTOR3 cParticleScene::playerPos()
 {
 	return (m_pPlayer)? m_pPlayer->GetPosition():D3DXVECTOR3(0,0,0);
@@ -178,7 +194,7 @@ void cParticleScene::UISetup()
 	cUIObject* buttonSet = new cUIObject;
 	m_vecUIObject.push_back(buttonSet);
 
-	string buttonTag[14];
+	string buttonTag[16];
 	buttonTag[0] = "시작 갯수";
 	buttonTag[1] = "추가 갯수";
 	buttonTag[2] = "수명";
@@ -193,15 +209,25 @@ void cParticleScene::UISetup()
 	buttonTag[11] = "시작 색 랜덤";
 	buttonTag[12] = "끝 색";
 	buttonTag[13] = "끝 색 랜덤";
-
-	for (int i = 0; i < 14; i++)
+	buttonTag[14] = "저장 하기";
+	buttonTag[15] = "불러 오기";
+	
+	for (int i = 0; i < 16; i++)
 	{
 		cUIButton* button = new cUIButton;
 		button->SetTag(buttonTag[i] + " 버튼");
 		buttonSet->AddChild(button);
 		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
-		button->SetPosition(1000 + (i % 2) * 80, ((i / 2) + 1) * 80);
-
+		
+		if (i < 14)
+		{
+			button->SetPosition(1000 + (i % 2) * 80, ((i / 2) + 1) * 80);
+		}
+		else
+		{
+			button->SetPosition((i % 2+1) * 80, (((i-14) / 2) + 1) * 80);
+		}
+		
 		switch (i)
 		{
 		case 0:
@@ -296,6 +322,14 @@ void cParticleScene::UISetup()
 			button->SetCallbackObject2(&m_pCurParticleGroup->GetEndColorVariation());
 			button->SetCallbackObject3(&m_eColor);
 			break;
+		case 14:
+			button->SetCallback(SaveButton);
+			button->SetCallbackObject(this);
+			break;
+		case 15:
+			button->SetCallback(LoadButton);
+			button->SetCallbackObject(this);
+			break;
 		}
 
 
@@ -323,6 +357,10 @@ void cParticleScene::UISetup()
 	text->SetHeight(40);
 	text->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
 	textBox->AddChild(text);
+
+	cUITextInput* textInput = new cUITextInput("texture/textbox.png");
+	textInput->SetPosition(0, 0);
+	buttonSet->AddChild(textInput);
 }
 
 void cParticleScene::TextBoxPrint()
@@ -373,11 +411,11 @@ void cParticleScene::ValueControl()
 {
 	if (m_eValueType == eFloat)
 	{
-		if (g_pKeyManager->IsOnceKeyDown('T'))
+		if (g_pKeyManager->IsStayKeyDown('T'))
 		{
 			*((float*)m_pCurValue) += 0.1f;
 		}
-		if (g_pKeyManager->IsOnceKeyDown('G'))
+		if (g_pKeyManager->IsStayKeyDown('G'))
 		{
 			*((float*)m_pCurValue) -= 0.1f;
 		}
@@ -385,11 +423,11 @@ void cParticleScene::ValueControl()
 
 	else if (m_eValueType == eInt)
 	{
-		if (g_pKeyManager->IsOnceKeyDown('T'))
+		if (g_pKeyManager->IsStayKeyDown('T'))
 		{
 			*((int*)m_pCurValue) += 1;
 		}
-		if (g_pKeyManager->IsOnceKeyDown('G'))
+		if (g_pKeyManager->IsStayKeyDown('G'))
 		{
 			*((int*)m_pCurValue) -= 1;
 		}
@@ -401,29 +439,29 @@ void cParticleScene::ValueControl()
 
 	else if (m_eValueType == eVector3)
 	{
-		if (g_pKeyManager->IsOnceKeyDown('T'))
+		if (g_pKeyManager->IsStayKeyDown('T'))
 		{
 			*((D3DXVECTOR3*)m_pCurValue) += D3DXVECTOR3(0.1f,0,0);
 		}
-		if (g_pKeyManager->IsOnceKeyDown('G'))
+		if (g_pKeyManager->IsStayKeyDown('G'))
 		{
 			*((D3DXVECTOR3*)m_pCurValue) -= D3DXVECTOR3(0.1f, 0, 0);
 		}
 
-		if (g_pKeyManager->IsOnceKeyDown('Y'))
+		if (g_pKeyManager->IsStayKeyDown('Y'))
 		{
 			*((D3DXVECTOR3*)m_pCurValue) += D3DXVECTOR3(0, 0.1f, 0);
 		}
-		if (g_pKeyManager->IsOnceKeyDown('H'))
+		if (g_pKeyManager->IsStayKeyDown('H'))
 		{
 			*((D3DXVECTOR3*)m_pCurValue) -= D3DXVECTOR3(0, 0.1f, 0);
 		}
 
-		if (g_pKeyManager->IsOnceKeyDown('U'))
+		if (g_pKeyManager->IsStayKeyDown('U'))
 		{
 			*((D3DXVECTOR3*)m_pCurValue) += D3DXVECTOR3(0, 0, 0.1f);
 		}
-		if (g_pKeyManager->IsOnceKeyDown('J'))
+		if (g_pKeyManager->IsStayKeyDown('J'))
 		{
 			*((D3DXVECTOR3*)m_pCurValue) -= D3DXVECTOR3(0, 0, 0.1f);
 		}
@@ -431,40 +469,48 @@ void cParticleScene::ValueControl()
 
 	else if (m_eValueType == eColor)
 	{
-		if (g_pKeyManager->IsOnceKeyDown('T'))
+		if (g_pKeyManager->IsStayKeyDown('T'))
 		{
 			(*((D3DXCOLOR*)m_pCurValue)).r += 0.1f;
 		}
-		if (g_pKeyManager->IsOnceKeyDown('G'))
+		if (g_pKeyManager->IsStayKeyDown('G'))
 		{
 			(*((D3DXCOLOR*)m_pCurValue)).r -= 0.1f;
 		}
 
-		if (g_pKeyManager->IsOnceKeyDown('Y'))
+		if (g_pKeyManager->IsStayKeyDown('Y'))
 		{
 			(*((D3DXCOLOR*)m_pCurValue)).g += 0.1f;
 		}
-		if (g_pKeyManager->IsOnceKeyDown('H'))
+		if (g_pKeyManager->IsStayKeyDown('H'))
 		{
 			(*((D3DXCOLOR*)m_pCurValue)).g -= 0.1f;
 		}
 
-		if (g_pKeyManager->IsOnceKeyDown('U'))
+		if (g_pKeyManager->IsStayKeyDown('U'))
 		{
 			(*((D3DXCOLOR*)m_pCurValue)).b += 0.1f;
 		}
-		if (g_pKeyManager->IsOnceKeyDown('J'))
+		if (g_pKeyManager->IsStayKeyDown('J'))
 		{
 			(*((D3DXCOLOR*)m_pCurValue)).b -= 0.1f;
 		}
 
-		if (g_pKeyManager->IsOnceKeyDown('I'))
+		if (g_pKeyManager->IsStayKeyDown('I'))
 		{
 			(*((D3DXCOLOR*)m_pCurValue)).a += 0.1f;
 		}
-		if (g_pKeyManager->IsOnceKeyDown('K'))
+		if (g_pKeyManager->IsStayKeyDown('K'))
 		{
 			(*((D3DXCOLOR*)m_pCurValue)).a -= 0.1f;
 		}
 	}
+}
+
+void cParticleScene::Save()
+{
+}
+
+void cParticleScene::Load()
+{
 }

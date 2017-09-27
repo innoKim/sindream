@@ -8,13 +8,24 @@ cEffectManager::cEffectManager()
 }
 
 cEffectManager::~cEffectManager()
-{
-	
+{	
 }
 
 void cEffectManager::SaveEffects()
 {
 
+}
+
+bool cEffectManager::IsEffectDead(vector<cParticleGroup*>& particleEffect)
+{
+	for each(auto p in particleEffect)
+	{
+		if (!p->IsDead())
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 void cEffectManager::LoadEffects()
@@ -32,88 +43,109 @@ cParticleGroup * cEffectManager::NewEffect()
 
 
 
-void cEffectManager::AddToStorage(string effectKey, cParticleGroup* particleGroup)
+void cEffectManager::AddToStorage(string effectKey, vector<cParticleGroup*> particleGroup)
 {
-	map<string, cParticleGroup*>::iterator itor;
+	map<string, vector<cParticleGroup*>>::iterator itor;
 	itor = m_mapStorage.find(effectKey);
 	
 	if (itor == m_mapStorage.end())
 	{
-		m_mapStorage.insert(pair<string, cParticleGroup*>(effectKey, particleGroup));
+		m_mapStorage.insert(pair<string, vector<cParticleGroup*>>(effectKey, particleGroup));
 	}
 	else
 	{
-		SAFE_DELETE(itor->second);
+		for each(auto p in itor->second)
+		{
+			SAFE_DELETE(p);
+		}
+
 		itor->second = particleGroup;
 	}
 }
 
 void cEffectManager::DeleteFromStorage(string effectKey)
 {
-	map<string, cParticleGroup*>::iterator itor;
+	map<string, vector<cParticleGroup*>>::iterator itor;
 	itor = m_mapStorage.find(effectKey);
 
 	if (itor == m_mapStorage.end())
 	{
-		SAFE_DELETE(itor->second);
+		for each(auto p in itor->second)
+		{
+			SAFE_DELETE(p);
+		}
 		m_mapStorage.erase(itor);
 	}
 }
 
 void cEffectManager::PlayEffect(string effectKey)
 {
-	map<string, cParticleGroup*>::iterator itor;
+	map<string, vector<cParticleGroup*>>::iterator itor;
 	itor = m_mapStorage.find(effectKey);
 
 	if (itor == m_mapStorage.end()) return;
 
-	cParticleGroup* clone = new cParticleGroup;
 
-	clone->SetTexturePath			(itor->second->GetTexturePath());
+	vector<cParticleGroup*> newVector;
 
-	clone->SetIsContinueus			(itor->second->GetIsContinueus());
-	
-	clone->SetInitParticleNumber	(itor->second->GetInitParticleNumber());
-	clone->SetGenParticleNumber		(itor->second->GetGenParticleNumber());
-	
-	clone->SetLifeTime				(itor->second->GetLifeTime());
-	clone->SetLifeTimeVariation		(itor->second->GetLifeTimeVariation());
-	
-	clone->SetStartPosition			(itor->second->GetStartPosition());
-	clone->SetStartPositionVariation(itor->second->GetStartPositionVariation());
-	
-	clone->SetVelocity				(itor->second->GetVelocity());
-	clone->SetVelocityVariation		(itor->second->GetVelocityVariation());
-	clone->SetDragVelocity			(itor->second->GetDragVelocity());
-	
-	clone->SetAcceleration			(itor->second->GetAcceleration());
-	clone->SetAccelerationVariation	(itor->second->GetAccelerationVariation());
-	
-	clone->SetStartColor			(itor->second->GetStartColor());
-	clone->SetStartColorVariation	(itor->second->GetStartColorVariation());
-	
-	clone->SetEndColor				(itor->second->GetEndColor());
-	clone->SetEndColorVariation		(itor->second->GetEndColorVariation());
+	for each (auto p in itor->second)
+	{
+		cParticleGroup* clone = new cParticleGroup;
 
-	clone->Setup();
-	
-	m_vecWork.push_back(clone);
+		clone->SetTexturePath(p->GetTexturePath());
+
+		clone->SetIsContinueus(p->GetIsContinueus());
+
+		clone->SetInitParticleNumber(p->GetInitParticleNumber());
+		clone->SetGenParticleNumber(p->GetGenParticleNumber());
+
+		clone->SetLifeTime(p->GetLifeTime());
+		clone->SetLifeTimeVariation(p->GetLifeTimeVariation());
+
+		clone->SetStartPosition(p->GetStartPosition());
+		clone->SetStartPositionVariation(p->GetStartPositionVariation());
+
+		clone->SetVelocity(p->GetVelocity());
+		clone->SetVelocityVariation(p->GetVelocityVariation());
+		clone->SetDragVelocity(p->GetDragVelocity());
+
+		clone->SetAcceleration(p->GetAcceleration());
+		clone->SetAccelerationVariation(p->GetAccelerationVariation());
+
+		clone->SetStartColor(p->GetStartColor());
+		clone->SetStartColorVariation(p->GetStartColorVariation());
+
+		clone->SetEndColor(p->GetEndColor());
+		clone->SetEndColorVariation(p->GetEndColorVariation());
+
+		clone->Setup();
+
+		newVector.push_back(clone);
+	}
+
+	m_vecWork.push_back(newVector);
 }
 
 void cEffectManager::Update()
 {
-	vector<cParticleGroup*>::iterator itor = m_vecWork.begin();
+	vector<vector<cParticleGroup*>>::iterator itor = m_vecWork.begin();
 	
 	for (itor; itor != m_vecWork.end();)
 	{
-		if ((*itor)->IsDead())
+		if (IsEffectDead((*itor)))
 		{
-			SAFE_DELETE(*itor);
+			for each(auto p in *itor)
+			{
+				SAFE_DELETE(p);
+			}
 			itor = m_vecWork.erase(itor);
 		}
 		else
 		{
-			(*itor)->Update();
+			for each(auto p in (*itor))
+			{
+				p->Update();
+			}
 			itor++;
 		}
 	}
@@ -123,7 +155,10 @@ void cEffectManager::Render()
 {
 	for each (auto p in m_vecWork)
 	{
-		p->Render();
+		for each (auto q in p)
+		{
+			q->Render();
+		}
 	}
 }
 
@@ -131,12 +166,18 @@ void cEffectManager::Destroy()
 {
 	for each(auto p in m_mapStorage)
 	{
-		SAFE_DELETE(p.second);
+		for each (auto q in p.second)
+		{
+			SAFE_DELETE(q);
+		}		
 	}
 
 	for each(auto p in m_vecWork)
 	{
-		SAFE_DELETE(p);
+		for each (auto q in p)
+		{
+			SAFE_DELETE(q);
+		}
 	}
 }
 
@@ -144,7 +185,10 @@ void cEffectManager::ClearWork()
 {
 	for each(auto p in m_vecWork)
 	{
-		SAFE_DELETE(p);
+		for each (auto q in p)
+		{
+			SAFE_DELETE(q);
+		}
 	}
 	m_vecWork.clear();
 }

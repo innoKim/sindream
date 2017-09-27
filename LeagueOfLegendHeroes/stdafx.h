@@ -20,6 +20,7 @@
 #include <memory.h>
 #include <tchar.h>
 #include <fstream>
+#include <conio.h>
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
 #include <d3dx9.h>
@@ -40,6 +41,7 @@ using namespace MY_UTIL;
 extern HWND		g_hWnd;		//HWND 전역변수
 extern POINT	g_ptMouse;	//마우스 포인터 위치 전역변수
 extern int		g_nMouseWheel; //마우스 휠 상태
+extern char		g_cInputChar;
 
 // define문 목록
 #define SAFE_ADD_REF(p) if(p) { (p)->AddRef(); }

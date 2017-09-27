@@ -10,7 +10,8 @@ public:
 	virtual ~cUIImage();
 
 	virtual void SetTexture(string sFullPath);
-
 	virtual void Render(LPD3DXSPRITE SpritePtr) override;
+
+	virtual void GetRect(RECT * RectPtr) override;
 };
 

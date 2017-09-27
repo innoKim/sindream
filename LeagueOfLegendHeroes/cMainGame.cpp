@@ -82,7 +82,7 @@ void cMainGame::Render()
 	g_pDebug->Print(str);
 	
 	sprintf(str, "%.2f, %.2f, %.2f", m_pScene->playerPos().x, m_pScene->playerPos().y, m_pScene->playerPos().z);
-	g_pDebug->Print(str,0,100);
+	g_pDebug->Print(str,0,30);
 	
 	/////  ·»´õ ³¡
 	g_pD3DDevice->EndScene();

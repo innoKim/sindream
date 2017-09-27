@@ -196,6 +196,7 @@
     <ClInclude Include="cUIObject.h" />
     <ClInclude Include="cUIScroll.h" />
     <ClInclude Include="cUIText.h" />
+    <ClInclude Include="cUITextInput.h" />
     <ClInclude Include="cUnit.h" />
     <ClInclude Include="cUtils.h" />
     <ClInclude Include="iMap.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="cUIObject.cpp" />
     <ClCompile Include="cUIScroll.cpp" />
     <ClCompile Include="cUIText.cpp" />
+    <ClCompile Include="cUITextInput.cpp" />
     <ClCompile Include="cUnit.cpp" />
     <ClCompile Include="cUtils.cpp" />
     <ClCompile Include="iMap.cpp" />

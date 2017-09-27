@@ -35,3 +35,23 @@ void cUIImage::Render(LPD3DXSPRITE SpritePtr)
 
 	cUIObject::Render(SpritePtr);
 }
+
+void cUIImage::GetRect(RECT * RectPtr)
+{
+	RECT rc;
+	GetClientRect(g_hWnd, &rc);
+
+	D3DXIMAGE_INFO stImageInfo;
+	LPDIRECT3DTEXTURE9 pTexture = g_pTextureManager->GetTextureEx(m_sTexture, &stImageInfo);
+
+	float widthRatio, heightRatio;
+	widthRatio = (float)rc.right / (float)WIN_WIDTH;
+	heightRatio = (float)rc.bottom / (float)WIN_HEIGHT;
+
+	if (!RectPtr) return;
+
+	RectPtr->left = m_matWorld._41*widthRatio;
+	RectPtr->top = m_matWorld._42*heightRatio;
+	RectPtr->right = (m_matWorld._41 + stImageInfo.Width)*widthRatio;
+	RectPtr->bottom = (m_matWorld._42 + stImageInfo.Height)*heightRatio;
+}

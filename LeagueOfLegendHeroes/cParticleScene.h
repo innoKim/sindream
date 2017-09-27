@@ -59,7 +59,8 @@ public:
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
 	static void SetVariableToChange(void * scene, void * variable, void *variabletype);
-
+	static void SaveButton(void* CallBackObj);
+	static void LoadButton(void* CallBackObj);
 	virtual D3DXVECTOR3 playerPos() override;
 
 private:
@@ -67,5 +68,7 @@ private:
 	void UISetup();
 	void TextBoxPrint();
 	void ValueControl();
+	void Save();
+	void Load();
 };
 

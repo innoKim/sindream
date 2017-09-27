@@ -19,6 +19,8 @@ void cTimeManager::Destroy()
 void cTimeManager::Update(float lock)
 {
 	if (m_pTimer != NULL) m_pTimer->tick(lock);
+
+
 }
 
 cTimeManager::cTimeManager()

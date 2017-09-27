@@ -25,6 +25,7 @@ void cUIObject::Update()
 {
 	m_matWorld._41 = m_vRelativePosition.x;
 	m_matWorld._42 = m_vRelativePosition.y;
+	
 	if (m_pParent)
 	{
 		m_matWorld._41 += m_pParent->m_matWorld._41;

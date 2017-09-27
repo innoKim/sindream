@@ -29,16 +29,15 @@ void cPlayer::KeyControl()
 	if (abs(m_moveInfo.nHorizontalFactor) + abs(m_moveInfo.nVerticalFactor) > 0)
 	{
 		//Lerp Dir and MoveDir
-		m_vDir = D3DXVECTOR3(m_vDir.x*0.9f + m_moveInfo.vMoveDir.x*0.1f, m_vDir.y, m_vDir.z*0.9f + m_moveInfo.vMoveDir.z*0.1f);
+		m_vDir = D3DXVECTOR3(m_vDir.x*0.8f + m_moveInfo.vMoveDir.x*0.2f, m_vDir.y, m_vDir.z*0.8f + m_moveInfo.vMoveDir.z*0.2f);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
-
 		if (m_pMap)
 		{
-			if (m_pMap->GetHeight(m_vPos + D3DXVECTOR3(PLAYER_SPD*m_vDir.x,0,0)) > FLT_EPSILON)
+			if (fabs(INFH - m_pMap->GetHeight(m_vPos + D3DXVECTOR3(PLAYER_SPD*m_vDir.x,0,0)))>FLT_EPSILON)
 			{
 				m_vPos += D3DXVECTOR3(PLAYER_SPD*m_vDir.x, 0, 0);
 			}
-			if (m_pMap->GetHeight(m_vPos + D3DXVECTOR3(0, 0, PLAYER_SPD*m_vDir.z)) > FLT_EPSILON)
+			if (fabs(INFH - m_pMap->GetHeight(m_vPos + D3DXVECTOR3(0, 0, PLAYER_SPD*m_vDir.z)))>FLT_EPSILON)
 			{
 				m_vPos += D3DXVECTOR3(0, 0, PLAYER_SPD*m_vDir.z);
 			}

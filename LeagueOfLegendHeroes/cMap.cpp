@@ -149,5 +149,6 @@ float cMap::GetHeight(D3DXVECTOR3 pos)
 	{
 		return 1000.f - Hit.dist;
 	}
-	return 0.f;
+
+	return INFH;
 }
