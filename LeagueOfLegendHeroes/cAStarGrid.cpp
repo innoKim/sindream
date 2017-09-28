@@ -54,8 +54,8 @@ cAStarNode * cAStarGrid::GetNode(int x, int z)
 
 void cAStarGrid::GetIndex(D3DXVECTOR3 vPos, OUT POINT* pt)
 {
-	int nX = vPos.x;
-	int nZ = vPos.z;
+	int nX = vPos.x / m_nSize;
+	int nZ = vPos.z / m_nSize;
 
 	float fX = vPos.x - nX;
 	float fZ = vPos.z - nZ;

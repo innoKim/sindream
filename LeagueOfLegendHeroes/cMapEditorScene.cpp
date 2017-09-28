@@ -154,11 +154,11 @@ void cMapEditorScene::Setup()
 
 	for (int i = 0; i < 3; i++)
 	{
-		cUnit* enemy = new cEnemy;
+		cEnemy* enemy = new cEnemy;
 		vector<ST_UNITLOADINFO> temp;
 		temp.push_back({ STATE_IDLE, "unit/PoroIdle.x" ,NULL,NULL });
 		enemy->Setup(temp, m_pMap);
-		enemy->SetPosition(D3DXVECTOR3(1000 + i * 100, 100, 1000 + i * 10));
+		enemy->SetPosition(D3DXVECTOR3(1500 + i * 100, 100, 1000 + i * 10));
 		m_vecEnemy.push_back(enemy);
 	}
 
@@ -183,13 +183,18 @@ void cMapEditorScene::Update()
 
 	for each(auto p in m_vecEnemy)
 	{
-		p->Update();
+		p->Update(m_pPlayer->GetPosition());
 	}
 }
 
 void cMapEditorScene::Render()
 {
 	m_pPlayer->Render();
+
+	for each(auto p in m_vecEnemy)
+	{
+		p->Render();
+	}
 
 	for each(auto p in m_vecBuilding)
 	{

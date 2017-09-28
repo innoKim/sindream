@@ -1,9 +1,6 @@
 #pragma once
 #include "cUnit.h"
 
-#define PLAYER_ROTSPD 0.05f
-#define PLAYER_SPD 10.0f
-
 struct ST_MoveInfo
 {
 	int nVerticalFactor = 0;

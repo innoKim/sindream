@@ -6,6 +6,7 @@ class cMap;
 class cBuilding;
 class cUIObject;
 class cAlphablending;
+class cEnemy;
 
 class cMapEditorScene : public iScene
 {
@@ -17,7 +18,7 @@ private:
 	LPD3DXSPRITE			m_pSprite;
 	vector<cBuilding*>		m_vecBuilding;
 	vector<cUIObject*>		m_vecUIObject;
-	vector<cUnit*>			m_vecEnemy;
+	vector<cEnemy*>			m_vecEnemy;
 
 	SYNTHESIZE(bool, m_bEditOn, EditOn);
 

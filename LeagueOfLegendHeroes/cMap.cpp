@@ -117,6 +117,8 @@ void cMap::LoadSur(char * FileFullPath)
 
 float cMap::GetHeight(D3DXVECTOR3 pos)
 {
+	if (isnan(pos.x) || isnan(pos.z)) return INFH;
+
 	//RayInfo m_stRay = Ray(D3DXVECTOR3(pos.x, 1000.f, pos.z), pos);
 	//HitInfo m_stHit;
 

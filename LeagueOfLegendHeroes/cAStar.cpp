@@ -32,6 +32,13 @@ void cAStar::Setup(cAStarGrid * pAstarGrid)
 
 vector<cAStarNode*> cAStar::GetPath(D3DXVECTOR3 vStartPos, D3DXVECTOR3 vEndPos)
 {
+	for each (auto p in m_vecPath)
+	{
+		SAFE_DELETE(p);
+	}
+
+	m_vecPath.clear();
+
 	POINT ptStart;
 
 	m_pAstarGrid->GetIndex(vStartPos, &ptStart);
