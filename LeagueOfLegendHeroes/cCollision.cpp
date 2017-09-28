@@ -43,8 +43,8 @@ void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2, bool byObstacle)
 	}
 
 	//가까우면 부담스러우니까 떨어트려
-	if (obj1.GetIsActivate())(*obj1.GetPositionPtr() += n*obj1.GetRadius()*0.1f);
-	if (obj2.GetIsActivate())(*obj2.GetPositionPtr() -= n*obj2.GetRadius()*0.1f);
+	if (obj1.GetIsActivate())(*obj1.GetPositionPtr() += n*obj1.GetRadius()*1.0f);
+	if (obj2.GetIsActivate())(*obj2.GetPositionPtr() -= n*obj2.GetRadius()*1.0f);
 }
 
 void cCollision::ObjVSObstacle(cPhysics& obj)

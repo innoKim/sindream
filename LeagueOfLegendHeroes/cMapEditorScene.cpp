@@ -343,7 +343,7 @@ void cMapEditorScene::AlistarSpell1CallBack2(void * CallBackObj)
 	for each (auto target in targets)
 	{
 		target->SetAcceleration(D3DXVECTOR3(0, 0, 0));
-		target->SetVelocity(target->GetVelocity() + D3DXVECTOR3(dir.x * 500, 100, dir.z * 500));
+		target->SetVelocity(target->GetVelocity() + D3DXVECTOR3(rand() % 100 - 50, 700, rand() % 100 - 50));
 		target->SetAngularVelocity(D3DXVECTOR3(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10));
 	}
 }
@@ -352,12 +352,14 @@ void cMapEditorScene::AlistarSpell2CallBack2(void * CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
+	D3DXVECTOR3 dir = Alistar->GetDirection();
+
 	set<cPhysics*> targets = g_pPhysicsManager->GetTargets(Alistar->GetPosition(), 100);
 
 	for each (auto target in targets)
 	{
 		target->SetAcceleration(D3DXVECTOR3(0, 0, 0));
-		target->SetVelocity(target->GetVelocity() + D3DXVECTOR3(rand() % 100 - 50, 700, rand() % 100 - 50));
+		target->SetVelocity(target->GetVelocity() + D3DXVECTOR3(dir.x * 500, 300, dir.z * 500));
 		target->SetAngularVelocity(D3DXVECTOR3(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10));
 	}
 }
