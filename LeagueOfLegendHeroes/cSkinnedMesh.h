@@ -14,7 +14,7 @@ struct ST_CallbackInfo
 class cSkinnedMesh
 {
 private:
-	cAllocateHierachy						m_alloc;
+	cAllocateHierachy			m_alloc;
 
 	LPD3DXFRAME_CUSTOM			m_pRoot;
 

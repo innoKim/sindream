@@ -235,6 +235,11 @@ void cParticleScene::SetTextureCallBack(void * CallBackObj)
 	cUITextInput* ti = thisScene->GetTextInputPtr();
 
 	thisScene->GetCurParticleGroupPtr()->SetTexturePath(ti->GetText());
+
+	for each (auto p in thisScene->GetCurParticleGroupVectorRef())
+	{
+		p->SetTexturePath(ti->GetText());
+	}
 }
 
 void cParticleScene::NewParticleCallBack(void * CallBackObj)
@@ -602,9 +607,6 @@ void cParticleScene::Save()
 {
 	cEffectLoader el;
 	el.SaveEffect(m_pTextInput->GetText(),m_vecCurParticleGroup);
-
-	ClearParticleVector();
-	m_pCurParticleGroup->Init();
 }
 
 void cParticleScene::Load()

@@ -57,8 +57,8 @@ void cSkinnedMesh::Update()
 		{
 			if (m_pAnimController->GetTime()>m_pAnimSet->GetPeriod())
 			{
-				cb.pfnCallBack(cb.pCallBackObj);
 				m_pAnimController->ResetTime();
+				cb.pfnCallBack(cb.pCallBackObj);				
 			}
 		}
 		else

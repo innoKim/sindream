@@ -56,7 +56,7 @@ void cMapEditorScene::Setup()
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
-	temp.push_back({ STATE_RUN, "unit/AlistarRun.x" });
+	temp.push_back({ STATE_RUN, "unit/AlistarRun.x",ST_CallbackInfo(0.0f,AlistarWalkCallBack,m_pPlayer) });
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell1CallBack2,m_pPlayer) });
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell2CallBack2,m_pPlayer) });
 	m_pPlayer->Setup(temp, m_pMap);
@@ -309,6 +309,12 @@ void cMapEditorScene::EnterBuildingCallback(void * CallBackObj)
 	}
 }
 
+void cMapEditorScene::AlistarWalkCallBack(void * CallBackObj)
+{
+	cUnit* Alistar = (cUnit*)CallBackObj;
+	g_pEffectManager->PlayEffect("effect/walk.eff", Alistar->GetPosition());
+}
+
 void cMapEditorScene::AlistarSpell1CallBack(void * CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
@@ -327,6 +333,7 @@ void cMapEditorScene::AlistarSpell1CallBack2(void * CallBackObj)
 	cAlphablending* pAlphablending = g_pAlphablending->GetAlphablending("AlistarQ");
 	pAlphablending->SetPositition(Alistar->GetPosition() + dir * 30);
 	g_pAlphablending->Play("AlistarQ");
+	g_pEffectManager->PlayEffect("effect/alistarq.eff", Alistar->GetPosition() + dir * 30);
 
 	for each (auto target in targets)
 	{

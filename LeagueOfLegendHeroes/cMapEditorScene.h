@@ -46,6 +46,7 @@ public:
 	static void SaveBuildingCallback(void * CallBackObj);
 	static void LoadBuildingCallback(void * CallBackObj);
 
+	static void AlistarWalkCallBack(void* CallBackObj);
 	static void AlistarSpell1CallBack(void* CallBackObj);
 	static void AlistarSpell1CallBack2(void * CallBackObj);
 	static void AlistarSpell2CallBack2(void * CallBackObj);

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cEffectManager.h"
 #include "cParticleGroup.h"
+#include "cEffectLoader.h"
 
 cEffectManager::cEffectManager()
 {
@@ -9,11 +10,6 @@ cEffectManager::cEffectManager()
 
 cEffectManager::~cEffectManager()
 {	
-}
-
-void cEffectManager::SaveEffects()
-{
-
 }
 
 bool cEffectManager::IsEffectDead(vector<cParticleGroup*>& particleEffect)
@@ -28,9 +24,20 @@ bool cEffectManager::IsEffectDead(vector<cParticleGroup*>& particleEffect)
 	return true;
 }
 
-void cEffectManager::LoadEffects()
+void cEffectManager::LoadEffects(string szFilePath)
 {
+	map<string, vector<cParticleGroup*>>::iterator mapItor;
+	mapItor = m_mapStorage.find(szFilePath);
 
+	if (mapItor == m_mapStorage.end())
+	{
+		cEffectLoader el;
+
+		vector<cParticleGroup*> vecGroup;
+		el.LoadEffect(szFilePath, vecGroup);
+
+		m_mapStorage.insert(pair < string, vector<cParticleGroup*>>(szFilePath, vecGroup));
+	}
 }
 
 cParticleGroup * cEffectManager::NewEffect()
@@ -41,59 +48,26 @@ cParticleGroup * cEffectManager::NewEffect()
 	return newParticleEffect;
 }
 
-
-
-void cEffectManager::AddToStorage(string effectKey, vector<cParticleGroup*> particleGroup)
+void cEffectManager::PlayEffect(string szFilePath, D3DXVECTOR3 position)
 {
 	map<string, vector<cParticleGroup*>>::iterator itor;
-	itor = m_mapStorage.find(effectKey);
+	itor = m_mapStorage.find(szFilePath);
+
+	if (itor == m_mapStorage.end())
+	{
+		LoadEffects(szFilePath);
+		itor = m_mapStorage.find(szFilePath);
+
+		if (itor == m_mapStorage.end()) return;
+	}
 	
-	if (itor == m_mapStorage.end())
-	{
-		m_mapStorage.insert(pair<string, vector<cParticleGroup*>>(effectKey, particleGroup));
-	}
-	else
-	{
-		for each(auto p in itor->second)
-		{
-			SAFE_DELETE(p);
-		}
-
-		itor->second = particleGroup;
-	}
-}
-
-void cEffectManager::DeleteFromStorage(string effectKey)
-{
-	map<string, vector<cParticleGroup*>>::iterator itor;
-	itor = m_mapStorage.find(effectKey);
-
-	if (itor == m_mapStorage.end())
-	{
-		for each(auto p in itor->second)
-		{
-			SAFE_DELETE(p);
-		}
-		m_mapStorage.erase(itor);
-	}
-}
-
-
-
-void cEffectManager::PlayEffect(string effectKey)
-{
-	map<string, vector<cParticleGroup*>>::iterator itor;
-	itor = m_mapStorage.find(effectKey);
-
-	if (itor == m_mapStorage.end()) return;
-
-
 	vector<cParticleGroup*> newVector;
 
 	for each (auto p in itor->second)
 	{
 		cParticleGroup* clone = new cParticleGroup;
 		clone->Clone(p);
+		clone->SetStartPosition(clone->GetStartPosition() + position);
 		clone->Setup();
 		newVector.push_back(clone);
 	}
