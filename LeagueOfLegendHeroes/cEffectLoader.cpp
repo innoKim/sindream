@@ -13,12 +13,16 @@ cEffectLoader::~cEffectLoader()
 
 void cEffectLoader::LoadEffect(IN string filePath, OUT vector<cParticleGroup*>& out)
 {
-
-
 	HANDLE file;
 	DWORD read;
 
 	file = CreateFile(filePath.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	
+	if (file == NULL)
+	{
+		CloseHandle(file);
+		return;
+	}
 
 	int vectorSize;
 	ReadFile(file, &vectorSize, sizeof(int), &read, NULL);

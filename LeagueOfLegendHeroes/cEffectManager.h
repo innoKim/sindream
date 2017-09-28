@@ -14,18 +14,18 @@ private:
 	vector<vector<cParticleGroup*>>			m_vecWork;
 
 	bool IsEffectDead(vector<cParticleGroup*>& particleEffect);
-	
-public:
-	void LoadEffects();
-	cParticleGroup* NewEffect();
-	void AddToStorage(string effectKey, vector<cParticleGroup*> particleGroup);
-	void DeleteFromStorage(string effectKey);
-	void SaveEffects();
-	void PlayEffect(string effectKey);
+	void LoadEffects(string szFilePath); 
+
+public:	
+	void PlayEffect(string szFilePath, D3DXVECTOR3 position);
 	void Update();
 	void Render();
 	
 	void Destroy();
 	void ClearWork();
+
+	cParticleGroup* NewEffect();
+
+	//void CloneGroupVector(IN vector<cParticleGroup*> in, OUT vector<cParticleGroup*> out);
 };
 
