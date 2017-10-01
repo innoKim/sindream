@@ -9,7 +9,7 @@ cShaderManager::cShaderManager()
 	, m_pShadowRenderTarget(NULL)
 	, m_pShadowDepthStencil(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(-1, 3500, -1, 1.0f)
+	, m_vLightPos(-1000, 3000, -1000, 1.0f)
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
@@ -44,8 +44,10 @@ void cShaderManager::SetupShadow()
 
 	
 	//광원-투영 행렬을 만든다
-	D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3600);
+	D3DXMatrixOrthoLH(&m_matLightProjection, 3000, 3000, 1, 6000);
+	//D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3600);
 	m_pCreateShadow->SetMatrix("matLightProjection", &m_matLightProjection);
+	m_pApplyShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 
 	if (m_bSkyboxOn)
 	{
@@ -182,7 +184,6 @@ void cShaderManager::Render()
 	
 	//2패스 렌더링에 필요한 각종 변수 설정
 	m_pApplyShadow->SetMatrix("matLightView", &m_matLightView);
-	m_pApplyShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 	m_pApplyShadow->SetMatrix("matViewProjection", &m_matViewProjection);
 
 	D3DXVECTOR4 vLightPos;

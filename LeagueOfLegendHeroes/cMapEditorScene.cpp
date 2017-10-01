@@ -292,7 +292,7 @@ void cMapEditorScene::LoadBuildingCallback(void * CallBackObj)
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
-		pThis->LoadBuilding("BuildingTest.txt");
+		pThis->LoadBuilding("Buildings.txt");
 	}
 }
 
