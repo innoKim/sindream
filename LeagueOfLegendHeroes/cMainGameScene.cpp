@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "cMapEditorScene.h"
+#include "cMainGameScene.h"
 #include "cBuilding.h"
 #include "cUnit.h"
 #include "cPlayer.h"
@@ -14,18 +14,18 @@
 #include "cAStarGrid.h"
 #include "cEnemy.h"
 
-cMapEditorScene::cMapEditorScene()
+cMainGameScene::cMainGameScene()
 	: m_pPlayer(NULL)
 	, m_pMap(NULL)
 	, m_pSprite(NULL)
-	, m_bEditOn(NULL)
+	, m_bEditOn(false)
 	, m_pCurrentBuilding(NULL)
 	, m_nIndexBuilding(0)
 {
 }
 
 
-cMapEditorScene::~cMapEditorScene()
+cMainGameScene::~cMainGameScene()
 {
 	SAFE_DELETE(m_pPlayer);
 	SAFE_DELETE(m_pMap);
@@ -45,13 +45,15 @@ cMapEditorScene::~cMapEditorScene()
 	}
 }
 
-void cMapEditorScene::Setup()
+void cMainGameScene::Setup()
 {
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
 
 	m_pMap = new cMap;
 	m_pMap->LoadMap("map/", "room.obj");
 	m_pMap->LoadSur("LoL/room_surface.obj");
+
+	LoadBuilding("Buildings.txt");
 
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
@@ -63,92 +65,6 @@ void cMapEditorScene::Setup()
 	m_pPlayer->SetPosition(D3DXVECTOR3(1000, 0, 1000));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
-
-	string buttonTag[12];
-	buttonTag[0] = "블루 넥서스";
-	buttonTag[1] = "레드 넥서스";
-	buttonTag[2] = "블루 억제기";
-	buttonTag[3] = "레드 억제기";
-	buttonTag[4] = "블루 타워";
-	buttonTag[5] = "레드 타워";
-	buttonTag[6] = "이전 건물";
-	buttonTag[7] = "다음 건물";
-	buttonTag[8] = "건물 삭제";
-	buttonTag[9] = "건물 세우기";
-	buttonTag[10] = "저장";
-	buttonTag[11] = "불러오기";
-
-	cUIObject* buttonSet = new cUIObject;
-	m_vecUIObject.push_back(buttonSet);
-
-	for (int i = 0; i < 12; i++)
-	{
-		char str[128];
-		sprintf(str, "button%d", i);
-		cUIButton* button = new cUIButton;
-		button->SetTag(str);
-		buttonSet->AddChild(button);
-		button->SetTexture("texture/smallbutton_norm.png", "texture/smallbutton_over.png", "texture/smallbutton_selected.png");
-		button->SetPosition(750 + (i % 6) * 80, (i / 6) * 80 + 50);
-
-		cUIText* text = new cUIText;
-		text->SetTag(buttonTag[i]);
-		text->SetText(buttonTag[i]);
-		text->SetFontType(cFontManager::E_SMALL);
-		text->SetWidth(50);
-		text->SetHeight(50);
-		text->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
-		text->SetTag("text");
-		button->AddChild(text);
-	}
-
-	cUIButton* pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button0");
-	pButton->SetCallback(AddOrderNexusCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button1");
-	pButton->SetCallback(AddChaosNexusCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button2");
-	pButton->SetCallback(AddOrderInhibitorCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button3");
-	pButton->SetCallback(AddChaosInhibitorCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button4");
-	pButton->SetCallback(AddOrderTurretCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button5");
-	pButton->SetCallback(AddChaosTurretCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button6");
-	pButton->SetCallback(PrevBuildingCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button7");
-	pButton->SetCallback(NextBuildingCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button8");
-	pButton->SetCallback(DeleteBuildingCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button9");
-	pButton->SetCallback(EnterBuildingCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button10");
-	pButton->SetCallback(SaveBuildingCallback);
-	pButton->SetCallbackObject(this);
-
-	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button11");
-	pButton->SetCallback(LoadBuildingCallback);
-	pButton->SetCallbackObject(this);
 
 	g_pAlphablending->AddAlphablending("AlistarQ", "AlistarQgroundcrack.dds", m_pPlayer->GetPosition(), D3DXVECTOR3(0, 1, 0), 1.0f, 150, true, false);
 
@@ -166,7 +82,7 @@ void cMapEditorScene::Setup()
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
 }
 
-void cMapEditorScene::Update()
+void cMainGameScene::Update()
 {
 	m_pPlayer->Update();
 	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
@@ -187,7 +103,7 @@ void cMapEditorScene::Update()
 	}
 }
 
-void cMapEditorScene::Render()
+void cMainGameScene::Render()
 {
 	m_pPlayer->Render();
 
@@ -202,7 +118,7 @@ void cMapEditorScene::Render()
 	}
 }
 
-void cMapEditorScene::UIRender()
+void cMainGameScene::UIRender()
 {
 	for each (auto p in m_vecUIObject)
 	{
@@ -210,124 +126,124 @@ void cMapEditorScene::UIRender()
 	}
 }
 
-void cMapEditorScene::AddOrderNexusCallback(void * CallBackObj)
+void cMainGameScene::AddOrderNexusCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddOrderNexus()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddOrderInhibitorCallback(void * CallBackObj)
+void cMainGameScene::AddOrderInhibitorCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddOrderInhibitor()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddOrderTurretCallback(void * CallBackObj)
+void cMainGameScene::AddOrderTurretCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddOrderTurret()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddChaosNexusCallback(void * CallBackObj)
+void cMainGameScene::AddChaosNexusCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddChaosNexus()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddChaosInhibitorCallback(void * CallBackObj)
+void cMainGameScene::AddChaosInhibitorCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddChaosInhibitor()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::AddChaosTurretCallback(void * CallBackObj)
+void cMainGameScene::AddChaosTurretCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		if (pThis->AddChaosTurret()) pThis->SetEditOn(true);
 	}
 }
 
-void cMapEditorScene::PrevBuildingCallback(void * CallBackObj)
+void cMainGameScene::PrevBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
-	
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
+
 	if (pThis->PrevBuilding()) pThis->SetEditOn(true);
 }
 
-void cMapEditorScene::NextBuildingCallback(void * CallBackObj)
+void cMainGameScene::NextBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
-	
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
+
 	if (pThis->NextBuilding()) pThis->SetEditOn(true);
 }
 
-void cMapEditorScene::SaveBuildingCallback(void * CallBackObj)
+void cMainGameScene::SaveBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		pThis->SaveBuilding("Buildings.txt");
 	}
 }
 
-void cMapEditorScene::LoadBuildingCallback(void * CallBackObj)
+void cMainGameScene::LoadBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
 		pThis->LoadBuilding("Buildings.txt");
 	}
 }
 
-void cMapEditorScene::DeleteBuildingCallback(void * CallBackObj)
+void cMainGameScene::DeleteBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (pThis->GetEditOn())
 	{
 		if (pThis->DeleteBuilding()) pThis->SetEditOn(false);
 	}
 }
 
-void cMapEditorScene::EnterBuildingCallback(void * CallBackObj)
+void cMainGameScene::EnterBuildingCallback(void * CallBackObj)
 {
-	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
+	cMainGameScene* pThis = (cMainGameScene*)CallBackObj;
 	if (pThis->GetEditOn())
 	{
 		if (pThis->EnterBuilding()) pThis->SetEditOn(false);
 	}
 }
 
-void cMapEditorScene::AlistarWalkCallBack(void * CallBackObj)
+void cMainGameScene::AlistarWalkCallBack(void * CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
 	g_pEffectManager->PlayEffect("effect/walk.eff", Alistar->GetPosition());
 }
 
-void cMapEditorScene::AlistarSpell1CallBack(void * CallBackObj)
+void cMainGameScene::AlistarSpell1CallBack(void * CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
 	Alistar->SetState(STATE_IDLE);
 }
 
-void cMapEditorScene::AlistarSpell1CallBack2(void * CallBackObj)
+void cMainGameScene::AlistarSpell1CallBack2(void * CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
@@ -348,7 +264,7 @@ void cMapEditorScene::AlistarSpell1CallBack2(void * CallBackObj)
 	}
 }
 
-void cMapEditorScene::AlistarSpell2CallBack2(void * CallBackObj)
+void cMainGameScene::AlistarSpell2CallBack2(void * CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
@@ -364,14 +280,14 @@ void cMapEditorScene::AlistarSpell2CallBack2(void * CallBackObj)
 	}
 }
 
-void cMapEditorScene::AlistarSpell2CallBack(void * CallBackObj)
+void cMainGameScene::AlistarSpell2CallBack(void * CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
 	Alistar->SetState(STATE_IDLE);
 }
 
-bool cMapEditorScene::AddOrderNexus(void)
+bool cMainGameScene::AddOrderNexus(void)
 {
 	cBuilding* pOrderNexus = new cBuilding;
 	vector<ST_UNITLOADINFO> tempOrderNexus;
@@ -387,7 +303,7 @@ bool cMapEditorScene::AddOrderNexus(void)
 	return true;
 }
 
-bool cMapEditorScene::AddOrderInhibitor(void)
+bool cMainGameScene::AddOrderInhibitor(void)
 {
 	cBuilding* pOrderInhibitor = new cBuilding;
 	vector<ST_UNITLOADINFO> tempOrderInhibitor;
@@ -403,7 +319,7 @@ bool cMapEditorScene::AddOrderInhibitor(void)
 	return true;
 }
 
-bool cMapEditorScene::AddOrderTurret(void)
+bool cMainGameScene::AddOrderTurret(void)
 {
 	cBuilding* pOrderTurret = new cBuilding;
 	vector<ST_UNITLOADINFO> tempOrderTurret;
@@ -419,7 +335,7 @@ bool cMapEditorScene::AddOrderTurret(void)
 	return true;
 }
 
-bool cMapEditorScene::AddChaosNexus(void)
+bool cMainGameScene::AddChaosNexus(void)
 {
 	cBuilding* pChaosNexus = new cBuilding;
 	vector<ST_UNITLOADINFO> tempChaosNexus;
@@ -435,7 +351,7 @@ bool cMapEditorScene::AddChaosNexus(void)
 	return true;
 }
 
-bool cMapEditorScene::AddChaosInhibitor(void)
+bool cMainGameScene::AddChaosInhibitor(void)
 {
 	cBuilding* pChaosInhibitor = new cBuilding;
 	vector<ST_UNITLOADINFO> tempChaosInhibitor;
@@ -451,7 +367,7 @@ bool cMapEditorScene::AddChaosInhibitor(void)
 	return true;
 }
 
-bool cMapEditorScene::AddChaosTurret(void)
+bool cMainGameScene::AddChaosTurret(void)
 {
 	cBuilding* pChaosTurret = new cBuilding;
 	vector<ST_UNITLOADINFO> tempChaosTurret;
@@ -467,7 +383,7 @@ bool cMapEditorScene::AddChaosTurret(void)
 	return true;
 }
 
-bool cMapEditorScene::PrevBuilding()
+bool cMainGameScene::PrevBuilding()
 {
 	if (!m_vecBuilding.empty())
 	{
@@ -493,7 +409,7 @@ bool cMapEditorScene::PrevBuilding()
 	return false;
 }
 
-bool cMapEditorScene::NextBuilding()
+bool cMainGameScene::NextBuilding()
 {
 	if (!m_vecBuilding.empty())
 	{
@@ -519,7 +435,7 @@ bool cMapEditorScene::NextBuilding()
 	return false;
 }
 
-bool cMapEditorScene::DeleteBuilding()
+bool cMainGameScene::DeleteBuilding()
 {
 	if (m_pCurrentBuilding)
 	{
@@ -541,7 +457,7 @@ bool cMapEditorScene::DeleteBuilding()
 	return false;
 }
 
-bool cMapEditorScene::EnterBuilding()
+bool cMainGameScene::EnterBuilding()
 {
 	for (int i = 0; i < m_vecBuilding.size(); i++)
 	{
@@ -558,7 +474,7 @@ bool cMapEditorScene::EnterBuilding()
 	return true;
 }
 
-bool cMapEditorScene::SaveBuilding(char* szFileName)
+bool cMainGameScene::SaveBuilding(char* szFileName)
 {
 	cBuildingLoader buildingLoader;
 	buildingLoader.SaveBuilding(szFileName, m_vecBuilding);
@@ -566,7 +482,7 @@ bool cMapEditorScene::SaveBuilding(char* szFileName)
 	return true;
 }
 
-bool cMapEditorScene::LoadBuilding(char* szFileName)
+bool cMainGameScene::LoadBuilding(char* szFileName)
 {
 	cBuildingLoader buildingLoader;
 	buildingLoader.LoadBuilding(szFileName, m_pMap, m_vecBuilding);

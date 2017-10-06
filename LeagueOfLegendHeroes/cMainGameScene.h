@@ -8,7 +8,7 @@ class cUIObject;
 class cAlphablending;
 class cEnemy;
 
-class cMapEditorScene : public iScene
+class cMainGameScene : public iScene
 {
 private:
 	cUnit*					m_pPlayer;
@@ -23,8 +23,8 @@ private:
 	SYNTHESIZE(bool, m_bEditOn, EditOn);
 
 public:
-	cMapEditorScene();
-	~cMapEditorScene();
+	cMainGameScene();
+	~cMainGameScene();
 
 	virtual void Setup() override;
 	virtual void Update() override;

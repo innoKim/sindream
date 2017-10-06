@@ -169,4 +169,3 @@ void cPhysicsScene::AlistarSpell2CallBack(void * CallBackObj)
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
 	Alistar->SetState(STATE_IDLE);
-}

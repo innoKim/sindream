@@ -28,6 +28,5 @@ public:
 	static void AlistarSpell2CallBack(void* CallBackObj);
 
 	void SetLight();
-
 };
 
