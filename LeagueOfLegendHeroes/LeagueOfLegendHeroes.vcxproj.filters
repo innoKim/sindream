@@ -202,7 +202,7 @@
       <Filter>Astar</Filter>
     </ClInclude>
     <ClInclude Include="cCameraManager.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>매니저</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -378,7 +378,7 @@
       <Filter>Astar</Filter>
     </ClCompile>
     <ClCompile Include="cCameraManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>매니저</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
