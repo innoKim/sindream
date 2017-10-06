@@ -5,6 +5,7 @@
 #include "cGridPlane.h"
 #include "cParticleScene.h"
 #include "cMapEditorScene.h"
+#include "cMainGameScene.h"
 
 cMainGame::cMainGame() :
 	m_pScene(NULL),
@@ -35,7 +36,8 @@ void cMainGame::Setup()
 //	m_pScene = new cTestScene;
 //	m_pScene = new cParticleScene;
 //	m_pScene = new cPhysicsScene;
-	m_pScene = new cMapEditorScene;
+//	m_pScene = new cMapEditorScene;
+	m_pScene = new cMainGameScene;
 
 	m_pScene->Setup();
 	
