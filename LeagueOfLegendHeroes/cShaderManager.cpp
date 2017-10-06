@@ -9,7 +9,7 @@ cShaderManager::cShaderManager()
 	, m_pShadowRenderTarget(NULL)
 	, m_pShadowDepthStencil(NULL)
 	, m_vLightColor(D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))
-	, m_vLightPos(-1000, 3000, -1000, 1.0f)
+	, m_vLightPos(-200, 1000, -200, 1.0f)
 	, m_pHWBackBuffer(NULL)
 	, m_pHWDepthStencilBuffer(NULL)
 	, m_pMeshGround(NULL)
@@ -44,7 +44,7 @@ void cShaderManager::SetupShadow()
 
 	
 	//광원-투영 행렬을 만든다
-	D3DXMatrixOrthoLH(&m_matLightProjection, 3000, 3000, 1, 6000);
+	D3DXMatrixOrthoLH(&m_matLightProjection, 3000, 3000, 1, 10000);
 	//D3DXMatrixPerspectiveFovLH(&m_matLightProjection, D3DX_PI / 4.0f, 1, 1, 3600);
 	m_pCreateShadow->SetMatrix("matLightProjection", &m_matLightProjection);
 	m_pApplyShadow->SetMatrix("matLightProjection", &m_matLightProjection);

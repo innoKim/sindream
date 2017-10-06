@@ -119,7 +119,7 @@ float4 ShadowMapping_ApplyShadow_Pixel_Shader_ps_main(PS_INPUT Input) : COLOR0
    
    float colorWeight = 1.0f * fLightWeight;
    
-   if (depth > shadowMapDepth + 0.000001f)
+   if (depth > shadowMapDepth + 0.001f)
    {
       colorWeight = 0.5f;
    }
