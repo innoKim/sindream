@@ -1,7 +1,7 @@
 #pragma once
 #include "cOBJLoader.h"
 
-#define INFH	FLT_MAX
+#define INFH	(-1000.0f)
 
 class cUnit;
 class cGroup;

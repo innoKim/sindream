@@ -53,7 +53,7 @@ void cPhysics::Update(float deltaTime)
 	m_vVelocity	+= Acc*deltaTime;
 	
 	(*m_pvPos) += m_vVelocity*deltaTime;
-
+	
 	D3DXMATRIXA16 rotx, roty, rotz;
 	D3DXMatrixRotationX(&rotx, m_vAngularVelocity.x*deltaTime);
 	D3DXMatrixRotationY(&roty, m_vAngularVelocity.y*deltaTime);
@@ -69,14 +69,13 @@ bool cPhysics::ColisionWith(set<cPhysics*> setVersusObject)
 	{
 		D3DXVECTOR3 dir = m_vVelocity;
 		D3DXVec3Normalize(&dir, &dir);
+
 		if (m_pMap->GetHeight((*m_pvPos+ dir)) < FLT_EPSILON)
 		{
 			m_vVelocity.x *= -1;
 			m_vVelocity.z *= -1;
-			//g_pCollisionCalculator->ObjVSWall(*this);
 		}
-	}
-	
+	}	
 
 	//자신이 이번 프레임에 한번이라도 충돌했으면 충돌연산에서 빠진다.
 	if (m_fRestDuration < g_pTimeManager->GetElapsedTime()) return false;

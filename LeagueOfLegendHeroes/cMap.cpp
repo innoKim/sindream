@@ -119,16 +119,6 @@ float cMap::GetHeight(D3DXVECTOR3 pos)
 {
 	if (isnan(pos.x) || isnan(pos.z)) return INFH;
 
-	//RayInfo m_stRay = Ray(D3DXVECTOR3(pos.x, 1000.f, pos.z), pos);
-	//HitInfo m_stHit;
-
-	//if (RayCastPC(m_stRay, m_stHit, &m_vecSur))
-	//{
-	//	return 1000.f - m_stHit.dist;
-	//}
-	//int a = 0;
-	//return 0.f;
-
 	//먼저 대상노드를 찾고
 	float width = MAP_SIZE * MAP_RATIO / MAP_GRID;
 
@@ -138,19 +128,6 @@ float cMap::GetHeight(D3DXVECTOR3 pos)
 	RayInfo	Ray(D3DXVECTOR3(pos.x, 1000.f, pos.z), D3DXVECTOR3(0, -1, 0));
 	HitInfo	Hit;
 
-	/*for (int i = -1; i <= 1; i++)
-	{
-		for (int j = -1; j <= 1; j++)
-		{
-			if (indexX + i >= m_gridHeightNode.size() || indexX + i < 0) continue;
-			if (indexZ + j >= m_gridHeightNode[indexX + i].size() || indexZ + j < 0) continue;
-
-			if (RayCast(Ray, Hit, m_gridHeightNode[indexX+i][indexZ+j].vecVertex))
-			{
-				return 1000.f - Hit.dist;
-			}
-		}
-	}*/
 	if (RayCast(Ray, Hit, m_gridHeightNode[indexX][indexZ].vecVertex))
 	{
 		return 1000.f - Hit.dist;
