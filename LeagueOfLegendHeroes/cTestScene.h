@@ -28,7 +28,5 @@ public:
 	static void AlistarSpell2CallBack(void* CallBackObj);
 
 	void SetLight();
-
-	D3DXVECTOR3 playerPos()override;
 };
 

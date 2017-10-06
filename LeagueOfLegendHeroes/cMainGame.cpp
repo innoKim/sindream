@@ -77,9 +77,6 @@ void cMainGame::Render()
 	sprintf(str, "%.2f FPS", g_pTimeManager->GetFrameRate());
 	g_pDebug->Print(str);
 	
-	sprintf(str, "%.2f, %.2f, %.2f", m_pScene->playerPos().x, m_pScene->playerPos().y, m_pScene->playerPos().z);
-	g_pDebug->Print(str,0,30);
-	
 	/////  ·»´õ ³¡
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);

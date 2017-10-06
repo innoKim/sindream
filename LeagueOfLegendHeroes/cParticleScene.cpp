@@ -259,11 +259,6 @@ void cParticleScene::InitCallBack(void * CallBackObj)
 	thisScene->GetCurParticleGroupPtr()->Init();
 }
 
-D3DXVECTOR3 cParticleScene::playerPos()
-{
-	return (m_pPlayer)? m_pPlayer->GetPosition():D3DXVECTOR3(0,0,0);
-}
-
 void cParticleScene::UISetup()
 {
 

@@ -108,18 +108,6 @@ void cTestScene::SetLight()
 	g_pD3DDevice->SetRenderState(D3DRS_SPECULARENABLE, true);
 }
 
-D3DXVECTOR3 cTestScene::playerPos()
-{
-	if (m_pPlayer)
-	{
-		m_pPlayer->GetPosition();
-	}
-	else
-	{
-		return D3DXVECTOR3(0, 0, 0);
-	}
-}
-
 void cTestScene::AlistarSpell1CallBack(void *CallBackObj)
 {
 	cUnit* Alistar = (cUnit*)CallBackObj;

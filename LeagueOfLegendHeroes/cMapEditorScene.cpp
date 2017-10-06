@@ -283,7 +283,7 @@ void cMapEditorScene::SaveBuildingCallback(void * CallBackObj)
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (!pThis->GetEditOn())
 	{
-		pThis->SaveBuilding("BuildingTest.txt");
+		pThis->SaveBuilding("Buildings.txt");
 	}
 }
 
@@ -369,11 +369,6 @@ void cMapEditorScene::AlistarSpell2CallBack(void * CallBackObj)
 	cUnit* Alistar = (cUnit*)CallBackObj;
 
 	Alistar->SetState(STATE_IDLE);
-}
-
-D3DXVECTOR3 cMapEditorScene::playerPos()
-{
-	return m_pPlayer->GetPosition();
 }
 
 bool cMapEditorScene::AddOrderNexus(void)

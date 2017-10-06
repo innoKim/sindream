@@ -170,8 +170,3 @@ void cPhysicsScene::AlistarSpell2CallBack(void * CallBackObj)
 
 	Alistar->SetState(STATE_IDLE);
 }
-
-D3DXVECTOR3 cPhysicsScene::playerPos()
-{
-	return m_pPlayer->GetPosition();
-}
