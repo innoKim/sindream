@@ -186,7 +186,7 @@
     <ClInclude Include="cUITextInput.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-	<ClInclude Include="cEffectLoader.h">
+    <ClInclude Include="cEffectLoader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cAStar.h">
@@ -200,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="cAStarNode.h">
       <Filter>Astar</Filter>
+    </ClInclude>
+    <ClInclude Include="cCameraManager.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -373,7 +376,11 @@
     </ClCompile>
     <ClCompile Include="cAStarNode.cpp">
       <Filter>Astar</Filter>
-    </ClCompile>  </ItemGroup>
+    </ClCompile>
+    <ClCompile Include="cCameraManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LeagueOfLegendHeroes.rc">
       <Filter>리소스</Filter>

@@ -162,6 +162,7 @@
     <ClInclude Include="cBuilding.h" />
     <ClInclude Include="cBuildingLoader.h" />
     <ClInclude Include="cCamera.h" />
+    <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cCollision.h" />
     <ClInclude Include="cDebugManager.h" />
     <ClInclude Include="cDeviceManager.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="cBuilding.cpp" />
     <ClCompile Include="cBuildingLoader.cpp" />
     <ClCompile Include="cCamera.cpp" />
+    <ClCompile Include="cCameraManager.cpp" />
     <ClCompile Include="cCollision.cpp" />
     <ClCompile Include="cDebugManager.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
