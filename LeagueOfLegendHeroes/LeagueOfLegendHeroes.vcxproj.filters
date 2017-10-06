@@ -19,6 +19,27 @@
     <Filter Include="Astar">
       <UniqueIdentifier>{5a66a02d-0c6a-43b1-86d7-25d5549fa2f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{3c4c1200-6237-4e5e-a16a-5f06dc8e7ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{34034159-46c1-43a3-8c4c-33d0c31684d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit">
+      <UniqueIdentifier>{d5c266cf-90f8-4e20-87ec-9a3f7899bfca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{3568d5f8-ec9d-42ec-8c4a-e2afceb7872c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{ef9b4f2c-d4e5-4e13-8586-a4abff810a51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{4b2dace2-d59c-4e60-a0bd-951696510628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{3703e0a7-342f-4a37-8f5d-3f34d6c100b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -45,52 +66,7 @@
     <ClInclude Include="cMtlTex.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cSkinnedMesh.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cAllocateHierachy.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="iMap.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cOBJLoader.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cGroup.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="iScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cTestScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cPhysicsScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cUnit.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cPlayer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cPlane.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cEnemy.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cPhysics.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cCollision.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cMap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cDebugManager.h">
@@ -117,77 +93,26 @@
     <ClInclude Include="cCamera.h">
       <Filter>매니저</Filter>
     </ClInclude>
-    <ClInclude Include="cGridPlane.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cPhysicsManager.h">
       <Filter>매니저</Filter>
-    </ClInclude>
-    <ClInclude Include="cRigidbody.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cRigidbodyCollision.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="timer.h">
       <Filter>매니저</Filter>
     </ClInclude>
-    <ClInclude Include="cParticle.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cParticleGroup.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cParticleScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cRandomManager.h">
       <Filter>매니저</Filter>
-    </ClInclude>
-    <ClInclude Include="cBuilding.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIImage.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIText.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIButton.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIScroll.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cFontManager.h">
       <Filter>매니저</Filter>
     </ClInclude>
-    <ClInclude Include="cUIBar.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cEffectManager.h">
       <Filter>매니저</Filter>
-    </ClInclude>
-    <ClInclude Include="cMapEditorScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cBuildingLoader.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cAlphablendingManager.h">
       <Filter>매니저</Filter>
     </ClInclude>
     <ClInclude Include="cAlphablending.h">
       <Filter>매니저</Filter>
-    </ClInclude>
-    <ClInclude Include="cUITextInput.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cEffectLoader.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cAStar.h">
       <Filter>Astar</Filter>
@@ -203,6 +128,102 @@
     </ClInclude>
     <ClInclude Include="cCameraManager.h">
       <Filter>매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="cCollision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="cPhysics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="cRigidbody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="cRigidbodyCollision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="cMapEditorScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="cPhysicsScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="cTestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIBar.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIImage.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIScroll.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIText.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cUITextInput.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cEffectLoader.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticleGroup.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="cGridPlane.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="cGroup.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="cMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="cOBJLoader.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlane.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="cAllocateHierachy.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cBuilding.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cBuildingLoader.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cEnemy.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMesh.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cUnit.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="iMap.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="iScene.h">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,49 +242,7 @@
     <ClCompile Include="cMtlTex.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="cSkinnedMesh.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cAllocateHierachy.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="iMap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cOBJLoader.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="iScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cTestScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cPhysicsScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cUnit.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlayer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlane.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cEnemy.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cPhysics.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cCollision.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cMap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cDebugManager.cpp">
@@ -290,80 +269,26 @@
     <ClCompile Include="cCamera.cpp">
       <Filter>매니저</Filter>
     </ClCompile>
-    <ClCompile Include="cGridPlane.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cPhysicsManager.cpp">
       <Filter>매니저</Filter>
-    </ClCompile>
-    <ClCompile Include="cRigidbody.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cRigidbodyCollision.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cGroup.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="timer.cpp">
       <Filter>매니저</Filter>
     </ClCompile>
-    <ClCompile Include="cParticle.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cParticleGroup.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cParticleScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cRandomManager.cpp">
       <Filter>매니저</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIImage.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIText.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIButton.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIScroll.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cFontManager.cpp">
       <Filter>매니저</Filter>
     </ClCompile>
-    <ClCompile Include="cUIBar.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cEffectManager.cpp">
       <Filter>매니저</Filter>
-    </ClCompile>
-    <ClCompile Include="cMapEditorScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cBuildingLoader.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cBuilding.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cAlphablendingManager.cpp">
       <Filter>매니저</Filter>
     </ClCompile>
     <ClCompile Include="cAlphablending.cpp">
       <Filter>매니저</Filter>
-    </ClCompile>
-    <ClCompile Include="cUITextInput.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cEffectLoader.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cAStar.cpp">
       <Filter>Astar</Filter>
@@ -379,6 +304,102 @@
     </ClCompile>
     <ClCompile Include="cCameraManager.cpp">
       <Filter>매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="cCollision.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="cPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="cRigidbody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="cRigidbodyCollision.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="cMapEditorScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="cPhysicsScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="cTestScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIBar.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIImage.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIObject.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIScroll.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIText.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUITextInput.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cEffectLoader.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticle.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticleGroup.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="cGridPlane.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="cGroup.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="cMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="cOBJLoader.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlane.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="cAllocateHierachy.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cBuilding.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cBuildingLoader.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemy.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMesh.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cUnit.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="iMap.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="iScene.cpp">
+      <Filter>Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
