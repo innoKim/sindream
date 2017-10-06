@@ -29,6 +29,5 @@ public:
 
 	void SetLight();
 
-	D3DXVECTOR3 playerPos()override;
 };
 

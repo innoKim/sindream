@@ -225,6 +225,9 @@
     <ClInclude Include="iScene.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="cAnimationTestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -400,6 +403,9 @@
     </ClCompile>
     <ClCompile Include="iScene.cpp">
       <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="cAnimationTestScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

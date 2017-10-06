@@ -5,6 +5,7 @@
 #include "cGridPlane.h"
 #include "cParticleScene.h"
 #include "cMapEditorScene.h"
+#include "cAnimationTestScene.h"
 
 cMainGame::cMainGame() :
 	m_pScene(NULL),
@@ -35,7 +36,8 @@ void cMainGame::Setup()
 //	m_pScene = new cTestScene;
 //	m_pScene = new cParticleScene;
 //	m_pScene = new cPhysicsScene;
-	m_pScene = new cMapEditorScene;
+//	m_pScene = new cMapEditorScene;
+	m_pScene = new cAnimationTestScene;
 
 	m_pScene->Setup();
 	
@@ -76,9 +78,6 @@ void cMainGame::Render()
 	char str[256];
 	sprintf(str, "%.2f FPS", g_pTimeManager->GetFrameRate());
 	g_pDebug->Print(str);
-	
-	sprintf(str, "%.2f, %.2f, %.2f", m_pScene->playerPos().x, m_pScene->playerPos().y, m_pScene->playerPos().z);
-	g_pDebug->Print(str,0,30);
 	
 	/////  ·»´õ ³¡
 	g_pD3DDevice->EndScene();

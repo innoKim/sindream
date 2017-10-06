@@ -66,6 +66,11 @@ void cUnit::Render()
 
 void cUnit::SetState(eSTATE state)
 {
-	m_pCurState = m_mapStates[state];
-	m_eStateNum = state;
+	map<eSTATE, cSkinnedMesh*>::iterator itor;
+	itor = m_mapStates.find(state);
+	if (itor != m_mapStates.end())
+	{
+		m_pCurState = itor->second;
+		m_eStateNum = state;
+	}
 }

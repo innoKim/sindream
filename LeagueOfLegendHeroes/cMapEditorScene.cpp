@@ -371,11 +371,6 @@ void cMapEditorScene::AlistarSpell2CallBack(void * CallBackObj)
 	Alistar->SetState(STATE_IDLE);
 }
 
-D3DXVECTOR3 cMapEditorScene::playerPos()
-{
-	return m_pPlayer->GetPosition();
-}
-
 bool cMapEditorScene::AddOrderNexus(void)
 {
 	cBuilding* pOrderNexus = new cBuilding;

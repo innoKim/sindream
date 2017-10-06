@@ -53,7 +53,6 @@ public:
 	static void AlistarSpell2CallBack2(void * CallBackObj);
 	static void AlistarSpell2CallBack(void* CallBackObj);
 
-	virtual D3DXVECTOR3 playerPos() override;
 private:
 	bool AddOrderNexus(void);
 	bool AddOrderInhibitor(void);
