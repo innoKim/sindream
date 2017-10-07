@@ -31,6 +31,7 @@ cMainGame::~cMainGame()
 	g_pShaderManager->Destroy();
 	g_pDeviceManager->Destroy();
 	g_pEffectManager->Destroy();
+	g_pSoundManager->Destroy();
 }
 
 void cMainGame::Setup()
@@ -55,6 +56,7 @@ void cMainGame::Update()
 	g_pCamera->Update();
 	g_pEffectManager->Update();
 	g_pAlphablending->Update();
+	g_pSoundManager->Update();
 }
 
 void cMainGame::Render()

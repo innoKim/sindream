@@ -228,8 +228,11 @@
     <ClInclude Include="cMainGameScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-  <ClInclude Include="cAnimationTestScene.h">
+    <ClInclude Include="cAnimationTestScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="cSoundManager.h">
+      <Filter>매니저</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,10 +413,12 @@
     <ClCompile Include="cMainGameScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-   <ClCompile Include="cAnimationTestScene.cpp">
+    <ClCompile Include="cAnimationTestScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-
+    <ClCompile Include="cSoundManager.cpp">
+      <Filter>매니저</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LeagueOfLegendHeroes.rc">

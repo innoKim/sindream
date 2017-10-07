@@ -94,7 +94,7 @@ void cShaderManager::BeginRender()
 	m_pApplyShadow->SetBool("bTexture", true);
 }
 
-void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture, D3DXMATRIXA16 matWorld)
+void cShaderManager::RenderShadow(LPD3DXMESH pMesh, LPDIRECT3DTEXTURE9 pTexture, D3DXMATRIX matWorld)
 {
 	//2패스 렌더링을 위해 벡터에 메쉬와 텍스처, 월드 매트릭스들을 저장
 	m_vecMesh.push_back(pMesh);
@@ -243,14 +243,14 @@ void cShaderManager::Render()
 	m_vecMatWorld.clear();
 }
 
-void cShaderManager::SetPlane(LPD3DXMESH pMesh, D3DXMATRIXA16 matWorld)
+void cShaderManager::SetPlane(LPD3DXMESH pMesh, D3DXMATRIX matWorld)
 {
 	m_pMeshGround = pMesh;
 
 	m_matWorldGround = matWorld;
 }
 
-void cShaderManager::SetMap(LPD3DXMESH pMesh, vector<cMtlTex*> vecMtlTex, D3DXMATRIXA16 matWorldGround)
+void cShaderManager::SetMap(LPD3DXMESH pMesh, vector<cMtlTex*> vecMtlTex, D3DXMATRIX matWorldGround)
 {
 	m_pMeshGround = pMesh;
 	m_matWorldGround = matWorldGround;

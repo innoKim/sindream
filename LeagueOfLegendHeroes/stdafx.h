@@ -180,6 +180,7 @@ struct ST_SQUARE
 #include "cPhysicsManager.h"
 #include "cCollision.h"
 #include "cAlphablendingManager.h"
+#include "cSoundManager.h"
 
 //타입 정의
 typedef void(*CALLBACKFUNC)(void*);
