@@ -51,8 +51,8 @@ void cMainGame::Update()
 {
 	m_pScene->Update();
 
-	g_pCamera->Update();
 	g_pCameraManager->Update();
+	g_pCamera->Update();
 	g_pEffectManager->Update();
 	g_pAlphablending->Update();
 }
