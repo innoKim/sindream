@@ -10,14 +10,14 @@ class cCamera
 {
 private:
 	SINGLETON(cCamera);
+	SYNTHESIZE(bool, m_bLocked, Locked);
+	SYNTHESIZE(D3DXVECTOR3, m_vCameraPos, Pos);
+	SYNTHESIZE(float, m_fDistanceFromTarget, DistanceFromTarget);
+	SYNTHESIZE(D3DXVECTOR3, m_vRotation, Rotation);
 	
 private:
-	D3DXVECTOR3		m_vCameraPos;
-
 	D3DXVECTOR3*	m_pvTarget;
 
-	float			m_fDistanceFromTarget;
-	D3DXVECTOR3		m_vRotation;
 	D3DXVECTOR3		m_vRelativePos;
 
 	D3DXMATRIXA16	m_mRotateX;

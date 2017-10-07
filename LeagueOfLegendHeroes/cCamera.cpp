@@ -7,6 +7,7 @@ cCamera::cCamera()
 	, m_vCameraPos(0, 0, 0)
 	, m_vRotation(0.5f, 0, 0)
 	, m_vRelativePos(0, 0, 0)
+	, m_bLocked(false)
 {
 	D3DXMatrixIdentity(&m_mLookAtLH);
 	D3DXMatrixIdentity(&m_mPerspectiveFovLH);
@@ -22,35 +23,44 @@ void cCamera::Destroy()
 
 void cCamera::Update()
 {
-	KeyControl();
-
-	m_vRelativePos.x = 0.0f;
-	m_vRelativePos.y = 0.0f;
-	m_vRelativePos.z = -m_fDistanceFromTarget;
-
-	D3DXMatrixRotationX(&m_mRotateX, m_vRotation.x);
-	D3DXMatrixRotationY(&m_mRotateY, m_vRotation.y);
-	D3DXVec3TransformCoord(&m_vRelativePos, &m_vRelativePos, &(m_mRotateX*m_mRotateY));
-
-	//타겟이 있으면 타겟을 보고
-	if (m_pvTarget)
+	if (m_bLocked)
 	{
-		m_vCameraPos = *m_pvTarget + m_vRelativePos;
+		m_vCameraPos = g_pCameraManager->GetCurPos();
 		D3DXMatrixLookAtLH(&m_mLookAtLH, &m_vCameraPos, m_pvTarget, &D3DXVECTOR3(0, 1, 0));
 		g_pD3DDevice->SetTransform(D3DTS_VIEW, &m_mLookAtLH);
 	}
-	//없으면 원점을 바라봄
 	else
 	{
-		m_vCameraPos = m_vRelativePos;
-		D3DXMatrixLookAtLH(&m_mLookAtLH, &m_vCameraPos, &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 1, 0));
-		g_pD3DDevice->SetTransform(D3DTS_VIEW, &m_mLookAtLH);
-	}
-	//화면 크기가 바뀌어도 카메라가 업데이트시 계속 투영매트릭스 적용
-	RECT rc;
-	GetClientRect(g_hWnd, &rc);
-	D3DXMatrixPerspectiveFovLH(&m_mPerspectiveFovLH, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1, 20000);
-	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &m_mPerspectiveFovLH);
+		KeyControl();
+
+		m_vRelativePos.x = 0.0f;
+		m_vRelativePos.y = 0.0f;
+		m_vRelativePos.z = -m_fDistanceFromTarget;
+
+		D3DXMatrixRotationX(&m_mRotateX, m_vRotation.x);
+		D3DXMatrixRotationY(&m_mRotateY, m_vRotation.y);
+		D3DXVec3TransformCoord(&m_vRelativePos, &m_vRelativePos, &(m_mRotateX*m_mRotateY));
+
+		//타겟이 있으면 타겟을 보고
+		if (m_pvTarget)
+		{
+			m_vCameraPos = *m_pvTarget + m_vRelativePos;
+			D3DXMatrixLookAtLH(&m_mLookAtLH, &m_vCameraPos, m_pvTarget, &D3DXVECTOR3(0, 1, 0));
+			g_pD3DDevice->SetTransform(D3DTS_VIEW, &m_mLookAtLH);
+		}
+		//없으면 원점을 바라봄
+		else
+		{
+			m_vCameraPos = m_vRelativePos;
+			D3DXMatrixLookAtLH(&m_mLookAtLH, &m_vCameraPos, &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 1, 0));
+			g_pD3DDevice->SetTransform(D3DTS_VIEW, &m_mLookAtLH);
+		}
+		//화면 크기가 바뀌어도 카메라가 업데이트시 계속 투영매트릭스 적용
+		RECT rc;
+		GetClientRect(g_hWnd, &rc);
+		D3DXMatrixPerspectiveFovLH(&m_mPerspectiveFovLH, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1, 20000);
+		g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &m_mPerspectiveFovLH);
+	}	
 }
 
 void cCamera::Zoom(float spd)
