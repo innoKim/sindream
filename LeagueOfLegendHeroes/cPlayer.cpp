@@ -58,6 +58,7 @@ void cPlayer::KeyControl()
 	if (g_pKeyManager->IsOnceKeyDown('Q'))
 	{
 		if (IsReady()) SetState(STATE_SPELL1);
+		g_pCameraManager->StartLerpChase(&m_vPos, 300, D3DXVECTOR3(0.5, 0.5, 0), 2.0f);
 	}
 	if (g_pKeyManager->IsOnceKeyDown('E'))
 	{

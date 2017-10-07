@@ -26,7 +26,7 @@ private:
 	float m_fDistanceFromTarget;
 
 	D3DXVECTOR3 m_vLerpTargetPos;
-	D3DXVECTOR3	m_vLerpDistance;
+	float		m_fLerpDistance;
 	D3DXVECTOR3 m_vLerpRotation;
 
 	float m_vLerpTotalTime;
