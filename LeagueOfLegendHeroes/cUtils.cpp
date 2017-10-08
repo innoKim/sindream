@@ -49,11 +49,11 @@ namespace MY_UTIL
 		D3DXVECTOR3 cameraPos(0, 0, 0);
 		D3DXVec3TransformCoord(&cameraPos, &cameraPos, &view);
 
-		D3DXVECTOR3 rayInVeiwSpace(fx, fy, 1.0f);
-		D3DXVec3TransformNormal(&rayInVeiwSpace, &rayInVeiwSpace, &view);
-		D3DXVec3Normalize(&rayInVeiwSpace, &rayInVeiwSpace);
+		D3DXVECTOR3 rayInViewSpace(fx, fy, 1.0f);
+		D3DXVec3TransformNormal(&rayInViewSpace, &rayInViewSpace, &view);
+		D3DXVec3Normalize(&rayInViewSpace, &rayInViewSpace);
 
-		return RayInfo(cameraPos, rayInVeiwSpace);
+		return RayInfo(cameraPos, rayInViewSpace);
 	}
 
 	bool RayCast(IN RayInfo& ray, OUT HitInfo& hit, IN vector<D3DXVECTOR3>& target)

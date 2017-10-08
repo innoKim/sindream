@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cBuilding.h"
 #include "cPhysics.h"
+#include "cMap.h"
 
 cBuilding::cBuilding()
 	: m_bSelect(false)
@@ -23,62 +24,63 @@ void cBuilding::Setup(vector<ST_UNITLOADINFO> statesVector, cMap * mapPtr)
 void cBuilding::Update()
 {
 	cUnit::Update();
-	KeyControl();
+	
+	if (m_bSelect)
+	{
+		KeyControl();
+	}
 }
 
 void cBuilding::KeyControl()
 {
-	if (m_bSelect && g_pKeyManager->IsStayKeyDown('W'))
+	RayInfo stRay = RayToScreenPoint(g_ptMouse.x, g_ptMouse.y);
+	HitInfo stHit;
+
+	bool temp = false;
+
+	for (int x = 0; x < MAP_GRID; x++)
 	{
-		m_vPos.z += m_fSpeed;
-	}
-	
-	if (m_bSelect && g_pKeyManager->IsStayKeyDown('S'))
-	{
-		m_vPos.z -= m_fSpeed;
+		for (int z = 0; z < MAP_GRID; z++)
+		{
+			if (RayCast(stRay, stHit, m_pMap->GetHeightNode()[x][z].vecVertex))
+			{
+				m_vPos = stHit.hitpos;
+				temp = true;
+				break;
+			}
+		}
 	}
 
-	if (m_bSelect && g_pKeyManager->IsStayKeyDown('A'))
+	if (!temp)
 	{
-		m_vPos.x -= m_fSpeed;
-	}
+		RayInfo stRay2 = RayToScreenPoint(g_ptMouse.x, g_ptMouse.y);
+		while (true)
+		{
+			if (stRay2.dir.y > 0) break;
 
-	if (m_bSelect && g_pKeyManager->IsStayKeyDown('D'))
-	{
-		m_vPos.x += m_fSpeed;
-	}
+			if (stRay2.pos.y < INFH) break;
 
-	if (m_bSelect && g_pKeyManager->IsStayKeyDown('R'))
-	{
-		m_vPos.y += m_fSpeed;
+			if (fabs(m_vPos.y - stRay2.pos.y)<1.0f)
+			{
+				m_vPos.x = stRay2.pos.x;
+				m_vPos.z = stRay2.pos.z;
+				break;
+			}
+			stRay2.pos += stRay2.dir;
+		}
 	}
-
-	if (m_bSelect && g_pKeyManager->IsStayKeyDown('F'))
-	{
-		m_vPos.y -= m_fSpeed;
-	}
-
-	if (m_bSelect && g_pKeyManager->IsStayKeyDown('Q'))
+		
+	if (g_pKeyManager->IsStayKeyDown('Q'))
 	{
 		D3DXMATRIXA16 matR;
 		D3DXMatrixRotationY(&matR, -0.01f);
 		D3DXVec3TransformNormal(&m_vDir, &m_vDir, &matR);
 	}
 
-	if (m_bSelect && g_pKeyManager->IsStayKeyDown('E'))
+	if (g_pKeyManager->IsStayKeyDown('E'))
 	{
 		D3DXMATRIXA16 matR;
 		D3DXMatrixRotationY(&matR,  0.01f);
 		D3DXVec3TransformNormal(&m_vDir, &m_vDir, &matR);
-	}
-
-	if (m_bSelect && g_pKeyManager->IsOnceKeyDown(VK_UP))
-	{
-		m_fSpeed++;
-	}
-
-	if (m_bSelect && g_pKeyManager->IsOnceKeyDown(VK_DOWN))
-	{
-		m_fSpeed--;
 	}
 }

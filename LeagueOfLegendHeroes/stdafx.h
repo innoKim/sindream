@@ -164,6 +164,17 @@ struct ST_SQUARE
 	float height() { return (d - a).y; }
 };
 
+struct ST_MoveInfo
+{
+	int nVerticalFactor = 0;
+	int nHorizontalFactor = 0;
+
+	D3DXVECTOR3 vVerticalDir;
+	D3DXVECTOR3 vHorizontalDir;
+	D3DXVECTOR3 vMoveDir;
+};
+
+
 // 매니저 클래스 인클루드 목록
 #include "cObject.h"
 #include "cDeviceManager.h"

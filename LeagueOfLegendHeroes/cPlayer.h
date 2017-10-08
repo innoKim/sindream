@@ -1,16 +1,6 @@
 #pragma once
 #include "cUnit.h"
 
-struct ST_MoveInfo
-{
-	int nVerticalFactor = 0;
-	int nHorizontalFactor = 0;
-
-	D3DXVECTOR3 vVerticalDir;
-	D3DXVECTOR3 vHorizontalDir;
-	D3DXVECTOR3 vMoveDir;
-};
-
 class cPlayer :
 	public cUnit
 {

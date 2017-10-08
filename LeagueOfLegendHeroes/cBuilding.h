@@ -14,8 +14,8 @@ public:
 	};
 
 private:
-	bool			m_bSelect;
 	float			m_fSpeed;
+	SYNTHESIZE(bool, m_bSelect, Select);
 	SYNTHESIZE(eBuildingType, m_eType, Type);
 public:
 	cBuilding();
@@ -25,6 +25,5 @@ public:
 	virtual void Update() override;
 
 	void KeyControl();
-	void SetSelect(bool select) { m_bSelect = select; }
 };
 

@@ -24,7 +24,7 @@ public:
 private:
 	
 	D3DXVECTOR3 m_vRotation;
-	float m_fDistanceFromTarget;
+	float		m_fDistanceFromTarget;
 
 	D3DXVECTOR3 m_vLerpTargetPos;
 	float		m_fLerpDistance;

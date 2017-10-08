@@ -21,6 +21,9 @@ cMapEditorScene::cMapEditorScene()
 	, m_bEditOn(NULL)
 	, m_pCurrentBuilding(NULL)
 	, m_nIndexBuilding(0)
+	, m_fSpeed(15.0f)
+	, m_vTargetPos(1000, 0, 1000)
+	, m_vTargetDir(0, 0, -1)
 {
 }
 
@@ -53,12 +56,12 @@ void cMapEditorScene::Setup()
 	m_pMap->LoadMap("map/", "room.obj");
 	m_pMap->LoadSur("LoL/room_surface.obj");
 
-	m_pPlayer = new cPlayer;
+	m_pPlayer = new cUnit;
 	vector<ST_UNITLOADINFO> temp;
 	temp.push_back({ STATE_IDLE, "unit/AlistarIdle.x" });
 	temp.push_back({ STATE_RUN, "unit/AlistarRun.x",ST_CallbackInfo(0.0f,AlistarWalkCallBack,m_pPlayer) });
-	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell1CallBack2,m_pPlayer) });
-	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell2CallBack2,m_pPlayer) });
+	//temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell1CallBack2,m_pPlayer) });
+	//temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell2CallBack2,m_pPlayer) });
 	m_pPlayer->Setup(temp, m_pMap);
 	m_pPlayer->SetPosition(D3DXVECTOR3(1000, 0, 1000));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
@@ -74,7 +77,7 @@ void cMapEditorScene::Setup()
 	buttonTag[6] = "이전 건물";
 	buttonTag[7] = "다음 건물";
 	buttonTag[8] = "건물 삭제";
-	buttonTag[9] = "건물 세우기";
+	buttonTag[9] = "건물 선택";
 	buttonTag[10] = "저장";
 	buttonTag[11] = "불러오기";
 
@@ -139,7 +142,7 @@ void cMapEditorScene::Setup()
 	pButton->SetCallbackObject(this);
 
 	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button9");
-	pButton->SetCallback(EnterBuildingCallback);
+	pButton->SetCallback(SelectBuildingCallback);
 	pButton->SetCallbackObject(this);
 
 	pButton = (cUIButton*)m_vecUIObject[0]->GetChild("button10");
@@ -160,6 +163,8 @@ void cMapEditorScene::Setup()
 		m_vecEnemy.push_back(enemy);
 	}
 
+	g_pCamera->SetTarget(&m_vTargetPos);
+	g_pCamera->Zoom(500);
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
 }
@@ -168,6 +173,27 @@ void cMapEditorScene::Update()
 {
 	m_pPlayer->Update();
 	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
+
+	FindMoveDir();
+
+	if (abs(m_moveInfo.nHorizontalFactor) + abs(m_moveInfo.nVerticalFactor) > 0)
+	{
+		//Lerp Dir and MoveDir
+		m_vTargetDir = m_moveInfo.vMoveDir;
+		D3DXVec3Normalize(&m_vTargetDir, &m_vTargetDir);
+		
+		m_vTargetPos += PLAYER_SPD * m_vTargetDir;
+	}
+
+	if (m_pCurrentBuilding && m_pCurrentBuilding->GetSelect() && g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
+	{
+		if (EnterBuilding()) SetEditOn(false);
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown(VK_DELETE))
+	{
+		DeleteBuildingCallback(this);
+	}
 
 	for each (auto p in m_vecUIObject)
 	{
@@ -303,12 +329,12 @@ void cMapEditorScene::DeleteBuildingCallback(void * CallBackObj)
 	}
 }
 
-void cMapEditorScene::EnterBuildingCallback(void * CallBackObj)
+void cMapEditorScene::SelectBuildingCallback(void * CallBackObj)
 {
 	cMapEditorScene* pThis = (cMapEditorScene*)CallBackObj;
 	if (pThis->GetEditOn())
 	{
-		if (pThis->EnterBuilding()) pThis->SetEditOn(false);
+		pThis->SelectBuilding();
 	}
 }
 
@@ -377,7 +403,6 @@ bool cMapEditorScene::AddOrderNexus(void)
 	pOrderNexus->Setup(tempOrderNexus, m_pMap);
 	pOrderNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
 	pOrderNexus->SetSelect(true);
-	g_pCamera->SetTarget(pOrderNexus->GetPosPtr());
 	pOrderNexus->SetType(cBuilding::E_ORDERNEXUS);
 	m_pCurrentBuilding = pOrderNexus;
 	m_vecBuilding.push_back(pOrderNexus);
@@ -393,7 +418,6 @@ bool cMapEditorScene::AddOrderInhibitor(void)
 	pOrderInhibitor->Setup(tempOrderInhibitor, m_pMap);
 	pOrderInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
 	pOrderInhibitor->SetSelect(true);
-	g_pCamera->SetTarget(pOrderInhibitor->GetPosPtr());
 	pOrderInhibitor->SetType(cBuilding::E_ORDERINHIBITOR);
 	m_pCurrentBuilding = pOrderInhibitor;
 	m_vecBuilding.push_back(pOrderInhibitor);
@@ -409,7 +433,6 @@ bool cMapEditorScene::AddOrderTurret(void)
 	pOrderTurret->Setup(tempOrderTurret, m_pMap);
 	pOrderTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
 	pOrderTurret->SetSelect(true);
-	g_pCamera->SetTarget(pOrderTurret->GetPosPtr());
 	pOrderTurret->SetType(cBuilding::E_ORDERTURRET);
 	m_pCurrentBuilding = pOrderTurret;
 	m_vecBuilding.push_back(pOrderTurret);
@@ -425,7 +448,6 @@ bool cMapEditorScene::AddChaosNexus(void)
 	pChaosNexus->Setup(tempChaosNexus, m_pMap);
 	pChaosNexus->SetPosition(D3DXVECTOR3(500, 50, 500));
 	pChaosNexus->SetSelect(true);
-	g_pCamera->SetTarget(pChaosNexus->GetPosPtr());
 	pChaosNexus->SetType(cBuilding::E_CHAOSNEXUS);
 	m_pCurrentBuilding = pChaosNexus;
 	m_vecBuilding.push_back(pChaosNexus);
@@ -441,7 +463,6 @@ bool cMapEditorScene::AddChaosInhibitor(void)
 	pChaosInhibitor->Setup(tempChaosInhibitor, m_pMap);
 	pChaosInhibitor->SetPosition(D3DXVECTOR3(500, 50, 500));
 	pChaosInhibitor->SetSelect(true);
-	g_pCamera->SetTarget(pChaosInhibitor->GetPosPtr());
 	pChaosInhibitor->SetType(cBuilding::E_CHAOSINHIBITOR);
 	m_pCurrentBuilding = pChaosInhibitor;
 	m_vecBuilding.push_back(pChaosInhibitor);
@@ -457,7 +478,6 @@ bool cMapEditorScene::AddChaosTurret(void)
 	pChaosTurret->Setup(tempChaosTurret, m_pMap);
 	pChaosTurret->SetPosition(D3DXVECTOR3(500, 50, 500));
 	pChaosTurret->SetSelect(true);
-	g_pCamera->SetTarget(pChaosTurret->GetPosPtr());
 	pChaosTurret->SetType(cBuilding::E_CHAOSTURRET);
 	m_pCurrentBuilding = pChaosTurret;
 	m_vecBuilding.push_back(pChaosTurret);
@@ -471,10 +491,10 @@ bool cMapEditorScene::PrevBuilding()
 	{
 		if (m_pCurrentBuilding) m_pCurrentBuilding->SetSelect(false);
 
-		if (m_pPlayer)
-		{
-			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
-		}
+		//if (m_pPlayer)
+		//{
+		//	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		//}
 
 		if (m_nIndexBuilding > 0)
 		{
@@ -482,8 +502,9 @@ bool cMapEditorScene::PrevBuilding()
 		}
 
 		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
-		m_pCurrentBuilding->SetSelect(true);
-		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+		//m_pCurrentBuilding->SetSelect(true);
+		m_vTargetPos = m_pCurrentBuilding->GetPosition();
+		//g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
 
 		return true;
 	}
@@ -497,10 +518,10 @@ bool cMapEditorScene::NextBuilding()
 	{
 		if (m_pCurrentBuilding) m_pCurrentBuilding->SetSelect(false);
 
-		if (m_pPlayer)
-		{
-			g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
-		}
+		//if (m_pPlayer)
+		//{
+		//	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
+		//}
 
 		if (m_nIndexBuilding < m_vecBuilding.size() - 1)
 		{
@@ -508,8 +529,9 @@ bool cMapEditorScene::NextBuilding()
 		}
 
 		m_pCurrentBuilding = m_vecBuilding[m_nIndexBuilding];
-		m_pCurrentBuilding->SetSelect(true);
-		g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
+		//m_pCurrentBuilding->SetSelect(true);
+		m_vTargetPos = m_pCurrentBuilding->GetPosition();
+		//g_pCamera->SetTarget(m_pCurrentBuilding->GetPosPtr());
 
 		return true;
 	}
@@ -546,12 +568,16 @@ bool cMapEditorScene::EnterBuilding()
 		m_vecBuilding[i]->SetSelect(false);
 	}
 
-	if (m_pPlayer)
-	{
-		g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
-	}
+	g_pCamera->SetTarget(&m_vTargetPos);
 
 	m_pCurrentBuilding = NULL;
+
+	return true;
+}
+
+bool cMapEditorScene::SelectBuilding()
+{
+	m_pCurrentBuilding->SetSelect(true);
 
 	return true;
 }
@@ -570,4 +596,26 @@ bool cMapEditorScene::LoadBuilding(char* szFileName)
 	buildingLoader.LoadBuilding(szFileName, m_pMap, m_vecBuilding);
 
 	return true;
+}
+
+void cMapEditorScene::FindMoveDir()
+{
+	m_moveInfo.vVerticalDir = g_pCamera->GetDirParrallelToPlane();
+
+	D3DXMATRIX moveDirRotation;
+	D3DXMatrixRotationY(&moveDirRotation, D3DX_PI / 2);
+
+	D3DXVec3TransformNormal(&m_moveInfo.vHorizontalDir, &m_moveInfo.vVerticalDir, &moveDirRotation);
+
+	m_moveInfo.nVerticalFactor = m_moveInfo.nHorizontalFactor = 0;
+
+	if (g_pKeyManager->IsStayKeyDown('W')) m_moveInfo.nVerticalFactor++;
+	if (g_pKeyManager->IsStayKeyDown('A')) m_moveInfo.nHorizontalFactor--;
+	if (g_pKeyManager->IsStayKeyDown('S')) m_moveInfo.nVerticalFactor--;
+	if (g_pKeyManager->IsStayKeyDown('D'))
+	{
+		m_moveInfo.nHorizontalFactor++;
+	}
+	m_moveInfo.vMoveDir = m_moveInfo.nHorizontalFactor*m_moveInfo.vHorizontalDir + m_moveInfo.nVerticalFactor*m_moveInfo.vVerticalDir;
+	D3DXVec3Normalize(&m_moveInfo.vMoveDir, &m_moveInfo.vMoveDir);
 }

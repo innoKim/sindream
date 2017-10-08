@@ -11,6 +11,9 @@ class cEnemy;
 class cMapEditorScene : public iScene
 {
 private:
+	float					m_fSpeed;
+	D3DXVECTOR3				m_vTargetPos;
+	D3DXVECTOR3				m_vTargetDir;
 	cUnit*					m_pPlayer;
 	cMap*					m_pMap;
 	cBuilding*				m_pCurrentBuilding;
@@ -19,6 +22,7 @@ private:
 	vector<cBuilding*>		m_vecBuilding;
 	vector<cUIObject*>		m_vecUIObject;
 	vector<cEnemy*>			m_vecEnemy;
+	ST_MoveInfo				m_moveInfo;
 
 	SYNTHESIZE(bool, m_bEditOn, EditOn);
 
@@ -42,7 +46,7 @@ public:
 	static void NextBuildingCallback(void * CallBackObj);
 
 	static void DeleteBuildingCallback(void * CallBackObj);
-	static void EnterBuildingCallback(void * CallBackObj);
+	static void SelectBuildingCallback(void * CallBackObj);
 
 	static void SaveBuildingCallback(void * CallBackObj);
 	static void LoadBuildingCallback(void * CallBackObj);
@@ -65,8 +69,11 @@ private:
 
 	bool DeleteBuilding();
 	bool EnterBuilding();
+	bool SelectBuilding();
 
 	bool SaveBuilding(char* szFileName);
 	bool LoadBuilding(char* szFileName);
+
+	void FindMoveDir();
 };
 
