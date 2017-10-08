@@ -1,7 +1,7 @@
 #pragma once
 #include "iScene.h"
-
 class cUnit;
+class cEnemy;
 class cPlane;
 class cMap;
 class cBuilding;
@@ -14,7 +14,7 @@ private:
 	D3DLIGHT9			m_light;
 	bool				m_bEditOn;
 
-	vector<cUnit*>		m_vecEnemy;
+	vector<cEnemy*>		m_vecEnemy;
 	vector<cBuilding*>	m_vecBuilding;
 	cBuilding*			m_pCurrentBuilding;
 	int					m_nIndexBuilding;

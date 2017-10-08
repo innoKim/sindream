@@ -7,6 +7,12 @@ class cAStarNode;
 
 class cEnemy : public cUnit
 {
+public :
+	enum eEnemyType
+	{
+		ENEMYTYPE_MELEE
+	};
+
 private:
 	cAStar*						m_pAStar;
 	cAStarGrid*					m_pAStarGrid;
@@ -19,7 +25,7 @@ public:
 	cEnemy();
 	virtual ~cEnemy();
 
-	virtual void Setup(vector<ST_UNITLOADINFO> statesVector, cMap* mapPtr);
+	virtual void Setup(eEnemyType enemyType, cMap* mapPtr);
 	virtual void Update(D3DXVECTOR3 vPlayerPos);
 	virtual void Render() override;
 };

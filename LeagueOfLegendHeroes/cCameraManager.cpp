@@ -82,7 +82,7 @@ void cCameraManager::Update()
 	break;
 	case CAMERAMOVETYPE_RERP:
 	{
-		if (fabs(m_fDistanceFromTarget-m_fLerpDistance)<1.0f) // 眠利 场
+		if (fabs(m_fDistanceFromTarget-m_fLerpDistance)<RERP_END) // 眠利 场
 		{
 			g_pCamera->SetTarget(m_pvTargetPos);
 			g_pCamera->SetLocked(false);

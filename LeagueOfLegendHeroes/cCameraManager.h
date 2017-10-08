@@ -1,7 +1,7 @@
 #pragma once
 
 #define g_pCameraManager cCameraManager::GetInstance()
-
+#define RERP_END 0.1f
 class cCamera;
 
 class cCameraManager

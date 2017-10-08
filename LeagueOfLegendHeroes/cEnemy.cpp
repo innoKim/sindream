@@ -22,12 +22,23 @@ cEnemy::~cEnemy()
 	Destroy();
 }
 
-void cEnemy::Setup(vector<ST_UNITLOADINFO> statesVector, cMap * mapPtr)
+void cEnemy::Setup(eEnemyType enemyType, cMap * mapPtr)
 {
-	cUnit::Setup(statesVector, mapPtr);
+	vector<ST_UNITLOADINFO> temp;
 
+	switch (enemyType)
+	{
+	case ENEMYTYPE_MELEE:
+		temp.push_back({ STATE_IDLE, "unit/minionMelee_idle.x" ,NULL,NULL });
+		temp.push_back({ STATE_RUN, "unit/minionMelee_run.x" ,NULL,NULL });
+		temp.push_back({ STATE_ATTACK1, "unit/minionMelee_att1.x" ,NULL,NULL });
+		temp.push_back({ STATE_ATTACK2, "unit/minionMelee_att2.x" ,NULL,NULL });
+		temp.push_back({ STATE_ATTACK3, "unit/minionMelee_att3.x" ,NULL,NULL });
+		break;
+	}
+	cUnit::Setup(temp, mapPtr);
+	
 	m_pAStarGrid = m_pMap->GetGrid();
-
 	m_pAStar = new cAStar;
 	m_pAStar->Setup(m_pAStarGrid);
 }

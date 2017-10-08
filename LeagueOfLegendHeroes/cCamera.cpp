@@ -92,6 +92,22 @@ void cCamera::KeyControl()
 			&&m_vRotation.x + virticalFactor*(float)CAMERA_MOVE_ANGLE_SPD > D3DX_PI / -2.0f)
 			m_vRotation.x += virticalFactor*(float)CAMERA_MOVE_ANGLE_SPD;
 
+		while (true)
+		{
+			if (-D3DX_PI * 2 <= m_vRotation.y&&m_vRotation.y <= D3DX_PI * 2)
+			{
+				break;
+			}
+			else if (-D3DX_PI * 2 > m_vRotation.y)
+			{
+				m_vRotation.y += D3DX_PI * 2;
+			}
+			else if (m_vRotation.y > D3DX_PI * 2)
+			{
+				m_vRotation.y -= D3DX_PI * 2;
+			}
+		}		
+
 		m_PrevMousePoint = g_ptMouse;
 	}
 

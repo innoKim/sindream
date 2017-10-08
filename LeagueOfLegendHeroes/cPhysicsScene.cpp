@@ -71,11 +71,9 @@ void cPhysicsScene::Setup()
 
 	for (int i = 0; i < 3; i++)
 	{
-		cUnit* enemy = new cEnemy;
-		vector<ST_UNITLOADINFO> temp;
-		temp.push_back({ STATE_IDLE, "unit/PoroIdle.x" ,NULL,NULL });
-		enemy->Setup(temp, m_pMap);
-		enemy->SetPosition(D3DXVECTOR3(1000+i * 100, 100 , 1000 + i * 10));
+		cEnemy* enemy = new cEnemy;
+		enemy->Setup(cEnemy::ENEMYTYPE_MELEE, m_pMap);
+		enemy->SetPosition(D3DXVECTOR3(1500 + i * 100, 100, 1000 + i * 10));
 		m_vecEnemy.push_back(enemy);
 	}
 	
@@ -98,7 +96,7 @@ void cPhysicsScene::Update()
 
 	for each(auto p in m_vecEnemy)
 	{
-		p->Update();
+		p->Update(m_pPlayer->GetPosition());
 	}
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
