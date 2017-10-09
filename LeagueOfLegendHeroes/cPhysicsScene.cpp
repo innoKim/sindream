@@ -8,6 +8,7 @@
 #include "cRigidbody.h"
 #include "cMap.h"
 #include "cBuildingLoader.h"
+#include "cGridPlane.h"
 
 void cPhysicsScene::SetLight()
 {
@@ -19,7 +20,6 @@ void cPhysicsScene::SetLight()
 
 	g_pD3DDevice->SetLight(0, &m_light);
 	g_pD3DDevice->LightEnable(0, true);
-
 	g_pD3DDevice->SetRenderState(D3DRS_SPECULARENABLE, true);
 }
 
@@ -28,7 +28,9 @@ cPhysicsScene::cPhysicsScene():
 	m_pMap(NULL),
 	m_bEditOn(false),
 	m_pCurrentBuilding(NULL),
-	m_nIndexBuilding(0)
+	m_nIndexBuilding(0),
+	m_pGrid(NULL),
+	m_nElasticFactor(3)
 {
 	
 }
@@ -47,16 +49,21 @@ cPhysicsScene::~cPhysicsScene()
 	{
 		SAFE_DELETE(p);
 	}
+
+	SAFE_DELETE(m_pGrid);
 }
 
 void cPhysicsScene::Setup()
 {
-	m_pMap = new cMap;
-	m_pMap->LoadMap("map/", "room.obj");
-	m_pMap->LoadSur("LoL/room_surface.obj");
+	//m_pMap = new cMap;
+	//m_pMap->LoadMap("map/", "room.obj");
+	//m_pMap->LoadSur("LoL/room_surface.obj");
+	//
+	//cBuildingLoader buildingLoader;
+	//buildingLoader.LoadBuilding("building.txt", m_pMap, m_vecBuilding);
 
-	cBuildingLoader buildingLoader;
-	buildingLoader.LoadBuilding("building.txt", m_pMap, m_vecBuilding);
+	m_pGrid = new cGridPlane();
+	m_pGrid->Setup(100, 50);
 
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
@@ -65,18 +72,11 @@ void cPhysicsScene::Setup()
 	temp.push_back({ STATE_SPELL1, "unit/AlistarSpell1.x",ST_CallbackInfo(0.0f,AlistarSpell1CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell1CallBack2,m_pPlayer)});
 	temp.push_back({ STATE_SPELL2, "unit/AlistarSpell2.x",ST_CallbackInfo(0.0f,AlistarSpell2CallBack,m_pPlayer),ST_CallbackInfo(0.5f,AlistarSpell2CallBack2,m_pPlayer)});
 	m_pPlayer->Setup(temp, m_pMap);
-	m_pPlayer->SetPosition(D3DXVECTOR3(1000, 0, 1000));
+	m_pPlayer->SetPosition(D3DXVECTOR3(0, 0, 0));
 	g_pCamera->SetTarget(m_pPlayer->GetPosPtr());
 	g_pShaderManager->SetTarget(g_pCamera->GetTarget());
+	g_pShaderManager->SetSkyBoxOn(false);
 
-	for (int i = 0; i < 3; i++)
-	{
-		cEnemy* enemy = new cEnemy;
-		enemy->Setup(cEnemy::ENEMYTYPE_MELEE, m_pMap);
-		enemy->SetPosition(D3DXVECTOR3(1500 + i * 100, 100, 1000 + i * 10));
-		m_vecEnemy.push_back(enemy);
-	}
-	
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
 	///요기까지 물리
@@ -87,7 +87,7 @@ void cPhysicsScene::Setup()
 void cPhysicsScene::Update()
 {
 	m_pPlayer->Update();
-	m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
+	if(m_pMap) m_pPlayer->SetPosY(m_pMap->GetHeight(m_pPlayer->GetPosition()));
 
 	for each(auto p in m_vecBuilding)
 	{
@@ -102,6 +102,42 @@ void cPhysicsScene::Update()
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
 	{
 		m_vecEnemy[0]->GetPhysics()->SetVelocity(D3DXVECTOR3(500, 500, 0));
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
+	{
+		RayInfo newRay = RayToScreenPoint(g_ptMouse.x, g_ptMouse.y);
+		
+		cEnemy* enemy = new cEnemy;
+		enemy->Setup(cEnemy::ENEMYTYPE_MELEE, m_pMap);
+		enemy->SetPosition(D3DXVECTOR3(newRay.pos));
+		enemy->SetDirection(newRay.dir);
+		enemy->GetPhysics()->SetVelocity(newRay.dir*THROW_SPD);
+		enemy->GetPhysics()->SetElastic(m_nElasticFactor*0.1f);
+		m_vecEnemy.push_back(enemy);
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown(VK_UP))
+	{
+		if (m_nElasticFactor <20)
+		{
+			m_nElasticFactor ++;
+		}
+		for each (auto p in *g_pPhysicsManager->GetSet())
+		{
+			p->SetElastic(m_nElasticFactor*0.1f);
+		}
+	}
+	if (g_pKeyManager->IsOnceKeyDown(VK_DOWN))
+	{
+		if (m_nElasticFactor >0 )
+		{
+			m_nElasticFactor --;
+		}
+		for each (auto p in *g_pPhysicsManager->GetSet())
+		{
+			p->SetElastic(m_nElasticFactor*0.1f);
+		}
 	}
 }
 
@@ -122,6 +158,11 @@ void cPhysicsScene::Render()
 
 void cPhysicsScene::UIRender()
 {
+	m_pGrid->Render();
+
+	char str[128];
+	sprintf(str, "Elastic Factor : %.2f", m_nElasticFactor*0.1f);
+	g_pDebug->Print(str, 50, 50);
 }
 
 void cPhysicsScene::AlistarSpell1CallBack(void *CallBackObj)

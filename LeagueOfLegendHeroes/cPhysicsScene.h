@@ -1,16 +1,21 @@
 #pragma once
 #include "iScene.h"
+
+#define THROW_SPD 1000
+
+
 class cUnit;
 class cEnemy;
-class cPlane;
 class cMap;
 class cBuilding;
+class cGridPlane;
 
 class cPhysicsScene : public iScene
 {
 private:
 	cUnit*				m_pPlayer;
 	cMap*				m_pMap;
+	cGridPlane*			m_pGrid;
 	D3DLIGHT9			m_light;
 	bool				m_bEditOn;
 
@@ -19,6 +24,8 @@ private:
 	cBuilding*			m_pCurrentBuilding;
 	int					m_nIndexBuilding;
 	
+	int				m_nElasticFactor;
+
 	void SetLight();
 public:
 	cPhysicsScene();

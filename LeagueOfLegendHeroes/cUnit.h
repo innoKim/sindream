@@ -1,9 +1,9 @@
 #pragma once
 
-#define ENEMY_SPD 5.0f
+#define ENEMY_SPD 3.0f
 
 #define PLAYER_ROTSPD 0.05f
-#define PLAYER_SPD 10.0f
+#define PLAYER_SPD 5.0f
 
 class cPhysics;
 class cRigidbody;

@@ -39,12 +39,14 @@ void cCollision::ObjVSObj(cPhysics & obj1, cPhysics & obj2, bool byObstacle)
 		{
 			obj1.SetRestDuration(0.0f);
 			obj2.SetRestDuration(0.0f);
-		}
+			obj1.SetAngularVelocity(D3DXVECTOR3(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10));
+			obj2.SetAngularVelocity(D3DXVECTOR3(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10));
+		}		
 	}
 
 	//가까우면 부담스러우니까 떨어트려
-	if (obj1.GetIsActivate())(*obj1.GetPositionPtr() += n*obj1.GetRadius()*0.5f);
-	if (obj2.GetIsActivate())(*obj2.GetPositionPtr() -= n*obj2.GetRadius()*0.5f);
+	if (obj1.GetIsActivate())(*obj1.GetPositionPtr() += n*obj1.GetRadius()*0.3f);
+	if (obj2.GetIsActivate())(*obj2.GetPositionPtr() -= n*obj2.GetRadius()*0.3f);
 }
 
 void cCollision::ObjVSObstacle(cPhysics& obj)

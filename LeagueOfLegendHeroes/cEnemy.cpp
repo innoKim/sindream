@@ -37,15 +37,20 @@ void cEnemy::Setup(eEnemyType enemyType, cMap * mapPtr)
 		break;
 	}
 	cUnit::Setup(temp, mapPtr);
-	
-	m_pAStarGrid = m_pMap->GetGrid();
-	m_pAStar = new cAStar;
-	m_pAStar->Setup(m_pAStarGrid);
+
+	if (m_pMap)
+	{
+		m_pAStarGrid = m_pMap->GetGrid();
+		m_pAStar = new cAStar;
+		m_pAStar->Setup(m_pAStarGrid);
+	}	
 }
 
 void cEnemy::Update(D3DXVECTOR3 vPlayerPos)
 {
 	cUnit::Update();
+
+	if (!m_pAStar) return;
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_SPACE))
 	{

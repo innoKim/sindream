@@ -8,7 +8,7 @@ cPhysics::cPhysics() :
 	m_pvPos(NULL),
 	m_vAcceleration(0, 0, 0),
 	m_vVelocity(0, 0, 0),
-	m_vElasticFactor(0.5f),
+	m_vElasticFactor(0.4f),
 	m_fRadius(0.0f),
 	m_fMass(1.0f),
 	m_pvDir(NULL),
@@ -65,7 +65,8 @@ bool cPhysics::ColisionWith(set<cPhysics*> setVersusObject)
 {
 	//먼저 지형과 충돌을 처리한다. 지형은 이전에 충돌했던 말던 신경안쓰고 바로 검사한다.
 	if ((*m_pvPos).y<Height()) g_pCollisionCalculator->ObjVSObstacle(*this);
-	if (GetVelocityScalar() > FLT_EPSILON)
+	
+	if (m_pMap&&GetVelocityScalar() > FLT_EPSILON)
 	{
 		D3DXVECTOR3 dir = m_vVelocity;
 		D3DXVec3Normalize(&dir, &dir);
@@ -103,6 +104,6 @@ bool cPhysics::ColisionWith(set<cPhysics*> setVersusObject)
 
 float cPhysics::Height()
 {
-	return (m_pMap) ? m_pMap->GetHeight(*m_pvPos) : 10.0f;
+	return (m_pMap) ? m_pMap->GetHeight(*m_pvPos) : 0.0f;
 }
 

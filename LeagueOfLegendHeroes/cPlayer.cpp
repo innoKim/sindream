@@ -29,7 +29,7 @@ void cPlayer::KeyControl()
 	if (abs(m_moveInfo.nHorizontalFactor) + abs(m_moveInfo.nVerticalFactor) > 0)
 	{
 		//Lerp Dir and MoveDir
-		m_vDir = D3DXVECTOR3(m_vDir.x*0.8f + m_moveInfo.vMoveDir.x*0.2f, m_vDir.y, m_vDir.z*0.8f + m_moveInfo.vMoveDir.z*0.2f);
+		m_vDir = D3DXVECTOR3(m_vDir.x*0.7f + m_moveInfo.vMoveDir.x*0.3f, m_vDir.y, m_vDir.z*0.7f + m_moveInfo.vMoveDir.z*0.3f);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		if (m_pMap)
 		{

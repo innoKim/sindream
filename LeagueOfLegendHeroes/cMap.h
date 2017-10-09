@@ -23,6 +23,7 @@ private:
 	D3DXMATRIX						m_matW, m_matS, m_matR, m_matT;
 	
 	SYNTHESIZE_PASS_BY_REF(vector<vector<ST_HEIGHTNODE>>, m_gridHeightNode, HeightNode); // 잘 나눠져서 들어왔네요
+	
 	SYNTHESIZE(cAStarGrid*,			m_pAStarGrid, Grid);
 public:
 	cMap();
