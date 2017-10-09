@@ -68,16 +68,17 @@ void cMainGameScene::Setup()
 
 	g_pAlphablending->AddAlphablending("AlistarQ", "AlistarQgroundcrack.dds", m_pPlayer->GetPosition(), D3DXVECTOR3(0, 1, 0), 1.0f, 150, true, false);
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		cEnemy* enemy = new cEnemy;
 		enemy->Setup(cEnemy::ENEMYTYPE_MELEE, m_pMap);
-		enemy->SetPosition(D3DXVECTOR3(1500 + i * 100, 100, 1000 + i * 10));
+		enemy->SetPosition(D3DXVECTOR3(1500 + (i%3) * 100, 100, 1000 + (i/3) * 100));
 		m_vecEnemy.push_back(enemy);
 	}
 
 	//물리관련
 	m_pPlayer->GetPhysics()->SetIsActivate(false);
+	g_pCamera->Zoom(500);
 }
 
 void cMainGameScene::Update()

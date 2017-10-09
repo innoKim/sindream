@@ -11,7 +11,7 @@ private:
 	
 	SYNTHESIZE(bool, m_bIsActivate, IsActivate);
 	SYNTHESIZE(float, m_fRestDuration, RestDuration);		//마지막 충돌로부터의 시간;
-
+	
 	SYNTHESIZE_PASS_BY_REF(float, m_fMass, Mass);			//질량
 	SYNTHESIZE_PASS_BY_REF(float, m_fRadius, Radius); // 지름
 	SYNTHESIZE_PASS_BY_REF(float, m_vElasticFactor, Elastic);		//탄성계수 0~1.0f; 1.0f=완탄충돌.

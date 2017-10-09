@@ -37,10 +37,10 @@ cMainGame::~cMainGame()
 void cMainGame::Setup()
 {
 //	m_pScene = new cTestScene;
-	m_pScene = new cParticleScene;
+//	m_pScene = new cParticleScene;
 //	m_pScene = new cPhysicsScene;
 //	m_pScene = new cMapEditorScene;
-//	m_pScene = new cMainGameScene;
+	m_pScene = new cMainGameScene;
 //	m_pScene = new cAnimationTestScene;
 
 	m_pScene->Setup();

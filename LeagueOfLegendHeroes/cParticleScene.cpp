@@ -449,6 +449,7 @@ void cParticleScene::UISetup()
 
 	cUITextInput* textInput = new cUITextInput("texture/textbox.png");
 	textInput->SetPosition(60, 320);
+	textInput->SetTag("텍스트입력");
 	buttonSet->AddChild(textInput);
 
 	m_pTextInput = textInput;
@@ -500,6 +501,13 @@ void cParticleScene::TextBoxPrint()
 
 void cParticleScene::ValueControl()
 {
+	for each (auto p in m_vecUIObject)
+	{
+		cUITextInput* text = (cUITextInput*)p->GetChild("텍스트입력");
+
+		if (text&&text->GetIsSelected()) return;
+	}
+
 	if (m_eValueType == eFloat)
 	{
 		if (g_pKeyManager->IsStayKeyDown('T'))
