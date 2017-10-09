@@ -58,13 +58,12 @@ void cPlayer::KeyControl()
 	if (g_pKeyManager->IsOnceKeyDown('Q'))
 	{
 		if (IsReady()) SetState(STATE_SPELL1);
-		g_pCameraManager->StartLerpChase(cCameraManager::CAMERAMOVETYPE_LERP,&m_vPos, 300, D3DXVECTOR3(0.5, 0.5, 0), 2.0f);
+		//g_pCameraManager->StartLerpChase(cCameraManager::CAMERAMOVETYPE_LERP,&m_vPos, 300, D3DXVECTOR3(0.5, 0.5, 0), 2.0f);
 	}
 	if (g_pKeyManager->IsOnceKeyDown('E'))
 	{
 		if (IsReady()) SetState(STATE_SPELL2);
-
-		g_pCameraManager->StartLerpChase(cCameraManager::CAMERAMOVETYPE_RERP, &m_vPos, 300, D3DXVECTOR3(0.5, 0.5, 0), 0.05f);
+		//g_pCameraManager->StartLerpChase(cCameraManager::CAMERAMOVETYPE_RERP, &m_vPos, 300, D3DXVECTOR3(0.5, 0.5, 0), 0.05f);
 	}
 }
 
