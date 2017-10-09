@@ -17,6 +17,7 @@ cShaderManager::cShaderManager()
 	, m_pSkybox(NULL)
 	, m_pCube(NULL)
 	, m_bSkyboxOn(true)
+	, m_pMeshPlane(NULL)
 {
 }
 
@@ -219,6 +220,16 @@ void cShaderManager::Render()
 		}
 
 		//각 오브젝트들의 그림자가 입혀진 바닥 맵 렌더링
+		if (m_pMeshPlane)
+		{
+			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldPlane);
+
+			m_pApplyShadow->SetFloat("fLightWeight", 2.0f);
+			g_pD3DDevice->SetTexture(0,NULL);
+			m_pApplyShadow->CommitChanges();
+			m_pMeshPlane->DrawSubset(0);
+		}
+		
 		if (m_pMeshGround)
 		{
 			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldGround);
@@ -245,9 +256,9 @@ void cShaderManager::Render()
 
 void cShaderManager::SetPlane(LPD3DXMESH pMesh, D3DXMATRIX matWorld)
 {
-	m_pMeshGround = pMesh;
+	m_pMeshPlane = pMesh;
 
-	m_matWorldGround = matWorld;
+	m_matWorldPlane = matWorld;
 }
 
 void cShaderManager::SetMap(LPD3DXMESH pMesh, vector<cMtlTex*> vecMtlTex, D3DXMATRIX matWorldGround)

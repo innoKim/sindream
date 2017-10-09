@@ -8,7 +8,7 @@
 #include "cRigidbody.h"
 #include "cMap.h"
 #include "cBuildingLoader.h"
-#include "cGridPlane.h"
+#include "cPlane.h"
 
 void cPhysicsScene::SetLight()
 {
@@ -62,8 +62,8 @@ void cPhysicsScene::Setup()
 	//cBuildingLoader buildingLoader;
 	//buildingLoader.LoadBuilding("building.txt", m_pMap, m_vecBuilding);
 
-	m_pGrid = new cGridPlane();
-	m_pGrid->Setup(100, 50);
+	m_pGrid = new cPlane;
+	m_pGrid->Setup(10000);
 
 	m_pPlayer = new cPlayer;
 	vector<ST_UNITLOADINFO> temp;
@@ -158,7 +158,7 @@ void cPhysicsScene::Render()
 
 void cPhysicsScene::UIRender()
 {
-	m_pGrid->Render();
+	//m_pGrid->Render();
 
 	char str[128];
 	sprintf(str, "Elastic Factor : %.2f", m_nElasticFactor*0.1f);

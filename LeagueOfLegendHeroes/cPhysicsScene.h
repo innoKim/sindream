@@ -8,14 +8,14 @@ class cUnit;
 class cEnemy;
 class cMap;
 class cBuilding;
-class cGridPlane;
+class cPlane;
 
 class cPhysicsScene : public iScene
 {
 private:
 	cUnit*				m_pPlayer;
 	cMap*				m_pMap;
-	cGridPlane*			m_pGrid;
+	cPlane*				m_pGrid;
 	D3DLIGHT9			m_light;
 	bool				m_bEditOn;
 

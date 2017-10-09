@@ -27,7 +27,11 @@ private:
 	D3DXMATRIX				m_matViewProjection;		//뷰-투영 매트릭스
 	D3DXVECTOR3*				m_pvTarget;					//카메라가 따라다니는 타겟
 	LPD3DXMESH					m_pMeshGround;				//맵으로 사용될 메쉬
-	D3DXMATRIX			m_matWorldGround;			//맵에 적용될 월드 매트릭스
+	D3DXMATRIX					m_matWorldGround;			//맵에 적용될 월드 매트릭스
+	
+	LPD3DXMESH					m_pMeshPlane;				//맵으로 사용될 메쉬
+	D3DXMATRIX					m_matWorldPlane;			//맵에 적용될 월드 매트릭스
+
 	vector<cMtlTex*>			m_vecMtlTex;				//맵에 적용될 텍스처
 	LPDIRECT3DCUBETEXTURE9		m_pCubeTexture;				//스카이박스로 사용될 큐브 텍스처
 	LPD3DXEFFECT				m_pSkybox;					//스카이박스를 그리기 위한 쉐이더
