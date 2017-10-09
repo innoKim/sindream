@@ -223,9 +223,8 @@ void cShaderManager::Render()
 		if (m_pMeshPlane)
 		{
 			m_pApplyShadow->SetMatrix("matWorld", &m_matWorldPlane);
-
 			m_pApplyShadow->SetFloat("fLightWeight", 2.0f);
-			g_pD3DDevice->SetTexture(0,NULL);
+			m_pApplyShadow->SetTexture("DiffuseMap_Tex", g_pTextureManager->GetTexture("shader/backimage.png"));
 			m_pApplyShadow->CommitChanges();
 			m_pMeshPlane->DrawSubset(0);
 		}
